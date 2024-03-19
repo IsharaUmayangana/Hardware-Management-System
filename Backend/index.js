@@ -26,7 +26,7 @@ const app = express()
 app.use(express.json());
 app.use(cors({
     origin: ['http://localhost:5173'],
-    methods: ["GET", "POST", "PATCH", "DELETE", "PUT"],
+    methods: ["GET", "POST", "PATCH", "DELETE"],
     credentials: true
 }));
 app.use(cookieParser());
@@ -48,30 +48,6 @@ app.get('/logout', (req, res) => {
 //Supply Manager Api's
 app.use('/supply-management/suppliers', supplierManagementRoutes)
 app.use('/supply-management', supplyManagementRoutes)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//sanjuka - routes,models
-const itemsRouter = require('./routes/items');
-const lendedItemsRouter = require('./routes/lendedItems');
-const Item = require("./models/Item");
-const userItemListRouter = require('./routes/userItemList');
-
-// sanjuka - routes
-app.use('/items', itemsRouter); 
-app.use('/lendedItems', lendedItemsRouter);
-app.use('/userItemList', userItemListRouter);
 
 
 
