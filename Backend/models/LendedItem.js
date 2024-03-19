@@ -9,6 +9,6 @@ const lendedItemSchema = new mongoose.Schema({
   totalPay: Number,
 });
 
-const LendedItem = mongoose.model('LendedItem', lendedItemSchema);
+const LendedItem = mongoose.model('Rented-items', lendedItemSchema);
 
 module.exports = LendedItem;

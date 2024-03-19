@@ -9,7 +9,7 @@ const itemSchema = new mongoose.Schema({
   oneDayPrice: Number 
 });
 
-const Item = mongoose.model("Item", itemSchema);
+const Item = mongoose.model("Rental-items", itemSchema);
 
 module.exports = Item;   
  

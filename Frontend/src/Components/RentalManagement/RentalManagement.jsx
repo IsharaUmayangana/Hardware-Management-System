@@ -140,7 +140,7 @@ function RentalManagement() {
           <div className="button-container">
             <Link to="/lendedItems" style={{ marginLeft: "0", margin: "10px" }}>
               <Button variant="contained" color="primary">
-                View Lended Items
+                View Rented Items
               </Button>
             </Link>
 

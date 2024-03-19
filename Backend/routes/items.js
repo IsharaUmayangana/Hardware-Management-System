@@ -4,6 +4,94 @@ const express = require('express');
 const router = express.Router();
 const Item = require('../models/Item');
 
+
+// Function to add default items
+const addDefaultItems = async () => {
+  try {
+    const count = await Item.countDocuments();
+    if (count === 0) {
+      const defaultItems = [
+        {
+          imageUrl: "https://asirihardware.lk/wp-content/uploads/2020/12/angel_grinder_prescott.jpg",
+          itemName: "Prescott – Angle Grinder",
+          description: "Rated voltage: 220-240V~50/60Hz",
+          quantity: 10,
+          oneDayPrice: 250
+        },
+        {
+          imageUrl: "https://asirihardware.lk/wp-content/uploads/2022/02/DIMO-DiTEC-Electric-Drill.jpg",
+          itemName: "Electric Drill",
+          description: "DT-ED65- Rated voltage: 220-240V~50/60Hz",
+          quantity: 7,
+          oneDayPrice: 330
+        },
+        {
+          imageUrl: "https://asirihardware.lk/wp-content/uploads/2022/02/DIMO-DiTEC-JIG-SAW.png",
+          itemName: "JIG SAW",
+          description: "DT-ED65- Rated voltage: 220-240V~50/60Hz",
+          quantity: 7,
+          oneDayPrice: 330
+        },
+        {
+          imageUrl: "https://asirihardware.lk/wp-content/uploads/2020/05/leiya_ly_c1301.png",
+          itemName: "Impact Drill",
+          description: "DT-ED65- Rated voltage: 220-240V~50/60Hz",
+          quantity: 7,
+          oneDayPrice: 330
+        },
+        {
+          imageUrl: "https://asirihardware.lk/wp-content/uploads/2023/05/Untitled-design-2023-05-30T081538.229.png",
+          itemName: "Brush Cutter",
+          description: "DT-ED65- Rated voltage: 220-240V~50/60Hz",
+          quantity: 7,
+          oneDayPrice: 330
+        },
+        {
+          imageUrl: "https://asirihardware.lk/wp-content/uploads/2022/02/DIMO-DiTEC-Electric-Drill.jpg",
+          itemName: "Electric Drill",
+          description: "DT-ED65- Rated voltage: 220-240V~50/60Hz",
+          quantity: 7,
+          oneDayPrice: 330
+        },
+        {
+          imageUrl: "https://asirihardware.lk/wp-content/uploads/2022/02/DIMO-DiTEC-Electric-Drill.jpg",
+          itemName: "Electric Drill",
+          description: "DT-ED65- Rated voltage: 220-240V~50/60Hz",
+          quantity: 7,
+          oneDayPrice: 330
+        },
+        {
+          imageUrl: "https://asirihardware.lk/wp-content/uploads/2022/02/DIMO-DiTEC-Electric-Drill.jpg",
+          itemName: "Electric Drill",
+          description: "DT-ED65- Rated voltage: 220-240V~50/60Hz",
+          quantity: 7,
+          oneDayPrice: 330
+        },
+        {
+          imageUrl: "https://asirihardware.lk/wp-content/uploads/2022/02/DIMO-DiTEC-Electric-Drill.jpg",
+          itemName: "Electric Drill",
+          description: "DT-ED65- Rated voltage: 220-240V~50/60Hz",
+          quantity: 7,
+          oneDayPrice: 330
+        },
+        
+      ];
+
+      await Item.insertMany(defaultItems);
+      console.log('Default items added successfully');
+    }
+  } catch (error) {
+    console.error('Error adding default items:', error);
+  }
+};
+
+
+// Add default items when the server starts
+addDefaultItems(); 
+
+
+
+
 // API endpoint to get all items
 router.get('/', async (req, res) => {
   try {
@@ -46,7 +134,7 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// API endpoint to delete an existing item 
+// API endpoint to delete an existing item
 router.delete('/:id', async (req, res) => {
   const itemId = req.params.id;
   try {
@@ -60,7 +148,7 @@ router.delete('/:id', async (req, res) => {
     res.status(500).json({ message: 'Internal Server Error' });
   }
 });
-
+  
 // API endpoint to update an existing item
 router.put('/:itemName/markReceived', async (req, res) => {
   const itemName = req.params.itemName;
