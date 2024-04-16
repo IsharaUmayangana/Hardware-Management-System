@@ -2,6 +2,7 @@ import  { useState } from "react"
 
 const LeaveForm = () => {
     const [employeeid, setEmployeeid] = useState('')
+    const [email, setEmail] = useState('')
     const [leaveType, setLeaveType] = useState('')
     const [startDate, setStartDate] = useState('')
     const [endDate, setEndDate] = useState('')
@@ -13,7 +14,7 @@ const LeaveForm = () => {
 
         e.preventDefault()
 
-        const leave = {employeeid,leaveType,startDate,endDate,reason}
+        const leave = {employeeid,email,leaveType,startDate,endDate,reason}
 
         const response = await fetch('http://localhost:8000/leaves', {
             method: 'POST',
@@ -29,6 +30,7 @@ const LeaveForm = () => {
         }
         if(response.ok){
             setEmployeeid('')
+            setEmail('')
             setLeaveType('')
             setStartDate('')
             setEndDate('')
@@ -41,11 +43,16 @@ const LeaveForm = () => {
 
 
     return (
+        <div className="leaveImg">
+        <div className="LeaveFrm">
         <form onSubmit={handleLeaveForm}>
             <h3>Add a New Leave Request</h3>
 
             <lable>Employee ID:(EmXXX)</lable>
             <input type="text" onChange={(e) => setEmployeeid(e.target.value)} value={employeeid}/>
+
+            <lable>Email:</lable>
+            <input type="text" onChange={(e) => setEmail(e.target.value)} value={email}/>
 
             <lable>Leave Type:</lable>
             <input type="text" onChange={(e) => setLeaveType(e.target.value)} value={leaveType}/>
@@ -59,9 +66,11 @@ const LeaveForm = () => {
             <lable>Reason:</lable>
             <input type="text" onChange={(e) => setReason(e.target.value)} value={reason}/>
 
-            <button>Send Request</button>
+            <button className="sendReq">Send Request</button>
             {error && <div className="error">{error}</div>}
         </form>
+        </div>
+        </div>
     );
 }
 

@@ -5,9 +5,9 @@ const Navibar =  () => {
         <header>
             <div className="#">
                 <Link to="/">
-                    <h1>Laeve details</h1>
+                    <h1 className="LevDet">Laeve details</h1>
                 </Link>
-                <a href="/acceptedleaveRequest" className="leaveReq">accepted Leave Requests</a>
+                
             </div>
         </header>
     )

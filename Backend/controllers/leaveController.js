@@ -29,10 +29,10 @@ const getLeave = async(req, res) => {
 
 //create a single details
 const createLeave = async(req , res) => {
-    const {employeeid, leaveType,startDate,endDate,reason} =req.body
+    const {employeeid,email, leaveType,startDate,endDate,reason} =req.body
 
     try{
-        const leave = await Leave.create({employeeid, leaveType,startDate,endDate,reason})
+        const leave = await Leave.create({employeeid,email, leaveType,startDate,endDate,reason})
         res.status(200).json(leave)
     }catch(error){
         res.status(400).json({error: error.message})

@@ -6,20 +6,35 @@ ul {
   
   li {
     display: inline-block; 
-    width: 240px; 
+    width: 500px; 
     margin: 5px 0px 10px 20px; 
     padding: 5px; 
     
+    
+  }
+ 
+  .empList{
+
+    position: relative;
+   
+    padding: 10px;
+    margin:-20px;
   }
 
   .employeeDetails{
     background: #fff;
     position: relative;
     border-radius: 4px;
-    margin:5px auto;
     padding: 5px;
+    margin:5px;
     box-shadow: 2px 2px 5px rgb(0,0,0,0.05);
-    height: 60px;
+    height: 50px;
+    color: black;
+   
+}
+.fullbody{
+  color: black;
+  position: relative;
 }
 
   .titles{
@@ -58,7 +73,7 @@ ul {
   position:relative;
   height: 40px;
   width: 100px;
-  left: 1200px;
+  left: 930px;
   bottom: 60px;
   background-color: aqua;
 }
@@ -80,17 +95,115 @@ ul {
 .fullbody{
   background-color: aquamarine;
 }
-/* .photo{
-  margin: 0px;
-    min-height: 100vh;
-    font-family: 'Arial', sans-serif;
-  background: url(Hr.jpg) no-repeat;
-  background-size: cover;
-  
-} */
+.genarate{
+  position:absolute;
+  height: 40px;
+  width: 130px;
+  left: 1000px;
+  bottom: 60px;
+  background-color: aqua;
+
+}
 .sear{
 
   position:relative;
   left:55px;
   top: 105px;
 }
+.AddEmpForm{
+
+  position: absolute;
+	top: 20px;
+	left: 790px;
+	padding: 60px 32px;
+	height: 700px;
+  width: 700px;
+	backdrop-filter: blur(60px);
+	border-radius: 20px;
+	box-shadow: -7px 5px 28px 5px rgb(64, 0, 64);
+  color: black;
+
+}
+.AddImage{
+  background: url('./Hr.jpg');
+	height: 100vh;
+	background-size: cover;
+	background-position: center;
+
+}
+.adBtn{
+  position:relative;
+  top: 10px;
+  background-color: aqua;
+  color: black;
+
+}
+.menuIC{
+  position:relative;
+ right: 730px;
+}
+.qr{
+  position:relative;
+  width: 50px;
+  height: 40px;
+  left: 1130px;
+  top: -60px;
+  background-color: aqua;
+  color: black;
+
+}
+.empimg {
+  background: url('./Pages/Ss.jpg');
+	height: 100vh;
+	background-size: cover;
+	background-position: center;
+}
+
+.empBody {
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+}
+
+.AddNewLeaves,
+.AddNewAttendances {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  width: 600px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+
+.AddNewLeaves:hover,
+.AddNewAttendances:hover {
+  background-color: #45a049; /* Darker Green */
+}
+
+.addReq,
+.addAttend {
+  color: white;
+  text-decoration: none;
+}
+
+.addReq:hover,
+.addAttend:hover {
+  text-decoration: underline;
+}
+  .empTitle{
+
+    font-size: 50px;
+    color: black;
+    font-family: 'Times New Roman', Times, serif;
+    position: absolute;
+    bottom: 500px;
+  }

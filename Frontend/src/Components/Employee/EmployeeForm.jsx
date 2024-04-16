@@ -1,4 +1,5 @@
 import  { useState } from "react"
+import './employee.css'
 
 const EmployeeForm = () => {
     const [employeeid, setEmployeeid] = useState('')
@@ -46,6 +47,8 @@ const EmployeeForm = () => {
 
 
     return (
+        <div className="AddImage">
+        <div className="AddEmpForm">
         <form onSubmit={handleEmployeeForm}>
             <h3>Add a New Employee</h3>
 
@@ -73,9 +76,11 @@ const EmployeeForm = () => {
             <lable>Basic Salary:</lable>
             <input type="number" onChange={(e) => setBasicsalary(e.target.value)} value={basicsalary}/>
 
-            <button>Add Employee</button>
+            <button className="adBtn">Add Employee</button>
             {error && <div className="error">{error}</div>}
         </form>
+        </div>
+        </div>
     );
 }
 

@@ -5,7 +5,9 @@ import { IconButton } from "@mui/material";
 import Badge from "@mui/material/Badge";
 
 
+
 const EmployeeDetails = ({ employee, onDelete  }) => {
+
 
     const handleDelete = async () => {
         try {
@@ -33,7 +35,9 @@ const EmployeeDetails = ({ employee, onDelete  }) => {
             <li>{employee.email}</li>
             <li>{employee.jobPost}</li>
             <li>{employee.employmenttype}</li>
+            <li><button className="qr"><Link to={`/employee/${employee._id}/qr`}>QR</Link></button></li>
             <li><button className='editBtn'><Link to={`/updateEmployee/${employee._id}`}>Update</Link></button></li>
+            <li><button className='genarate'><Link to={`/employee/${employee.id}/report`}>Generate Report</Link></button></li>
 
         <div className='dltBtn'> <li>
         <IconButton size="large"  color="inherit" onClick={handleDelete}>
@@ -43,7 +47,9 @@ const EmployeeDetails = ({ employee, onDelete  }) => {
         </IconButton></li></div>
         
             </ul>
+           
         </div>
+       
       
     )
 }

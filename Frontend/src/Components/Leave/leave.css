@@ -12,12 +12,15 @@ ul {
     
   }
   .leaveDetails{
+    position: relative;
     background: #fff;
     border-radius: 4px;
     margin: 20px auto;
-    padding: 20px;
+    padding: 5px;
     position: relative;
     box-shadow: 2px 2px 5px rgb(0,0,0,0.05);
+    height: 60px;
+
 }
 
 .titles{
@@ -27,4 +30,51 @@ ul {
     border-radius: 10px;
 
 
+  }
+  .LeaveFrm{
+
+  position: absolute;
+	top: 70px;
+	left: 70px;
+	padding: 60px 32px;
+	height: 550px;
+  width: 700px;
+	backdrop-filter: blur(60px);
+	border-radius: 20px;
+	box-shadow: -7px 5px 28px 5px rgb(64, 0, 64);
+  color: black;
+
+  }
+  .leaveImg{
+    background: url('./Hr3.jpg');
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+  
+  }
+  .sendReq{
+  position:relative;
+  top: 20px;
+  background-color: aqua;
+  color: black;
+  }
+  .home{
+    background-color:aquamarine;
+    color: black;
+  }
+  .levBtn{
+    background-color: aqua;
+    color: black;
+    position:relative;
+    bottom: 57px;
+    left: 1100px;
+    height:40px;
+    width: 100px;
+
+  }
+  .LevDet{
+    position:relative;
+  left:600px;
+  top:20px;
+  font-family:Georgia, 'Times New Roman', Times, serif;
   }
