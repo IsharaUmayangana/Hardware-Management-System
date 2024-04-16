@@ -67,9 +67,9 @@ function UserItemCard({ item }) {
           <Button
             variant="contained"
             style={{
-              backgroundColor: item.quantity > 0 ? "#118ab2" : "#adb5bd",
+              backgroundColor: item.quantity > 0 ? "#1a759f" : "#adb5bd",
               marginTop: "02px",
-              borderRadius: "10px",
+              borderRadius: "5px",
               color: "white",
             }}
             disabled={item.quantity === 0}
