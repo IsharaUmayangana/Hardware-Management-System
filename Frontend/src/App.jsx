@@ -68,7 +68,7 @@ function App() {
           <Route exact path="/AttHome" element={<AttendanceHome />} />
           <Route exact path="/addAttendance" element={<AttendanceForm/>} />
           <Route exact path="/acceptedLeaveRequests" element={<AcceptedLeaveReq />} />
-          <Route exact path="/employee/:employeeId/report" element={<EmployeeReport />} />
+          <Route exact path="/employee/:employeeid/report" element={<EmployeeReport />} />
 
           
          

@@ -26,25 +26,13 @@ const EmployeeQRCode = () => {
 
   return (
     <div className="employeeQRCode">
-      <h2>Employee QR Code</h2>
-      <div className="employeeInfo">
-        {/* Display employee information if available */}
-        {employee && (
-          <>
-            <p><strong>Employee ID:</strong> {employee.employeeid}</p>
-            <p><strong>Full Name:</strong> {employee.fullname}</p>
-            <p><strong>Address:</strong> {employee.address}</p>
-            <p><strong>Email:</strong> {employee.email}</p>
-            <p><strong>Job Post:</strong> {employee.jobPost}</p>
-            <p><strong>Date of Hire:</strong> {employee.dateofhire}</p>
-            <p><strong>Employment Type:</strong> {employee.employmenttype}</p>
-            <p><strong>Basic Salary:</strong> {employee.basicsalary}</p>
-           
-          </>
-        )}
-      </div>
+      
+      <p className='scan'>SCAN</p>
+      <p className='here'>HERE</p>
+      <p className='toGet'>TO GET MORE</p>
+      <p className='info'>INFORMATION</p>
    
-      <QRCode value={JSON.stringify(employee)} /> {/* Generate QR code */}
+      <QRCode className='qrCodepic' value={JSON.stringify(employee)} size={400}/> {/* Generate QR code */}
     </div>
   );
 };

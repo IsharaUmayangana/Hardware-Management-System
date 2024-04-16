@@ -42,23 +42,25 @@ const EmployeeReport = () => {
   }, [monthlyAttendance, basicSalary]);
 
   const handleDownloadPDF = () => {
-    const doc = (
-      <Document>
-        <Page size="A4" style={styles.page}>
-          <View>
-            <Text>Employee ID: {employeeid}</Text>
-            <Text>Monthly Attendance Dates: {monthlyAttendance.length}</Text>
-            <Text>Monthly Salary: {monthlySalary}</Text>
-          </View>
-        </Page>
-      </Document>
-    );
+
+    window.print();
+    // const doc = (
+    //   <Document>
+    //     <Page size="A4" style={styles.page}>
+    //       <View>
+    //         <Text>Employee ID: {employeeid}</Text>
+    //         <Text>Monthly Attendance Dates: {monthlyAttendance.length}</Text>
+    //         <Text>Monthly Salary: {monthlySalary}</Text>
+    //       </View>
+    //     </Page>
+    //   </Document>
+    // );
   
-    const asPdf = PDFDocument.create();
-    asPdf.addPages(doc);
-    const pdfBytes = asPdf.save();
+    // const asPdf = PDFDocument.create();
+    // asPdf.addPages(doc);
+    // const pdfBytes = asPdf.save();
   
-    saveAs(new Blob([pdfBytes], { type: 'application/pdf' }), 'employee_report.pdf');
+    // saveAs(new Blob([pdfBytes], { type: 'application/pdf' }), 'employee_report.pdf');
   };
 
   return (

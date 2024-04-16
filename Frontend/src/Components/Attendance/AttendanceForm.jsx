@@ -1,5 +1,5 @@
 
-
+import './Attendance.css'
 import React, { useState } from 'react';
 
 
@@ -41,9 +41,10 @@ const AttendanceForm = () => {
 
 
     return (
-    
+    <div className='AttImg'><div className='AddAttForm'>
         <form onSubmit={handleSubmit}>
-            <input type="text" placeholder="Employee ID" value={employeeid} onChange={(e) => setEmployeeid(e.target.value)} />
+        <h3 className='adddaily'>Add Daily Attendance</h3>
+            <input type="text" className="empId" placeholder="Employee ID" value={employeeid} onChange={(e) => setEmployeeid(e.target.value)} />
             <select value={status} onChange={(e) => setStatus(e.target.value)}>
                 <option value="">Select Status</option>
                 <option value="present">Present</option>
@@ -54,11 +55,13 @@ const AttendanceForm = () => {
         <input type="datetime-local" value={timeIn} onChange={(e) => setTimeIn(e.target.value)} />
       </label>
       <label>
-        Time Out:
-        <input type="datetime-local" value={timeOut} onChange={(e) => setTimeOut(e.target.value)} />
+        <div className="timeout">Time Out:</div>
+        <input className="timeout" type="datetime-local" value={timeOut} onChange={(e) => setTimeOut(e.target.value)} />
       </label>
-            <button type="submit">Submit</button>
+            <button className="atBtn"  type="submit">Submit</button>
         </form>
+        </div>
+        </div>
     );
 };
 
