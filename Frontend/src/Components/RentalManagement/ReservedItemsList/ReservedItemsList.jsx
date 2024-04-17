@@ -205,7 +205,7 @@ const ReservedItemsList = () => {
             Rent Confirmation
           </h2>
           <p id="rent-confirmation-description">
-            Are you sure you want to rent this item?
+            Are you sure you want to rent this reservation?
           </p>
           <Button
             variant="contained"
@@ -260,7 +260,7 @@ const ReservedItemsList = () => {
             Remove Confirmation
           </h2>
           <p id="remove-confirmation-description">
-            Are you sure you want to remove this item?
+            Are you sure you want to remove this reservation?
           </p>
           <Button
             variant="contained"
