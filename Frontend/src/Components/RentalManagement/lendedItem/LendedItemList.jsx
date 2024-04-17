@@ -85,6 +85,7 @@ const LendedItemList = () => {
           fontSize: "30px",
           marginTop: "10px",
           marginBottom: "15px",
+          textAlign: "center",
         }}
       >
         Rented Items List

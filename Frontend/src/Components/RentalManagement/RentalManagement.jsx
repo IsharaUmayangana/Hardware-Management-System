@@ -17,6 +17,7 @@ import "./RentalManagement.css";
 Modal.setAppElement(document.body);
 
 function RentalManagement() {
+  document.title = "Rental Services";
   const navigate = useNavigate();
 
   const [searchTerm, setSearchTerm] = useState("");

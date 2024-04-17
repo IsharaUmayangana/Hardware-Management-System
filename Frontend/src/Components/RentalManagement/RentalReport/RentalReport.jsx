@@ -50,11 +50,11 @@ function RentalReport() {
   const uniqueItemNames = [...new Set(reportData.map((item) => item.itemName))];
 
   const mostlyHiringItems = uniqueItemNames.filter(
-    (itemName) => calculateTotalTimesHired(itemName) > 4
+    (itemName) => calculateTotalTimesHired(itemName) > 3
   );
 
   const leastHiringItems = uniqueItemNames.filter(
-    (itemName) => calculateTotalTimesHired(itemName) < 4
+    (itemName) => calculateTotalTimesHired(itemName) < 3
   );
 
   // Calculate total income
@@ -80,13 +80,27 @@ function RentalReport() {
           textDecoration: "underline",
           fontSize: "25px",
           marginTop: "10px",
-          marginBottom: "10px",
+          marginBottom: "20px",
+          color: "#023047",
         }}
       >
         Rental Report
       </h1>
-      <TableContainer component={Paper}>
-        <Table>
+      <div
+        align="center"
+        style={{
+          textDecoration: "underline",
+          fontSize: "20px",
+        }}
+      >
+        Rented Items Details
+      </div>
+
+      <TableContainer
+        component={Paper}
+        style={{ maxWidth: "90vw", margin: "auto" }}
+      >
+        <Table style={{ textAlign: "center" }}>
           <TableHead>
             <TableRow>
               <TableCell style={{ fontWeight: "bold" }}>Item Name</TableCell>
@@ -113,54 +127,36 @@ function RentalReport() {
           </TableBody>
         </Table>
       </TableContainer>
-
-      <TableContainer component={Paper}>
-        <Table>
+      <div
+        align="center"
+        style={{
+          textDecoration: "underline",
+          fontSize: "20px",
+          marginTop: "20px",
+        }}
+      >
+        Mostly Hiring Items
+      </div>
+      <TableContainer
+        component={Paper}
+        style={{ maxWidth: "90vw", margin: "auto" }}
+      >
+        <Table style={{ textAlign: "center" }}>
           <TableHead>
             <TableRow>
-              <TableCell
-                colSpan={4}
-                align="center"
-                style={{ fontWeight: "bold", textDecoration: "underline" }}
-              >
-                Mostly Hiring Items
+              <TableCell colSpan={2} style={{ fontWeight: "bold" }}>
+                Item Name
               </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell colSpan={3}>Item Name</TableCell>
-              <TableCell colSpan={1}>No of Times Hired</TableCell>
+              <TableCell colSpan={2} style={{ fontWeight: "bold" }}>
+                No of Times Hired
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {mostlyHiringItems.map((itemName, index) => (
               <TableRow key={index}>
-                <TableCell colSpan={3}>{itemName}</TableCell>
-                <TableCell colSpan={1}>
-                  {calculateTotalTimesHired(itemName)}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-          <TableHead>
-            <TableRow>
-              <TableCell
-                colSpan={4}
-                align="center"
-                style={{ fontWeight: "bold", textDecoration: "underline" }}
-              >
-                Least Hiring Items
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell colSpan={3}>Item Name</TableCell>
-              <TableCell colSpan={1}>No of Times Hired</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {leastHiringItems.map((itemName, index) => (
-              <TableRow key={index}>
-                <TableCell colSpan={3}>{itemName}</TableCell>
-                <TableCell colSpan={1}>
+                <TableCell colSpan={2}>{itemName}</TableCell>
+                <TableCell colSpan={2}>
                   {calculateTotalTimesHired(itemName)}
                 </TableCell>
               </TableRow>
@@ -168,8 +164,51 @@ function RentalReport() {
           </TableBody>
         </Table>
       </TableContainer>
-
-      <h2 style={{ marginTop: "10px", fontSize: "30px" }}>
+      <div
+        align="center"
+        style={{
+          textDecoration: "underline",
+          fontSize: "20px",
+          marginTop: "20px",
+        }}
+      >
+        Least Hiring Items
+      </div>
+      <TableContainer
+        component={Paper}
+        style={{ maxWidth: "90vw", margin: "auto" }}
+      >
+        <Table style={{ textAlign: "center" }}>
+          <TableHead>
+            <TableRow>
+              <TableCell colSpan={2} style={{ fontWeight: "bold" }}>
+                Item Name
+              </TableCell>
+              <TableCell colSpan={2} style={{ fontWeight: "bold" }}>
+                No of Times Hired
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {leastHiringItems.map((itemName, index) => (
+              <TableRow key={index}>
+                <TableCell colSpan={2}>{itemName}</TableCell>
+                <TableCell colSpan={2}>
+                  {calculateTotalTimesHired(itemName)}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <h2
+        style={{
+          marginTop: "10px",
+          fontSize: "30px",
+          textAlign: "center",
+          color: "#023047",
+        }}
+      >
         Total Income - Rs. {totalIncome}.00
       </h2>
       <CardActions>

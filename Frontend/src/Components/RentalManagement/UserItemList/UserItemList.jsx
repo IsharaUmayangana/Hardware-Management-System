@@ -4,6 +4,7 @@ import SearchBar from "../searchBar/searchBar";
 import UserItemCard from "../UserItemCard/UserItemCard";
 
 function UserItemList() {
+  document.title = "Rental Item List";
   const [items, setItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
 

@@ -1,15 +1,23 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import ProductDetails from './Inventory-ProductDetails';
 import Status from './Inventory-Status';
 import Sidebar from "../Dashboard/Dashboard_Sidebar";
-import { TextField, Select, MenuItem, Button, FormControl, InputLabel } from '@mui/material';
+import AddProductForm from './InventoryForm';
+import AddNewCategoryForm from './inventory-AddNewCategory';
+import './InventoryStyles.css';
+import { TextField, Select, MenuItem, Button, FormControl, InputLabel, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 
 const InventoryHome = () => {
     const [products, setProducts] = useState(null);
+    const [categories, setCategories] = useState([]); 
+    const [addCategoryDialogOpen, setAddCategoryDialogOpen] = useState(false);
+    const [addProductDialogOpen, setAddProductDialogOpen] = useState(false);
+    const [refreshPage, setRefreshPage] = useState(false);
+
     const [selectedCategory, setSelectedCategory] = useState('');
     const [searchQuery, setSearchQuery] = useState('');
     const [curPage, setCurPage] = useState(1);
-    const recordsPerPage = 5;
+    const recordsPerPage = 7;
 
     const handleCategory = (e) => {
         setSelectedCategory(e.target.value);
@@ -19,6 +27,25 @@ const InventoryHome = () => {
     const handleSearch = (e) => {
         setSearchQuery(e.target.value);
         setCurPage(1); // Reset page number when search query change
+    };
+
+    //Dialog functions
+    const handleAddCategoryDialogOpen = () => {
+        setAddCategoryDialogOpen(true);
+    };
+
+    const handleAddCategoryDialogClose = () => {
+        setAddCategoryDialogOpen(false);
+        setRefreshPage(true);
+    };
+
+    const handleAddProductDialogOpen = () => {
+        setAddProductDialogOpen(true);
+    };
+
+    const handleAddProductDialogClose = () => {
+        setAddProductDialogOpen(false);
+        setRefreshPage(true);
     };
 
     useEffect(() => {
@@ -32,7 +59,30 @@ const InventoryHome = () => {
         };
 
         fetchProducts();
-    }, []);
+    }, [refreshPage]);
+
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const response = await fetch('http://localhost:8000/categories');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch categories');
+                }
+                const data = await response.json();
+                setCategories(data);
+            } catch (error) {
+                console.error('Error fetching categories:', error.message);
+            }
+        };
+
+        fetchCategories();
+    }, [refreshPage]);
+
+    // Function to count product categories
+    const calculateCategories = () =>{
+        let totalCategories = categories.length;  
+        return totalCategories;
+    };
 
     // Function to calculate total value
     const calculateTotalValue = () => {
@@ -145,10 +195,9 @@ const InventoryHome = () => {
         <div style={{ width: '20%'}}><Sidebar/></div>
         <div style={{ width: '70%',margin: '5px 60px'}} >
             <h2>Inventory</h2>
-            <br></br>
-            <Status totalvalue={calculateTotalValue()} totalProducts={calculateTotalProducts()} outOfStock={calculateOutOfStock()}/>
+            <Status totalCategories={calculateCategories()} totalvalue={calculateTotalValue()} totalProducts={calculateTotalProducts()} outOfStock={calculateOutOfStock()}/>
             <div className="functionBar">
-                <div>
+                <div className='searchbar'>
                     <TextField label="Search by Name" value={searchQuery} onChange={handleSearch} fullWidth />
                 </div>
                 <div className="categoryBox">
@@ -156,35 +205,37 @@ const InventoryHome = () => {
                         <InputLabel id="category-select-label">Select Category</InputLabel>
                         <Select labelId="category-select-label" value={selectedCategory} onChange={handleCategory} fullWidth >
                             <MenuItem value="">All</MenuItem>
-                            <MenuItem value="Hand Tools">Hand Tools</MenuItem>
-                            <MenuItem value="Power Tools">Power Tools</MenuItem>
-                            <MenuItem value="Building Materials">Building Materials</MenuItem>
-                            <MenuItem value="Paint and Painting Supplies">Paint and Painting Supplies</MenuItem>
-                            <MenuItem value="Plumbing Supplies">Plumbing Supplies</MenuItem>
-                            <MenuItem value="Electrical Supplies">Electrical Supplies</MenuItem>
-                            <MenuItem value="Other">Other</MenuItem>                             
+                                {categories.map(category => (
+                                    <MenuItem key={category._id} value={category.name}>{category.name}</MenuItem>
+                                ))}                            
                         </Select>
                     </FormControl>
                 </div>
-                <Button href="/addnewItem" variant="contained" color="primary">Add New Product</Button>
+                <Button className='add-buttons' onClick={handleAddCategoryDialogOpen} variant="contained" color="primary">Add New Category</Button>
+                <Button className='add-buttons' onClick={handleAddProductDialogOpen} variant="contained" color="primary">Add New Product</Button>
             </div>
             <div className="topicline">
                 <table>
-                    <th className='topic-photo'></th>
-                    <th className='topic-name'>Name</th>
-                    <th className='topic-price'>Price (Rs)</th>
-                    <th className='topic-disPrice'>Discount Price</th>
-                    <th className='tpoic-quantity'>Quantity</th>
+                    <tr>
+                        <th className='topic-photo'></th>
+                        <th className='topic-name'>Name</th>
+                        <th className='topic-price'>Price (Rs)</th>
+                        <th className='topic-disPrice'>Discount Price</th>
+                        <th className='tpoic-quantity'>Quantity</th>
+                    </tr>
                 </table>
             </div>
             {records.map((Inventory) => (
                 <ProductDetails key={Inventory._id} Inventory={Inventory}/>
             ))}
-            <br></br>
+            
+            {/* button to navigate to report1 */}
             <div>
                 <Button href="/report1" variant="contained" color="primary">Inventory List Report</Button>
             </div>
             <br></br>
+
+            {/* pagination */}
             <div className='pagination'>
                 <li className='page-item'>
                     <Button className='page-link' onClick={previousPage}>Prev</Button>
@@ -200,6 +251,29 @@ const InventoryHome = () => {
                     <Button className='page-link' onClick={nextPage}>Next</Button>
                 </li>
             </div>
+
+            {/* Add New Category Dialog */}
+            <Dialog open={addCategoryDialogOpen} onClose={handleAddCategoryDialogClose} maxWidth="100px">
+                <DialogContent>
+                    <AddNewCategoryForm />
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleAddCategoryDialogClose} color="primary">Cancel</Button>
+                </DialogActions>
+            </Dialog>
+
+            {/* Add New Product Dialog */}
+            <Dialog open={addProductDialogOpen} onClose={handleAddProductDialogClose} maxWidth="1000px" >
+                <DialogTitle>
+                    <h2>Add New Product</h2>
+                </DialogTitle>
+                <DialogContent>
+                    <AddProductForm />
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleAddProductDialogClose} color="primary">Cancel</Button>
+                </DialogActions>
+            </Dialog>
         </div>
         </div>
      );

@@ -26,7 +26,7 @@ function UserItemCard({ item }) {
       <Card sx={{ maxWidth: 400, margin: 2 }}>
         <CardMedia
           component="img"
-          height="140"
+          height="230"
           image={item.imageUrl}
           alt={item.itemName}
         />

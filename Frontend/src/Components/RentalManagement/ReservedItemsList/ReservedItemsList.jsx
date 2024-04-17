@@ -103,6 +103,7 @@ const ReservedItemsList = () => {
           fontSize: "30px",
           marginTop: "10px",
           marginBottom: "15px",
+          textAlign: "center",
         }}
       >
         Reserved Items List

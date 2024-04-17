@@ -1,9 +1,10 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
-import Register from "./Components/Register/Register";
-import Login from "./Components/Login/Login";
-import DashBoard from "./Components/Dashboard//DashBoard";
-import NavHome from "./Components/Home/NavHome";
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import React, { useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Register from './Components/Register/Register';
+import Login from './Components/Login/Login';
+import DashBoard from './Components/Dashboard//DashBoard';
+import NavHome from './Components/Home/NavHome';
 
 import InventoryHome from "./Components/Inventory/InventoryHome";
 import InventoryForm from "./Components/Inventory/InventoryForm";
@@ -12,6 +13,8 @@ import EditInventoryItems from "./Components/Inventory/EditInventoryItems";
 import CusHome from "./Components/Home/Home-Products";
 import CusSelectedItem from "./Components/Home/Home-SelectedItem";
 import Report1 from "./Components/Inventory/Inventory-report1";
+import ProductCategory from "./Components/Inventory/inventory-AddNewCategory";
+import ScannerBarcode from "./Components/Inventory/scanner";
 
 import Layout from "./pages/SupplyManager/components/Layout";
 import SupplyManagementHome from "./pages/SupplyManager/home.page"
@@ -30,6 +33,13 @@ import DeliveryUpdateDelete from './Components/DeliveryManagement/DeliveryView/D
 
 
 
+
+import SelectedOrderItem from './Components/Order/Home-SelectedItem'
+import CartPage from './Components/Order/CartPages'
+import DeliveryInfoPage from './Components/Order/DeliveryInfoPage';
+import PaymentPage from './Components/Order/PaymentPage'
+import AdminOrdersPage from './Components/Order/AdminOrderdPage'
+
 import { Provider } from "react-redux";
 import store from "../src/Components/ReduxTool/Store";
 
@@ -43,6 +53,11 @@ import RentalReport from "./Components/RentalManagement/RentalReport/RentalRepor
 // import SearchBar from "./Components/RentalManagement/searchBar/searchBar";
 
 function App() {
+  const [cart, setCart] = useState([]);
+
+  const addToCart = (item) => {
+    setCart([...cart, item]);
+  };
   return (
     <Provider store={store}>
       <BrowserRouter>
@@ -56,9 +71,20 @@ function App() {
           <Route exact path="/addnewItem" element={<InventoryForm />} />
           <Route exact path="/selectedItem/:id" element={<SelectedItem />} />
           <Route exact path="/editItem/:id" element={<EditInventoryItems />} />
-          <Route exact path="/cusHome" element={<CusHome />} />
+
+          <Route exact path='/cart' element={<CartPage cart={cart}/>}/>
+          <Route exact path="/cusOrderSelectedItem/:id" element={<SelectedOrderItem  addToCart={addToCart}/>} />
+          <Route exact path='/deliveryinfo' element={<DeliveryInfoPage />}/>
+          <Route exact path='/payment' element={<PaymentPage />}/>
+          <Route exact path='/order' element={<AdminOrdersPage />}/>
+          
+          
+
+          <Route exact path="/cusHome" element={<CusHome addToCart={addToCart}/>} />
           <Route exact path="/cusSelectedItem/:id" element={<CusSelectedItem />} />
           <Route exact path="/report1" element={<Report1 />} />
+          <Route exact path="/addNewCategory" element={<ProductCategory />} />
+          <Route exact path="/scannerBarcode" element={<ScannerBarcode />} />
 
           {/* sanjuka - routes */}
           <Route path="/rentalService" element={<RentalManagement />} />
