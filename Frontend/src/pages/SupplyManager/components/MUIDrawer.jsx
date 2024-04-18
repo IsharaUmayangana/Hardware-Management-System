@@ -146,7 +146,7 @@ export default function MuiDrawer() {
               component={Link}
               to="/supply-management/notifications"
               size="large"
-              aria-label="show 17 new notifications"
+              aria-label="show new notifications"
               color="inherit"
               edge="end"
               sx={{
@@ -192,13 +192,7 @@ export default function MuiDrawer() {
         </List>
         <Divider />
         <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
+          
         </List>
       </Drawer>
       <Main open={open}>

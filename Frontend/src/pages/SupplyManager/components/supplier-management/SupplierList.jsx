@@ -4,20 +4,17 @@ import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
-import SaveIcon from '@mui/icons-material/Save';
-import CancelIcon from '@mui/icons-material/Close';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import {
   DataGrid,
   GridToolbarContainer,
   GridActionsCellItem,
-  GridRowEditStopReasons,
   GridRowModes,
 } from '@mui/x-data-grid';
 import { useNavigate } from 'react-router-dom';
-import ProductDetailsModal from './supplier-management/productDetailsModal/productDetails';
-import AddSupplierForm from './supplier-management/AddSupplierFormModal/AddSupplierForm';
-import UpdateSupplierForm from './supplier-management/UpdateSupplierFormModal/UpdateSupplierForm';
+import ProductDetailsModal from './productDetailsModal/productDetails';
+import AddSupplierForm from './AddSupplierFormModal/AddSupplierForm';
+import UpdateSupplierForm from './UpdateSupplierFormModal/UpdateSupplierForm';
 
 const initialRows = [];
 

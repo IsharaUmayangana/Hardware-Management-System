@@ -191,90 +191,89 @@ const InventoryHome = () => {
      }
 
     return ( 
-        <div className="home" style={{ display: 'flex', flexDirection: 'row',minHeight: '100vh'}}> 
-        <div style={{ width: '20%'}}><Sidebar/></div>
-        <div style={{ width: '70%',margin: '5px 60px'}} >
-            <h2>Inventory</h2>
-            <Status totalCategories={calculateCategories()} totalvalue={calculateTotalValue()} totalProducts={calculateTotalProducts()} outOfStock={calculateOutOfStock()}/>
-            <div className="functionBar">
-                <div className='searchbar'>
-                    <TextField label="Search by Name" value={searchQuery} onChange={handleSearch} fullWidth />
+        <div className="invhome"> 
+            <div className='invMain'>
+                <h2>Inventory</h2>
+                <Status totalCategories={calculateCategories()} totalvalue={calculateTotalValue()} totalProducts={calculateTotalProducts()} outOfStock={calculateOutOfStock()}/>
+                <div className="functionBar">
+                    <div className='searchbar'>
+                        <TextField label="Search by Name" value={searchQuery} onChange={handleSearch} fullWidth />
+                    </div>
+                    <div className="categoryBox">
+                        <FormControl fullWidth>
+                            <InputLabel id="category-select-label">Select Category</InputLabel>
+                            <Select labelId="category-select-label" value={selectedCategory} onChange={handleCategory} fullWidth >
+                                <MenuItem value="">All</MenuItem>
+                                    {categories.map(category => (
+                                        <MenuItem key={category._id} value={category.name}>{category.name}</MenuItem>
+                                    ))}                            
+                            </Select>
+                        </FormControl>
+                    </div>
+                    <Button className='add-buttons' onClick={handleAddCategoryDialogOpen} variant="contained" color="primary">Add New Category</Button>
+                    <Button className='add-buttons' onClick={handleAddProductDialogOpen} variant="contained" color="primary">Add New Product</Button>
                 </div>
-                <div className="categoryBox">
-                    <FormControl fullWidth>
-                        <InputLabel id="category-select-label">Select Category</InputLabel>
-                        <Select labelId="category-select-label" value={selectedCategory} onChange={handleCategory} fullWidth >
-                            <MenuItem value="">All</MenuItem>
-                                {categories.map(category => (
-                                    <MenuItem key={category._id} value={category.name}>{category.name}</MenuItem>
-                                ))}                            
-                        </Select>
-                    </FormControl>
-                </div>
-                <Button className='add-buttons' onClick={handleAddCategoryDialogOpen} variant="contained" color="primary">Add New Category</Button>
-                <Button className='add-buttons' onClick={handleAddProductDialogOpen} variant="contained" color="primary">Add New Product</Button>
-            </div>
-            <div className="topicline">
-                <table>
-                    <tr>
-                        <th className='topic-photo'></th>
-                        <th className='topic-name'>Name</th>
-                        <th className='topic-price'>Price (Rs)</th>
-                        <th className='topic-disPrice'>Discount Price</th>
-                        <th className='tpoic-quantity'>Quantity</th>
-                    </tr>
+                <table className="topicline">
+                    <tbody>
+                        <tr>
+                            <th className='topic-photo'></th>
+                            <th className='topic-name'>Name</th>
+                            <th className='topic-price'>Price (Rs)</th>
+                            <th className='topic-disPrice'>Discount Price</th>
+                            <th className='tpoic-quantity'>Quantity</th>
+                        </tr>
+                    </tbody>
                 </table>
-            </div>
-            {records.map((Inventory) => (
-                <ProductDetails key={Inventory._id} Inventory={Inventory}/>
-            ))}
-            
-            {/* button to navigate to report1 */}
-            <div>
-                <Button href="/report1" variant="contained" color="primary">Inventory List Report</Button>
-            </div>
-            <br></br>
+                {records.map((Inventory) => (
+                    <ProductDetails key={Inventory._id} Inventory={Inventory}/>
+                ))}
+                
+                {/* button to navigate to report1 */}
+                <div>
+                    <Button href="/report1" variant="contained" color="primary">Inventory List Report</Button>
+                </div>
+                <br></br>
 
-            {/* pagination */}
-            <div className='pagination'>
-                <li className='page-item'>
-                    <Button className='page-link' onClick={previousPage}>Prev</Button>
-                </li>
-                {
-                    numbers.map((n, i) => (
-                        <li className={`page-item ${curPage === n ? 'active': ''}`} key={i}>
-                            <Button className='page-link' onClick={() => changeCurPage(n)}>{n}</Button>
-                        </li>
-                    ))
-                }
-                <li className='page-item'>
-                    <Button className='page-link' onClick={nextPage}>Next</Button>
-                </li>
+                {/* pagination */}
+                <div className='pagination'>
+                    <li className='page-item'>
+                        <Button className='page-link' onClick={previousPage}>Prev</Button>
+                    </li>
+                    {
+                        numbers.map((n, i) => (
+                            <li className={`page-item ${curPage === n ? 'active': ''}`} key={i}>
+                                <Button className='page-link' onClick={() => changeCurPage(n)}>{n}</Button>
+                            </li>
+                        ))
+                    }
+                    <li className='page-item'>
+                        <Button className='page-link' onClick={nextPage}>Next</Button>
+                    </li>
+                </div>
+
+                {/* Add New Category Dialog */}
+                <Dialog open={addCategoryDialogOpen} onClose={handleAddCategoryDialogClose} maxWidth="100px">
+                    <DialogContent>
+                        <AddNewCategoryForm />
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleAddCategoryDialogClose} color="primary">Cancel</Button>
+                    </DialogActions>
+                </Dialog>
+
+                {/* Add New Product Dialog */}
+                <Dialog open={addProductDialogOpen} onClose={handleAddProductDialogClose} maxWidth="1000px" >
+                    <DialogTitle>
+                        <h2>Add New Product</h2>
+                    </DialogTitle>
+                    <DialogContent>
+                        <AddProductForm />
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleAddProductDialogClose} color="primary">Cancel</Button>
+                    </DialogActions>
+                </Dialog>
             </div>
-
-            {/* Add New Category Dialog */}
-            <Dialog open={addCategoryDialogOpen} onClose={handleAddCategoryDialogClose} maxWidth="100px">
-                <DialogContent>
-                    <AddNewCategoryForm />
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleAddCategoryDialogClose} color="primary">Cancel</Button>
-                </DialogActions>
-            </Dialog>
-
-            {/* Add New Product Dialog */}
-            <Dialog open={addProductDialogOpen} onClose={handleAddProductDialogClose} maxWidth="1000px" >
-                <DialogTitle>
-                    <h2>Add New Product</h2>
-                </DialogTitle>
-                <DialogContent>
-                    <AddProductForm />
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleAddProductDialogClose} color="primary">Cancel</Button>
-                </DialogActions>
-            </Dialog>
-        </div>
         </div>
      );
 }

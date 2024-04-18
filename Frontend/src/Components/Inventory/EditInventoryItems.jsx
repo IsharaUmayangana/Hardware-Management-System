@@ -40,9 +40,7 @@ const EditInventoryItems = ({ product }) => {
   const validateForm = () => {
     // function to validate numeric input with up to 2 decimal places
     const validateNumberInput = (value) => {
-
       const stringValue = String(value);
-    
       const parts = stringValue.split('.');
       if (parts.length > 2 || (parts[1] && parts[1].length > 2)) {
         return false;
@@ -57,6 +55,7 @@ const EditInventoryItems = ({ product }) => {
       setLoading(false);
       return;
     }
+    return true;
   };
 
   // calculate price after discount 
@@ -71,9 +70,7 @@ const EditInventoryItems = ({ product }) => {
     e.preventDefault();
     setLoading(true);
 
-    if (!validateForm()) {
-      return;
-  }
+    if (!validateForm()) {return;}
 
     // construct form data
     const formData = new FormData();
@@ -114,7 +111,7 @@ const EditInventoryItems = ({ product }) => {
   };
 
   return (
-    <div className="selectedProduct">
+    <div className="editProduct">
       <form className="editItem-form" onSubmit={handleInventoryEdit}>
         <Grid container spacing={0.8}>
           <Grid item xs={12}>

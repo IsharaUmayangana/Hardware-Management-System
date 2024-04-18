@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 // Get all purchase orders
 const getAllPurchaseOrders = async (req, res) => {
     try {
-        const purchaseOrders = await PurchaseOrder.find({}).sort({ createdAt: -1 });
+        const purchaseOrders = await PurchaseOrder.find({}).sort({ createdAt: -1 }).populate('supplier').populate('items.item');
         res.status(200).json(purchaseOrders);
     } catch (error) {
         res.status(500).json({ error: error.message });

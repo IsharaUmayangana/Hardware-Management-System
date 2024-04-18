@@ -56,19 +56,19 @@ const handleAddToCart = async () => {
 };
 
   return (
-    <div className="selectedProduct">
+    <div className="selectedOrderProduct">
       {loading && <p>Loading...</p>}
       {!loading && !product && <p>No product found</p>}
       {!loading && product && (
 
-        <div className="detailsBox">
+        <div className="OrderdetailsBox">
           <div className="productImage">
           
           <img src={`http://localhost:8000/images/${product.img_URL}`} alt={product.name} />
           
           </div>
     
-        <div className="productDetails">
+        <div className="productOrderDetails">
           <p className="productName">Product Name : {product.name}</p>
           <p className="unitPrice">Unit Price : {product.price}</p>
           <p className="availableAmount">Available Amount : {product.quantity}</p>

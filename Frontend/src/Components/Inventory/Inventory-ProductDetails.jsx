@@ -15,13 +15,15 @@ const ProductDetails = ({ Inventory }) => {
         <div className="productDetails">
             <Link to={`http://localhost:5173/selectedItem/${Inventory._id}`}>
                 <table>  
-                    <tr>
-                        <td className="productDetails-image"><img src={`http://localhost:8000/images/${Inventory.img_URL}`} alt="Product"/></td>
-                        <td className="productDetails-name">{Inventory.name}</td>
-                        <td className="productDetails-price">{formattedPrice}</td>
-                        <td className="productDetails-disPrice">{formattedDiscountedPrice}</td>
-                        <td className="productDetails-quantity">{Inventory.quantity}</td>
-                    </tr>
+                    <tbody>
+                        <tr>
+                            <td className="productDetails-image"><img src={`http://localhost:8000/images/${Inventory.img_URL}`} alt="Product"/></td>
+                            <td className="productDetails-name">{Inventory.name}</td>
+                            <td className="productDetails-price">{formattedPrice}</td>
+                            <td className="productDetails-disPrice">{formattedDiscountedPrice}</td>
+                            <td className="productDetails-quantity">{Inventory.quantity}</td>
+                        </tr>
+                    </tbody>
                 </table>
             </Link>
         </div>

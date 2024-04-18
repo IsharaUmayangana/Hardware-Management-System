@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate,useLocation } from 'react-router-dom'
+ 
+
 import './order.css'
 
 const DeliveryInfoPage = () => {
@@ -81,6 +83,8 @@ const DeliveryInfoPage = () => {
             
         </div>
     );
+    
+    
 };
 
 export default DeliveryInfoPage;

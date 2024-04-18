@@ -93,22 +93,25 @@ const SelectedItem = () => {
   }, [id]);
 
   return (
-    <div className="selectedProduct" style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
-      <div>
+    <div>
+      <div className="selectedProduct">
         {loading && <p>Loading...</p>}
         {!loading && !product && <p>No product found</p>}
         {!loading && product && (
-          <div className="detailsBox" style={{color: 'black'}}>
+          <div className="detailsBox" >
             <h2>{product.name}</h2><br></br>
             <span><a href='http://localhost:5173/inventory' className="back-button">Back</a></span>
-
-            <div style={{ display: "flex"}}>
-              <div style={{ marginRight:"50px"}}>
-                <img src={`http://localhost:8000/images/`+ product.img_URL} alt="Product" style={{ maxWidth: "500px" ,height:"300px"}}/>
-                <p style={{ maxWidth: "500px" ,height:"200px"}}>Description : {product.description}</p>
+            <div className="sp-container1">
+              <div className="sp-subContainer1"> 
+                <img className="sp-imageView" src={`http://localhost:8000/images/`+ product.img_URL} alt="Product" />
+                <p className="sp-description">Description : {product.description}</p>
+                <div className="sp-button">
+                  <Button onClick={handleEditDialogOpen} variant="contained" color="primary">Edit</Button>
+                  <Button onClick={handleDelete} variant="contained" color="error">Delete</Button>
+                </div>
               </div>
               <div>
-                <table style={{margin:"10px 0px"}}>
+                <table className="sp-table">
                   <tbody>
                     <tr>
                       <td>Product Id:</td>
@@ -165,8 +168,6 @@ const SelectedItem = () => {
           </div>
         )}
 
-        <button onClick={handleEditDialogOpen}>Edit</button>
-        <button onClick={handleDelete}>Delete</button>
 
         {/* Edit Product Dialog */}
         <Dialog open={editDialogOpen} onClose={handleEditDialogClose} maxWidth="1000px">

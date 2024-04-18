@@ -20,7 +20,7 @@ import Layout from "./pages/SupplyManager/components/Layout";
 import SupplyManagementHome from "./pages/SupplyManager/home.page"
 import NotificationPage from "./pages/SupplyManager/home.notifications"
 import NotificationDetails from "./pages/SupplyManager/components/NotificationDetails"
-import SupplierList from "./pages/SupplyManager/components/SupplierList"
+import SupplierList from "./pages/SupplyManager/components/supplier-management/SupplierList";
 
 
 import MapView from './Components/DeliveryManagement/MapView/AlignMap'
@@ -49,6 +49,7 @@ import LendedItemsList from "./Components/RentalManagement/lendedItem/LendedItem
 import UserItemList from "./Components/RentalManagement/UserItemList/UserItemList";
 import ReservedItemsList from "./Components/RentalManagement/ReservedItemsList/ReservedItemsList";
 import RentalReport from "./Components/RentalManagement/RentalReport/RentalReport";
+import PurchaseOrderList from "./pages/SupplyManager/components/purchase-order-management/PurchaseOrderList";
 
 // import SearchBar from "./Components/RentalManagement/searchBar/searchBar";
 
@@ -119,7 +120,7 @@ function App() {
                     path="supplier-management"
                     element={<SupplierList />}
                   />
-                  <Route path="purchase-orders" element={<SupplierList />} />
+                  <Route path="purchase-orders" element={<PurchaseOrderList />} />
                   <Route path="return-management" element={<SupplierList />} />
                   <Route path="reports" element={<SupplierList />} />
                 </Routes>
