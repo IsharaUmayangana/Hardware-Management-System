@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Quagga from 'quagga';
+//import Quagga from 'quagga';
 import { useNavigate } from 'react-router-dom';
 
 const BarcodeScanner = () => {

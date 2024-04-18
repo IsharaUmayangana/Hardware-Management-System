@@ -30,7 +30,7 @@ import VehicleUpdateDelete from './Components/DeliveryManagement/VehicleView/Veh
 import DeliveryView from './Components/DeliveryManagement/DeliveryView/DeliveryView'
 import CreateDelivery from './Components/DeliveryManagement/MapView/DeliveryForm'
 import DeliveryUpdateDelete from './Components/DeliveryManagement/DeliveryView/DeliveryUpdateDelete'
-
+import Orders from './Components/DeliveryManagement/OrderView/Orders'
 
 
 
@@ -102,6 +102,7 @@ function App() {
           <Route path="/DeliveryView" element={<DeliveryView />} />
           <Route path="/CreateDelivery" element={<CreateDelivery />} />
           <Route path="/DeliveryUpdateDelete/:id" element={< DeliveryUpdateDelete />} />
+          <Route path="/Orders" element={< Orders />} />
 
           <Route
             path="/supply-management/*"

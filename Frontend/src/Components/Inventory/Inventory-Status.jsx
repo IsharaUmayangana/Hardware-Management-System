@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Home, Category, MonetizationOn } from "@mui/icons-material"; 
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
-import formatNumber from 'format-number'; 
+//import formatNumber from 'format-number'; 
 import './InventoryStyles.css';
 
 const Status = (props) => {

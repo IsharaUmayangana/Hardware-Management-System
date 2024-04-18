@@ -1,119 +1,58 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Table, TableBody, TableCell, TableHead, TableRow, TextField } from "@mui/material";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-function Orders() {
-  const [users, setUsers] = useState([]);
-  const [selectedUser, setSelectedUser] = useState(null);
-  const [openDialog, setOpenDialog] = useState(false);
-  const [updatedName, setUpdatedName] = useState('');
-  const [updatedEmail, setUpdatedEmail] = useState('');
-  const [updatedAge, setUpdatedAge] = useState('');
+const Orders = () => {
+  const [shippingAddresses, setShippingAddresses] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:3001')
-      .then(result => setUsers(result.data))
-      .catch(err => console.log(err));
+    const fetchShippingAddresses = async () => {
+      try {
+        // Simulate fetching shipping addresses after a delay of 1 second
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        // Sample shipping address data
+        const sampleData = [
+          {
+            id: 1,
+            name: 'John Doe',
+            address: '123 Main St, City, Country',
+            phone: '+1234567890'
+          },
+          {
+            id: 2,
+            name: 'Jane Smith',
+            address: '456 Elm St, Town, Country',
+            phone: '+0987654321'
+          },
+          {
+            id: 3,
+            name: 'Alice Johnson',
+            address: '789 Oak St, Village, Country',
+            phone: '+1122334455'
+          }
+        ];
+        setShippingAddresses(sampleData);
+      } catch (error) {
+        console.error('Error fetching shipping addresses:', error);
+      }
+    };
+
+    fetchShippingAddresses();
   }, []);
 
-
-//Delete Records
-  const handleDelete = (id) => {
-    axios.delete(`http://localhost:3001/deleteUser/${id}`)
-      .then(response => {
-        console.log("User deleted successfully:", response.data);
-        setUsers(users.filter(user => user._id !== id));
-        setOpenDialog(false); // Close the dialog after deleting the user
-      })
-      .catch(err => console.log(err));
-  };
-
-  const handleOpenDialog = (user) => {
-    setSelectedUser(user);
-    setUpdatedName(user.name);
-    setUpdatedEmail(user.email);
-    setUpdatedAge(user.age);
-    setOpenDialog(true);
-  };
-
-  const handleCloseDialog = () => {
-    setOpenDialog(false);
-  };
-
-  const handleUpdate = () => {
-    const updatedUser = {
-      id: selectedUser._id,
-      name: updatedName,
-      email: updatedEmail,
-      age: updatedAge
-    };
-    axios.put(`http://localhost:3001/updateUser/${selectedUser._id}`, updatedUser)
-      .then(response => {
-        console.log("User updated successfully:", response.data);
-        // Update the user in the users state
-        setUsers(users.map(user => user._id === selectedUser._id ? { ...user, name: updatedName, email: updatedEmail, age: updatedAge } : user));
-        setOpenDialog(false); // Close the dialog after updating the user
-      })
-      .catch(err => console.log(err));
-  };
-
   return (
-    <div className="d-flex vh-100 bg-primary justify-content-center align-items-center">
-      <div className="w-50 bg-white rounded p-3">
-        <Link to="/create" className='btn btn-success'>Add +</Link>
-        <Table >
-          <TableHead>
-            <TableRow>
-              <TableCell>Order ID</TableCell>
-              <TableCell>Action</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {users.map((user, index) => (
-              <TableRow key={index}>
-                <TableCell>#{user._id}</TableCell>
-                <TableCell>
-                  {/* <Link to={`/update/${user._id}`} className='btn btn-success'>Proceed Delivery</Link> */}
-                  
-                  <Button className="btn btn-info" onClick={() => handleOpenDialog(user)}>View Details</Button>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-        <Dialog   open={openDialog} onClose={handleCloseDialog}>
-          <DialogTitle>User Details</DialogTitle>
-          <DialogContent style={{ margin: 20 , padding: 10 }}>
-            <TextField
-              label="Name"
-              value={updatedName}
-              onChange={(e) => setUpdatedName(e.target.value)}
-              fullWidth
-            /><br/>
-            <TextField
-              label="Email"
-              value={updatedEmail}
-              onChange={(e) => setUpdatedEmail(e.target.value)}
-              fullWidth
-            />
-            <TextField
-              label="Age"
-              value={updatedAge}
-              onChange={(e) => setUpdatedAge(e.target.value)}
-              fullWidth
-            />
-            {/* Add more details as needed */}
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleUpdate} color="primary">Update</Button>
-            <Button onClick={() => handleDelete(selectedUser._id)} color="secondary">Delete</Button>
-            <Button onClick={handleCloseDialog}>Cancel</Button>
-          </DialogActions>
-        </Dialog>
-      </div>
+    <div>
+      <h2>Shipping Addresses</h2>
+      <ul>
+        {shippingAddresses.map(address => (
+          <li key={address.id}>
+            <div>{address.name}</div>
+            <div>{address.address}</div>
+            <div>{address.phone}</div>
+          </li>
+        ))}
+      </ul>
     </div>
   );
-}
+};
 
 export default Orders;
