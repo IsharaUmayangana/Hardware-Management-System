@@ -133,7 +133,7 @@ const FormSide = ({ ShippingAddressCopy, handleFetchData, sampleData, deliveryCo
         OrderId: '#8647638298',
         name: 'Deshan Thranga ',
         address: '51/8E,Dimitiyagahawatta Road,Dambahena , Maharagaman',
-        phone: '+1122334455'
+        phone: '+1122334455'  
       }
     ];
     setShippingAddresses(sampleShippingAddresses);
