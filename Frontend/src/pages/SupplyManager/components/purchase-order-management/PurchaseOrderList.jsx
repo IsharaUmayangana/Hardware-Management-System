@@ -186,7 +186,15 @@ export default function PurchaseOrderList() {
         doc.save('purchase_order_report.pdf');
     };
     
-    
+    // const generatePDF = () => {
+    //     const doc = new jsPDF();
+
+    //     doc.autoTable({
+    //         head:[['Order Number','Toatal Amount','Supplier', 'Status', 'Date']],
+    //         body: filteredOrders.map(order => [order.orderNumber, order.totalAmount, order.supplier.name, order.status,new Date(order.createdAt).toLocaleDateString()])
+    //     })
+
+    // }
     
     
 
