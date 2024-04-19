@@ -262,9 +262,9 @@ export default function SupplierList() {
           const transformedData = data.map(supplier => ({
             id: supplier._id,
             name: supplier.name,
-            phone: supplier.contact.phone,
-            email: supplier.contact.email,
-            address: supplier.contact.address,
+            phone: supplier.contact ? supplier.contact.phone : '', 
+            email: supplier.contact ? supplier.contact.email : '', 
+            address: supplier.contact ? supplier.contact.address : '',
             productsSupplied: supplier.productsSupplied.map(product => ({
               name: product.name,
               category: product.category
