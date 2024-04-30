@@ -5,7 +5,10 @@ import axios from "axios"; // Import Axios
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { clearUser } from "../ReduxTool/userSlice";
+
+import NavigationBar from './Home-Navigation';
 import HomeComponent from './Home-Products';
+import Footer from './Home-Footer';
 
 import { BsPersonCircle } from "react-icons/bs";
 
@@ -28,64 +31,29 @@ function NavHome() {
     navigate("/login"); // Redirect to the login page after logout
   };
 
-  // Navigate to user item list
-  const handleCheckRentalItems = () => {
-    navigate("/userItemList");
-  };
+  
 
   return (
     <div className={homeCss.body}>
-      <div className={homeCss.navbar}>
-        <div className={homeCss.logo}>Logo</div>
-        <ul className={homeCss.navLinks}>
-          <li>
-            <a href="#">Payment Card details</a>
-          </li>
-          <li>
-            <a href="#">Order management </a>
-          </li>
-          <li>
-            <a href="#">Feedback management</a>
-          </li>
-          <li>
-            <a href="#">Home</a>
-          </li>
-        </ul>
-      </div>
+      <NavigationBar/>
 
       <div style={{display:"flex"}}>
-      <div className={homeCss.navIcons} >
-        <BsPersonCircle className="iconHeader" />
-        <span className={homeCss.span}>Welcome {user.name}</span>
+        <div className={homeCss.navIcons} >
+          <BsPersonCircle className="iconHeader" />
+          <span className={homeCss.span}>Welcome {user.name}</span>
 
-        <span className={homeCss.span}>
-          <button onClick={handleLogout} className="btn btn-primary">
-            Logout
-          </button>
-        </span>
-
-        <span className={homeCss.span}>
-          <button
-            onClick={handleCheckRentalItems}
-            className="btn btn-primary"
-            style={{
-              fontSize: "0.8rem",
-              fontWeight: "bold",
-              color: "#003049",
-              backgroundColor: "#b8c0ff",
-              border: "none",
-              padding: "10px",
-            }}
-          >
-            Check Rental Items Availability
-          </button>
-        </span>
-      </div>
+          <span className={homeCss.span}>
+            <button onClick={handleLogout} className="btn btn-primary">
+              Logout
+            </button>
+          </span>
+        </div>
         
       </div>
       <div>
         <HomeComponent/>
       </div>
+      <Footer/>
       
     </div>
   );

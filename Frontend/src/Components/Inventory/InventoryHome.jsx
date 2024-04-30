@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ProductDetails from './Inventory-ProductDetails';
 import Status from './Inventory-Status';
-import Sidebar from "../Dashboard/Dashboard_Sidebar";
+// import Sidebar from "../Dashboard/Dashboard_Sidebar";
 import AddProductForm from './InventoryForm';
 import AddNewCategoryForm from './inventory-AddNewCategory';
 import './InventoryStyles.css';

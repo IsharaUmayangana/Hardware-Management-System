@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import SearchBar from "../searchBar/searchBar";
 import UserItemCard from "../UserItemCard/UserItemCard";
+import NavigationBar from '../../Home/Home-Navigation';
 
 function UserItemList() {
   document.title = "Rental Item List";
@@ -31,7 +32,8 @@ function UserItemList() {
 
   return (
     <>
-      <h1>Item List (Customer side)</h1>
+      {/* <h1>Item List (Customer side)</h1> */}
+      <NavigationBar/>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <SearchBar onSearch={handleSearch} />{" "}
       </div>

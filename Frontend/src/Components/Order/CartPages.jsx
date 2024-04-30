@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
+import NavigationBar from '../Home/Home-Navigation';
 import './order.css';
 
 const CartPage = () => {
@@ -120,68 +121,73 @@ const CartPage = () => {
 
 
  return (
-    <div className="cartAll">
-        <h2>Cart Details</h2>
-        {loading ? (
-            <p>Loading...</p>
-        ) : carts.length === 0 ? (
-            <p>No carts available</p>
-        ) : (
-            <div className="cart">
-                <table>
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Product</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {carts.map((cart, index) => (
-                            <React.Fragment key={index}>
-                                {cart.cartItems.map((item, itemIndex) => (
-                                    <tr key={itemIndex}>
-                                        <td><img src={`http://localhost:8000/images/${item.product.img_URL}`} alt={item.product.name} /></td>
-                                        <td>{item.product ? item.product.name : 'Product Name Not Available'}</td>
-                                        <td>{item.price}</td>
-                                        <td>
-                                            <input
-                                                type="number"
-                                                value={item.quantity}
-                                                onChange={(e) => handleQuantityChange(index, itemIndex, parseInt(e.target.value))}
-                                            />
-                                        </td>
-                                        <td>
-                                            <Button 
-                                                variant="contained"
-                                                color="error"
-                                                startIcon={<DeleteIcon />}
-                                                onClick={() => handleRemoveItem(cart._id, item.product._id)}
-                                            >
-                                                Remove
-                                            </Button>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </React.Fragment>
-                        ))}
-                    </tbody>
-                </table>
-                {changesMade && (
-            <button className="update-cart-btn" onClick={handleUpdateCart}>Update Cart</button>
-        )}
-            </div>
-        )}
-        
-        
-        <div className="checkout-section">
-                <div>
-                    <h3>Total Price </h3>
-                    <h3><strong>{calculateTotalPrice()}</strong></h3>
-                    <button onClick={handleProceedToCheckout}>Proceed to Checkout</button>
+    <div >
+        <div>
+            <NavigationBar/>
+        </div>
+        <div className="cartAll">
+            <h2>Cart Details</h2>
+            {loading ? (
+                <p>Loading...</p>
+            ) : carts.length === 0 ? (
+                <p>No carts available</p>
+            ) : (
+                <div className="cart">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {carts.map((cart, index) => (
+                                <React.Fragment key={index}>
+                                    {cart.cartItems.map((item, itemIndex) => (
+                                        <tr key={itemIndex}>
+                                            <td><img src={`http://localhost:8000/images/${item.product.img_URL}`} alt={item.product.name} /></td>
+                                            <td>{item.product ? item.product.name : 'Product Name Not Available'}</td>
+                                            <td>{item.price}</td>
+                                            <td>
+                                                <input
+                                                    type="number"
+                                                    value={item.quantity}
+                                                    onChange={(e) => handleQuantityChange(index, itemIndex, parseInt(e.target.value))}
+                                                />
+                                            </td>
+                                            <td>
+                                                <Button 
+                                                    variant="contained"
+                                                    color="error"
+                                                    startIcon={<DeleteIcon />}
+                                                    onClick={() => handleRemoveItem(cart._id, item.product._id)}
+                                                >
+                                                    Remove
+                                                </Button>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </React.Fragment>
+                            ))}
+                        </tbody>
+                    </table>
+                    {changesMade && (
+                <button className="update-cart-btn" onClick={handleUpdateCart}>Update Cart</button>
+            )}
                 </div>
+            )}
+            
+            
+            <div className="checkout-section">
+                    <div>
+                        <h3>Total Price </h3>
+                        <h3><strong>{calculateTotalPrice()}</strong></h3>
+                        <button onClick={handleProceedToCheckout}>Proceed to Checkout</button>
+                    </div>
+            </div>
         </div>
     </div>
   );
