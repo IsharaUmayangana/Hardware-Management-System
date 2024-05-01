@@ -100,12 +100,12 @@
   margin: auto;
   border: 1px black solid;
 }
-.searchBox input{
-  max-width: 500px;
+.searchBox {
+  width: 500px;
 }
 
 .categoryBox{
-  max-width: 200px;
+  width: 200px;
 }
 
 /* pagination */
@@ -133,8 +133,19 @@
   background-color: #e0e0e0;
 }
 
-.active .page-link {
+.page-item.active .page-link { 
   background-color: #007bff;
   color: #fff;
   border-color: #007bff;
+}
+
+
+
+/* footer design */
+.footerSection1{
+  margin: 5px 100px;
+}
+.footerLogo{
+  width: 200px;
+  height: 100px;
 }
