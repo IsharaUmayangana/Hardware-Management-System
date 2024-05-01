@@ -140,7 +140,7 @@ export default function PurchaseOrderList() {
     }, []);
 
 
-    const generatePDF = () => {
+    /* const generatePDF = () => {
         const doc = new jsPDF();
         
         // Add summary section
@@ -162,11 +162,11 @@ export default function PurchaseOrderList() {
                 'Order Date': new Date(purchaseOrder.createdAt).toLocaleDateString(),
             };
     
-            /*const orderItems = purchaseOrder.items.map((item) => ({
-                'Item': item.item.name,
-                'Quantity': item.quantity,
-                // Add more item details as needed
-            }));*/
+            //const orderItems = purchaseOrder.items.map((item) => ({
+             //   'Item': item.item.name,
+              //  'Quantity': item.quantity,
+             //   // Add more item details as needed
+            //}));
     
             ordersData.push([orderSummary]);
         });
@@ -184,17 +184,17 @@ export default function PurchaseOrderList() {
         });
     
         doc.save('purchase_order_report.pdf');
-    };
+    }; */
     
-    // const generatePDF = () => {
-    //     const doc = new jsPDF();
+    const generatePDF = () => {
+        const doc = new jsPDF();
 
-    //     doc.autoTable({
-    //         head:[['Order Number','Toatal Amount','Supplier', 'Status', 'Date']],
-    //         body: filteredOrders.map(order => [order.orderNumber, order.totalAmount, order.supplier.name, order.status,new Date(order.createdAt).toLocaleDateString()])
-    //     })
+        doc.autoTable({
+            head:[['Order Number','Toatal Amount','Supplier', 'Status', 'Date']],
+            body: filteredOrders.map(order => [order.orderNumber, order.totalAmount, order.supplier.name, order.status,new Date(order.createdAt).toLocaleDateString()])
+        })
 
-    // }
+    }
     
     
 
