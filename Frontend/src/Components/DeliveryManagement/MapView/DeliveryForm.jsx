@@ -331,6 +331,7 @@ const DeliveryForm = () => {
 
   const handleDeliveryCostUpdate = (cost) => {
     setDeliveryCost(cost);
+    //set delivery cost 
   };
 
 
