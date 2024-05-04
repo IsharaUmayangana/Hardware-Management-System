@@ -1,20 +1,20 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import AddIcon from '@mui/icons-material/Add';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/DeleteOutlined';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import AddIcon from "@mui/icons-material/Add";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/DeleteOutlined";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import {
   DataGrid,
   GridToolbarContainer,
   GridActionsCellItem,
   GridRowModes,
-} from '@mui/x-data-grid';
-import { useNavigate } from 'react-router-dom';
-import ProductDetailsModal from './productDetailsModal/productDetails';
-import AddSupplierForm from './AddSupplierFormModal/AddSupplierForm';
-import UpdateSupplierForm from './UpdateSupplierFormModal/UpdateSupplierForm';
+} from "@mui/x-data-grid";
+import { useNavigate } from "react-router-dom";
+import ProductDetailsModal from "./productDetailsModal/productDetails";
+import AddSupplierForm from "./AddSupplierFormModal/AddSupplierForm";
+import UpdateSupplierForm from "./UpdateSupplierFormModal/UpdateSupplierForm";
 
 const initialRows = [];
 
@@ -29,13 +29,16 @@ function EditToolbar(props) {
   const handleFormSubmit = async (formData) => {
     //console.log("New supplier formData: ",formData)
     try {
-      const response = await fetch("http://localhost:8000/supply-management/suppliers", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "http://localhost:8000/supply-management/suppliers",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
       if (response.ok) {
         const newSupplier = await response.json();
         newSupplier.id = newSupplier._id;
@@ -51,19 +54,17 @@ function EditToolbar(props) {
 
         setRows((oldRows) => [newSupplier, ...oldRows]);
 
-
         setIsFormOpen(false);
-
 
         setRowModesModel((oldModel) => ({
           ...oldModel,
-          [newSupplier.id]: { mode: GridRowModes.Edit, fieldToFocus: 'name' },
+          [newSupplier.id]: { mode: GridRowModes.Edit, fieldToFocus: "name" },
         }));
       } else {
-        console.error('Failed to add supplier');
+        console.error("Failed to add supplier");
       }
     } catch (error) {
-      console.error('Error adding supplier:', error);
+      console.error("Error adding supplier:", error);
     }
   };
   const handleAddSupplierClick = () => {
@@ -75,12 +76,14 @@ function EditToolbar(props) {
       <GridToolbarContainer sx={{ width: 180, height: 50 }}>
         <Button
           sx={{
-            color: 'primary.main',
-            '&:hover': {
-              backgroundColor: 'rgba(0, 0, 0, 0.1)',
+            color: "primary.main",
+            "&:hover": {
+              backgroundColor: "rgba(0, 0, 0, 0.1)",
             },
           }}
-          startIcon={<AddIcon />} onClick={handleAddSupplierClick} >
+          startIcon={<AddIcon />}
+          onClick={handleAddSupplierClick}
+        >
           Add Supplier
         </Button>
       </GridToolbarContainer>
@@ -101,26 +104,24 @@ export default function SupplierList() {
   const [selectedSupplier, setSelectedSupplier] = React.useState(null);
   const [isUpdateFormOpen, setIsUpdateFormOpen] = React.useState(false);
 
-
-
-
   const handleDeleteClick = (id) => async () => {
     //console.log('deleting')
     try {
-      const response = await fetch(`http://localhost:8000/supply-management/suppliers/${id}`, {
-        method: "DELETE",
-      });
+      const response = await fetch(
+        `http://localhost:8000/supply-management/suppliers/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
       if (response.ok) {
         setRows(rows.filter((row) => row.id !== id));
       } else {
-        console.error('Failed to delete supplier');
+        console.error("Failed to delete supplier");
       }
     } catch (error) {
-      console.error('Error deleting supplier:', error);
+      console.error("Error deleting supplier:", error);
     }
   };
-
-
 
   const handleViewProducts = (id) => {
     const supplier = rows.find((row) => row.id === id);
@@ -142,13 +143,16 @@ export default function SupplierList() {
     const id = formData.id;
     //console.log("Submitted form data: ",formData)
     try {
-      const response = await fetch(`http://localhost:8000/supply-management/suppliers/${id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        `http://localhost:8000/supply-management/suppliers/${id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
       if (response.ok) {
         const updatedSupplierData = await response.json();
 
@@ -163,10 +167,9 @@ export default function SupplierList() {
 
         const updatedIndex = rows.findIndex((row) => row.id === id);
         if (updatedIndex !== -1) {
-
           const updatedRows = [...rows];
 
-          updatedRows[updatedIndex] = updatedSupplierData
+          updatedRows[updatedIndex] = updatedSupplierData;
 
           setRows(updatedRows);
 
@@ -174,78 +177,83 @@ export default function SupplierList() {
 
           setRowModesModel((oldModel) => ({
             ...oldModel,
-            [id]: { mode: GridRowModes.Edit, fieldToFocus: 'name' },
+            [id]: { mode: GridRowModes.Edit, fieldToFocus: "name" },
           }));
 
           setSelectedSupplier(updatedSupplierData);
         } else {
-          console.error('Failed to find updated supplier in the rows array');
+          console.error("Failed to find updated supplier in the rows array");
         }
       } else {
-        console.error('Failed to update supplier');
+        console.error("Failed to update supplier");
       }
     } catch (error) {
-      console.error('Error updating supplier:', error);
+      console.error("Error updating supplier:", error);
     }
   };
 
-
   const columns = [
-    { field: 'name', headerName: 'Name', width: 180, editable: false },
-    { field: 'phone', headerName: 'Phone', width: 180, editable: false },
+    { field: "name", headerName: "Name", width: 180, editable: false },
+    { field: "phone", headerName: "Phone", width: 180, editable: false },
     {
-      field: 'email', headerName: 'Email', width: 180, editable: false,
+      field: "email",
+      headerName: "Email",
+      width: 180,
+      editable: false,
       renderCell: (params) => (
         <a href={`mailto:${params.value}`}>{params.value}</a>
       ),
     },
-    { field: 'address', headerName: 'Address', width: 250, editable: false },
+    { field: "address", headerName: "Address", width: 250, editable: false },
     {
-      field: 'products',
-      headerName: 'Products',
+      field: "products",
+      headerName: "Products",
       width: 150,
       renderCell: (params) => (
-        <Button
-          onClick={() => handleViewProducts(params.row.id)}
-
-        >
+        <Button onClick={() => handleViewProducts(params.row.id)}>
           View Products
         </Button>
       ),
     },
-    { field: 'paymentTerms', headerName: 'Payment Terms', width: 150, editable: false },
     {
-      field: 'actions',
-      type: 'actions',
-      headerName: 'Actions',
+      field: "paymentTerms",
+      headerName: "Payment Terms",
       width: 150,
-      cellClassName: 'actions',
+      editable: false,
+    },
+    {
+      field: "actions",
+      type: "actions",
+      headerName: "Actions",
+      width: 150,
+      cellClassName: "actions",
       getActions: ({ id }) => {
-
         return [
-          <GridActionsCellItem sx={{ width: 50, height: 50 }}
+          <GridActionsCellItem
+            sx={{ width: 50, height: 50 }}
             icon={<EditIcon />}
             label="Edit"
             className="textPrimary"
             onClick={() => handleEditClick(id)}
             color="inherit"
-            title='Edit row'
+            title="Edit row"
           />,
-          <GridActionsCellItem sx={{ width: 50, height: 50 }}
+          <GridActionsCellItem
+            sx={{ width: 50, height: 50 }}
             icon={<DeleteIcon />}
             label="Delete"
             onClick={handleDeleteClick(id)}
             color="inherit"
-            title='Delete row'
+            title="Delete row"
           />,
         ];
       },
     },
     {
-      field: 'navigate',
-      headerName: '',
+      field: "navigate",
+      headerName: "",
       width: 150,
-      type: 'actions',
+      type: "actions",
       renderCell: (params) => (
         <Button
           endIcon={<ChevronRightIcon />}
@@ -255,19 +263,18 @@ export default function SupplierList() {
         </Button>
       ),
     },
-
   ];
 
   const handleNavigate = (id) => {
-
     navigate(`/suppliers/${id}`);
   };
-
 
   React.useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:8000/supply-management/suppliers");
+        const response = await fetch(
+          "http://localhost:8000/supply-management/suppliers"
+        );
         if (response.ok) {
           const data = await response.json();
           //console.log(data)
@@ -279,17 +286,16 @@ export default function SupplierList() {
             address: supplier.contact ? supplier.contact.address : '',
             productsSupplied: supplier.productsSupplied?.map(product => ({
               name: product.name,
-              category: product.category
+              category: product.category,
             })),
             paymentTerms: supplier.paymentTerms,
-
           }));
           setRows(transformedData);
         } else {
-          console.error('Failed to fetch data');
+          console.error("Failed to fetch data");
         }
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     };
 
@@ -300,12 +306,12 @@ export default function SupplierList() {
     <Box
       sx={{
         height: 500,
-        width: '100%',
-        '& .actions': {
-          color: 'text.secondary',
+        width: "100%",
+        "& .actions": {
+          color: "text.secondary",
         },
-        '& .textPrimary': {
-          color: 'text.primary',
+        "& .textPrimary": {
+          color: "text.primary",
         },
         marginTop: 10,
       }}
@@ -313,9 +319,8 @@ export default function SupplierList() {
       <DataGrid
         rows={rows}
         columns={columns}
-        editMode='row'
+        editMode="row"
         rowModesModel={rowModesModel}
-
         slots={{
           toolbar: EditToolbar,
         }}
@@ -336,8 +341,6 @@ export default function SupplierList() {
         onSubmit={handleUpdateFormSubmit}
         initialData={selectedSupplier}
       />
-
     </Box>
   );
 }
-
