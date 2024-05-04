@@ -95,14 +95,15 @@ export default function MuiDrawer() {
       text: "Purchase Orders",
       path:'/supply-management/purchase-orders'
     }, 
-    {
-      text: "Return Management",
-      path: "/supply-management/return-management"
-    }, 
+    
     {
       text: "Supplier Management",
       path: "/supply-management/supplier-management"
-    }, 
+    },
+    {
+      text: "Return Management",
+      path: "/supply-management/return-management"
+    },
     {
       text: "Report and Analytics",
       path: "/supply-management/reports"

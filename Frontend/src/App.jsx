@@ -18,7 +18,7 @@ import ScannerBarcode from "./Components/Inventory/scanner";
 
 import Layout from "./pages/SupplyManager/components/Layout";
 import SupplyManagementHome from "./pages/SupplyManager/home.page"
-import NotificationPage from "./pages/SupplyManager/home.notifications"
+import NotificationPage from "./pages/SupplyManager/components/low-stock-notifications/home.notifications"
 import NotificationDetails from "./pages/SupplyManager/components/NotificationDetails"
 import SupplierList from "./pages/SupplyManager/components/supplier-management/SupplierList";
 

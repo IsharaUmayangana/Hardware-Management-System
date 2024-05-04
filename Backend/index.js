@@ -20,7 +20,7 @@ const feedbackRoutes = require('./routes/productFeedback');
 const productCategoryRoutes = require('./routes/productCategories');
 
 
-const lowStockNotifications = require('./routes/SupplyManagementRoutes/NotificationsRoutes');
+const lowStockNotifications = require('./routes/SupplyManagementRoutes/lowStockRoutes');
 const supplierManagementRoutes = require('./routes/SupplyManagementRoutes/SupplierManagementRoutes');
 const purchaseOrderRoutes = require('./routes/SupplyManagementRoutes/PurchaseOrdersRoutes');
 
