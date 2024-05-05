@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import {
     BsCart3,
+    BsGrid1X2Fill,
     BsFillArchiveFill,
     BsFillGrid3X2GapFill,
     BsPeopleFill,
@@ -20,7 +21,7 @@ function DashboardSidebar({ onClose }) {
             <div className="sidebar-title" >
 
                 <div className="sidebar-brand" style={{ color: 'white', fontSize: '20px' }}>
-                    <BsCart3 className="icon_header" style={{ color: 'white', fontSize: '34px'  , textDecoration: "none"}} /> Shop
+                    <BsCart3 className="icon_header" style={{ color: 'white', fontSize: '34px', textDecoration: "none" }} /> Shop
                 </div>
 
                 <BsFillXCircleFill onClick={onClose} className="icon close-icon" style={{ color: 'red', fontSize: '40px' }} /> {/* Close icon */}
@@ -33,6 +34,11 @@ function DashboardSidebar({ onClose }) {
                 <li className="sidebar-list-item">
                     <a href="">
 
+                    </a>
+                </li>
+                <li className="sidebar-list-item">
+                    <a href="/Dashboard">
+                        <BsGrid1X2Fill className="icon" /> Dashboard
                     </a>
                 </li>
 

@@ -24,7 +24,7 @@ const Report1 = () => {
         fetchProducts();
     }, []);
 
-    // Function to group products by category and calculate product count and total value
+    //Function to group products by category and calculate product count and total value
     const groupProductsByCategory = () => {
         const groupedProducts = {};
         products.forEach((product) => {

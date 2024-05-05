@@ -22,7 +22,6 @@ const SupplierSchema = new Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Order'
     },
-    orderDate: Date,
     
   }],
   performanceMetrics: {

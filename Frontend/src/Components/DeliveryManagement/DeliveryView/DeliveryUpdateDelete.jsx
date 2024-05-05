@@ -66,7 +66,7 @@ function DeliveryUpdateDelete() {
                                 value={selectedVehicle}
                                 onChange={(e) => setSelectedVehicle(e.target.value)}
                                 margin="normal"
-                                required
+                                disabled
                             />
                             <TextField
                                 fullWidth
