@@ -104,6 +104,7 @@ const ReservedItemsList = () => {
           marginTop: "10px",
           marginBottom: "15px",
           textAlign: "center",
+          color: "#415a77",
         }}
       >
         Reserved Items List

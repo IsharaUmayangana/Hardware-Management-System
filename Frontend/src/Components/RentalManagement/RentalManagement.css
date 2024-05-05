@@ -13,7 +13,6 @@
   
   .content {
 
-    margin-left: 200px; 
     flex: 1; 
     overflow-y: auto; 
     padding: 20px; 
