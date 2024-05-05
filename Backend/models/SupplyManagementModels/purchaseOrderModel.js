@@ -36,6 +36,9 @@ const PurchaseOrderSchema = new mongoose.Schema({
     enum: ['Pending', 'Cancelled', 'Received'],
     default: 'Pending'
   },
+  receivedDate: {
+    type: Date 
+  },
   createdAt: {
     type: Date,
     default: Date.now

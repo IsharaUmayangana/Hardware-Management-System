@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react"
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import styles from "./notifications.module.css"
+import SearchBar from "../searchBar/searchBar"
 
 
 
 const NotificationPage = () => {
     const [notifications, setNotifications] = useState([]);
-    const [selectedNotifications, setSelectedNotifications] = useState([]);
-
-
+    const [searchQuery, setSearchQuery] = useState('');
+    const [filteredNotifications, setFilteredNotifications] = useState([]);
 
     useEffect(() => {
         const fetchNotifications = async () => {
@@ -17,46 +17,58 @@ const NotificationPage = () => {
             if (response.ok) {
                 const json = await response.json();
                 setNotifications(json);
+                setFilteredNotifications(json);
             } else {
                 console.error('Failed to fetch data');
             }
         };
 
         fetchNotifications()
-    },[])
+    }, [])
 
-    
-    
-    //console.log("notifications ", notifications)
+    const handleSearch = (searchTerm) => {
+        setSearchQuery(searchTerm);
+    };
 
-    const handleNotificationSelection = (notificationId) => {
-        setSelectedNotifications((prevSelectedNotifications) =>
-            prevSelectedNotifications.includes(notificationId)
-                ? prevSelectedNotifications.filter((id) => id !== notificationId)
-                : [...prevSelectedNotifications, notificationId]
+    useEffect(() => {
+        // Filter notifications based on search query
+        const filtered = notifications.filter(notification =>
+            notification.suppliers.some(supplier =>
+                supplier.name.toLowerCase().includes(searchQuery.toLowerCase())
+            )
         );
+        setFilteredNotifications(filtered);
+    }, [searchQuery, notifications]);
+
+
+    const handleSendingEmail = async () => {
+        try {
+            const response = await fetch('http://localhost:8000/supply-management/sendMail', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ notifications: filteredNotifications })
+            });
+            if (response.ok) {
+                console.log('Emails sent successfully');
+            } else {
+                console.error('Failed to send emails');
+            }
+        } catch (error) {
+            console.error('Error sending emails:', error);
+        }
     };
 
-    const handlePlaceIndividualOrders = () => {
-        // Logic to place individual orders for selected notifications
-        console.log("Placing individual orders for:", selectedNotifications);
-    };
 
-    const handleConsolidateOrders = () => {
-        // Logic to consolidate selected notifications into orders
-        console.log("Consolidating orders for:", selectedNotifications);
-    };
 
     return (
         <div className={styles.lowStockNotificationsContainer}>
-
-            {notifications.map((notification) => (
+            <div style={{ display: "flex", justifyContent: "end", marginBottom:10, width:'auto'}}>
+                <SearchBar onSearch={handleSearch} placeholder="Search by supplier name" />
+            </div>
+            {filteredNotifications.map((notification) => (
                 <div key={notification._id} className={styles.notificationItem}>
-                    <input
-                        type="checkbox"
-                        checked={selectedNotifications.includes(notification._id)}
-                        onChange={() => handleNotificationSelection(notification._id)}
-                    />
                     <div className={styles.notificationContent}>
                         <h4>{notification.name}</h4>
                         <p><strong>Category:</strong> {notification.category}</p>
@@ -67,8 +79,7 @@ const NotificationPage = () => {
                 </div>
             ))}
             <div className={styles.notificationButtons}>
-                <button onClick={handlePlaceIndividualOrders}>Place Individual Orders</button>
-                <button onClick={handleConsolidateOrders}>Consolidate Orders</button>
+                <button onClick={handleSendingEmail}>Send Email</button>
             </div>
         </div>
     )

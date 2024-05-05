@@ -1,4 +1,5 @@
 const PurchaseOrder = require('../../models/SupplyManagementModels/purchaseOrderModel');
+const Sequence = require('../../models/SupplyManagementModels/sequenceModel')
 const mongoose = require('mongoose');
 
 // Get all purchase orders
@@ -30,10 +31,21 @@ const getOnePurchaseOrder = async (req, res) => {
 
 // Create a new purchase order
 const createPurchaseOrder = async (req, res) => {
-    const { orderNumber, supplier, items, totalAmount } = req.body;
+    const {  supplier, items, totalAmount, status, receivedDate } = req.body;
     try {
-        const newPurchaseOrder = await PurchaseOrder.create({ orderNumber, supplier, items, totalAmount });
-        res.status(201).json(newPurchaseOrder);
+
+        const sequence = await Sequence.findOneAndUpdate(
+            { name: 'purchaseOrder' },
+            { $inc: { value: 1 } },
+            { new: true, upsert: true }
+        );
+
+        // Generate the order number
+        const orderNumber = `PO${sequence.value}`;
+
+        const newPurchaseOrder = await PurchaseOrder.create({ orderNumber, supplier, items, totalAmount, status, receivedDate });
+        const populatePurchaseOrder = await PurchaseOrder.findById(newPurchaseOrder._id).populate('supplier').populate('items.item');
+        res.status(201).json(populatePurchaseOrder);
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
@@ -42,24 +54,22 @@ const createPurchaseOrder = async (req, res) => {
 // Update the purchase order
 const updatePurchaseOrder = async (req, res) => {
     const { id } = req.params;
-    const { status, items, totalAmount } = req.body;
+    const { status } = req.body;
     
-    console.log(req.body)
     try {
         if (!mongoose.Types.ObjectId.isValid(id)) {
             return res.status(404).json({ error: 'Invalid purchase order ID' });
         }
         
-        
         const updatedPurchaseOrder = await PurchaseOrder.findByIdAndUpdate(id, {
             status,
-            items,
-            totalAmount,
         }, { new: true });
+
         if (!updatedPurchaseOrder) {
             return res.status(404).json({ error: 'Purchase order not found' });
         }
-        res.status(200).json(updatedPurchaseOrder);
+        const populatePurchaseOrder = await PurchaseOrder.findById(updatedPurchaseOrder._id).populate('supplier').populate('items.item');
+        res.status(200).json(populatePurchaseOrder);
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
