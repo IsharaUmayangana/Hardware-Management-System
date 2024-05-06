@@ -1,50 +1,49 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Register from './Components/Register/Register';
-import Login from './Components/Login/Login';
-import DashBoard from './Components/Dashboard//DashBoard';
-import NavHome from './Components/Home/NavHome';
+import { AuthProvider } from './pages/common/AuthContext'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Login from './pages/common/Login'
+import Signup from './pages/common/Signup'
+import NotFound from './pages/common/NotFound'
+import Dashboard from './pages/common/Dashboard';
 
-import InventoryHome from './Components/Inventory/InventoryHome';
-import InventoryForm from './Components/Inventory/InventoryForm';
-import SelectedItem from './Components/Inventory/SelectedItem';
-import EditInventoryItems from './Components/Inventory/EditInventoryItems';
-
-import { Provider } from 'react-redux';
-import store from '../src/Components/ReduxTool/Store';
-
+import UserProfile from './pages/common/UserProfile';
+import CashierHome from './pages/cashier/CashierHome';
+import NewSale from './pages/cashier/CashierHome';
+import Sales from './pages/salesManager/Sales';
 
 
-function App() {
 
+
+export default function App() {
   return (
-
-
-    <Provider store={store}>
-      <BrowserRouter>
+    <BrowserRouter>
+      <ToastContainer autoClose={1000} />
+      <AuthProvider>
 
         <Routes>
 
-          <Route  path="/" element={<NavHome />} />
-          <Route  path="/Register" element={<Register />} />
-          <Route  path="/Login" element={<Login />} />
-          <Route  path="/DashBoard" element={<DashBoard />} />
+          {/*Common Routes */}
+          <Route path='/login' element={<Login />} />
+          <Route path='/signup' element={<Signup />} />
+          <Route path='*' element={<NotFound />} />
 
-          <Route exact path="/inventory" element={<InventoryHome />} />
-          <Route exact path="/addnewItem" element={<InventoryForm />} />
-          <Route exact path="/selectedItem/:id" element={<SelectedItem />} />
-          <Route exact path="/editItem/:id" element={<EditInventoryItems />} />
 
+          {/* Inside dashboard layout */}
+          <Route path='/' element={<Dashboard />}>
+
+            {/*Cashier Routes */}
+            <Route path='profile' element={<UserProfile />} />
+            <Route path='/cashier' element={<CashierHome />} />
+
+
+            {/*Sales Manager Routes */}
+            <Route path='/sales' element={<Sales />} />
+
+          </Route>
         </Routes>
-
-      </BrowserRouter>
-
-    </Provider>
-
-
-
-
-  );
+        {/* <StickyFooter /> */}
+      </AuthProvider>
+    </BrowserRouter>
+  )
 }
-
-export default App

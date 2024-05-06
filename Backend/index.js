@@ -1,55 +1,27 @@
-require('dotenv').config()
+import express from 'express';
+import dotenv from 'dotenv';
+import { dbConfig } from './utils/dbconfig.js';
+import cors from 'cors'
+import morgan from 'morgan'
+import userRouter from './routes/userRoutes.js';
+import salesRouter from './routes/SalesRoutes.js';
 
-const express = require('express')
-const mongoose = require('mongoose')
-const cors = require('cors')
-const jwt = require('jsonwebtoken')
-const cookieParser = require('cookie-parser')
-
-
-
-const registerRouter = require('./routes/LoginRegisterDashboard/registerRouter');
-const authRoutes = require('./routes/LoginRegisterDashboard/authRoutes');
-const authDashboard = require('./routes/LoginRegisterDashboard/authDashboard');
-const inventoryRoutes = require('./routes/inventory');
-
-
-const app = express()
-
-
-//middleware
+dotenv.config();
+const PORT = process.env.PORT || 8000
+const app = express();
+app.use(cors());
 app.use(express.json());
-app.use(cors({
-    origin: ['http://localhost:5173'],
-    methods: ["GET", "POST", "PATCH", "DELETE"],
-    credentials: true
-}));
-app.use(cookieParser());
+app.use(morgan('dev'))
 
+app.get('/', (req, res) => {
+    res.status(200).json({message:"Server is up and running"})
+})	
 
-//Prabashwara's Apis
-app.use('/register', registerRouter);
-app.use('/', authRoutes);
-app.use('/dashboard', authDashboard);
+app.use('/', userRouter);
+app.use('/sale', salesRouter);
 
-//Binura's Api
-app.use('/inventory', inventoryRoutes);
+dbConfig();
 
-app.get('/logout', (req, res) => {
-    res.clearCookie('token');
-    res.json({ Status: true })
-})
-
-
-//Database connection
-mongoose.connect(process.env.MONGODB_URL)
-    .then(() => {
-        //Server setup
-        app.listen(process.env.PORT, () => {
-            console.log('Connected to db and listening to port ', process.env.PORT)
-        })
-    })
-    .catch((error) => {
-        console.log(error)
-    })
-
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}🚀`);
+});
