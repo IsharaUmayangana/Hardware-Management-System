@@ -16,6 +16,7 @@ const ReserveItemModal = ({ isOpen, onClose, item, onReservationSuccess }) => {
     itemId: item._id,
     buyerName: "",
     contactNo: "",
+    nicNo: "",
     oneDayPrice: item.oneDayPrice,
     daysToRent: 1,
     totalPay: item.oneDayPrice,
@@ -67,6 +68,7 @@ const ReserveItemModal = ({ isOpen, onClose, item, onReservationSuccess }) => {
         itemId: item._id,
         buyerName: "",
         contactNo: "",
+        nic: "",
         oneDayPrice: item.oneDayPrice,
         daysToRent: 1,
         totalPay: item.oneDayPrice,
@@ -148,6 +150,17 @@ const ReserveItemModal = ({ isOpen, onClose, item, onReservationSuccess }) => {
                   value={reservationData.contactNo}
                   onChange={handleChange}
                   fullWidth
+                  required
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  name="nicNo"
+                  label="NIC Number"
+                  value={reservationData.nicNo}
+                  onChange={handleChange}
+                  fullWidth
+                  inputProps={{ type: "number" }}
                   required
                 />
               </Grid>

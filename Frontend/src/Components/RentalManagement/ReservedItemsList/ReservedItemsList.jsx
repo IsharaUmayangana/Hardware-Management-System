@@ -134,6 +134,7 @@ const ReservedItemsList = () => {
               <Typography variant="body1">
                 Contact No: {item.contactNo}
               </Typography>
+              <Typography variant="body1">NIC No: {item.nicNo}</Typography>
               <Typography variant="body1">
                 Days to Rent: {item.daysToRent}
               </Typography>

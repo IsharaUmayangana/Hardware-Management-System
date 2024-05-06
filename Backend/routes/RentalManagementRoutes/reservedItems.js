@@ -10,6 +10,7 @@ router.post("/", async (req, res) => {
       itemId,
       buyerName,
       contactNo,
+      nicNo,
       oneDayPrice,
       daysToRent,
       totalPay,
@@ -20,6 +21,7 @@ router.post("/", async (req, res) => {
       itemId,
       buyerName,
       contactNo,
+      nicNo,
       oneDayPrice,
       daysToRent,
       totalPay
