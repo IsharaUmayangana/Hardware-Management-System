@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import ProductDetails from './Home-ProductDetails';
 import { TextField, Select, MenuItem, Button, FormControl, InputLabel, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 import homeCss from "./home.module.css";
+import { useSelector } from 'react-redux';
 
 const CustomerSideHome = () => {
+    const userId = useSelector(state => state.user.userId);
     const [products, setProducts] = useState(null);
     const [categories, setCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('');

@@ -36,6 +36,7 @@ import CartPage from "./Components/Order/CartPages";
 import DeliveryInfoPage from "./Components/Order/DeliveryInfoPage";
 import PaymentPage from "./Components/Order/PaymentPage";
 import AdminOrdersPage from "./Components/Order/AdminOrderdPage";
+import AdminRatingPage from './Components/Order/AdminRatingPage'
 
 import { Provider } from "react-redux";
 import store from "../src/Components/ReduxTool/Store";
