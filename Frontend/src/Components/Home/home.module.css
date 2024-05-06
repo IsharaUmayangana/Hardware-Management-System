@@ -11,7 +11,7 @@
   }
   
   .navbar {
-    background-color: #232121;
+    background-color: #191970;
     overflow: hidden;
     padding: 15px;
     text-align: center;
@@ -58,6 +58,10 @@
 
   }
   
+  .navbarLogo{
+    width: 150px;
+    height: 40px;
+  }
   
   /* End of NavHome */
 
@@ -142,10 +146,30 @@
 
 
 /* footer design */
+.footerMain{
+  color: #ffffff;
+  padding: 0px;
+  margin: 10px 0px 0px 0px;
+  border: #000080 2px solid;
+  border-radius: 3px;
+}
+.footerSection1,
+.footerSection2{
+  padding: 10px 0px;
+  display: flex;
+  justify-content: space-around; 
+}
 .footerSection1{
-  margin: 5px 100px;
+  background-color: #4682B4;
+}
+.footerSection2{
+  background-color: #191970;
+}
+.footerLogo{
+  width: 100px;
+  height: 100px;
 }
 .footerLogo{
   width: 200px;
-  height: 100px;
+  height: 120px;
 }
