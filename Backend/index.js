@@ -35,6 +35,8 @@ const CreateVehicleRoute = require('./routes/DeliveryManagementRoutes/DeliveryRo
 const GetDeliveryRoutes = require('./routes/DeliveryManagementRoutes/DeliveryRoutes/GetDeliveryRoute');
 const DeliveryUpdateDeleteRoutes = require('./routes/DeliveryManagementRoutes/DeliveryRoutes/UpdateAndDeleteRoutes');
 
+const SalesRoutes = require('./routes/SalesRoutes');
+
 
 
 
@@ -107,6 +109,7 @@ app.use('/userItemList', userItemListRouter);
 app.use("/reservedItems", reservedItemsRouter);
 app.use('/rentalReport', rentalReportRoutes); 
 
+app.use('/sale',SalesRoutes);
 
 
 

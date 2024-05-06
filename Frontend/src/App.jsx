@@ -48,6 +48,10 @@ import ReservedItemsList from "./Components/RentalManagement/ReservedItemsList/R
 import RentalReport from "./Components/RentalManagement/RentalReport/RentalReport";
 import PurchaseOrderList from "./pages/SupplyManager/components/purchase-order-management/PurchaseOrderList";
 
+//Himash
+import SalesManagement from "./Components/Sales/salesManager/Sales";
+import CashierHome from "./Components/Sales/cashier/CashierHome";
+
 // import SearchBar from "./Components/RentalManagement/searchBar/searchBar";
 
 function App() {
@@ -142,6 +146,10 @@ function App() {
               </Layout>
             }
           />
+
+          <Route exact path="/salesManagement" element={<SalesManagement />} />
+          <Route exact path="/cashierView" element={<CashierHome />} />
+          
         </Routes>
       </BrowserRouter>
     </Provider>
