@@ -1,10 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useReactToPrint } from 'react-to-print';
+import formatNumber from 'format-number';
 import { Grid, Typography, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 
 const Report1 = () => {
     const componentPDF = useRef();
     const [products, setProducts] = useState([]);
+
+    // Define options for formatting
+    const options = { round: 2, padRight: 2, padLeft: 0, thousand: ',', decimal: '.' };
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -24,7 +28,7 @@ const Report1 = () => {
         fetchProducts();
     }, []);
 
-    // Function to group products by category and calculate product count and total value
+    //Function to group products by category and calculate product count and total value
     const groupProductsByCategory = () => {
         const groupedProducts = {};
         products.forEach((product) => {
@@ -75,15 +79,15 @@ const Report1 = () => {
                                     {groupedProducts[category].products.map((product) => (
                                         <TableRow key={product._id}>
                                             <TableCell>{product.name}</TableCell>
-                                            <TableCell style={{ textAlign: 'right' }}>{product.price}</TableCell>
+                                            <TableCell style={{ textAlign: 'right' }}>{product.price && formatNumber(options)(parseFloat(product.price))}</TableCell>
                                             <TableCell style={{ textAlign: 'right' }}>{product.quantity}</TableCell>
-                                            <TableCell style={{ textAlign: 'right' }}>{product.price * product.quantity}</TableCell>
+                                            <TableCell style={{ textAlign: 'right' }}>{product.price && product.quantity && formatNumber(options)(parseFloat(product.price) * parseFloat(product.quantity))}</TableCell>
                                         </TableRow>
                                     ))}
                                     <TableRow style={{ border: '2px solid #ccc'}}>
                                         <TableCell colSpan="2"></TableCell>
                                         <TableCell style={{ textAlign: 'right' }}>{groupedProducts[category].itemCount}</TableCell>
-                                        <TableCell style={{ textAlign: 'right' }}>{groupedProducts[category].totalValue}</TableCell>
+                                        <TableCell style={{ textAlign: 'right' }}>{groupedProducts[category].totalValue && formatNumber(options)(parseFloat(groupedProducts[category].totalValue))}</TableCell>
                                     </TableRow>
                                 </TableBody>
                             </Table>

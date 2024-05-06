@@ -1,64 +1,81 @@
-import React from 'react';
-import { Modal, Box, TextField, Button, Stack } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Modal, Box, TextField, Button, Stack, Autocomplete } from '@mui/material';
+import Checkbox from '@mui/material/Checkbox';
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
+
+const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
+const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 function UpdateSupplierForm({ isOpen, onClose, onSubmit, initialData }) {
     const [formData, setFormData] = React.useState({
         name: '',
         phone: '',
-        email:  '',
+        email: '',
         address: '',
         paymentTerms: '',
-        products: [{ name: '', category: '' }],
+        products: [],
     });
+
+    const [products, setProducts] = useState([]);
+    const [selectedProducts, setSelectedProducts] = useState([]);
+
+
+    useEffect(() => {
+        // Fetch products from Inventory collection
+        const fetchProducts = async () => {
+            try {
+                const response = await fetch('http://localhost:8000/inventory/');
+                if (response.ok) {
+                    const data = await response.json();
+                    setProducts(data);
+                } else {
+                    console.error('Failed to fetch products');
+                }
+            } catch (error) {
+                console.error('Error fetching products:', error);
+            }
+        };
+
+        fetchProducts();
+    }, []);
+
 
     React.useEffect(() => {
         if (initialData) {
+            //console.log("Initial data : ", initialData)
+            const productNames = initialData.productsSupplied.map(product => product.name);
+            const initialSelectedProducts = products.filter(product => productNames.includes(product.name));
+
+
             setFormData({
                 name: initialData.name || '',
                 phone: initialData.phone || '',
-                email:  initialData.email ||  '',
-                address: initialData.address ||  '',
+                email: initialData.email || '',
+                address: initialData.address || '',
                 paymentTerms: initialData.paymentTerms || '',
-                products: initialData.productsSupplied || [{ name: '', category: '' }],
+                products: initialData.productsSupplied || [],
             });
+            setSelectedProducts(initialSelectedProducts)
         }
     }, [initialData]);
 
+
+
+
+
     const handleChange = (event, index) => {
+
         const { name, value } = event.target;
-        if (name === 'productName' || name === 'productCategory') {
-            const newProducts = [...formData.products];
-            newProducts[index] = { ...newProducts[index], [name]: value };
-            setFormData({ ...formData, products: newProducts });
-        } else {
-            setFormData({ ...formData, [name]: value });
-        }
+        setFormData({ ...formData, [name]: value });
+
     };
 
-    const handleProductsChange = (event, index) => {
-        const { name, value } = event.target;
-        const newProducts = [...formData.products];
-        newProducts[index] = { ...newProducts[index], [name]: value };
-        setFormData({ ...formData, products: newProducts });
-
-    }
-
-    const handleAddProduct = () => {
-        setFormData({
-            ...formData,
-            products: [...formData.products, { name: '', category: '' }],
-        });
-    };
-
-    const handleRemoveProduct = (index) => {
-        const newProducts = formData.products.filter((_, i) => i !== index);
-        setFormData({ ...formData, products: newProducts });
-    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        // Handle form submission here
-        console.log('Form submitted:', formData);
+        // Handle form submission
+        //console.log('Form submitted:', formData);
         const formattedData = {
             id: initialData.id,
             name: formData.name,
@@ -67,7 +84,7 @@ function UpdateSupplierForm({ isOpen, onClose, onSubmit, initialData }) {
                 email: formData.email,
                 address: formData.address,
             },
-            productsSupplied: formData.products,
+            productsSupplied: selectedProducts,
             paymentTerms: formData.paymentTerms,
         };
         await onSubmit(formattedData);
@@ -87,9 +104,9 @@ function UpdateSupplierForm({ isOpen, onClose, onSubmit, initialData }) {
                     p: 4,
                     minWidth: 400,
                     maxWidth: 600,
-                    overflowY: 'auto', // Add scrollable behavior
-                    maxHeight: '80vh', // Limit maximum height
-                    zIndex: 9999, // Adjust z-index to keep modal above screen
+                    overflowY: 'auto',
+                    maxHeight: '80vh',
+                    zIndex: 9999,
                 }}
             >
                 <h2 id="update-supplier-modal-title">Update Supplier</h2>
@@ -135,42 +152,34 @@ function UpdateSupplierForm({ isOpen, onClose, onSubmit, initialData }) {
                             fullWidth
                             required
                         />
-                        {formData.products.map((product, index) => (
-                            <Stack key={index} direction="row" spacing={2}>
-                                <TextField
-                                    label="Product Name"
-                                    name="name"
-                                    value={product.name}
-                                    onChange={(e) => handleProductsChange(e, index)}
-                                    fullWidth
-                                />
-                                <TextField
-                                    label="Product Category"
-                                    name="category"
-                                    value={product.category}
-                                    onChange={(e) => handleProductsChange(e, index)}
-                                    fullWidth
-                                />
-                                <Button
-                                    type="button"
-                                    variant="contained"
-                                    color="secondary"
-                                    onClick={() => handleRemoveProduct(index)}
-                                >
-                                    Remove Product
-                                </Button>
-                            </Stack>
-                        ))}
-                        <Button
-                            type="button"
-                            variant="contained"
-                            color="primary"
-                            onClick={handleAddProduct}
-                        >
-                            Add Product
-                        </Button>
+                        <Autocomplete
+                            multiple
+                            options={products}
+                            disableCloseOnSelect
+                            getOptionLabel={(product) => product.name}
+                            renderOption={(props, product, { selected }) => (
+                                <li {...props}>
+                                    <Checkbox
+                                        icon={icon}
+                                        checkedIcon={checkedIcon}
+                                        style={{ marginRight: 8 }}
+                                        checked={selected}
+                                    />
+                                    {product.name}
+                                </li>
+                            )}
+                            value={selectedProducts}
+                            onChange={(event, newValue) => setSelectedProducts(newValue)}
+                            renderInput={(params) => (
+                                <TextField {...params} label="Select Product" variant="outlined" />
+                            )}
+                        />
+
                         <Button type="submit" variant="contained" color="primary">
                             Update Supplier
+                        </Button>
+                        <Button variant="contained" color="error" onClick={onClose}>
+                            Cancel
                         </Button>
                     </Stack>
                 </form>

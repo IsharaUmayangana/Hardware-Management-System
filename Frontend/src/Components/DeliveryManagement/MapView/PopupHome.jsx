@@ -41,11 +41,13 @@ function PopupHome() {
 
     return (
         <main className="main-container">
+            <h3 style={{ color: 'black' , textAlign: 'center', fontSize: '53px' , fontWeight: 'normal' }}>Delivery Dashboard</h3> <br></br>
             <div className="main-title">
-                <h3>Dashboard</h3>
+              
             </div>
-
+          
             <div className="main-cards" style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
+                
                 <div className="card" style={{ width: '400px', height: '150px'  , marginLeft: "30px" , paddingRight: "100px"}}>
                     <div className="card-inner">
                         <h2>Deliveries</h2>

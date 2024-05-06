@@ -13,7 +13,7 @@ import MapView from './MapView';
 
 
 
-const FormSide = ({ ShippingAddressCopy ,handleFetchData, sampleData, deliveryCost, setDeliveryCost }) => {
+const FormSide = ({ ShippingAddressCopy, handleFetchData, sampleData, deliveryCost, setDeliveryCost }) => {
 
   //const destinationAddress = useSelector(selectDestinationAddress);
 
@@ -70,8 +70,15 @@ const FormSide = ({ ShippingAddressCopy ,handleFetchData, sampleData, deliveryCo
         .then(res => {
           console.log("Vehicle availability updated successfully!");
           toast.success("Delivery created successfully!");
-          console.log("Response from server:", res.data);
-          console.log(selectedVehicleData)
+          //console.log("Response from server:", res.data);
+          //console.log(selectedVehicleData)
+
+
+          setTimeout(() => {
+            navigate('/MapView');
+          }, 2000); // 2000 milliseconds = 5 seconds
+          
+          
           // window.location.reload(); // Refresh the page
 
 
@@ -80,9 +87,10 @@ const FormSide = ({ ShippingAddressCopy ,handleFetchData, sampleData, deliveryCo
 
       axios.post('http://localhost:8000/CreateDelivery/CreateDelivery', { shippingAddress, selectedVehicle, deliveryCost, estimateTime })
         .then(res => {
-          alert("Delevery created successfully!");
+          //alert("Delevery created successfully!");
           // Redirect to a different route after successful submission
           // navigate('/'); 
+          window.location.reload()
         })
         .catch(err => console.log(err));
     }
@@ -103,21 +111,21 @@ const FormSide = ({ ShippingAddressCopy ,handleFetchData, sampleData, deliveryCo
         id: 2,
         OrderId: '#0836457309',
         name: 'Nishadi Ganegoda',
-        address: '456 Elm St, Town, Country',
+        address: '281/1/m, sunrise city, pore, athurugiriya',
         phone: '+0987654321'
       },
       {
         id: 3,
         OrderId: '#6486726459',
         name: 'Kasuni Thisarika ',
-        address: '789 Oak St, Village, Country',
+        address: 'Reka , polhidigoda,godagama , matara',
         phone: '+1122334455'
       },
       {
         id: 4,
         OrderId: '#8647638298',
         name: 'Deshan Thranga ',
-        address: '789 Oak St, Village, Country',
+        address: '51/8E,Dimitiyagahawatta Road,Dambahena , Maharagaman',
         phone: '+1122334455'
       }
     ];
@@ -139,9 +147,9 @@ const FormSide = ({ ShippingAddressCopy ,handleFetchData, sampleData, deliveryCo
             label="Shipping Address"
             variant="standard"
             value={ShippingAddressCopy}
-            onChange={(e) => setShippingAddress(e.target.value)} 
+            onChange={(e) => setShippingAddress(e.target.value)}
             required
-            />
+          />
 
           <TextField
             select
@@ -151,7 +159,7 @@ const FormSide = ({ ShippingAddressCopy ,handleFetchData, sampleData, deliveryCo
             value={selectedVehicle}
             onChange={handleVehicleChange} >
             {sampleData.map((vehicle) => (
-              <MenuItem key={vehicle.id} value={vehicle.name}>{vehicle.name} - {vehicle.model}</MenuItem>
+              <MenuItem key={vehicle.id} value={vehicle.name}>{vehicle.name}   {vehicle.model}</MenuItem>
             ))}
           </TextField>
 
@@ -167,7 +175,7 @@ const FormSide = ({ ShippingAddressCopy ,handleFetchData, sampleData, deliveryCo
 
           <TextField
             fullWidth
-            label="Estimate Time"
+            label="Estimate Time(Hours.Mintes)"
             variant="standard"
             value={estimateTime}
             onChange={(e) => setEstimateTime(e.target.value)}
@@ -320,9 +328,10 @@ const DeliveryForm = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const [sampleData, setSampleData] = useState([]);
   const [deliveryCost, setDeliveryCost] = useState('');
- 
+
   const handleDeliveryCostUpdate = (cost) => {
     setDeliveryCost(cost);
+    //set delivery cost 
   };
 
 
@@ -350,8 +359,8 @@ const DeliveryForm = () => {
   return (
     <Container>
       <Grid container spacing={2}>
-      {/* <FormSide handleFetchData={handleFetchData} sampleData={sampleData} /> */}
-      <FormSide handleFetchData={handleFetchData} sampleData={sampleData} deliveryCost={deliveryCost} setDeliveryCost={setDeliveryCost} />
+        {/* <FormSide handleFetchData={handleFetchData} sampleData={sampleData} /> */}
+        <FormSide handleFetchData={handleFetchData} sampleData={sampleData} deliveryCost={deliveryCost} setDeliveryCost={setDeliveryCost} />
       </Grid>
       <Grid container spacing={2}>
         {/* <DeliveryCostCalculationForm updateDeliveryCost={setDeliveryCost} /> */}
@@ -388,7 +397,7 @@ const DeliveryForm = () => {
       <ToastContainer /> {/* Add ToastContainer */}
       {/* <DeliveryCostCalculationForm updateDeliveryCost={handleDeliveryCostUpdate} /> */}
       {/* <FormSide sampleData={sampleData} deliveryCost={deliveryCost} setDeliveryCost={setDeliveryCost} /> */}
-      
+
     </Container>
   );
 };

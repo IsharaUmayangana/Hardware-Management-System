@@ -29,6 +29,7 @@
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.8.2",
     "jwt-decode": "^4.0.0",
+    "mdb-react-ui-kit": "^8.0.0",
     "node": "^18.20.2",
     "quagga": "^0.12.1",
     "react": "^18.2.0",
@@ -41,7 +42,8 @@
     "react-router-dom": "^6.21.3",
     "react-to-print": "^2.15.1",
     "react-toastify": "^10.0.5",
-    "recharts": "^2.10.4"
+    "recharts": "^2.10.4",
+    "sonner": "^1.4.41"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",

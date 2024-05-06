@@ -1,14 +1,17 @@
 const express = require('express')
 
-const { addCategory, getAllCategories } = require('../controllers/categoryController')
+const { addCategory, getAllCategories, deleteCategory } = require('../controllers/categoryController')
 
 const router = express.Router()
 
-// GET all products
+// GET all category
 router.get('/', getAllCategories)
 
-// POST a new feedback
+// POST a new category
 router.post('/', addCategory)
+
+// DELET a category
+router.delete('/:id', deleteCategory)
 
 
 module.exports = router

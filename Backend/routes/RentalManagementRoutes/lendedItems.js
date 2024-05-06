@@ -6,7 +6,7 @@ const Item = require('../../models/RentalManagementModels/Item');
 // API endpoint - create a new lended item
 router.post('/', async (req, res) => {
   try {
-    const { itemId, itemName, lenderName, daysForLend, oneDayPrice, totalPay } = req.body;
+    const { itemId, itemName, lenderName,nicNo, daysForLend, oneDayPrice, totalPay } = req.body;
 
     const item = await Item.findById(itemId);
     
@@ -23,6 +23,7 @@ router.post('/', async (req, res) => {
       itemId,
       itemName,
       lenderName,
+      nicNo,
       daysForLend,
       oneDayPrice,
       totalPay,

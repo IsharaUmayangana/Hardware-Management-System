@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import ProductDetails from './Inventory-ProductDetails';
 import Status from './Inventory-Status';
-import Sidebar from "../Dashboard/Dashboard_Sidebar";
 import AddProductForm from './InventoryForm';
 import AddNewCategoryForm from './inventory-AddNewCategory';
-import './InventoryStyles.css';
+import AddReturnItemForm from './returnItemForm';
 import { TextField, Select, MenuItem, Button, FormControl, InputLabel, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
+import './InventoryStyles.css';
 
 const InventoryHome = () => {
     const [products, setProducts] = useState(null);
     const [categories, setCategories] = useState([]); 
     const [addCategoryDialogOpen, setAddCategoryDialogOpen] = useState(false);
     const [addProductDialogOpen, setAddProductDialogOpen] = useState(false);
+    const [addReturnItemDialogOpen, setAddReturnItemDialogOpen] = useState(false);
     const [refreshPage, setRefreshPage] = useState(false);
 
     const [selectedCategory, setSelectedCategory] = useState('');
@@ -21,12 +22,12 @@ const InventoryHome = () => {
 
     const handleCategory = (e) => {
         setSelectedCategory(e.target.value);
-        setCurPage(1); // Reset page number when category change
+        setCurPage(1); //reset page number when category change
     };
 
     const handleSearch = (e) => {
         setSearchQuery(e.target.value);
-        setCurPage(1); // Reset page number when search query change
+        setCurPage(1); //reset page number when search query change
     };
 
     //Dialog functions
@@ -45,6 +46,15 @@ const InventoryHome = () => {
 
     const handleAddProductDialogClose = () => {
         setAddProductDialogOpen(false);
+        setRefreshPage(true);
+    };
+
+    const handleReturnItemDialogOpen = () => {
+        setAddReturnItemDialogOpen(true);
+    };
+
+    const handleReturnItemDialogClose = () => {
+        setAddReturnItemDialogOpen(false);
         setRefreshPage(true);
     };
 
@@ -78,13 +88,13 @@ const InventoryHome = () => {
         fetchCategories();
     }, [refreshPage]);
 
-    // Function to count product categories
+    //function to count product categories
     const calculateCategories = () =>{
         let totalCategories = categories.length;  
         return totalCategories;
     };
 
-    // Function to calculate total value
+    //function to calculate total value
     const calculateTotalValue = () => {
         if (!products) {
             return 0;
@@ -98,7 +108,7 @@ const InventoryHome = () => {
         return totalValue;
     };
 
-    // Function to calculate total products
+    //function to calculate total products
     const calculateTotalProducts = () => {
         if (!products) {
             return 0;
@@ -112,13 +122,13 @@ const InventoryHome = () => {
         return totalProducts;
     };
 
-    // Function to check and find out of stock
+    //function to check and find out of stock
     const calculateOutOfStock = () => {
         if (!products) {
             return 0;
         }
         let outOfStock = 0;
-        let lowStockProducts = []; // Array to store low stock product data
+        let lowStockProducts = []; //array to store low stock product data
     
         products.forEach(product => {
             if (!selectedCategory || product.category === selectedCategory) {
@@ -130,13 +140,13 @@ const InventoryHome = () => {
             }
         });
     
-        // Send low stock products to the backend
+        //send low stock products to the backend
         sendLowStocktoBackend(lowStockProducts);
     
         return outOfStock;
     };
     
-    // Function to send low stock data to backend
+    //function to send low stock data to backend
     const sendLowStocktoBackend = async (lowStockProducts) => {
         try {
             if (lowStockProducts.length > 0) {
@@ -145,7 +155,7 @@ const InventoryHome = () => {
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify( lowStockProducts ), // Pass low stock product data to backend
+                    body: JSON.stringify( lowStockProducts ), //pass low stock product data to backend
                 });
                 if (!response.ok) {
                     if (response.status === 400) {
@@ -162,7 +172,7 @@ const InventoryHome = () => {
         }
     };    
 
-    // Pagination variables
+    //pagination variables
     const lastIndex = curPage * recordsPerPage;
     const firstIndex = lastIndex - recordsPerPage;
     const filteredProducts = products ? products.filter(product =>
@@ -173,7 +183,7 @@ const InventoryHome = () => {
     const noOfPage = Math.ceil(filteredProducts.length / recordsPerPage);
     const numbers = [...Array(noOfPage + 1).keys()].slice(1);
 
-    // Pagination functions
+    //pagination functions
     function previousPage(){
         if(curPage !== 1) {
             setCurPage(curPage - 1)
@@ -212,6 +222,7 @@ const InventoryHome = () => {
                     </div>
                     <Button className='add-buttons' onClick={handleAddCategoryDialogOpen} variant="contained" color="primary">Add New Category</Button>
                     <Button className='add-buttons' onClick={handleAddProductDialogOpen} variant="contained" color="primary">Add New Product</Button>
+                    <Button className='add-buttons' onClick={handleReturnItemDialogOpen} variant="contained" color="primary">Return Item</Button>
                 </div>
                 <table className="topicline">
                     <tbody>
@@ -271,6 +282,19 @@ const InventoryHome = () => {
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleAddProductDialogClose} color="primary">Cancel</Button>
+                    </DialogActions>
+                </Dialog>
+
+                {/* Return Item Dialog */}
+                <Dialog open={addReturnItemDialogOpen} onClose={handleReturnItemDialogClose} maxWidth="1000px" >
+                    <DialogTitle>
+                        <h2>Return Item</h2>
+                    </DialogTitle>
+                    <DialogContent>
+                        <AddReturnItemForm />
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleReturnItemDialogClose} color="primary">Cancel</Button>
                     </DialogActions>
                 </Dialog>
             </div>

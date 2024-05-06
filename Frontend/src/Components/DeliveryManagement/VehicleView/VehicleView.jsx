@@ -105,11 +105,30 @@ function VehicleDetails() {
                                 Back
                             </button>
                         </Link>
+                        <Link to="/CreateVehicle" style={{ textDecoration: 'none', top: 0, right: 0 }}>
+                            <button style={{
+                                margin: "10px",
+                                backgroundColor: '#4CAF50',
+                                border: 'none',
+                                color: 'white',
+                                padding: '15px 0', /* Adjust vertical padding */
+                                width: '150px', /* Set width */
+                                textAlign: 'center',
+                                textDecoration: 'none',
+                                display: 'inline-block',
+                                fontSize: '16px',
+                                cursor: 'pointer',
+                                borderRadius: '12px',
+                            }}>
+                                Add New Vehicle
+                            </button>
+                        </Link>
+                        
 
                         <TableRow>
                             <TableCell>Name</TableCell>
                             <TableCell>Model</TableCell>
-                            <TableCell>Millage</TableCell>
+                            <TableCell>Millage(KM)</TableCell>
                             <TableCell>Status</TableCell>
                             <TableCell>Actions</TableCell>
                         </TableRow>

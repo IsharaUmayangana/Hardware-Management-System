@@ -104,6 +104,7 @@ const ReservedItemsList = () => {
           marginTop: "10px",
           marginBottom: "15px",
           textAlign: "center",
+          color: "#415a77",
         }}
       >
         Reserved Items List
@@ -133,6 +134,7 @@ const ReservedItemsList = () => {
               <Typography variant="body1">
                 Contact No: {item.contactNo}
               </Typography>
+              <Typography variant="body1">NIC No: {item.nicNo}</Typography>
               <Typography variant="body1">
                 Days to Rent: {item.daysToRent}
               </Typography>
@@ -205,7 +207,7 @@ const ReservedItemsList = () => {
             Rent Confirmation
           </h2>
           <p id="rent-confirmation-description">
-            Are you sure you want to rent this item?
+            Are you sure you want to rent this reservation?
           </p>
           <Button
             variant="contained"
@@ -260,7 +262,7 @@ const ReservedItemsList = () => {
             Remove Confirmation
           </h2>
           <p id="remove-confirmation-description">
-            Are you sure you want to remove this item?
+            Are you sure you want to remove this reservation?
           </p>
           <Button
             variant="contained"

@@ -5,8 +5,8 @@ const mongoose = require('mongoose')
 const getAllSuppliers = async (req, res) => {
 
     try {
-        const Suppliers = await Supplier.find({}).sort({ createdAt: -1 });
-
+        const Suppliers = await Supplier.find({}).populate('productsSupplied').sort({ createdAt: -1 }).exec();
+        //console.log(Suppliers)
         res.status(200).json(Suppliers);
     }
     catch (error) {
@@ -24,7 +24,7 @@ const getOneSupplier = async (req, res) => {
         if (!mongoose.Types.ObjectId.isValid(id)) {
             return res.status(404).json({ error: 'Invalid supplier id' });
         }
-        const supplier = await Supplier.findById(id);
+        const supplier = await Supplier.findById(id).populate('productsSupplied').exec();
 
         if (!supplier) {
             return res.status(404).json({ error: 'Cannot find the supplier' });
@@ -40,11 +40,16 @@ const getOneSupplier = async (req, res) => {
 
 const createSupplier = async (req, res) => {
     const { name, contact, productsSupplied, paymentTerms } = req.body;
+    //console.log(req.body)
 
     try {
 
         const newSupplier = await Supplier.create({ name, contact, productsSupplied, paymentTerms });
-        res.status(201).json(newSupplier);
+
+        const populatedSupplier = await Supplier.findById(newSupplier._id).populate('productsSupplied').exec();
+
+        res.status(201).json(populatedSupplier);
+               
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
@@ -75,8 +80,10 @@ const updateSupplier = async (req, res) => {
             return res.status(404).json({ error: 'Supplier not found' });
         }
 
+        const populatedSupplier = await Supplier.findById(id).populate('productsSupplied').exec()
 
-        res.status(200).json(updatedSupplier);
+
+        res.status(200).json(populatedSupplier);
     } catch (error) {
 
         res.status(400).json({ error: error.message });

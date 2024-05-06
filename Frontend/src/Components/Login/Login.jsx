@@ -29,6 +29,8 @@ function Login() {
                         navigate('/Dashboard');
                     } else if (res.data.role === "employee") {
                         navigate('/employeeProfile');
+                    }else if (res.data.role === "supply-manager") {
+                        navigate('/supply-management');
                     } else {
                         navigate('/');
                     }

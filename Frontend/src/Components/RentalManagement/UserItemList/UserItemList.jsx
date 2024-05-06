@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import SearchBar from "../searchBar/searchBar";
 import UserItemCard from "../UserItemCard/UserItemCard";
+import NavigationBar from "../../Home/Home-Navigation";
+import "./UserItemList.css";
 
 function UserItemList() {
   document.title = "Rental Item List";
@@ -30,9 +32,45 @@ function UserItemList() {
   };
 
   return (
-    <>
-      <h1>Item List (Customer side)</h1>
-      <div style={{ display: "flex", justifyContent: "center" }}>
+    <div className="">
+      <NavigationBar />
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginTop: "10px",
+          color: "#fca311",
+          fontFamily: "unset",
+          fontWeight: "600",
+          fontSize: "30px",
+          letterSpacing: "5px",
+        }}
+      >
+        Rent Your Perfect Match Today!
+      </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginTop: "1px",
+          marginBottom: "20px",
+          color: "#415a77",
+          fontFamily: "unset",
+          fontWeight: "600",
+          fontSize: "20px",
+          letterSpacing: "4px",
+        }}
+      >
+        We made renting easy
+      </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginTop: "10px",
+        }}
+      >
         <SearchBar onSearch={handleSearch} />{" "}
       </div>
 
@@ -48,7 +86,7 @@ function UserItemList() {
           <UserItemCard key={item._id} item={item} style={{ margin: "10px" }} />
         ))}
       </div>
-    </>
+    </div>
   );
 }
 
