@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './order.css';
+// import RatingPage from './RatingComponent'
 
 const OrderPage = () => {
     const [orders, setOrders] = useState([]);
@@ -9,6 +10,7 @@ const OrderPage = () => {
     const [endDate, setEndDate] = useState('');
     const [minPrice, setMinPrice] = useState('');
     const [maxPrice, setMaxPrice] = useState('');
+    const [selectedProduct, setSelectedProduct] = useState(null);
 
     useEffect(() => {
         fetch('http://localhost:8000/order')
@@ -30,6 +32,7 @@ const OrderPage = () => {
             });
     }, []);
 
+    
     const generateReport = () => {
         window.print();
     };
@@ -64,7 +67,10 @@ const OrderPage = () => {
         setMaxPrice('');
         fetchOrders();
     };
-
+    // const handleViewRatings = async(productId) => {
+    //     setSelectedProduct(productId);
+        
+    // };
     
     return (
         <div>
@@ -118,6 +124,8 @@ const OrderPage = () => {
                                 </div>
                             ))}
                             <hr className="bold-hr" />
+                            <button onClick={() => handleViewRatings(order.productId)}>View Ratings</button>
+                            {/* {selectedProduct === order.productId && <RatingPage productId={order.productId} />} */}
                         </div>
                     ))}
                 </div>
