@@ -22,6 +22,7 @@ function Login() {
                 if (res.data.Status === "Success") {
                     dispatch(setUser({
                         name: res.data.name,
+                        userId: res.data.userId
                     }));
 
                     if (res.data.role === "admin") {

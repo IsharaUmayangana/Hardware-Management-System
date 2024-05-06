@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import ProductDetails from './Home-ProductDetails';
 import homeCss from "./home.module.css";
+import { useSelector } from 'react-redux';
 
 const CustomerSideHome = () => {
+    const userId = useSelector(state => state.user.userId);
     const [products, setProducts] = useState(null);
     const [selectedCategory, setSelectedCategory] = useState('');
     const [searchQuery, setSearchQuery] = useState('');

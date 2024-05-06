@@ -39,6 +39,7 @@ import CartPage from './Components/Order/CartPages'
 import DeliveryInfoPage from './Components/Order/DeliveryInfoPage';
 import PaymentPage from './Components/Order/PaymentPage'
 import AdminOrdersPage from './Components/Order/AdminOrderdPage'
+import AdminRatingPage from './Components/Order/AdminRatingPage'
 
 import { Provider } from "react-redux";
 import store from "../src/Components/ReduxTool/Store";
@@ -78,7 +79,7 @@ function App() {
           <Route exact path='/deliveryinfo' element={<DeliveryInfoPage />}/>
           <Route exact path='/payment' element={<PaymentPage />}/>
           <Route exact path='/order' element={<AdminOrdersPage />}/>
-          
+          <Route exact path='/rating' element={<AdminRatingPage/>} />
           
 
           <Route exact path="/cusHome" element={<CusHome addToCart={addToCart}/>} />

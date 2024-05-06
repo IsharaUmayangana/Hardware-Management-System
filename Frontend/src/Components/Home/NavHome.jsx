@@ -14,6 +14,8 @@ function NavHome() {
   console.log(user.name);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [cartItemCount, setCartItemCount] = useState(0);
+
 
   //logout with route
   //clear cookie data and locatstorage data
@@ -33,11 +35,14 @@ function NavHome() {
     navigate("/userItemList");
   };
 
+ 
+
   return (
     <div className={homeCss.body}>
       <div className={homeCss.navbar}>
         <div className={homeCss.logo}>Logo</div>
         <ul className={homeCss.navLinks}>
+        
           <li>
             <a href="#">Payment Card details</a>
           </li>
@@ -80,6 +85,7 @@ function NavHome() {
             Check Rental Items Availability
           </button>
         </span>
+        
       </div>
         
       </div>

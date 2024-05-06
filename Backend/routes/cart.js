@@ -1,8 +1,9 @@
 const express = require('express');
 
-const { addToCart,getCartById,getAllCarts,updateCart,deleteCartItem  } = require('../controllers/cartController');
-const { model } = require('mongoose');
+const { addToCart,getCartById,getAllCarts,updateCart,deleteCartItem   } = require('../controllers/cartController');
+// const { model } = require('mongoose');
 const router = express.Router();
+//const { extractUserId  } = require('../middleware/authMiddleware');
 
 router.post('/',addToCart);
 
@@ -14,4 +15,7 @@ router.get('/', getAllCarts); // Route to fetch all carts
 router.patch('/update', updateCart);
 
 router.delete('/:cartId/remove/:productId', deleteCartItem);
+
+//router.get('/count', getCartItemCount);
+
 module.exports = router;
