@@ -8,7 +8,7 @@ import { clearUser } from "../ReduxTool/userSlice";
 
 import NavigationBar from "./Home-Navigation";
 import HomeComponent from "./Home-Products";
-import Footer from "./Footer";
+import Footer from "./footer";
 
 import { BsPersonCircle } from "react-icons/bs";
 
@@ -17,6 +17,8 @@ function NavHome() {
   console.log(user.name);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [cartItemCount, setCartItemCount] = useState(0);
+
 
   //logout with route
   //clear cookie data and locatstorage data
@@ -30,6 +32,13 @@ function NavHome() {
     dispatch(clearUser());
     navigate("/login"); // Redirect to the login page after logout
   };
+
+  // Navigate to user item list
+  const handleCheckRentalItems = () => {
+    navigate("/userItemList");
+  };
+
+ 
 
   return (
     <div className={homeCss.body}>

@@ -9,6 +9,7 @@ const cookieParser = require('cookie-parser')
 
 
 
+
 const registerRouter = require('./routes/LoginRegisterDashboard/registerRouter');
 const authRoutes = require('./routes/LoginRegisterDashboard/authRoutes');
 const authDashboard = require('./routes/LoginRegisterDashboard/authDashboard');
@@ -18,6 +19,7 @@ const cartRoutes = require('./routes/cart')
 const deliveryInfoRoutes = require('./routes/deliveryInfo')
 const feedbackRoutes = require('./routes/productFeedback');
 const productCategoryRoutes = require('./routes/productCategories');
+const ratingRoutes = require('./routes/ratings')
 const returnItemRouts = require('./routes/returnItem');
 
 const lowStockNotifications = require('./routes/SupplyManagementRoutes/lowStockRoutes');
@@ -68,6 +70,10 @@ app.use('/categories',productCategoryRoutes);
 app.use('/order', orderRoutes); // Add order routes
 app.use('/cart',cartRoutes)
 app.use('/deliveryinfo', deliveryInfoRoutes);
+app.use('/ratings', ratingRoutes);
+
+
+
 
 app.get('/logout', (req, res) => {
     res.clearCookie('token');

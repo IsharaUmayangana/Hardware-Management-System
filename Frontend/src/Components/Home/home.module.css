@@ -64,6 +64,23 @@
   }
   
   /* End of NavHome */
+  /* Add styles for the cart icon */
+.cartIcon {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.cartItemCount {
+  position: absolute;
+  top: -8px; /* Adjust the position as needed */
+  right: -8px; /* Adjust the position as needed */
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 4px 8px;
+  font-size: 12px;
+}
 
 
   /* home page */
