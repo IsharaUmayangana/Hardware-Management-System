@@ -82,7 +82,26 @@ function DeliveryView() {
                     style={{ marginBottom: '20px' }}
                 />
                 <Table>
+                
                     <TableHead>
+                    <Link to="/MapView" style={{ textDecoration: 'none', top: 0, right: 0 }}>
+                            <button style={{
+                                margin: "10px",
+                                backgroundColor: '#4CAF50',
+                                border: 'none',
+                                color: 'white',
+                                padding: '15px 0', /* Adjust vertical padding */
+                                width: '100px', /* Set width */
+                                textAlign: 'center',
+                                textDecoration: 'none',
+                                display: 'inline-block',
+                                fontSize: '16px',
+                                cursor: 'pointer',
+                                borderRadius: '12px',
+                            }}>
+                                Back
+                            </button>
+                        </Link>
                         <TableRow>
                             <TableCell>Delivery ID</TableCell>
                             <TableCell>Shipping Address</TableCell>

@@ -17,6 +17,7 @@ import "./RentalManagement.css";
 Modal.setAppElement(document.body);
 
 function RentalManagement() {
+  document.title = "Rental Services";
   const navigate = useNavigate();
 
   const [searchTerm, setSearchTerm] = useState("");
@@ -92,12 +93,24 @@ function RentalManagement() {
 
   return (
     <div className="rental-management-container">
-      <div className="sidebar">
-        <Sidebar />
-      </div>
+      {/* <div className="sidebar"><Sidebar /></div> */}
       <div className="content">
         <div>
-          <h1>Item List (hardware side)</h1>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "10px",
+              color: "#415a77",
+              fontFamily: "unset",
+              fontWeight: "600",
+              fontSize: "30px",
+              letterSpacing: "3px",
+            }}
+          >
+            Rental Services Management
+          </div>
+
           <br />
           <div style={{ display: "flex", justifyContent: "center" }}>
             <SearchBar onSearch={handleSearch} />

@@ -1,39 +1,45 @@
 import { Link } from "react-router-dom";
-import { Home, Category, Notifications, MonetizationOn } from "@mui/icons-material"; 
+import { Home, Category, MonetizationOn } from "@mui/icons-material"; 
+import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
+import formatNumber from 'format-number'; 
+import './InventoryStyles.css';
 
 const Status = (props) => {
+    
     const totalValue = props.totalvalue;
     const totalproducts = props.totalProducts;
     const totalOutOfproducts = props.outOfStock;
+    const totalCategories = props.totalCategories;
+    
+    // Define options for formatting
+  const options = { round: 2, padRight: 2, padLeft: 0, thousand: ',', decimal: '.' };
 
     return ( 
         <header>
-           
-                <div className="statusBoxs" style={{ textAlign: 'center', margin: 'auto',}}>
-                    <div className="box1" style={{ width:'250px', height:'130px'}}>
-                        <Home /> 
-                        <h3>Total Products:</h3>
-                        <h3>{totalproducts}</h3>
-                    </div>
-                    <div className="box2" style={{ width:'250px', height:'130px'}}>
-                        <Category /> 
-                        <h3>All Categories:</h3>
-                        <h3>7</h3>
-                    </div>
-                    <div className="box3" style={{ width:'250px', height:'130px'}}>
-                        <Link to='/supply-management/notifications'>
-                            <Notifications /> 
-                            <h3>Out of Stock:</h3>
-                            <h3>{totalOutOfproducts}</h3> 
-                        </Link>                         
-                    </div>
-                    <div className="box4" style={{ width:'250px', height:'130px'}}>
-                        <MonetizationOn /> 
-                        <h3>Total Value:</h3>
-                        <h3>{totalValue}</h3>
-                    </div>
+            <div className="statusBoxs" >
+                <div className="box1" >
+                    <Home /> 
+                    <h4>Total Products:</h4>
+                    <h4>{totalproducts}</h4>
                 </div>
-            
+                <div className="box2" >
+                    <Category /> 
+                    <h4>All Categories:</h4>
+                    <h4>{totalCategories}</h4>
+                </div>
+                <div className="box3" >
+                    <Link to='/supply-management/notifications'>
+                        <ProductionQuantityLimitsIcon /> 
+                        <h4>Out of Stock:</h4>
+                        <h4>{totalOutOfproducts}</h4> 
+                    </Link>                         
+                </div>
+                <div className="box4" >
+                    <MonetizationOn /> 
+                    <h4>Total Value:</h4>
+                    <h4>{formatNumber(options)(totalValue)}</h4>
+                </div>
+            </div>
         </header>
      );
 }

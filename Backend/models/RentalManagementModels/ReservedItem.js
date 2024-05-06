@@ -7,6 +7,7 @@ const reservedItemSchema = new mongoose.Schema({
   itemId: String,
   buyerName: String,
   contactNo: String,
+  nicNo: String,
   oneDayPrice: Number,
   daysToRent: Number,
   totalPay: Number,

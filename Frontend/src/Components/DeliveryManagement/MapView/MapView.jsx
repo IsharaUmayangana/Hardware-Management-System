@@ -2,7 +2,10 @@ import React, { useState, useRef } from 'react';
 import { Grid, Paper, Button, TextField, Card, CardContent, Typography } from '@mui/material';
 import { GoogleMap, useLoadScript, Marker, DirectionsRenderer } from '@react-google-maps/api';
 
-const MapView = () => {
+
+
+const MapView = ( ) => {
+
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: 'AIzaSyANu8c_NzURmzwkBfT3zkutCk8cOcRCsQo'
   });
@@ -13,9 +16,13 @@ const MapView = () => {
   const [directions, setDirections] = useState(null);
   const [distance, setDistance] = useState(null);
   const [duration, setDuration] = useState(null);
+
+
   const mapRef = useRef();
 
   const handleFindLocation = () => {
+
+
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -35,7 +42,11 @@ const MapView = () => {
     setDestinationCoordinates({ lat: e.latLng.lat(), lng: e.latLng.lng() });
   };
 
-  const handleDirections = () => {
+  const handleDirections = (  ) => {
+    ///const [ShippingAddressCopy, SetShippingAddressCopy] = useState([]);
+    
+  
+
     if (navigator.geolocation) {
       // Find current location
       navigator.geolocation.getCurrentPosition(
@@ -83,6 +94,7 @@ const MapView = () => {
 
   const handleChangeDestination = (e) => {
     setDestination(e.target.value);
+
   };
 
   const handleSearchDestination = () => {
@@ -127,7 +139,7 @@ const MapView = () => {
 
   const PaperStyle = { width: 805, marginTop: "20px", marginLeft: "28px", height: "640px"  }; //height = 550
   const PaperStyle2 = { width: 810 , marginTop: "20px", marginLeft: "25px", marginBottom: "10px" ,   padding: "10px 10px",  height: "400px" , border: '2px solid #86E212'  }; //border: '2px solid #86E212'
-  const PaperStyle3 = { padding: "30px 30px", width: 820, margin: "15px 0px", height: "300px" };
+  //const PaperStyle3 = { padding: "30px 30px", width: 820, margin: "15px 0px", height: "300px" };
 
   return (
 
@@ -190,7 +202,7 @@ const MapView = () => {
             <Button variant='contained' color="primary" onClick={handleCalculateDistance} style={{ borderRadius: "10px", width: "80%", margin: "5px" }}>Calculate Distance</Button>
           </div>
 
-
+         
         </Paper>
       </Grid>
 

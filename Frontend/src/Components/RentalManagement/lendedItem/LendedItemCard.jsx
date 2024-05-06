@@ -56,7 +56,11 @@ function LendedItemCard({ item, onExtendTime, onItemReceived }) {
       <CardContent>
         <Typography variant="h6">Item Name: {item.itemName}</Typography>
         <Typography variant="body2">Item ID: {item._id}</Typography>
-        <Typography variant="body2">Lender Name: {item.lenderName}</Typography>
+        <Typography variant="body2">Buyer Name: {item.lenderName}</Typography>
+        <Typography variant="body2">NIC No: {item.nicNo}</Typography>
+        <Typography variant="body2">
+          Days for Rent: {item.daysForLend}
+        </Typography>
         <Typography variant="body2">
           Existing lend to Pay (Rs): {item.totalPay}
         </Typography>

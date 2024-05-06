@@ -15,7 +15,7 @@ const PurchaseOrderSchema = new mongoose.Schema({
   items: [{
     item: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Inventory',
+      ref: 'newInventory',
       required: true
     },
     quantity: {
@@ -35,6 +35,9 @@ const PurchaseOrderSchema = new mongoose.Schema({
     type: String,
     enum: ['Pending', 'Cancelled', 'Received'],
     default: 'Pending'
+  },
+  receivedDate: {
+    type: Date 
   },
   createdAt: {
     type: Date,

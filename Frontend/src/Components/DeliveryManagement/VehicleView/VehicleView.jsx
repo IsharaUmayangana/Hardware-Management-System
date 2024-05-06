@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link  , useParams} from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Table, TableHead, TableBody, TableRow, TableCell, Paper, Button, TextField, Dialog, DialogTitle, DialogContent, DialogActions, DialogContentText } from "@mui/material";
 import jsPDF from 'jspdf';
 
@@ -23,7 +23,7 @@ function VehicleDetails() {
             .catch(err => console.log(err));
     }, []);
 
-  
+
     const downloadAsPdf = (vehicle) => {
         const pdf = new jsPDF();
 
@@ -68,12 +68,13 @@ function VehicleDetails() {
                 window.location.reload(); // Reload the page
 
             })
-            .catch(err => console.log(err   ));
+            .catch(err => console.log(err));
 
     };
 
     return (
-        <div className={VihicleViewCss.body}>
+        <div className={VihicleViewCss.body} style={{ position: 'relative' }}>
+
             <Paper className={VihicleViewCss.paper}>
                 <TextField
                     label="Search"
@@ -84,11 +85,50 @@ function VehicleDetails() {
                     style={{ marginBottom: '20px' }}
                 />
                 <Table>
+
                     <TableHead>
+                        <Link to="/MapView" style={{ textDecoration: 'none', top: 0, right: 0 }}>
+                            <button style={{
+                                margin: "10px",
+                                backgroundColor: '#4CAF50',
+                                border: 'none',
+                                color: 'white',
+                                padding: '15px 0', /* Adjust vertical padding */
+                                width: '100px', /* Set width */
+                                textAlign: 'center',
+                                textDecoration: 'none',
+                                display: 'inline-block',
+                                fontSize: '16px',
+                                cursor: 'pointer',
+                                borderRadius: '12px',
+                            }}>
+                                Back
+                            </button>
+                        </Link>
+                        <Link to="/CreateVehicle" style={{ textDecoration: 'none', top: 0, right: 0 }}>
+                            <button style={{
+                                margin: "10px",
+                                backgroundColor: '#4CAF50',
+                                border: 'none',
+                                color: 'white',
+                                padding: '15px 0', /* Adjust vertical padding */
+                                width: '150px', /* Set width */
+                                textAlign: 'center',
+                                textDecoration: 'none',
+                                display: 'inline-block',
+                                fontSize: '16px',
+                                cursor: 'pointer',
+                                borderRadius: '12px',
+                            }}>
+                                Add New Vehicle
+                            </button>
+                        </Link>
+                        
+
                         <TableRow>
                             <TableCell>Name</TableCell>
                             <TableCell>Model</TableCell>
-                            <TableCell>Millage</TableCell>
+                            <TableCell>Millage(KM)</TableCell>
                             <TableCell>Status</TableCell>
                             <TableCell>Actions</TableCell>
                         </TableRow>
@@ -101,11 +141,11 @@ function VehicleDetails() {
                                 <TableCell>{vehicle.millage}</TableCell>
                                 <TableCell>{vehicle.availability}</TableCell>
                                 <TableCell style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                    <Link to={`/VehicleUpdateDelete/${vehicle._id}`} style={{ textDecoration: 'none', marginRight: '10px'  }}>
+                                    <Link to={`/VehicleUpdateDelete/${vehicle._id}`} style={{ textDecoration: 'none', marginRight: '10px' }}>
                                         <Button variant="contained" color="primary">Update</Button>
                                     </Link>
                                     <Button
-                                        style={{ textDecoration: 'none', marginRight: '10px', backgroundColor: "#D875C7"  }}
+                                        style={{ textDecoration: 'none', marginRight: '10px', backgroundColor: "#D875C7" }}
                                         variant="contained"
                                         color="secondary"
                                         onClick={() => {

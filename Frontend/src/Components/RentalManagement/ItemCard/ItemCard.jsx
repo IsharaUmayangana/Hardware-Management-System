@@ -57,7 +57,7 @@ function ItemCard({ item, onLendClick, onUpdateItemClick }) {
     <Card sx={{ maxWidth: 400, margin: 2 }}>
       <CardMedia
         component="img"
-        height="140"
+        height="220px"
         image={item.imageUrl}
         alt={item.itemName}
       />

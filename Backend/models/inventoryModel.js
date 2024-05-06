@@ -15,6 +15,10 @@ const inventorySchema = new Schema({
         type: Number,
         required: true
     },
+    pricebeforeDiscount: { 
+        type: Number,
+        required: true
+    },
     buyingPrice: { 
         type: Number,
         required: true

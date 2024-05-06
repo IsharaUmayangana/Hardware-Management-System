@@ -12,6 +12,7 @@ const LendForm = ({
 }) => {
   const [lenderName, setLenderName] = useState("");
   const [daysForLend, setDaysForLend] = useState("");
+  const [nicNo, setnicNo] = useState("");
   const [oneDayPrice, setOneDayPrice] = useState("");
 
   // Calculate total pay
@@ -29,6 +30,7 @@ const LendForm = ({
       itemId: selectedItemId,
       itemName: selectedItemName,
       lenderName,
+      nicNo,
       daysForLend,
       oneDayPrice: selectedItemOneDay,
       totalPay,
@@ -108,9 +110,18 @@ const LendForm = ({
             </Grid>
             <Grid item xs={12}>
               <TextField
-                label="Lender Name"
+                label="Buyer Name"
                 value={lenderName}
                 onChange={(e) => setLenderName(e.target.value)}
+                fullWidth
+                sx={{ marginBottom: 2 }}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                label="NIC No"
+                value={nicNo}
+                onChange={(e) => setnicNo(e.target.value)}
                 fullWidth
                 sx={{ marginBottom: 2 }}
               />

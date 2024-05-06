@@ -85,6 +85,8 @@ const LendedItemList = () => {
           fontSize: "30px",
           marginTop: "10px",
           marginBottom: "15px",
+          textAlign: "center",
+          color: "#415a77",
         }}
       >
         Rented Items List
