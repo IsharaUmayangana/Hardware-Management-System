@@ -23,6 +23,5 @@ const LowStockSchema = new Schema({
     
 },{ timestamps: true })
 
-LowStockSchema.index({product:1 ,name:1, category:1, quantity:1},{unique:true});
 
 module.exports = mongoose.model('LowStock', LowStockSchema);

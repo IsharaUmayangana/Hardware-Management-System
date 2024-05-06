@@ -352,7 +352,7 @@ export default function PurchaseOrderList() {
             if (response.ok) {
                 const newOrder = await response.json()
                 console.log("created data ", newOrder)
-                setPurchaseOrders([...purchaseOrders, newOrder]);
+                setPurchaseOrders([newOrder,...purchaseOrders]);
             } else {
                 console.error("Failed to add supplier");
             }

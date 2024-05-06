@@ -61,15 +61,28 @@ const createLowStockItem = async (req, res) => {
     const items = req.body; 
 
     try {
-        
         const createdItems = [];
 
-        
         for (const item of items) {
             const { product, name, category, quantity } = item;
-            // Create the low stock item
-            const lowStockItem = await LowStock.create({ product, name, category, quantity });
-            createdItems.push(lowStockItem); 
+            
+            // Check if a record already exists for the product
+            let existingItem = await LowStock.findOne({ product });
+
+            if (existingItem) {
+                // If exists, update the existing record
+                existingItem.name = name;
+                existingItem.category = category;
+                existingItem.quantity = quantity;
+                
+                // Save the updated item
+                await existingItem.save();
+                createdItems.push(existingItem);
+            } else {
+                // If doesn't exist, create a new record
+                const lowStockItem = await LowStock.create({ product, name, category, quantity });
+                createdItems.push(lowStockItem); 
+            }
         }
 
         res.status(200).json(createdItems); 
@@ -77,6 +90,7 @@ const createLowStockItem = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 }
+
 
 
 

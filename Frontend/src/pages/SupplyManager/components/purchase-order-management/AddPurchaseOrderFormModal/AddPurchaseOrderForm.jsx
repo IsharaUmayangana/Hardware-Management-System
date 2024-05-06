@@ -8,7 +8,7 @@ function AddOrderForm({ isOpen, onClose, onSubmit }) {
         supplier: '', // Changed to store supplier's ObjectId
         totalAmount: 0,
         status: '',
-        orderDate: '',
+        receivedDate: '',
         products: [], // Array to hold products
     });
 
@@ -114,7 +114,7 @@ function AddOrderForm({ isOpen, onClose, onSubmit }) {
             supplier: selectedSupplier ? selectedSupplier._id : '', // Correctly set supplier's ObjectId
             totalAmount: parseFloat(formData.totalAmount),
             status: formData.status,
-            orderDate: formData.orderDate,
+            receivedDate: formData.receivedDate,
             items: items,
         };
 
@@ -180,9 +180,9 @@ function AddOrderForm({ isOpen, onClose, onSubmit }) {
                         </TextField>
                         <TextField
                             label="Receiving Date"
-                            name="orderDate"
+                            name="receivedDate"
                             type="date"
-                            value={formData.orderDate}
+                            value={formData.receivedDate}
                             onChange={handleChange}
                             fullWidth
                             required
