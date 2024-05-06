@@ -1,7 +1,7 @@
 
 import MuiDrawer from "./MUIDrawer";
 
-const InventoryLayout = ({ children }) => {
+const Layout = ({ children }) => {
     return (
          <div style={{ display: 'flex' }}> {/* Ensure that the layout uses flexbox */}
             <MuiDrawer />
@@ -12,4 +12,4 @@ const InventoryLayout = ({ children }) => {
     );
 }
 
-export default InventoryLayout;
+export default Layout;

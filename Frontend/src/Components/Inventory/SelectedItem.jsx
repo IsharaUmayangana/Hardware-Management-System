@@ -99,7 +99,7 @@ const SelectedItem = () => {
         {!loading && !product && <p>No product found</p>}
         {!loading && product && (
           <div className="detailsBox" >
-            <h2>{product.name}</h2><br></br>
+            <h2>{product.name}</h2>
             <span><a href='http://localhost:5173/inventory' className="back-button">Back</a></span>
             <div className="sp-container1">
               <div className="sp-subContainer1"> 
@@ -162,7 +162,7 @@ const SelectedItem = () => {
                 <div className="barcode-section">
                   <BarCode id={id} />
                 </div>
-                <button onClick={handlePrint}>Print this barcode</button>
+                <Button variant="contained" onClick={handlePrint}>Print this barcode</Button>
               </div>
             </div> 
           </div>

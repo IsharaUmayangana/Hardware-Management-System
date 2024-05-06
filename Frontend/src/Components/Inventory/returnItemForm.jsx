@@ -43,6 +43,18 @@ const ReturnItemForm = () => {
             if (!response.ok) {
                 setError(json.error);
             } else {
+                //update inventory quantity 
+                const itemToUpdate = inventoryItems.find(item => item.name === name);
+                const updatedQuantity = itemToUpdate.quantity - 1;
+                await fetch(`http://localhost:8000/inventory/${itemToUpdate.id}`, {
+                    method: 'PATCH',
+                    body: JSON.stringify({ quantity: updatedQuantity }),
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                // Reset form fields
                 setName('');
                 setSerialNumber('');
                 setDescription('');

@@ -1,10 +1,10 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import React, { useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Register from './Components/Register/Register';
-import Login from './Components/Login/Login';
-import DashBoard from './Components/Dashboard//DashBoard';
-import NavHome from './Components/Home/NavHome';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React, { useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Register from "./Components/Register/Register";
+import Login from "./Components/Login/Login";
+import DashBoard from "./Components/Dashboard//DashBoard";
+import NavHome from "./Components/Home/NavHome";
 
 import InventoryHome from "./Components/Inventory/InventoryHome";
 import InventoryForm from "./Components/Inventory/InventoryForm";
@@ -17,29 +17,27 @@ import ProductCategory from "./Components/Inventory/inventory-AddNewCategory";
 import ScannerBarcode from "./Components/Inventory/scanner";
 import InventoryLayout from "./Components/Inventory/InventoryLayout"
 
-import Layout from "./pages/SupplyManager/components/InventoryLayout";
-import SupplyManagementHome from "./pages/SupplyManager/home.page"
-import NotificationPage from "./pages/SupplyManager/components/low-stock-notifications/home.notifications"
-import NotificationDetails from "./pages/SupplyManager/components/NotificationDetails"
+import Layout from "./pages/SupplyManager/components/Layout";
+import SupplyManagementHome from "./pages/SupplyManager/home.page";
+import NotificationPage from "./pages/SupplyManager/components/low-stock-notifications/home.notifications";
+import NotificationDetails from "./pages/SupplyManager/components/NotificationDetails";
 import SupplierList from "./pages/SupplyManager/components/supplier-management/SupplierList";
 
+import MapView from "./Components/DeliveryManagement/MapView/AlignMap";
+import CreateVehicle from "./Components/DeliveryManagement/VehicleView/CreateVehicle";
+import VehicleView from "./Components/DeliveryManagement/VehicleView/VehicleView";
+import VehicleUpdateDelete from "./Components/DeliveryManagement/VehicleView/VehicleUpdateDelete";
+import DeliveryView from "./Components/DeliveryManagement/DeliveryView/DeliveryView";
+import CreateDelivery from "./Components/DeliveryManagement/MapView/DeliveryForm";
+import DeliveryUpdateDelete from "./Components/DeliveryManagement/DeliveryView/DeliveryUpdateDelete";
+import Orders from "./Components/DeliveryManagement/OrderView/Orders";
 
-import MapView from './Components/DeliveryManagement/MapView/AlignMap'
-import CreateVehicle from './Components/DeliveryManagement/VehicleView/CreateVehicle'
-import VehicleView from './Components/DeliveryManagement/VehicleView/VehicleView'
-import VehicleUpdateDelete from './Components/DeliveryManagement/VehicleView/VehicleUpdateDelete'
-import DeliveryView from './Components/DeliveryManagement/DeliveryView/DeliveryView'
-import CreateDelivery from './Components/DeliveryManagement/MapView/DeliveryForm'
-import DeliveryUpdateDelete from './Components/DeliveryManagement/DeliveryView/DeliveryUpdateDelete'
-import Orders from './Components/DeliveryManagement/OrderView/Orders'
-
-
-
-import SelectedOrderItem from './Components/Order/Home-SelectedItem'
-import CartPage from './Components/Order/CartPages'
-import DeliveryInfoPage from './Components/Order/DeliveryInfoPage';
-import PaymentPage from './Components/Order/PaymentPage'
-import AdminOrdersPage from './Components/Order/AdminOrderdPage'
+import SelectedOrderItem from "./Components/Order/Home-SelectedItem";
+import CartPage from "./Components/Order/CartPages";
+import DeliveryInfoPage from "./Components/Order/DeliveryInfoPage";
+import PaymentPage from "./Components/Order/PaymentPage";
+import AdminOrdersPage from "./Components/Order/AdminOrderdPage";
+import AdminRatingPage from './Components/Order/AdminRatingPage'
 
 import { Provider } from "react-redux";
 import store from "../src/Components/ReduxTool/Store";
@@ -51,6 +49,10 @@ import UserItemList from "./Components/RentalManagement/UserItemList/UserItemLis
 import ReservedItemsList from "./Components/RentalManagement/ReservedItemsList/ReservedItemsList";
 import RentalReport from "./Components/RentalManagement/RentalReport/RentalReport";
 import PurchaseOrderList from "./pages/SupplyManager/components/purchase-order-management/PurchaseOrderList";
+
+//Himash
+import SalesManagement from "./Components/Sales/salesManager/Sales";
+import CashierHome from "./Components/Sales/cashier/CashierHome";
 
 // import SearchBar from "./Components/RentalManagement/searchBar/searchBar";
 
@@ -99,16 +101,21 @@ function App() {
           <Route path="/reserved-items" element={<ReservedItemsList />} />
           <Route path="/rentalReport" element={<RentalReport />} />
 
-
           {/* Prabashwara's routes */}
           <Route path="/MapView" element={<MapView />} />
           <Route path="/CreateVehicle" element={<CreateVehicle />} />
           <Route path="/VehicleView" element={<VehicleView />} />
-          <Route path="/VehicleUpdateDelete/:id" element={<VehicleUpdateDelete />} />
+          <Route
+            path="/VehicleUpdateDelete/:id"
+            element={<VehicleUpdateDelete />}
+          />
           <Route path="/DeliveryView" element={<DeliveryView />} />
           <Route path="/CreateDelivery" element={<CreateDelivery />} />
-          <Route path="/DeliveryUpdateDelete/:id" element={< DeliveryUpdateDelete />} />
-          <Route path="/Orders" element={< Orders />} />
+          <Route
+            path="/DeliveryUpdateDelete/:id"
+            element={<DeliveryUpdateDelete />}
+          />
+          <Route path="/Orders" element={<Orders />} />
 
           <Route
             path="/supply-management/*"
@@ -125,7 +132,10 @@ function App() {
                     path="supplier-management"
                     element={<SupplierList />}
                   />
-                  <Route path="purchase-orders" element={<PurchaseOrderList />} />
+                  <Route
+                    path="purchase-orders"
+                    element={<PurchaseOrderList />}
+                  />
                   <Route path="return-management" element={<SupplierList />} />
                   <Route path="reports" element={<SupplierList />} />
                 </Routes>
