@@ -241,7 +241,7 @@ const InventoryHome = () => {
                 
                 {/* button to navigate to report1 */}
                 <div>
-                    <Button href="/report1" variant="contained" color="primary">Inventory List Report</Button>
+                    <Button href="inventory/report1" variant="contained" color="primary">Inventory List Report</Button>
                 </div>
                 <br></br>
 
