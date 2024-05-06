@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import DeleteIcon from '@mui/icons-material/Delete';
 import NavigationBar from '../Home/Home-Navigation';
+
 import './order.css';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
@@ -164,23 +165,17 @@ const CartPage = () => {
         });
     };
 
-    const getTotalItemsCount = () => {
-        let totalCount = 0;
-        carts.forEach(cart => {
-            cart.cartItems.forEach(item => {
-                totalCount += item.quantity;
-            });
-        });
-        return totalCount;
-    };
+    
     
  return (
     <div >
         <div>
             <NavigationBar/>
         </div>
+        
         <div className="cartAll">
-            <h2>Cart Details</h2>
+            
+            
             {loading ? (
                 <p>Loading...</p>
             ) : carts.length === 0 ? (
@@ -228,19 +223,29 @@ const CartPage = () => {
                             ))}
                         </tbody>
                     </table>
-                    {changesMade && (
-                <button className="update-cart-btn" onClick={handleUpdateCart}>Update Cart</button>
-            )}
+                    
                 </div>
             )}
             
             
             <div className="checkout-section">
-                    <div>
-                        <h3>Total Price </h3>
-                        <h3><strong>{calculateTotalPrice()}</strong></h3>
-                        <button onClick={handleProceedToCheckout}>Proceed to Checkout</button>
-                    </div>
+            <div>
+                    <h3>Total Price </h3>
+                    <h3><strong>{calculateTotalPrice()}</strong></h3>
+                    {changesMade && (
+                                
+                                <Button variant="contained" color="primary" onClick={handleUpdateCart}>
+                            Update Cart
+                        </Button>
+                            )}
+                            
+                    
+                    <Box m={1}>
+                        <Button variant="contained" color="primary" onClick={handleProceedToCheckout}>
+                            Proceed to Checkout
+                        </Button>
+                    </Box>
+                </div>
             </div>
         </div>
     </div>

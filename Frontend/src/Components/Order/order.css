@@ -121,7 +121,10 @@ body {
 
 
   .cart table {
-  border-collapse: collapse; 
+  border-collapse: collapse;
+  margin-top: 25px;
+  margin-left: 200px; 
+  
 }
 
 .cart table th,

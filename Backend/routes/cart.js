@@ -16,6 +16,6 @@ router.patch('/update', updateCart);
 
 router.delete('/:cartId/remove/:productId', deleteCartItem);
 
-//router.get('/count', getCartItemCount);
+
 
 module.exports = router;

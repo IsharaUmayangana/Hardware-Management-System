@@ -19,7 +19,8 @@ const cartRoutes = require('./routes/cart')
 const deliveryInfoRoutes = require('./routes/deliveryInfo')
 const feedbackRoutes = require('./routes/productFeedback');
 const productCategoryRoutes = require('./routes/productCategories');
-const ratingRoutes = require('./routes/ratings')const returnItemRouts = require('./routes/returnItem');
+const ratingRoutes = require('./routes/ratings')
+const returnItemRouts = require('./routes/returnItem');
 
 const lowStockNotifications = require('./routes/SupplyManagementRoutes/lowStockRoutes');
 const supplierManagementRoutes = require('./routes/SupplyManagementRoutes/SupplierManagementRoutes');

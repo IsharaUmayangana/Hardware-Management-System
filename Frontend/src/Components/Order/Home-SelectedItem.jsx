@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import RatingComponent from './RatingPage';// Import the BasicRating component
 import RatingPage from "./RatingComponent";
 import Stack from '@mui/material/Stack';
+import NavigationBar from '../Home/Home-Navigation';
 import CartCount from './CartCount';
 
 
@@ -105,7 +106,7 @@ const HomeSelectedItem = ({ addToCart }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       window.location.reload();
-    }, 3000);
+    }, 6000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -115,9 +116,11 @@ const HomeSelectedItem = ({ addToCart }) => {
   
 
   return (
-
+  <div>
+            <NavigationBar/>
+        
     <div className="selectedOrderProduct">
-      <CartCount/>
+      
       
       {loading && <p>Loading...</p>}
       {!loading && !product && <p>No product found</p>}
@@ -137,6 +140,7 @@ const HomeSelectedItem = ({ addToCart }) => {
             <p className="productName">Product Name : {product.name}</p>
             <p className="unitPrice">Unit Price : {product.price}</p>
             <p className="availableAmount">Available Amount : {product.quantity}</p>
+            <p className="availableAmount">Description: {product.description}</p>
             <Stack spacing={2} direction="column">
               <Button variant="contained" size="medium" style={{ width: '200px' }} onClick={handleAddToCart} startIcon={<AddShoppingCartIcon />}>
                 Add to Cart
@@ -153,6 +157,8 @@ const HomeSelectedItem = ({ addToCart }) => {
           </div>
         </div>
       )}
+    </div>
+
     </div>
   );
 };

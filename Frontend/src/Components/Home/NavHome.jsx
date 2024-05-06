@@ -8,7 +8,7 @@ import { clearUser } from "../ReduxTool/userSlice";
 
 import NavigationBar from "./Home-Navigation";
 import HomeComponent from "./Home-Products";
-import Footer from "./Footer";
+import Footer from "./footer";
 
 import { BsPersonCircle } from "react-icons/bs";
 
