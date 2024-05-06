@@ -20,9 +20,10 @@ const feedbackRoutes = require('./routes/productFeedback');
 const productCategoryRoutes = require('./routes/productCategories');
 const returnItemRouts = require('./routes/returnItem');
 
-const lowStockNotifications = require('./routes/SupplyManagementRoutes/NotificationsRoutes');
+const lowStockNotifications = require('./routes/SupplyManagementRoutes/lowStockRoutes');
 const supplierManagementRoutes = require('./routes/SupplyManagementRoutes/SupplierManagementRoutes');
 const purchaseOrderRoutes = require('./routes/SupplyManagementRoutes/PurchaseOrdersRoutes');
+const sendMailRoutes = require('./routes/SupplyManagementRoutes/sendMailRoutes')
 
 const CreatevehicleRoutes = require('./routes/DeliveryManagementRoutes/VehicleRoutes/CreateVehicleRoute');
 const VehicleViewRoutes = require('./routes/DeliveryManagementRoutes/VehicleRoutes/VehicleViewRoute');
@@ -75,8 +76,9 @@ app.get('/logout', (req, res) => {
 
 //Supply Manager Api's
 app.use('/supply-management/suppliers', supplierManagementRoutes);
-app.use('/supply-management', lowStockNotifications);
 app.use('/supply-management/purchase-orders', purchaseOrderRoutes);
+app.use('/supply-management/sendMail', sendMailRoutes);
+app.use('/supply-management', lowStockNotifications);
 
 
 

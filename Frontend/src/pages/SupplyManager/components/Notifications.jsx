@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
-import "../index.css";
-import formatDistanceToNow from "date-fns/formatDistanceToNow";
+import { Link } from "react-router-dom"
+
+import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+
 
 const Notifications = ({ notification }) => {
   return (

@@ -27,6 +27,7 @@ function EditToolbar(props) {
   };
 
   const handleFormSubmit = async (formData) => {
+    //console.log("New supplier formData: ",formData)
     try {
       const response = await fetch(
         "http://localhost:8000/supply-management/suppliers",
@@ -44,6 +45,12 @@ function EditToolbar(props) {
         newSupplier.phone = newSupplier.contact.phone;
         newSupplier.email = newSupplier.contact.email;
         newSupplier.address = newSupplier.contact.address;
+        newSupplier.productsSupplied = newSupplier.productsSupplied?.map(product => ({
+          name: product.name,
+          category: product.category
+        }))
+
+        //console.log("New Supplier: ", newSupplier)
 
         setRows((oldRows) => [newSupplier, ...oldRows]);
 
@@ -98,7 +105,7 @@ export default function SupplierList() {
   const [isUpdateFormOpen, setIsUpdateFormOpen] = React.useState(false);
 
   const handleDeleteClick = (id) => async () => {
-    console.log("deleting");
+    //console.log('deleting')
     try {
       const response = await fetch(
         `http://localhost:8000/supply-management/suppliers/${id}`,
@@ -134,6 +141,7 @@ export default function SupplierList() {
 
   const handleUpdateFormSubmit = async (formData) => {
     const id = formData.id;
+    //console.log("Submitted form data: ",formData)
     try {
       const response = await fetch(
         `http://localhost:8000/supply-management/suppliers/${id}`,
@@ -152,6 +160,10 @@ export default function SupplierList() {
         updatedSupplierData.phone = updatedSupplierData.contact.phone;
         updatedSupplierData.email = updatedSupplierData.contact.email;
         updatedSupplierData.address = updatedSupplierData.contact.address;
+        updatedSupplierData.productsSupplied = updatedSupplierData.productsSupplied?.map(product => ({
+          name: product.name,
+          category: product.category
+        }))
 
         const updatedIndex = rows.findIndex((row) => row.id === id);
         if (updatedIndex !== -1) {
@@ -265,13 +277,14 @@ export default function SupplierList() {
         );
         if (response.ok) {
           const data = await response.json();
-          const transformedData = data.map((supplier) => ({
+          //console.log(data)
+          const transformedData = data.map(supplier => ({
             id: supplier._id,
             name: supplier.name,
-            phone: supplier.contact ? supplier.contact.phone : "",
-            email: supplier.contact ? supplier.contact.email : "",
-            address: supplier.contact ? supplier.contact.address : "",
-            productsSupplied: supplier.productsSupplied.map((product) => ({
+            phone: supplier.contact ? supplier.contact.phone : '', 
+            email: supplier.contact ? supplier.contact.email : '', 
+            address: supplier.contact ? supplier.contact.address : '',
+            productsSupplied: supplier.productsSupplied?.map(product => ({
               name: product.name,
               category: product.category,
             })),

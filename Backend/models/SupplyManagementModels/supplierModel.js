@@ -12,10 +12,10 @@ const SupplierSchema = new Schema({
     email: String,
     address: String
   },
-  productsSupplied: [{
-    name: String,
-    category: String 
-  }],
+  productsSupplied: {
+    type:[mongoose.Schema.Types.ObjectId],
+    ref:'newInventory'
+  },
   paymentTerms: String,
   orderHistory: [{
     orderId: {

@@ -22,6 +22,7 @@ import Badge from "@mui/material/Badge";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import SearchBar from "./searchBar/searchBar";
 
 const drawerWidth = 240;
 
@@ -90,15 +91,16 @@ export default function MuiDrawer() {
     },
     {
       text: "Purchase Orders",
-      path: "/supply-management/purchase-orders",
+      path:'/supply-management/purchase-orders'
+    }, 
+    
+    {
+      text: "Supplier Management",
+      path: "/supply-management/supplier-management"
     },
     {
       text: "Return Management",
-      path: "/supply-management/return-management",
-    },
-    {
-      text: "Supplier Management",
-      path: "/supply-management/supplier-management",
+      path: "/supply-management/return-management"
     },
     {
       text: "Report and Analytics",
@@ -139,6 +141,7 @@ export default function MuiDrawer() {
             {getCurrentRouteText()}
           </Typography>
 
+          
           <Box sx={{ flexGrow: 1 }} />
           <IconButton
             component={Link}
