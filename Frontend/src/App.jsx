@@ -15,6 +15,7 @@ import CusSelectedItem from "./Components/Home/Home-SelectedItem";
 import Report1 from "./Components/Inventory/Inventory-report1";
 import ProductCategory from "./Components/Inventory/inventory-AddNewCategory";
 import ScannerBarcode from "./Components/Inventory/scanner";
+import InventoryLayout from "./Components/Inventory/InventoryLayout"
 
 import Layout from "./pages/SupplyManager/components/Layout";
 import SupplyManagementHome from "./pages/SupplyManager/home.page";
@@ -70,34 +71,28 @@ function App() {
           <Route path="/Login" element={<Login />} />
           <Route path="/DashBoard" element={<DashBoard />} />
 
-          <Route exact path="/inventory" element={<InventoryHome />} />
-          <Route exact path="/addnewItem" element={<InventoryForm />} />
-          <Route exact path="/selectedItem/:id" element={<SelectedItem />} />
-          <Route exact path="/editItem/:id" element={<EditInventoryItems />} />
+          <Route
+            path="/inventory/*"
+            element={
+              <InventoryLayout>
+                <Routes>
+                  <Route exact path="/" element={<InventoryHome />} />
+                  <Route exact path="/addnewItem" element={<InventoryForm />} />
+                  <Route exact path="/selectedItem/:id" element={<SelectedItem />} />
+                  <Route exact path="/editItem/:id" element={<EditInventoryItems />} />
+                  <Route exact path="/report1" element={<Report1 />} />
+                </Routes>
+              </InventoryLayout>}
+          />
 
-          <Route exact path="/cart" element={<CartPage cart={cart} />} />
-          <Route
-            exact
-            path="/cusOrderSelectedItem/:id"
-            element={<SelectedOrderItem addToCart={addToCart} />}
-          />
-          <Route exact path="/deliveryinfo" element={<DeliveryInfoPage />} />
-          <Route exact path="/payment" element={<PaymentPage />} />
-          <Route exact path="/order" element={<AdminOrdersPage />} />
 
-          <Route
-            exact
-            path="/cusHome"
-            element={<CusHome addToCart={addToCart} />}
-          />
-          <Route
-            exact
-            path="/cusSelectedItem/:id"
-            element={<CusSelectedItem />}
-          />
-          <Route exact path="/report1" element={<Report1 />} />
-          <Route exact path="/addNewCategory" element={<ProductCategory />} />
-          <Route exact path="/scannerBarcode" element={<ScannerBarcode />} />
+          <Route exact path='/cart' element={<CartPage cart={cart} />} />
+          <Route exact path="/cusOrderSelectedItem/:id" element={<SelectedOrderItem addToCart={addToCart} />} />
+          <Route exact path='/deliveryinfo' element={<DeliveryInfoPage />} />
+          <Route exact path='/payment' element={<PaymentPage />} />
+          <Route exact path='/order' element={<AdminOrdersPage />} />
+          {<Route exact path="/cusHome" element={<CusHome addToCart={addToCart} />} />}
+          <Route exact path="/cusSelectedItem/:id" element={<CusSelectedItem />} />
 
           {/* sanjuka - routes */}
           <Route path="/rentalService" element={<RentalManagement />} />
@@ -148,9 +143,9 @@ function App() {
             }
           />
 
-          <Route exact path="/salesManagement" element={<SalesManagement />} />
-          <Route exact path="/cashierView" element={<CashierHome />} />
-          
+
+
+
         </Routes>
       </BrowserRouter>
     </Provider>
