@@ -55,6 +55,16 @@ const EditInventoryItems = ({ product }) => {
       setLoading(false);
       return;
     }
+    
+    if (parseFloat(priceAfterDiscount) <= parseFloat(buyingPrice)) {
+        setError('Price after discount must be greater than buying price.');
+        return false;
+    }
+
+    if (parseFloat(quantity) < 0 || parseFloat(quantityLimit) < 0) {
+        setError('Quantity and minimum quantity can not be less than 0.');
+        return false;
+    }
     return true;
   };
 

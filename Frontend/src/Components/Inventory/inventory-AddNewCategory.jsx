@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Button, Grid } from '@mui/material';
+import { TextField, Button, Grid, IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const AddCategoryForm = () => {
   const [categoryName, setCategoryName] = useState('');
@@ -28,26 +29,43 @@ const AddCategoryForm = () => {
     }
   };
 
+  const handleDeleteCategory = async (categoryId) => {
+    try {
+      const response = await fetch(`http://localhost:8000/categories/${categoryId}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete category');
+      }
+
+      setCategories(categories.filter(category => category._id !== categoryId));
+      alert('Category deleted successfully');
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
   useEffect(() => {
     const fetchCategories = async () => {
-        try {
-            const response = await fetch('http://localhost:8000/categories');
-            if (!response.ok) {
-                throw new Error('Failed to fetch categories');
-            }
-            const data = await response.json();
-            setCategories(data);
-        } catch (error) {
-            console.error('Error fetching categories:', error.message);
+      try {
+        const response = await fetch('http://localhost:8000/categories');
+        if (!response.ok) {
+          throw new Error('Failed to fetch categories');
         }
+        const data = await response.json();
+        setCategories(data);
+      } catch (error) {
+        console.error('Error fetching categories:', error.message);
+      }
     };
 
     fetchCategories();
   }, []);
 
   return (
-    <div className='category-page-main' style={{ display: 'flex' }}>
-      <div className='newCategory-form' style={{ marginRight: '20px' }}>
+    <div className='category-page-main'>
+      <div className='newCategory-form'>
         <h2>Add New Category</h2>
         <form onSubmit={(e) => { e.preventDefault(); handleAddCategory(); }}>
           <Grid container spacing={2}>
@@ -72,11 +90,23 @@ const AddCategoryForm = () => {
       <div className='existing-category-list'>
         <br/>
         <h2>Existing Categories</h2>
-        <ul>
-          {categories.map(category => (
-            <li key={category._id}>{category.name}</li>
-          ))}
-        </ul>
+        <h7>If deleting a product category, make sure to change the product <br/>category of related products as well!</h7>
+        <TableContainer component={Paper}>
+          <Table>
+            <TableBody>
+              {categories.map(category => (
+                <TableRow key={category._id}>
+                  <TableCell>{category.name}</TableCell>
+                  <TableCell>
+                    <IconButton aria-label="delete" onClick={() => handleDeleteCategory(category._id)}>
+                      <DeleteIcon />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </div>
       
     </div>

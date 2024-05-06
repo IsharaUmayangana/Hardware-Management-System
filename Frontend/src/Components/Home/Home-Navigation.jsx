@@ -2,8 +2,8 @@ import homeCss from "./home.module.css";
 
 const navigationBar = () => {
     return ( 
-        <div className={homeCss.navbar}>
-        <div className={homeCss.logo}>Logo</div>
+      <div className={homeCss.navbar}>
+        <div className={homeCss.logo}><img className= {homeCss.navbarLogo} src={`http://localhost:8000/logos/laksiri-hardware-logo1.jpg`} alt="Product" /></div>
         <ul className={homeCss.navLinks}>
           <li>
             <a href="/userItemList">Rental Items</a>
