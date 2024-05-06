@@ -6,9 +6,9 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { clearUser } from "../ReduxTool/userSlice";
 
-import NavigationBar from './Home-Navigation';
-import HomeComponent from './Home-Products';
-import Footer from './Home-Footer';
+import NavigationBar from "./Home-Navigation";
+import HomeComponent from "./Home-Products";
+import Footer from "./Footer";
 
 import { BsPersonCircle } from "react-icons/bs";
 
@@ -31,14 +31,12 @@ function NavHome() {
     navigate("/login"); // Redirect to the login page after logout
   };
 
-  
-
   return (
     <div className={homeCss.body}>
-      <NavigationBar/>
+      <NavigationBar />
 
-      <div style={{display:"flex"}}>
-        <div className={homeCss.navIcons} >
+      <div style={{ display: "flex" }}>
+        <div className={homeCss.navIcons}>
           <BsPersonCircle className="iconHeader" />
           <span className={homeCss.span}>Welcome {user.name}</span>
 
@@ -48,13 +46,11 @@ function NavHome() {
             </button>
           </span>
         </div>
-        
       </div>
       <div>
-        <HomeComponent/>
+        <HomeComponent />
       </div>
-      <Footer/>
-      
+      <Footer />
     </div>
   );
 }
