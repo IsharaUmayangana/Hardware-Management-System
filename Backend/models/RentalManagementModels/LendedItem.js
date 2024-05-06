@@ -4,6 +4,7 @@ const lendedItemSchema = new mongoose.Schema({
   itemId: String,
   itemName: String,
   lenderName: String,
+  nicNo : String,
   daysForLend: Number,
   oneDayPrice: Number,
   totalPay: Number,

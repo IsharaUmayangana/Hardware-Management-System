@@ -104,7 +104,7 @@ const SelectedItem = () => {
             <div className="sp-container1">
               <div className="sp-subContainer1"> 
                 <img className="sp-imageView" src={`http://localhost:8000/images/`+ product.img_URL} alt="Product" />
-                <p className="sp-description">Description : {product.description}</p>
+                <p className="sp-description"><strong>Description :</strong> <br></br>{product.description}</p>
                 <div className="sp-button">
                   <Button onClick={handleEditDialogOpen} variant="contained" color="primary">Edit</Button>
                   <Button onClick={handleDelete} variant="contained" color="error">Delete</Button>
@@ -114,47 +114,47 @@ const SelectedItem = () => {
                 <table className="sp-table">
                   <tbody>
                     <tr>
-                      <td>Product Id:</td>
+                      <th>Product Id:</th>
                       <td>{id}</td>
                     </tr>
                     <tr>
-                      <td>Product Category:</td>
+                      <th>Product Category:</th>
                       <td>{product.category}</td>
                     </tr>
                     <tr>
-                      <td>Price Before Discount:</td>
+                      <th>Price Before Discount:</th>
                       <td>{product.pricebeforeDiscount && formatNumber(options)(parseFloat(product.pricebeforeDiscount))}</td>
                     </tr>
                     <tr>
-                      <td>Discount :</td>
+                      <th>Discount :</th>
                       <td>{product.discount}%</td>
                     </tr>
                     <tr>
-                      <td>Price After Discount:</td>
+                      <th>Price After Discount:</th>
                       <td>{product.price && formatNumber(options)(parseFloat(product.price))}</td>
                     </tr>
                     <tr>
-                      <td>Unit Buying Price:</td>
+                      <th>Unit Buying Price:</th>
                       <td>{product.buyingPrice && formatNumber(options)(parseFloat(product.buyingPrice))}</td>
                     </tr>
                     <tr>
-                      <td>Profit:</td>
+                      <th>Profit:</th>
                       <td>{product.price && product.buyingPrice && formatNumber(options)(parseFloat(product.price) - parseFloat(product.buyingPrice))}</td>
                     </tr>
                     <tr>
-                      <td>Available Amount:</td>
+                      <th>Available Amount:</th>
                       <td>{product.quantity}</td>
                     </tr>
                     <tr>
-                      <td>Quantity Limit:</td>
+                      <th>Quantity Limit:</th>
                       <td>{product.quantityLimit}</td>
                     </tr>
                     <tr>
-                      <td>Total Value of Available Quantity:</td>
+                      <th>Total Value of Available Quantity:</th>
                       <td>{product.price && product.quantity && formatNumber(options)(parseFloat(product.price) * parseFloat(product.quantity))}</td>
                     </tr>
                     <tr>
-                      <td>Display on home page:</td>
+                      <th>Display on home page:</th>
                       <td>{product.displayItem === true ? "Yes" : "No"}</td>
                     </tr>
                   </tbody>

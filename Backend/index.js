@@ -18,7 +18,7 @@ const cartRoutes = require('./routes/cart')
 const deliveryInfoRoutes = require('./routes/deliveryInfo')
 const feedbackRoutes = require('./routes/productFeedback');
 const productCategoryRoutes = require('./routes/productCategories');
-
+const returnItemRouts = require('./routes/returnItem');
 
 const lowStockNotifications = require('./routes/SupplyManagementRoutes/lowStockRoutes');
 const supplierManagementRoutes = require('./routes/SupplyManagementRoutes/SupplierManagementRoutes');
@@ -61,6 +61,7 @@ app.use('/dashboard', authDashboard);
 //Inventory Manager's Api
 app.use('/inventory', inventoryRoutes);
 app.use('/feedback',feedbackRoutes);
+app.use('/returnItem',returnItemRouts);
 app.use('/categories',productCategoryRoutes);
 
 //Navishka's API

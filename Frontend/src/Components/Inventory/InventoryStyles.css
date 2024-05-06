@@ -43,6 +43,7 @@ header a {
   width: 250px;
   height: 110px;
   border: 2px solid #333; 
+  border-radius: 3px;
 }
 .box1{background: #9de98e;}
 .box2{background: #7784e6;}

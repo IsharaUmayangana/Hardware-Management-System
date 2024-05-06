@@ -91,6 +91,7 @@ function RentalReport() {
         style={{
           textDecoration: "underline",
           fontSize: "20px",
+          color: "#415a77",
         }}
       >
         Rented Items Details
@@ -133,6 +134,7 @@ function RentalReport() {
           textDecoration: "underline",
           fontSize: "20px",
           marginTop: "20px",
+          color: "#415a77",
         }}
       >
         Mostly Hiring Items
@@ -170,6 +172,7 @@ function RentalReport() {
           textDecoration: "underline",
           fontSize: "20px",
           marginTop: "20px",
+          color: "#415a77",
         }}
       >
         Least Hiring Items
