@@ -40,6 +40,11 @@ import UserItemList from "./Components/RentalManagement/UserItemList/UserItemLis
 import ReservedItemsList from "./Components/RentalManagement/ReservedItemsList/ReservedItemsList";
 import RentalReport from "./Components/RentalManagement/RentalReport/RentalReport";
 
+
+import DriverDispatcherHome from "./Components/DriverDispatcherManagement/DriverDispatcherHome";
+import AddDriverForm from "./Components/DriverDispatcherManagement/AddDriverForm/AddDriverForm";
+import UpdateDriverForm from "./Components/DriverDispatcherManagement/UpdateDriverForm/UpdateDriver";
+
 // import SearchBar from "./Components/RentalManagement/searchBar/searchBar";
 
 function App() {
@@ -76,6 +81,10 @@ function App() {
           <Route path="/DeliveryView" element={<DeliveryView />} />
           <Route path="/CreateDelivery" element={<CreateDelivery />} />
           <Route path="/DeliveryUpdateDelete/:id" element={< DeliveryUpdateDelete />} />
+
+          <Route path="/driver-dispatcher" element={<DriverDispatcherHome />} />
+          <Route path="/driver-dispatcher/AddDriver" element={<AddDriverForm />} />
+          <Route path="/driver-dispatcher/:driverId" element={<UpdateDriverForm/>} />
 
           <Route
             path="/supply-management/*"
