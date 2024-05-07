@@ -51,9 +51,16 @@ import UserItemList from "./Components/RentalManagement/UserItemList/UserItemLis
 import ReservedItemsList from "./Components/RentalManagement/ReservedItemsList/ReservedItemsList";
 import RentalReport from "./Components/RentalManagement/RentalReport/RentalReport";
 
+
+
+import DriverDispatcherHome from "./Components/DriverDispatcherManagement/DriverDispatcherHome";
+import AddDriverForm from "./Components/DriverDispatcherManagement/AddDriverForm/AddDriverForm";
+import UpdateDriverForm from "./Components/DriverDispatcherManagement/UpdateDriverForm/UpdateDriver";
+
 //Himash
 import SalesManagement from "./Components/Sales/salesManager/Sales";
 import CashierHome from "./Components/Sales/cashier/CashierHome";
+
 
 // import SearchBar from "./Components/RentalManagement/searchBar/searchBar";
 
@@ -118,6 +125,10 @@ function App() {
           />
           <Route path="/Orders" element={<Orders />} />
 
+          <Route path="/driver-dispatcher" element={<DriverDispatcherHome />} />
+          <Route path="/driver-dispatcher/AddDriver" element={<AddDriverForm />} />
+          <Route path="/driver-dispatcher/:driverId" element={<UpdateDriverForm/>} />
+
           <Route
             path="/supply-management/*"
             element={
@@ -144,8 +155,8 @@ function App() {
             }
           />
 
-
-
+          <Route exact path="/salesManagement" element={<SalesManagement />} />
+          <Route exact path="/cashierView" element={<CashierHome />} />
 
         </Routes>
       </BrowserRouter>

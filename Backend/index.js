@@ -37,7 +37,11 @@ const CreateVehicleRoute = require('./routes/DeliveryManagementRoutes/DeliveryRo
 const GetDeliveryRoutes = require('./routes/DeliveryManagementRoutes/DeliveryRoutes/GetDeliveryRoute');
 const DeliveryUpdateDeleteRoutes = require('./routes/DeliveryManagementRoutes/DeliveryRoutes/UpdateAndDeleteRoutes');
 
+
+const driverDispatcherRoutes = require('./routes/DriverDispatcherRoutes/DriverDispatcherRoutes')
+
 const SalesRoutes = require('./routes/SalesRoutes');
+
 
 
 
@@ -175,6 +179,8 @@ app.use('/DeliveryDelete', DeliveryUpdateDeleteRoutes);
 // });
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------//
+
+app.use('/driver-dispatcher', driverDispatcherRoutes);
 
 
 

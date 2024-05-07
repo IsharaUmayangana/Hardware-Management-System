@@ -1,18 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import ProductDetails from './Inventory-ProductDetails';
 import Status from './Inventory-Status';
-import AddProductForm from './InventoryForm';
-import AddNewCategoryForm from './inventory-AddNewCategory';
-import AddReturnItemForm from './returnItemForm';
 import { TextField, Select, MenuItem, Button, FormControl, InputLabel, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 import './InventoryStyles.css';
 
 const InventoryHome = () => {
     const [products, setProducts] = useState(null);
     const [categories, setCategories] = useState([]); 
-    const [addCategoryDialogOpen, setAddCategoryDialogOpen] = useState(false);
-    const [addProductDialogOpen, setAddProductDialogOpen] = useState(false);
-    const [addReturnItemDialogOpen, setAddReturnItemDialogOpen] = useState(false);
     const [refreshPage, setRefreshPage] = useState(false);
 
     const [selectedCategory, setSelectedCategory] = useState('');
@@ -28,34 +22,6 @@ const InventoryHome = () => {
     const handleSearch = (e) => {
         setSearchQuery(e.target.value);
         setCurPage(1); //reset page number when search query change
-    };
-
-    //Dialog functions
-    const handleAddCategoryDialogOpen = () => {
-        setAddCategoryDialogOpen(true);
-    };
-
-    const handleAddCategoryDialogClose = () => {
-        setAddCategoryDialogOpen(false);
-        setRefreshPage(true);
-    };
-
-    const handleAddProductDialogOpen = () => {
-        setAddProductDialogOpen(true);
-    };
-
-    const handleAddProductDialogClose = () => {
-        setAddProductDialogOpen(false);
-        setRefreshPage(true);
-    };
-
-    const handleReturnItemDialogOpen = () => {
-        setAddReturnItemDialogOpen(true);
-    };
-
-    const handleReturnItemDialogClose = () => {
-        setAddReturnItemDialogOpen(false);
-        setRefreshPage(true);
     };
 
     useEffect(() => {
@@ -203,7 +169,6 @@ const InventoryHome = () => {
     return ( 
         <div className="invhome"> 
             <div className='invMain'>
-                <h2>Inventory</h2>
                 <Status totalCategories={calculateCategories()} totalvalue={calculateTotalValue()} totalProducts={calculateTotalProducts()} outOfStock={calculateOutOfStock()}/>
                 <div className="functionBar">
                     <div className='searchbar'>
@@ -220,9 +185,7 @@ const InventoryHome = () => {
                             </Select>
                         </FormControl>
                     </div>
-                    <Button className='add-buttons' onClick={handleAddCategoryDialogOpen} variant="contained" color="primary">Add New Category</Button>
-                    <Button className='add-buttons' onClick={handleAddProductDialogOpen} variant="contained" color="primary">Add New Product</Button>
-                    <Button className='add-buttons' onClick={handleReturnItemDialogOpen} variant="contained" color="primary">Return Item</Button>
+                    
                 </div>
                 <table className="topicline">
                     <tbody>
@@ -239,11 +202,6 @@ const InventoryHome = () => {
                     <ProductDetails key={Inventory._id} Inventory={Inventory}/>
                 ))}
                 
-                {/* button to navigate to report1 */}
-                <div>
-                    <Button href="inventory/report1" variant="contained" color="primary">Inventory List Report</Button>
-                </div>
-                <br></br>
 
                 {/* pagination */}
                 <div className='pagination'>
@@ -261,42 +219,6 @@ const InventoryHome = () => {
                         <Button className='page-link' onClick={nextPage}>Next</Button>
                     </li>
                 </div>
-
-                {/* Add New Category Dialog */}
-                <Dialog open={addCategoryDialogOpen} onClose={handleAddCategoryDialogClose} maxWidth="100px">
-                    <DialogContent>
-                        <AddNewCategoryForm />
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={handleAddCategoryDialogClose} color="primary">Cancel</Button>
-                    </DialogActions>
-                </Dialog>
-
-                {/* Add New Product Dialog */}
-                <Dialog open={addProductDialogOpen} onClose={handleAddProductDialogClose} maxWidth="1000px" >
-                    <DialogTitle>
-                        <h2>Add New Product</h2>
-                    </DialogTitle>
-                    <DialogContent>
-                        <AddProductForm />
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={handleAddProductDialogClose} color="primary">Cancel</Button>
-                    </DialogActions>
-                </Dialog>
-
-                {/* Return Item Dialog */}
-                <Dialog open={addReturnItemDialogOpen} onClose={handleReturnItemDialogClose} maxWidth="1000px" >
-                    <DialogTitle>
-                        <h2>Return Item</h2>
-                    </DialogTitle>
-                    <DialogContent>
-                        <AddReturnItemForm />
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={handleReturnItemDialogClose} color="primary">Cancel</Button>
-                    </DialogActions>
-                </Dialog>
             </div>
         </div>
      );
