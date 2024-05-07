@@ -22,6 +22,8 @@ import SupplyManagementHome from "./pages/SupplyManager/home.page";
 import NotificationPage from "./pages/SupplyManager/components/low-stock-notifications/home.notifications";
 import NotificationDetails from "./pages/SupplyManager/components/NotificationDetails";
 import SupplierList from "./pages/SupplyManager/components/supplier-management/SupplierList";
+import PurchaseOrderList from "./pages/SupplyManager/components/purchase-order-management/PurchaseOrderList";
+
 
 import MapView from "./Components/DeliveryManagement/MapView/AlignMap";
 import CreateVehicle from "./Components/DeliveryManagement/VehicleView/CreateVehicle";
@@ -48,7 +50,6 @@ import LendedItemsList from "./Components/RentalManagement/lendedItem/LendedItem
 import UserItemList from "./Components/RentalManagement/UserItemList/UserItemList";
 import ReservedItemsList from "./Components/RentalManagement/ReservedItemsList/ReservedItemsList";
 import RentalReport from "./Components/RentalManagement/RentalReport/RentalReport";
-import PurchaseOrderList from "./pages/SupplyManager/components/purchase-order-management/PurchaseOrderList";
 
 //Himash
 import SalesManagement from "./Components/Sales/salesManager/Sales";

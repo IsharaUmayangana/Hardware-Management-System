@@ -2,7 +2,7 @@ const orderRequestEmailTemplate = `
 <html>
 <head>
     <style>
-        /* Add your CSS styles here */
+       
         body {
             font-family: Arial, sans-serif;
         }
