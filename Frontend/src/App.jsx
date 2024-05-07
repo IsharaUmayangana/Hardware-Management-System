@@ -50,9 +50,16 @@ import ReservedItemsList from "./Components/RentalManagement/ReservedItemsList/R
 import RentalReport from "./Components/RentalManagement/RentalReport/RentalReport";
 import PurchaseOrderList from "./pages/SupplyManager/components/purchase-order-management/PurchaseOrderList";
 
+
+
+import DriverDispatcherHome from "./Components/DriverDispatcherManagement/DriverDispatcherHome";
+import AddDriverForm from "./Components/DriverDispatcherManagement/AddDriverForm/AddDriverForm";
+import UpdateDriverForm from "./Components/DriverDispatcherManagement/UpdateDriverForm/UpdateDriver";
+
 //Himash
 import SalesManagement from "./Components/Sales/salesManager/Sales";
 import CashierHome from "./Components/Sales/cashier/CashierHome";
+
 
 // import SearchBar from "./Components/RentalManagement/searchBar/searchBar";
 
@@ -116,6 +123,10 @@ function App() {
             element={<DeliveryUpdateDelete />}
           />
           <Route path="/Orders" element={<Orders />} />
+
+          <Route path="/driver-dispatcher" element={<DriverDispatcherHome />} />
+          <Route path="/driver-dispatcher/AddDriver" element={<AddDriverForm />} />
+          <Route path="/driver-dispatcher/:driverId" element={<UpdateDriverForm/>} />
 
           <Route
             path="/supply-management/*"
