@@ -46,7 +46,7 @@ const ReturnItemForm = () => {
                 //update inventory quantity 
                 const itemToUpdate = inventoryItems.find(item => item.name === name);
                 const updatedQuantity = itemToUpdate.quantity - 1;
-                await fetch(`http://localhost:8000/inventory/${itemToUpdate.id}`, {
+                await fetch(`http://localhost:8000/inventory/${itemToUpdate._id}`, {
                     method: 'PATCH',
                     body: JSON.stringify({ quantity: updatedQuantity }),
                     headers: {
