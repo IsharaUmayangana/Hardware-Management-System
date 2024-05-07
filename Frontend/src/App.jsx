@@ -143,8 +143,8 @@ function App() {
             }
           />
 
-
-
+          <Route exact path="/salesManagement" element={<SalesManagement />} />
+          <Route exact path="/cashierView" element={<CashierHome />} />
 
         </Routes>
       </BrowserRouter>

@@ -100,7 +100,6 @@ const SelectedItem = () => {
         {!loading && product && (
           <div className="detailsBox" >
             <h2>{product.name}</h2>
-            <span><a href='http://localhost:5173/inventory' className="back-button">Back</a></span>
             <div className="sp-container1">
               <div className="sp-subContainer1"> 
                 <img className="sp-imageView" src={`http://localhost:8000/images/`+ product.img_URL} alt="Product" />

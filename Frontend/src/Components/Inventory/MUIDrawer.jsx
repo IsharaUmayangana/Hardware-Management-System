@@ -71,7 +71,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
+  
   ...theme.mixins.toolbar,
   justifyContent: "flex-end",
 }));
@@ -119,15 +119,15 @@ const handleReturnItemDialogClose = () => {
   setRefreshPage(true);
 };
 
- /* const getCurrentRouteText = () => {
-    if (location.pathname === "/supply-management/notifications") {
-      return "Low Stock Items";
+ const getCurrentRouteText = () => {
+    if (location.pathname === "inventory/report1") {
+      return "Inventory Report";
     }
     const currentComponent = components.find(
       (item) => item.path === location.pathname
     );
     return currentComponent ? currentComponent.text : "";
-  };*/
+  };
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -149,7 +149,7 @@ const handleReturnItemDialogClose = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            {/*getCurrentRouteText()*/}
+            getCurrentRouteText()
           </Typography>
 
           
@@ -200,14 +200,20 @@ const handleReturnItemDialogClose = () => {
         </DrawerHeader>
         <Divider />
         <List>
+          <ListItemButton href="/inventory">
+            <ListItemText primary="Home" />
+          </ListItemButton>
           <ListItemButton onClick={handleAddCategoryDialogOpen}>
             <ListItemText primary="Add New Category" />
           </ListItemButton>
           <ListItemButton onClick={handleAddProductDialogOpen}>
             <ListItemText primary="Add New Products" />
           </ListItemButton>
-          <ListItemButton onClick={handleAddProductDialogOpen}>
-            <ListItemText primary="Return Item" onClick={handleReturnItemDialogOpen}/>
+          <ListItemButton onClick={handleReturnItemDialogOpen}>
+            <ListItemText primary="Return Item" />
+          </ListItemButton>
+          <ListItemButton href="inventory/report1">
+            <ListItemText primary="Inventory Report" />
           </ListItemButton>
         </List>
         <Divider />

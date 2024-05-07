@@ -126,11 +126,11 @@ header a {
 .invhome {
     display: flex;
     flex-direction: row;
-    margin: auto;
+    margin: 20px 0px;
 }
 
 .invMain{
-  margin: auto;
+  margin: 0px 100px;
 }
 .productDetails td {
   background: #fff;
