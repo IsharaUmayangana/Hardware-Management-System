@@ -2,9 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 import DeleteIcon from '@mui/icons-material/Delete';
 import NavigationBar from '../Home/Home-Navigation';
+
 import './order.css';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+
 
 const CartPage = () => {
     const [carts, setCarts] = useState([]);
@@ -94,10 +98,52 @@ const CartPage = () => {
     };
 
 
+    // const handleProceedToCheckout = () => {
+    //     const totalPrice = calculateTotalPrice();
+        
+        
+    //     fetch('http://localhost:8000/order/create', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify({
+    //             carts,
+    //             totalPrice
+    //         }),
+    //     })
+    //     .then((response) => response.json())
+    //     .then((data) => {
+    //         console.log('Order created successfully:', data);
+    //         navigate('/deliveryinfo',{ state: { totalPrice } });
+    //     })
+    //     .catch((error) => {
+    //         console.error("Error creating order:", error);
+    //         alert('Failed to create order');
+    //     });
+    // };
     const handleProceedToCheckout = () => {
         const totalPrice = calculateTotalPrice();
         
+        // Update inventory quantities
+        carts.forEach(cart => {
+            cart.cartItems.forEach(item => {
+                fetch(`http://localhost:8000/inventory/${item.product._id}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ 
+                        quantity: item.product.quantity - item.quantity 
+                    }),
+                })
+                .then(response => response.json())
+                .then(data => console.log('Inventory updated successfully:', data))
+                .catch(error => console.error('Error updating inventory:', error));
+            });
+        });
         
+        // Proceed to create order
         fetch('http://localhost:8000/order/create', {
             method: 'POST',
             headers: {
@@ -119,14 +165,17 @@ const CartPage = () => {
         });
     };
 
-
+    
+    
  return (
     <div >
         <div>
             <NavigationBar/>
         </div>
+        
         <div className="cartAll">
-            <h2>Cart Details</h2>
+            
+            
             {loading ? (
                 <p>Loading...</p>
             ) : carts.length === 0 ? (
@@ -174,19 +223,29 @@ const CartPage = () => {
                             ))}
                         </tbody>
                     </table>
-                    {changesMade && (
-                <button className="update-cart-btn" onClick={handleUpdateCart}>Update Cart</button>
-            )}
+                    
                 </div>
             )}
             
             
             <div className="checkout-section">
-                    <div>
-                        <h3>Total Price </h3>
-                        <h3><strong>{calculateTotalPrice()}</strong></h3>
-                        <button onClick={handleProceedToCheckout}>Proceed to Checkout</button>
-                    </div>
+            <div>
+                    <h3>Total Price </h3>
+                    <h3><strong>{calculateTotalPrice()}</strong></h3>
+                    {changesMade && (
+                                
+                                <Button variant="contained" color="primary" onClick={handleUpdateCart}>
+                            Update Cart
+                        </Button>
+                            )}
+                            
+                    
+                    <Box m={1}>
+                        <Button variant="contained" color="primary" onClick={handleProceedToCheckout}>
+                            Proceed to Checkout
+                        </Button>
+                    </Box>
+                </div>
             </div>
         </div>
     </div>

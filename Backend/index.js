@@ -9,6 +9,7 @@ const cookieParser = require('cookie-parser')
 
 
 
+
 const registerRouter = require('./routes/LoginRegisterDashboard/registerRouter');
 const authRoutes = require('./routes/LoginRegisterDashboard/authRoutes');
 const authDashboard = require('./routes/LoginRegisterDashboard/authDashboard');
@@ -18,6 +19,7 @@ const cartRoutes = require('./routes/cart')
 const deliveryInfoRoutes = require('./routes/deliveryInfo')
 const feedbackRoutes = require('./routes/productFeedback');
 const productCategoryRoutes = require('./routes/productCategories');
+const ratingRoutes = require('./routes/ratings')
 const returnItemRouts = require('./routes/returnItem');
 
 const lowStockNotifications = require('./routes/SupplyManagementRoutes/lowStockRoutes');
@@ -35,7 +37,12 @@ const CreateVehicleRoute = require('./routes/DeliveryManagementRoutes/DeliveryRo
 const GetDeliveryRoutes = require('./routes/DeliveryManagementRoutes/DeliveryRoutes/GetDeliveryRoute');
 const DeliveryUpdateDeleteRoutes = require('./routes/DeliveryManagementRoutes/DeliveryRoutes/UpdateAndDeleteRoutes');
 
+
 const driverDispatcherRoutes = require('./routes/DriverDispatcherRoutes/DriverDispatcherRoutes')
+
+const SalesRoutes = require('./routes/SalesRoutes');
+
+
 
 
 
@@ -69,6 +76,10 @@ app.use('/categories',productCategoryRoutes);
 app.use('/order', orderRoutes); // Add order routes
 app.use('/cart',cartRoutes)
 app.use('/deliveryinfo', deliveryInfoRoutes);
+app.use('/ratings', ratingRoutes);
+
+
+
 
 app.get('/logout', (req, res) => {
     res.clearCookie('token');
@@ -108,6 +119,7 @@ app.use('/userItemList', userItemListRouter);
 app.use("/reservedItems", reservedItemsRouter);
 app.use('/rentalReport', rentalReportRoutes); 
 
+app.use('/sale',SalesRoutes);
 
 
 

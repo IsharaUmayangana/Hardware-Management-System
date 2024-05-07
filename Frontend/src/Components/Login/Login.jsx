@@ -22,6 +22,7 @@ function Login() {
                 if (res.data.Status === "Success") {
                     dispatch(setUser({
                         name: res.data.name,
+                        userId: res.data.userId
                     }));
 
                     if (res.data.role === "admin") {
@@ -30,6 +31,8 @@ function Login() {
                         navigate('/employeeProfile');
                     }else if (res.data.role === "supply-manager") {
                         navigate('/supply-management');
+                    } else if(res.data.role === "inventory-manager"){
+                        navigate('/inventory');
                     } else {
                         navigate('/');
                     }

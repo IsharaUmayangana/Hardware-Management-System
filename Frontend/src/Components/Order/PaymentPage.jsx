@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { TextField, Button, Box } from "@mui/material";
+import PaymentIcon from '@mui/icons-material/Payment';
 import './order.css';
 
 const PaymentPage = ({ totalPrice }) => {
@@ -66,26 +68,82 @@ const handleCardNumberChange = (e) => {
       setCardNumberError('');
   }
 };
+  // return (
+  //   <div className="Payment">
+  //     <h2>Payment Details</h2>
+  //     <form style={{ display: 'flex', flexDirection: 'column' }}>
+  //       <label htmlFor="cardName">Name on Card:</label>
+  //       <input type="text" id="cardName" name="cardName" required />
+  //       <label htmlFor="cardNumber">Card Number:</label>
+  //       <input type="text" id="cardNumber" name="cardNumber" value={cardNumber} onChange={handleCardNumberChange} maxLength="19" required />
+  //       {cardNumberError && <p style={{ color: 'red' }}>{cardNumberError}</p>}
+  //       <label htmlFor="cvv">CVV:</label>
+  //       <input type="text" id="cvv" name="cvv" value={cvv}onChange={handleCvvChange} maxLength="3" required />
+  //       {cvvError && <p style={{ color: 'red' }}>{cvvError}</p>}
+  //       <label htmlFor="expiry">Expiry MM/YY:</label>
+  //       <input type="text" id="expiry" name="expiry" value={expiry} onChange={handleExpiryChange} maxLength="5" required />
+  //       {expiryError && <p style={{ color: 'red' }}>{expiryError}</p>}
+  //       <p>Total Price: {totalPrice}</p>
+  //       <button type="submit">Pay Now</button>
+  //     </form>
+  //   </div>
+  // );
   return (
-    <div className="Payment">
-      <h2>Payment Details</h2>
-      <form style={{ display: 'flex', flexDirection: 'column' }}>
-        <label htmlFor="cardName">Name on Card:</label>
-        <input type="text" id="cardName" name="cardName" required />
-        <label htmlFor="cardNumber">Card Number:</label>
-        <input type="text" id="cardNumber" name="cardNumber" value={cardNumber} onChange={handleCardNumberChange} maxLength="19" required />
-        {cardNumberError && <p style={{ color: 'red' }}>{cardNumberError}</p>}
-        <label htmlFor="cvv">CVV:</label>
-        <input type="text" id="cvv" name="cvv" value={cvv}onChange={handleCvvChange} maxLength="3" required />
-        {cvvError && <p style={{ color: 'red' }}>{cvvError}</p>}
-        <label htmlFor="expiry">Expiry MM/YY:</label>
-        <input type="text" id="expiry" name="expiry" value={expiry} onChange={handleExpiryChange} maxLength="5" required />
-        {expiryError && <p style={{ color: 'red' }}>{expiryError}</p>}
-        <p>Total Price: {totalPrice}</p>
-        <button type="submit">Pay Now</button>
-      </form>
+    <div className="Payment" style={{ display: 'flex', justifyContent: 'center' }}>
+        <div>
+        <h2>Payment Details</h2>
+        
+        <form style={{ display: 'flex', flexDirection: 'column',width:'400px'}}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}> {/* Added Box component with gap */}
+            <TextField
+                label="Name on Card"
+                id="cardName"
+                name="cardName"
+                required
+            />
+            <TextField
+                label="Card Number"
+                id="cardNumber"
+                name="cardNumber"
+                value={cardNumber}
+                onChange={handleCardNumberChange}
+                required
+                error={cardNumberError ? true : false}
+                helperText={cardNumberError}
+                
+                
+            />
+            <TextField
+                label="CVV"
+                id="cvv"
+                name="cvv"
+                value={cvv}
+                onChange={handleCvvChange}
+                maxLength="3"
+                required
+                error={cvvError ? true : false}
+                helperText={cvvError}
+            />
+            <TextField
+                label="Expiry MM/YY"
+                id="expiry"
+                name="expiry"
+                value={expiry}
+                onChange={handleExpiryChange}
+                maxLength="5"
+                required
+                error={expiryError ? true : false}
+                helperText={expiryError}
+            /></Box>
+            <p>Total Price: {totalPrice}</p>
+            <Button variant="contained" color="primary" type="submit" startIcon={<PaymentIcon />}>
+                Pay Now
+            </Button>
+        </form>
+        
+        </div>
     </div>
-  );
+);
 };
 
 export default PaymentPage;

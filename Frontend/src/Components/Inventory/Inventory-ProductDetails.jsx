@@ -13,7 +13,7 @@ const ProductDetails = ({ Inventory }) => {
 
     return ( 
         <div className="productDetails">
-            <Link to={`http://localhost:5173/selectedItem/${Inventory._id}`}>
+            <Link to={`http://localhost:5173/inventory/selectedItem/${Inventory._id}`}>
                 <table>  
                     <tbody>
                         <tr>
