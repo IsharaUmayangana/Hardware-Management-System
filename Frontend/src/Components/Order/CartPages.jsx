@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import DeleteIcon from '@mui/icons-material/Delete';
 import NavigationBar from '../Home/Home-Navigation';
+import formatNumber from 'format-number';
 
 import './order.css';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -70,7 +71,7 @@ const CartPage = () => {
                 totalPrice += item.price;
             });
         });
-        return totalPrice;
+        return totalPrice && formatNumber(options)(parseFloat(totalPrice));
     };
 
     
@@ -167,7 +168,8 @@ const CartPage = () => {
         });
     };
 
-    
+    // Define options for formatting
+    const options = { round: 2, padRight: 2, padLeft: 0, thousand: ',', decimal: '.' };
     
  return (
     <div >
@@ -201,7 +203,7 @@ const CartPage = () => {
                                         <tr key={itemIndex}>
                                             <td><img src={`http://localhost:8000/images/${item.product.img_URL}`} alt={item.product.name} /></td>
                                             <td>{item.product ? item.product.name : 'Product Name Not Available'}</td>
-                                            <td>{item.price}</td>
+                                            <td style={{textAlign:"right"}}>Rs {item.price && formatNumber(options)(parseFloat(item.price))}</td>
                                             <td>
                                                 <input
                                                     type="number"
@@ -233,7 +235,7 @@ const CartPage = () => {
             <div className="checkout-section">
             <div>
                     <h3>Total Price </h3>
-                    <h3><strong>{calculateTotalPrice()}</strong></h3>
+                    <h3><strong>Rs {calculateTotalPrice()}</strong></h3>
                     {changesMade && (
                                 
                                 <Button variant="contained" color="primary" onClick={handleUpdateCart}>
