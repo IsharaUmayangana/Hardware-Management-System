@@ -56,7 +56,7 @@ const HomeSelectedItem = ({ addToCart }) => {
         },
         body: JSON.stringify({
           productId: id,
-          userId: '662639b6d941c0f2cc66be48', // Assuming you have the user's ID in state
+          userId: '662639b6d941c0f2cc66be48', 
           rating: newRating,
         }),
       });
@@ -117,11 +117,9 @@ const HomeSelectedItem = ({ addToCart }) => {
 
   return (
   <div>
-            <NavigationBar/>
-        
+    <NavigationBar/>
+
     <div className="selectedOrderProduct">
-      
-      
       {loading && <p>Loading...</p>}
       {!loading && !product && <p>No product found</p>}
       {!loading && product && (
@@ -142,9 +140,13 @@ const HomeSelectedItem = ({ addToCart }) => {
             <p className="availableAmount">Available Amount : {product.quantity}</p>
             <p className="availableAmount">Description: {product.description}</p>
             <Stack spacing={2} direction="column">
-              <Button variant="contained" size="medium" style={{ width: '200px' }} onClick={handleAddToCart} startIcon={<AddShoppingCartIcon />}>
-                Add to Cart
-              </Button>
+              {product.quantity > 0 ? (
+                <Button variant="contained" size="medium" style={{ width: '200px' }} onClick={handleAddToCart} startIcon={<AddShoppingCartIcon />}>
+                  Add to Cart
+                </Button>
+              ):(
+                <p className="outOfStockMsg">Out of Stock</p>
+              )}
               <Button variant="contained" size="medium" style={{ width: '200px' }} component={Link} to="/cart" startIcon={<ShoppingCartIcon />}>
                 View Cart
               </Button>

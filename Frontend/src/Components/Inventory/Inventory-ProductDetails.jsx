@@ -5,10 +5,10 @@ const ProductDetails = ({ Inventory }) => {
     // Define options for formatting
     const options = { round: 2, padRight: 2, padLeft: 0, thousand: ',', decimal: '.' };
 
-    // Format price with comma and two decimal places
+    // Format price 
     const formattedPrice = formatNumber(options)(parseFloat(Inventory.pricebeforeDiscount));
 
-    // Format discounted price with comma and two decimal places
+    // Format discounted price 
     const formattedDiscountedPrice = formatNumber(options)(parseFloat(Inventory.price));
 
     return ( 
