@@ -1,111 +1,68 @@
-import { useState } from 'react'
-import axios from 'axios'
+import { useState } from 'react';
+import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import loginCss from './login.module.css';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../ReduxTool/userSlice';
 
 function Login() {
-
-    const [email, setEmail] = useState();
-    const [password, setPass] = useState();
+    const [email, setEmail] = useState('');
+    const [password, setPass] = useState('');
     const navigate = useNavigate();
-
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     axios.defaults.withCredentials = true;
+
     const handleSubmit = (e) => {
-        e.preventDefault()
-        
-        // dispatch(setUser({
-        //      email : email,
-        //      logedin: true
-        //     }))
+        e.preventDefault();
 
         axios.post('http://localhost:8000/login', { email, password })
             .then(res => {
-                console.log("login : " + res.data)
+                console.log("login : " + res.data);
                 if (res.data.Status === "Success") {
-                    
+                    dispatch(setUser({
+                        name: res.data.name,
+                    }));
+
                     if (res.data.role === "admin") {
-                      
-
-                        //set user name from axios post req by login and 
-                        //pass to userSlice and stored in localstorage
-                        //this technique use because login page not have name field
-                        dispatch(setUser({
-                            
-                            name : res.data.name,
-                            
-                           }))
-                        navigate('/Dashboard')
-                        
-
+                        navigate('/Dashboard');
+                    } else if (res.data.role === "employee") {
+                        navigate('/employeeProfile');
                     } else {
-
-                        dispatch(setUser({
-                              name : res.data.name,
-                            
-                           }))
- 
-
-                        navigate('/')
+                        navigate('/');
                     }
                 }
             })
-            .catch(err => console.log(err))
-
-    }
-
+            .catch(err => console.log(err));
+    };
 
     return (
-
-        
         <div className={loginCss.body}>
-            {/* get boxicons icons
-            <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel="stylesheet"/>
-         */}
-        <div className={loginCss.wrapper}>
-                <form onSubmit={handleSubmit} >
-                
+            <div className={loginCss.wrapper}>
+                <form onSubmit={handleSubmit}>
 
                     <h1>Login</h1>
 
-                    {/* {loginCss.input-box} */}
                     <div className={loginCss.inputBox}>
                         <input type="text" placeholder="Username" id='email' required
-                        onChange={(e) => setEmail(e.target.value)}/>
-                        {/* <i class='bx bxs-user-circle'></i> */}
-
-                    </div> 
+                            onChange={(e) => setEmail(e.target.value)} />
+                    </div>
 
                     <div className={loginCss.inputBox}>
                         <input type="password" placeholder="Password" id='pass' required
-                        onChange={(e) => setPass(e.target.value)}/>
-                        {/* <i class='bx bxs-lock-alt'></i> */}
-
-                    </div> 
+                            onChange={(e) => setPass(e.target.value)} />
+                    </div>
 
                     <button type="submit" className={loginCss.btn}>Login</button>
 
                     <div className={loginCss.registerLink}>
-
                         <p>Don't Have an Account <Link to="/register">Register</Link></p>
-                    </div> 
-                    
+                    </div>
 
                 </form>
-        </div> 
-   
+            </div>
         </div>
-
-          
-
-       
-    )
-
-
-
+    );
 }
 
 export default Login;

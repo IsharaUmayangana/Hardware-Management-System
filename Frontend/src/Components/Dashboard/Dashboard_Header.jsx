@@ -76,7 +76,7 @@ function Header() {
                 <BsFillEnvelopeFill className="icon"/> */}
 
                 <BsPersonCircle className="iconHeader" />
-                <span className="span">Welcome {user.name}</span>
+                <span  sx={{color: "primary"}} > Welcome  {user.name}</span>
  
                 <span className="span">
                     <button onClick={handleLogout} className="btn btn-primary">
