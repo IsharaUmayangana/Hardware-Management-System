@@ -137,22 +137,23 @@ const InventoryHome = () => {
             }
         });
 
-        // Send low stock products to the backend
+        //send low stock products to the backend
         sendLowStocktoBackend(lowStockProducts);
 
         return outOfStock;
     };
 
-    // Function to send low stock data to backend
+    //function to send low stock data to backend
     const sendLowStocktoBackend = async (lowStockProducts) => {
         try {
             if (lowStockProducts.length > 0) {
+                console.log("low stock items", lowStockProducts)
                 const response = await fetch('http://localhost:8000/supply-management/notifications', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(lowStockProducts), // Pass low stock product data to backend
+                    body: JSON.stringify(lowStockProducts), //pass low stock product data to backend
                 });
                 if (!response.ok) {
                     if (response.status === 400) {
@@ -181,7 +182,7 @@ const InventoryHome = () => {
     const noOfPage = Math.ceil(filteredProducts.length / recordsPerPage);
     const numbers = [...Array(noOfPage + 1).keys()].slice(1);
 
-    // Pagination functions
+    //pagination functions
     function previousPage() {
         if (curPage !== 1) {
             setCurPage(curPage - 1)

@@ -1,6 +1,8 @@
 import React from "react";
 import { BsFillBellFill, BsFillEnvelopeFill, BsPersonCircle, BsSearch, BsJustify }
     from 'react-icons/bs'
+import './Dashboard.css'
+
 
 
 import { useEffect, useState  } from "react";

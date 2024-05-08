@@ -165,7 +165,7 @@ export default function MuiDrawer() {
           <Box sx={{ flexGrow: 1 }} />
           <IconButton
             component={Link}
-            to="/supply-management/notifications"
+            to="/supply-management/low-stock-notifications"
             size="large"
             aria-label="show new notifications"
             color="inherit"
