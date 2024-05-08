@@ -30,7 +30,15 @@ const AddNewItemForm = ({ onClose }) => {
 
   return (
     <div>
-      <h2>Add New Item</h2>
+      <h2
+        style={{
+          textDecoration: "underline",
+          fontSize: "25px",
+          marginBottom: "15px",
+        }}
+      >
+        Add New Item
+      </h2>
       <form onSubmit={handleSubmit}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
@@ -86,12 +94,36 @@ const AddNewItemForm = ({ onClose }) => {
             />
           </Grid>
         </Grid>
-        <div style={{ marginTop: "20px" }}>
-          <Button variant="contained" color="primary" type="submit">
-            Add to List
-          </Button>
-          <Button variant="contained" color="secondary" onClick={onClose}>
+        <div
+          style={{
+            marginTop: "20px",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <Button
+            variant="outlined"
+            onClick={onClose}
+            style={{
+              backgroundColor: "#ffffff",
+              color: "#ef476f",
+              fontWeight: "bold",
+              marginRight: "8px",
+            }}
+          >
             Cancel
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            type="submit"
+            style={{
+              backgroundColor: "#1a759f",
+              fontWeight: "bold",
+            }}
+          >
+            Add to List
           </Button>
         </div>
       </form>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import SendIcon from "@mui/icons-material/Send";
 
 import {
   Table,
@@ -49,11 +50,11 @@ function RentalReport() {
   const uniqueItemNames = [...new Set(reportData.map((item) => item.itemName))];
 
   const mostlyHiringItems = uniqueItemNames.filter(
-    (itemName) => calculateTotalTimesHired(itemName) > 4
+    (itemName) => calculateTotalTimesHired(itemName) > 3
   );
 
   const leastHiringItems = uniqueItemNames.filter(
-    (itemName) => calculateTotalTimesHired(itemName) < 4
+    (itemName) => calculateTotalTimesHired(itemName) < 3
   );
 
   // Calculate total income
@@ -72,9 +73,35 @@ function RentalReport() {
 
   return (
     <div>
-      <h1>Rental Report</h1>
-      <TableContainer component={Paper}>
-        <Table>
+      <h1
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          textDecoration: "underline",
+          fontSize: "25px",
+          marginTop: "10px",
+          marginBottom: "20px",
+          color: "#023047",
+        }}
+      >
+        Rental Report
+      </h1>
+      <div
+        align="center"
+        style={{
+          textDecoration: "underline",
+          fontSize: "20px",
+          color: "#415a77",
+        }}
+      >
+        Rented Items Details
+      </div>
+
+      <TableContainer
+        component={Paper}
+        style={{ maxWidth: "90vw", margin: "auto" }}
+      >
+        <Table style={{ textAlign: "center" }}>
           <TableHead>
             <TableRow>
               <TableCell style={{ fontWeight: "bold" }}>Item Name</TableCell>
@@ -101,54 +128,37 @@ function RentalReport() {
           </TableBody>
         </Table>
       </TableContainer>
-
-      <TableContainer component={Paper}>
-        <Table>
+      <div
+        align="center"
+        style={{
+          textDecoration: "underline",
+          fontSize: "20px",
+          marginTop: "20px",
+          color: "#415a77",
+        }}
+      >
+        Mostly Hiring Items
+      </div>
+      <TableContainer
+        component={Paper}
+        style={{ maxWidth: "90vw", margin: "auto" }}
+      >
+        <Table style={{ textAlign: "center" }}>
           <TableHead>
             <TableRow>
-              <TableCell
-                colSpan={4}
-                align="center"
-                style={{ fontWeight: "bold", textDecoration: "underline" }}
-              >
-                Mostly Hiring Items
+              <TableCell colSpan={2} style={{ fontWeight: "bold" }}>
+                Item Name
               </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell colSpan={3}>Item Name</TableCell>
-              <TableCell colSpan={1}>No of Times Hired</TableCell>
+              <TableCell colSpan={2} style={{ fontWeight: "bold" }}>
+                No of Times Hired
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {mostlyHiringItems.map((itemName, index) => (
               <TableRow key={index}>
-                <TableCell colSpan={3}>{itemName}</TableCell>
-                <TableCell colSpan={1}>
-                  {calculateTotalTimesHired(itemName)}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-          <TableHead>
-            <TableRow>
-              <TableCell
-                colSpan={4}
-                align="center"
-                style={{ fontWeight: "bold", textDecoration: "underline" }}
-              >
-                Least Hiring Items
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell colSpan={3}>Item Name</TableCell>
-              <TableCell colSpan={1}>No of Times Hired</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {leastHiringItems.map((itemName, index) => (
-              <TableRow key={index}>
-                <TableCell colSpan={3}>{itemName}</TableCell>
-                <TableCell colSpan={1}>
+                <TableCell colSpan={2}>{itemName}</TableCell>
+                <TableCell colSpan={2}>
                   {calculateTotalTimesHired(itemName)}
                 </TableCell>
               </TableRow>
@@ -156,14 +166,78 @@ function RentalReport() {
           </TableBody>
         </Table>
       </TableContainer>
-
-      <h2>Total Income - Rs. {totalIncome}.00</h2>
+      <div
+        align="center"
+        style={{
+          textDecoration: "underline",
+          fontSize: "20px",
+          marginTop: "20px",
+          color: "#415a77",
+        }}
+      >
+        Least Hiring Items
+      </div>
+      <TableContainer
+        component={Paper}
+        style={{ maxWidth: "90vw", margin: "auto" }}
+      >
+        <Table style={{ textAlign: "center" }}>
+          <TableHead>
+            <TableRow>
+              <TableCell colSpan={2} style={{ fontWeight: "bold" }}>
+                Item Name
+              </TableCell>
+              <TableCell colSpan={2} style={{ fontWeight: "bold" }}>
+                No of Times Hired
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {leastHiringItems.map((itemName, index) => (
+              <TableRow key={index}>
+                <TableCell colSpan={2}>{itemName}</TableCell>
+                <TableCell colSpan={2}>
+                  {calculateTotalTimesHired(itemName)}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <h2
+        style={{
+          marginTop: "10px",
+          fontSize: "30px",
+          textAlign: "center",
+          color: "#023047",
+        }}
+      >
+        Total Income - Rs. {totalIncome}.00
+      </h2>
       <CardActions>
-        <Button variant="contained" color="primary" onClick={goItemList}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={goItemList}
+          style={{
+            marginTop: "5px",
+            backgroundColor: "#354f52",
+            fontWeight: "bold",
+          }}
+          endIcon={<SendIcon />}
+        >
           Go to Item List
         </Button>
 
-        <Button variant="contained" onClick={printPage}>
+        <Button
+          variant="contained"
+          onClick={printPage}
+          style={{
+            marginTop: "5px",
+            backgroundColor: "#1a759f",
+            fontWeight: "bold",
+          }}
+        >
           Print Report
         </Button>
       </CardActions>

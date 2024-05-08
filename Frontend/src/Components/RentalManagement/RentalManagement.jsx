@@ -17,6 +17,7 @@ import "./RentalManagement.css";
 Modal.setAppElement(document.body);
 
 function RentalManagement() {
+  document.title = "Rental Services";
   const navigate = useNavigate();
 
   const [searchTerm, setSearchTerm] = useState("");
@@ -92,31 +93,62 @@ function RentalManagement() {
 
   return (
     <div className="rental-management-container">
-      <div className="sidebar">
-        <Sidebar />
-      </div>
+      {/* <div className="sidebar"><Sidebar /></div> */}
       <div className="content">
         <div>
-          <h1>Item List (hardware side)</h1>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "10px",
+              color: "#415a77",
+              fontFamily: "unset",
+              fontWeight: "600",
+              fontSize: "30px",
+              letterSpacing: "3px",
+            }}
+          >
+            Rental Services Management
+          </div>
+
           <br />
           <div style={{ display: "flex", justifyContent: "center" }}>
             <SearchBar onSearch={handleSearch} />
           </div>
 
-          <div className="button-container">
-            <Link to="/lendedItems" style={{ marginLeft: "0", margin: "10px" }}>
-              <Button variant="contained" color="primary">
-                View Rented Items
-              </Button>
-            </Link>
-
+          <div
+            className="button-container"
+            style={{
+              border: "2px solid #ccc",
+              padding: "5px",
+              borderRadius: "5px",
+              backgroundColor: "#e9ecef",
+            }}
+          >
             <Link style={{ marginLeft: "0", margin: "10px" }}>
               <Button
                 variant="contained"
-                color="primary"
+                style={{
+                  backgroundColor: "#013a63",
+                  fontWeight: "bold",
+                  width: "",
+                }}
                 onClick={handleAddItemClick}
               >
                 Add New Item
+              </Button>
+            </Link>
+
+            <Link to="/lendedItems" style={{ marginLeft: "0", margin: "10px" }}>
+              <Button
+                variant="contained"
+                style={{
+                  backgroundColor: "#013a63",
+                  fontWeight: "bold",
+                  width: "",
+                }}
+              >
+                View Rented Items
               </Button>
             </Link>
 
@@ -124,8 +156,16 @@ function RentalManagement() {
               style={{ marginLeft: "0", margin: "10px" }}
               to="/reserved-items"
             >
-              <Button variant="contained" color="primary">
-                View reserved
+              <Button
+                variant="contained"
+                color="primary"
+                style={{
+                  backgroundColor: "#013a63",
+                  fontWeight: "bold",
+                  width: "",
+                }}
+              >
+                View reserved Items
               </Button>
             </Link>
 
@@ -133,7 +173,15 @@ function RentalManagement() {
               style={{ marginLeft: "0", margin: "10px" }}
               to="/rentalReport"
             >
-              <Button variant="contained" color="primary">
+              <Button
+                variant="contained"
+                color="primary"
+                style={{
+                  backgroundColor: "#013a63",
+                  fontWeight: "bold",
+                  width: "",
+                }}
+              >
                 Invoice
               </Button>
             </Link>

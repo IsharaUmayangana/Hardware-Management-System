@@ -5,16 +5,19 @@
     min-height: 100vh;
     font-family: 'Arial', sans-serif;
     /* background: url(HomeBackground.jpg) no-repeat; */
-    background-color: aliceblue;
+    /* background-color: aliceblue; */
     background-size: cover;
     /* background-position:center; */
   }
   
   .navbar {
-    background-color: #232121;
+    background-color: #1d1d33d7;
     overflow: hidden;
     padding: 15px;
     text-align: center;
+  }
+  .navbarContent{
+    margin: 0px 50px;
   }
   
   .logo {
@@ -58,8 +61,29 @@
 
   }
   
+  .navbarLogo{
+    width: 150px;
+    height: 40px;
+  }
   
   /* End of NavHome */
+  /* Add styles for the cart icon */
+.cartIcon {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.cartItemCount {
+  position: absolute;
+  top: -8px; /* Adjust the position as needed */
+  right: -8px; /* Adjust the position as needed */
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 4px 8px;
+  font-size: 12px;
+}
 
 
   /* home page */
@@ -96,16 +120,15 @@
 
 .homeContainer{
   display: flex;
-  max-width: 1000px;
-  margin: auto;
-  border: 1px black solid;
+  margin: 10px 20px;
 }
-.searchBox input{
-  max-width: 500px;
+.searchBox {
+  width: 600px;
+  margin-left: 220px;
 }
 
 .categoryBox{
-  max-width: 200px;
+  width: 200px;
 }
 
 /* pagination */
@@ -133,8 +156,39 @@
   background-color: #e0e0e0;
 }
 
-.active .page-link {
+.page-item.active .page-link { 
   background-color: #007bff;
   color: #fff;
   border-color: #007bff;
+}
+
+
+
+/* footer design */
+.footerMain{
+  color: #ffffff;
+  padding: 0px;
+  margin: 10px 0px 0px 0px;
+  border: #000080 2px solid;
+  border-radius: 3px;
+}
+.footerSection1,
+.footerSection2{
+  padding: 10px 0px;
+  display: flex;
+  justify-content: space-around; 
+}
+.footerSection1{
+  background-color: #4682B4;
+}
+.footerSection2{
+  background-color: #191970;
+}
+.footerLogo{
+  width: 100px;
+  height: 100px;
+}
+.footerLogo{
+  width: 200px;
+  height: 120px;
 }

@@ -2,27 +2,53 @@ import React, { useState } from "react";
 import axios from 'axios';
 import { TextField, Button, Container, Typography, Grid, FormControl, RadioGroup, FormControlLabel, Radio } from '@mui/material';
 import { useNavigate } from "react-router-dom";
+import { toast , ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function CreateVehicle() {
     const [name, setName] = useState('');
     const [model, setModel] = useState('');
     const [millage, setMillage] = useState('');
     const [availability, setAvailability] = useState('available'); // Default value
+    const [modelError, setModelError] = useState(''); // State variable for model error
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:8000/CreateVehicle/CreateVehicle', { name, model, millage , availability })
+
+        // Validate model format
+        const modelRegex = /^[A-Za-z]{2}-\d{4}$/;
+        if (!modelRegex.test(model)) {
+            // Set error message for invalid model format
+            setModelError("Invalid model format. It should be two characters followed by a hyphen and four digits.");
+            return;
+        }
+
+        // Check if millage is an integer
+        if (!Number.isInteger(Number(millage))) {
+            // Show toast message for invalid millage
+            toast.error("Millage must be an integer");
+            return;
+        }
+
+        axios.post('http://localhost:8000/CreateVehicle/CreateVehicle', { name, model, millage, availability })
             .then(res => {
-                alert("Vehicle created successfully!");
-                // Redirect to a different route after successful submission
-                // navigate('/'); 
+                toast.success("Vehicle Record created successfully!");
+                setTimeout(() => {
+                    navigate('/VehicleView');
+                }, 3000); // 3000 milliseconds = 3 seconds
             })
             .catch(err => console.log(err));
     };
 
     const handleAvailabilityChange = (e) => {
         setAvailability(e.target.value);
+    };
+
+    const handleModelChange = (e) => {
+        // Clear model error when the user starts typing in the model input
+        setModelError('');
+        setModel(e.target.value);
     };
 
     return (
@@ -43,12 +69,14 @@ function CreateVehicle() {
                             />
                             <TextField
                                 fullWidth
-                                label="Vehicle Model"
+                                label="Vehicle Model (AA-1243)"
                                 variant="outlined"
                                 value={model}
-                                onChange={(e) => setModel(e.target.value)}
+                                onChange={handleModelChange}
                                 margin="normal"
                                 required
+                                error={!!modelError} // Set error state based on modelError
+                                helperText={modelError} // Display error message if modelError is not empty
                             />
                             <TextField
                                 fullWidth
@@ -65,8 +93,8 @@ function CreateVehicle() {
                                     row
                                     aria-label="availability"
                                     name="availability"
-                                     value={availability}
-                                     onChange={handleAvailabilityChange}
+                                    value={availability}
+                                    onChange={handleAvailabilityChange}
                                 >
                                     <FormControlLabel value="available" control={<Radio />} label="Available" />
                                     <FormControlLabel value="notAvailable" control={<Radio />} label="Not Available" />
@@ -79,6 +107,7 @@ function CreateVehicle() {
                     </div>
                 </Grid>
             </Grid>
+            <ToastContainer />
         </Container>
     );
 }

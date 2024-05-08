@@ -1,3 +1,4 @@
+//index.js
 require('dotenv').config()
 
 const express = require('express')
@@ -8,16 +9,23 @@ const cookieParser = require('cookie-parser')
 
 
 
+
 const registerRouter = require('./routes/LoginRegisterDashboard/registerRouter');
 const authRoutes = require('./routes/LoginRegisterDashboard/authRoutes');
 const authDashboard = require('./routes/LoginRegisterDashboard/authDashboard');
 const inventoryRoutes = require('./routes/inventory');
+const orderRoutes = require('./routes/order');
+const cartRoutes = require('./routes/cart')
+const deliveryInfoRoutes = require('./routes/deliveryInfo')
 const feedbackRoutes = require('./routes/productFeedback');
+const productCategoryRoutes = require('./routes/productCategories');
+const ratingRoutes = require('./routes/ratings')
+const returnItemRouts = require('./routes/returnItem');
 
-
-const lowStockNotifications = require('./routes/SupplyManagementRoutes/NotificationsRoutes');
+const lowStockNotifications = require('./routes/SupplyManagementRoutes/lowStockRoutes');
 const supplierManagementRoutes = require('./routes/SupplyManagementRoutes/SupplierManagementRoutes');
 const purchaseOrderRoutes = require('./routes/SupplyManagementRoutes/PurchaseOrdersRoutes');
+const sendMailRoutes = require('./routes/SupplyManagementRoutes/sendMailRoutes')
 
 const CreatevehicleRoutes = require('./routes/DeliveryManagementRoutes/VehicleRoutes/CreateVehicleRoute');
 const VehicleViewRoutes = require('./routes/DeliveryManagementRoutes/VehicleRoutes/VehicleViewRoute');
@@ -35,14 +43,27 @@ const leaveRoutes = require('./routes/leaves');
 const attendanceRoutes = require('./routes/attendance');
 const accleaveRoutes = require('./routes/accleaves');
 
+const employeeRoutes = require('./routes/employees');
+const leaveRoutes = require('./routes/leaves');
+const attendanceRoutes = require('./routes/attendance');
+const accleaveRoutes = require('./routes/accleaves');
 
+const driverDispatcherRoutes = require('./routes/DriverDispatcherRoutes/DriverDispatcherRoutes')
+
+const SalesRoutes = require('./routes/SalesRoutes');
+
+
+
+
+
+const { copyInventoryToOrderItems } = require('./controllers/orderController');
 
 const app = express()
 
 
 //middleware
 app.use(express.json());
-app.use(cors({
+app.use(cors({ 
     origin: ['http://localhost:5173'],
     methods: ["GET", "POST", "PATCH", "DELETE", "PUT"],
     credentials: true
@@ -55,9 +76,20 @@ app.use('/register', registerRouter);
 app.use('/', authRoutes);
 app.use('/dashboard', authDashboard);
 
-//Binura's Api
+//Inventory Manager's Api
 app.use('/inventory', inventoryRoutes);
 app.use('/feedback',feedbackRoutes);
+app.use('/returnItem',returnItemRouts);
+app.use('/categories',productCategoryRoutes);
+
+//Navishka's API
+app.use('/order', orderRoutes); // Add order routes
+app.use('/cart',cartRoutes)
+app.use('/deliveryinfo', deliveryInfoRoutes);
+app.use('/ratings', ratingRoutes);
+
+
+
 
 app.get('/logout', (req, res) => {
     res.clearCookie('token');
@@ -66,8 +98,9 @@ app.get('/logout', (req, res) => {
 
 //Supply Manager Api's
 app.use('/supply-management/suppliers', supplierManagementRoutes);
-app.use('/supply-management', lowStockNotifications);
 app.use('/supply-management/purchase-orders', purchaseOrderRoutes);
+app.use('/supply-management/sendMail', sendMailRoutes);
+app.use('/supply-management', lowStockNotifications);
 
 
 
@@ -96,6 +129,7 @@ app.use('/userItemList', userItemListRouter);
 app.use("/reservedItems", reservedItemsRouter);
 app.use('/rentalReport', rentalReportRoutes); 
 
+app.use('/sale',SalesRoutes);
 
 
 
@@ -156,6 +190,10 @@ app.use('/DeliveryDelete', DeliveryUpdateDeleteRoutes);
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------//
 
+app.use('/driver-dispatcher', driverDispatcherRoutes);
+
+app.use('/driver-dispatcher', driverDispatcherRoutes);
+
 
 //Duvidu's Api
 app.use('/employees',employeeRoutes)
@@ -172,6 +210,7 @@ app.use((req, res, next)=> {
 //Database connection
 mongoose.connect(process.env.MONGODB_URL)
     .then(() => {
+        
         //Server setup
         app.listen(process.env.PORT, () => {
             console.log('Connected to db and listening to port ', process.env.PORT)

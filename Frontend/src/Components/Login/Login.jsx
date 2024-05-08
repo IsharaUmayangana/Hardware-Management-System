@@ -22,12 +22,17 @@ function Login() {
                 if (res.data.Status === "Success") {
                     dispatch(setUser({
                         name: res.data.name,
+                        userId: res.data.userId
                     }));
 
                     if (res.data.role === "admin") {
                         navigate('/Dashboard');
                     } else if (res.data.role === "employee") {
                         navigate('/employeeProfile');
+                    }else if (res.data.role === "supply-manager") {
+                        navigate('/supply-management');
+                    } else if(res.data.role === "inventory-manager"){
+                        navigate('/inventory');
                     } else {
                         navigate('/');
                     }

@@ -57,13 +57,13 @@ function ItemCard({ item, onLendClick, onUpdateItemClick }) {
     <Card sx={{ maxWidth: 400, margin: 2 }}>
       <CardMedia
         component="img"
-        height="140"
+        height="220px"
         image={item.imageUrl}
         alt={item.itemName}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {item.itemName} {/* Update to use item.itemName */}
+          {item.itemName}
         </Typography>
         <Typography variant="body2" color="text.secondary">
           {item.description}
@@ -75,25 +75,25 @@ function ItemCard({ item, onLendClick, onUpdateItemClick }) {
           One Day Price: {item.oneDayPrice}
         </Typography>
       </CardContent>
-      <CardContent sx={{ textAlign: "right" }}>
+      <CardContent sx={{ textAlign: "right", backgroundColor: "#f8f9fa" }}>
         <Button
           variant="contained"
           className="availButton"
-          sx={{ marginLeft: "0", margin: "4px" }}
+          sx={{ marginLeft: "0", margin: "4px", backgroundColor: "#1a759f" }}
           onClick={handleUpdateClick}
         >
           Update Item
         </Button>
         <Button
           variant="contained"
-          sx={{ marginLeft: "0", margin: "4px" }}
+          sx={{ marginLeft: "0", margin: "4px", backgroundColor: "#1a759f" }}
           onClick={handleLendClick}
         >
           Rent
         </Button>
         <Button
           variant="contained"
-          sx={{ marginLeft: "0", margin: "4px" }}
+          sx={{ marginLeft: "0", margin: "4px", backgroundColor: "#1a759f" }}
           onClick={handleDeleteClick}
         >
           Remove Item

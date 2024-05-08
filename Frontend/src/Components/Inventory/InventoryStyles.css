@@ -31,17 +31,19 @@ header a {
 /* ststus boxes */
 
 .statusBoxs {
+  color: black;
   display: flex;
   justify-content: space-around; 
+  text-align: center;
+  margin: auto;
 }
 
 .box1, .box2, .box3, .box4 {
-  width: 200px;
-  height: auto;
   padding: 10px;
-  border: 2px solid #333;
-  text-align: center;
-  margin: 0 10px; 
+  width: 250px;
+  height: 110px;
+  border: 2px solid #333; 
+  border-radius: 3px;
 }
 .box1{background: #9de98e;}
 .box2{background: #7784e6;}
@@ -53,8 +55,9 @@ header a {
   padding: 5px 0;
   color: black;
 }
-
-
+.button-list{
+  border: #333 2px solid;
+}
 /* pagination */
 
 .pagination {
@@ -90,16 +93,18 @@ header a {
 
 .functionBar{
   display: flex;
-  margin: 10px;
+  justify-content: space-around; 
+  margin-top: 10px;
   padding-bottom: 10px;
   border-bottom: #333 solid;
 }
-
+.searchbar{
+  width: 300px;
+}
 .categoryBox{
-  margin: auto;
   width: 250px;
 }
-.addButton{
+/* .addButton{
   display: inline-block;
   width: 80px;
   height: 30px;
@@ -115,31 +120,26 @@ header a {
 .addButton:hover {
   background-color: #3172ae; 
   color: #fff; 
-}
+} */
 
 /* home page */
+.invhome {
+    display: flex;
+    flex-direction: row;
+    margin: 20px 0px;
+}
 
-.topicline td{
-  border-radius: 4px;
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+.invMain{
+  margin: 0px 100px;
 }
 .productDetails td {
   background: #fff;
   border-radius: 4px;
+  border: none;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
   list-style-type: none;
   margin: 0;
   padding: 0;
-}
-
-.topicline li,
-.productDetails li {
-  display: inline-block;
-  padding-bottom: 5px;
-  padding-top: 5px; 
 }
 
 .productDetails {
@@ -151,12 +151,12 @@ header a {
 }
 
 .productDetails table {
-  width: calc(100% - 20px); /* Adjust the width as needed */
+  width: calc(100% - 20px); 
   border-collapse: collapse;
 }
 
 .productDetails td {
-  padding: 8px;
+  padding: 4px;
 }
 
 .productDetails a {
@@ -165,12 +165,13 @@ header a {
 }
 
 .productDetails-image img {
-  max-width: 30px;
+  max-width: 50px;
   height: 30px;
+  padding-right: 10px;
 }
 
 .productDetails-name {
-  width: 40%; 
+  width: 38%; 
 }
 
 .productDetails-price,
@@ -184,32 +185,39 @@ header a {
 .topicline {
   margin-bottom: 10px;
   text-align: center;
+  justify-content: space-around;
+  border: none;
+  border-bottom: #333 2px solid;
+  padding: 10px;
+  color: #612f6a;
 }
 
-.topic-photo{
-  width: 3%; 
+.topic-photo {
+  width: 40px;
 }
+
 .topic-name {
-  width: 30%; 
+  width: 600px;
+  text-align: center;
 }
 
-.topic-disPrice {
-  width: 30%; 
+.topic-disPrice{
+  width: 280px; 
 }
-
 .topic-price{
-  width: 30%; 
+  width: 200px; 
 }
-.tpoic-quantity {
-  width: 30%; 
+.topic-quantity {
+  width: 200px;
 }
 
 
 /* InventoryForm page */
 
-.newItem-form,.editItem-form {
+.newItem-form,
+.editItem-form {
   width: 1000px;
-  margin: 20px 250px;
+  /* margin: 20px 250px; */
   padding: 20px;
   border: 1px solid #262bc8;
   border-radius: 8px;
@@ -246,6 +254,10 @@ button:hover {
   text-align: center;
 }
 
+.add-buttons{
+  width: 200px;
+}
+
 /* productDetails */
 
 .productDetails {
@@ -256,20 +268,42 @@ button:hover {
 .productDetails li {
   color: #511b5b;
 }
-
-/* customized-barcode */
-.customized-barcode svg{
-  width: 300px; 
-  height: auto;
+/*selected product*/
+.selectedProduct {
+  margin: 0 auto;
+  width: fit-content;
 }
 
-.selectedProduct{
+.sp-container1{
   display: flex;
 }
+.sp-subContainer1{
+  margin-right: 50px;
+}
+.sp-description{
+  max-width: 500px;
+  height: 256px;
+}
+.sp-imageView{
+  width: 500px;
+  height: 300px;
+}
+/* customized-barcode */
+.customized-barcode svg{
+  width: 500px; 
+  height: auto;
+}
+.sp-button{
+  width: 500px;
+  display: flex;
+}
+
 .s1, .s2{
   margin: 20px 40px;
 }
-
+.detailsBox{
+  color: black;
+}
 /* HomePage */
 .homeProductDetails{
   height: 350px;
@@ -287,3 +321,30 @@ button:hover {
   margin-bottom: 20px;
 }
 
+/*add category page*/
+
+.newCategory-form {
+  width: 500px;
+  /* margin: 20px 250px; */
+  padding: 20px;
+  border: 1px solid #262bc8;
+  border-radius: 8px;
+  background-color: #f7f7f7;
+  display: flex;
+  flex-direction: column;
+}
+
+.back-button{
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #50275b;
+  color: #fff; 
+  text-decoration: none; 
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.back-button:hover {
+  background-color: #583f8a; 
+}

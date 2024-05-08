@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { Card, CardContent, Typography, Button, Modal } from "@mui/material";
+import SendIcon from "@mui/icons-material/Send";
 
 const ReservedItemsList = () => {
   document.title = "Reserved Items";
@@ -96,7 +97,18 @@ const ReservedItemsList = () => {
 
   return (
     <>
-      <h2>Reserved Items List</h2>
+      <h2
+        style={{
+          textDecoration: "underline",
+          fontSize: "30px",
+          marginTop: "10px",
+          marginBottom: "15px",
+          textAlign: "center",
+          color: "#415a77",
+        }}
+      >
+        Reserved Items List
+      </h2>
       {reservedItems.map((item) => (
         <div
           style={{
@@ -122,6 +134,7 @@ const ReservedItemsList = () => {
               <Typography variant="body1">
                 Contact No: {item.contactNo}
               </Typography>
+              <Typography variant="body1">NIC No: {item.nicNo}</Typography>
               <Typography variant="body1">
                 Days to Rent: {item.daysToRent}
               </Typography>
@@ -131,30 +144,38 @@ const ReservedItemsList = () => {
               <Typography variant="body1">
                 Total Price: {item.totalPay}
               </Typography>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => handleRent(item._id)}
+              <div
                 style={{
-                  backgroundColor: "black",
-                  width: "48%",
-                  margin: "2px",
+                  marginTop: "20px",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
                 }}
               >
-                Rent
-              </Button>
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={() => handleRemove(item._id)}
-                style={{
-                  backgroundColor: "",
-                  width: "50%",
-                  margin: "2px",
-                }}
-              >
-                Remove
-              </Button>
+                <Button
+                  variant="outlined"
+                  onClick={() => handleRemove(item._id)}
+                  style={{
+                    backgroundColor: "",
+                    color: "#ef476f",
+                    fontWeight: "bold",
+                    marginRight: "8px",
+                  }}
+                >
+                  Remove
+                </Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => handleRent(item._id)}
+                  style={{
+                    backgroundColor: "#1a759f",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Rent
+                </Button>
+              </div>
             </CardContent>
           </Card>
         </div>
@@ -177,22 +198,38 @@ const ReservedItemsList = () => {
             minWidth: "300px",
           }}
         >
-          <h2 id="rent-confirmation-modal">Rent Confirmation</h2>
+          <h2
+            style={{
+              fontSize: "25px",
+              marginBottom: "10px",
+            }}
+          >
+            Rent Confirmation
+          </h2>
           <p id="rent-confirmation-description">
-            Are you sure you want to rent this item?
+            Are you sure you want to rent this reservation?
           </p>
           <Button
             variant="contained"
             color="primary"
             onClick={handleConfirmRent}
-            style={{ marginRight: "10px" }}
+            style={{
+              marginBottom: "5px",
+              backgroundColor: "#1a759f",
+              fontWeight: "bold",
+            }}
           >
             Yes
           </Button>
           <Button
-            variant="contained"
-            color="secondary"
+            variant="outlined"
             onClick={handleCancelRent}
+            style={{
+              marginBottom: "5px",
+              backgroundColor: "#ffffff",
+              color: "#ef476f",
+              fontWeight: "bold",
+            }}
           >
             No
           </Button>
@@ -216,22 +253,38 @@ const ReservedItemsList = () => {
             minWidth: "300px",
           }}
         >
-          <h2 id="remove-confirmation-modal">Remove Confirmation</h2>
+          <h2
+            style={{
+              fontSize: "25px",
+              marginBottom: "10px",
+            }}
+          >
+            Remove Confirmation
+          </h2>
           <p id="remove-confirmation-description">
-            Are you sure you want to remove this item?
+            Are you sure you want to remove this reservation?
           </p>
           <Button
             variant="contained"
             color="primary"
             onClick={handleConfirmRemove}
-            style={{ marginRight: "10px" }}
+            style={{
+              marginBottom: "5px",
+              backgroundColor: "#1a759f",
+              fontWeight: "bold",
+            }}
           >
             Yes
           </Button>
           <Button
-            variant="contained"
-            color="secondary"
+            variant="outlined"
             onClick={handleCancelRemove}
+            style={{
+              marginBottom: "5px",
+              backgroundColor: "#ffffff",
+              color: "#ef476f",
+              fontWeight: "bold",
+            }}
           >
             No
           </Button>
@@ -239,7 +292,17 @@ const ReservedItemsList = () => {
       </Modal>
 
       <Link to="/rentalService">
-        <Button variant="contained" color="primary">
+        <Button
+          variant="contained"
+          color="primary"
+          style={{
+            marginTop: "5px",
+            backgroundColor: "#354f52",
+            fontWeight: "bold",
+            borderRadius: "0px",
+          }}
+          endIcon={<SendIcon />}
+        >
           Go to Item List
         </Button>
       </Link>
