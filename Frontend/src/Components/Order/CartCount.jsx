@@ -2,6 +2,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import React, { useEffect, useState } from 'react';
 const CartCount = () => {
     const [carts, setCarts] = useState([]);
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
 
         fetch('http://localhost:8000/cart')
