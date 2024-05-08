@@ -124,6 +124,8 @@ const CartPage = () => {
     // };
     const handleProceedToCheckout = () => {
         const totalPrice = calculateTotalPrice();
+       
+
         
         // Update inventory quantities
         carts.forEach(cart => {
