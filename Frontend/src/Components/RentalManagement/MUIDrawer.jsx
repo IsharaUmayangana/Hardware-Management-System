@@ -19,15 +19,13 @@ import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import Badge from "@mui/material/Badge";
+import Modal from "react-modal";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import AddProductForm from './InventoryForm';
-import AddNewCategoryForm from './inventory-AddNewCategory';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material'
 import { useState } from "react";
-import AddReturnItemForm from './returnItemForm';
-
+import AddNewItemForm from "./Form-addItem/AddNewItemForm";
 
 const drawerWidth = 240;
 
@@ -71,7 +69,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   padding: theme.spacing(0, 1),
-  
+
   ...theme.mixins.toolbar,
   justifyContent: "flex-end",
 }));
@@ -83,6 +81,7 @@ export default function MuiDrawer() {
   const [addCategoryDialogOpen, setAddCategoryDialogOpen] = useState(false);
   const [addProductDialogOpen, setAddProductDialogOpen] = useState(false);
   const [addReturnItemDialogOpen, setAddReturnItemDialogOpen] = useState(false);
+  const [isAddNewItemFormOpen, setAddNewItemFormOpen] = useState(false);
 
 
   const handleDrawerOpen = () => {
@@ -93,33 +92,17 @@ export default function MuiDrawer() {
     setOpen(false);
   };
 
-  const handleAddCategoryDialogOpen = () => {
-    setAddCategoryDialogOpen(true);
-};
+  const handleAddItemClick = () => {
+    setAddNewItemFormOpen(true);
+  };
+
+  const handleCloseAddNewItemForm = () => {
+    setAddNewItemFormOpen(false);
+  };
 
 
-const handleAddCategoryDialogClose = () => {
-  setAddCategoryDialogOpen(false);
-};
 
-const handleAddProductDialogOpen = () => {
-  setAddProductDialogOpen(true);
-};
-
-const handleAddProductDialogClose = () => {
-  setAddProductDialogOpen(false);
-};
-
-const handleReturnItemDialogOpen = () => {
-  setAddReturnItemDialogOpen(true);
-};
-
-const handleReturnItemDialogClose = () => {
-  setAddReturnItemDialogOpen(false);
-  setRefreshPage(true);
-};
-
- const getCurrentRouteText = () => {
+  const getCurrentRouteText = () => {
     if (location.pathname === "inventory/report1") {
       return "Inventory Report";
     }
@@ -149,10 +132,10 @@ const handleReturnItemDialogClose = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            <h4>Inventory</h4>
+            <h4>Rental Service</h4>
           </Typography>
 
-          
+
           <Box sx={{ flexGrow: 1 }} />
           <IconButton
             component={Link}
@@ -200,20 +183,20 @@ const handleReturnItemDialogClose = () => {
         </DrawerHeader>
         <Divider />
         <List>
-          <ListItemButton href="/inventory">
+          <ListItemButton href="/rentalservice">
             <ListItemText primary="Home" />
           </ListItemButton>
-          <ListItemButton onClick={handleAddCategoryDialogOpen}>
-            <ListItemText primary="Add New Category" />
+          <ListItemButton onClick={handleAddItemClick}>
+            <ListItemText primary="Add New Item" />
           </ListItemButton>
-          <ListItemButton onClick={handleAddProductDialogOpen}>
-            <ListItemText primary="Add New Products" />
+          <ListItemButton href="/rentalservice/lendedItems">
+            <ListItemText primary="View Rented Items" />
           </ListItemButton>
-          <ListItemButton onClick={handleReturnItemDialogOpen}>
-            <ListItemText primary="Return Item" />
+          <ListItemButton href="/rentalservice/reserved-items">
+            <ListItemText primary="View Reserved Items" />
           </ListItemButton>
-          <ListItemButton href="inventory/report1">
-            <ListItemText primary="Inventory Report" />
+          <ListItemButton href="/rentalservice/rentalReport">
+            <ListItemText primary="Invoice" />
           </ListItemButton>
         </List>
         <Divider />
@@ -221,41 +204,13 @@ const handleReturnItemDialogClose = () => {
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
-        {/* Add New Category Dialog */}
-        <Dialog open={addCategoryDialogOpen} onClose={handleAddCategoryDialogClose} maxWidth="100px">
-                    <DialogContent>
-                        <AddNewCategoryForm />
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={handleAddCategoryDialogClose} color="primary">Cancel</Button>
-                    </DialogActions>
-                </Dialog>
-
-                {/* Add New Product Dialog */}
-                <Dialog open={addProductDialogOpen} onClose={handleAddProductDialogClose} maxWidth="1000px" >
-                    <DialogTitle>
-                        <h2>Add New Product</h2>
-                    </DialogTitle>
-                    <DialogContent>
-                        <AddProductForm />
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={handleAddProductDialogClose} color="primary">Cancel</Button>
-                    </DialogActions>
-                </Dialog>
-
-                {/* Return Item Dialog */}
-                <Dialog open={addReturnItemDialogOpen} onClose={handleReturnItemDialogClose} maxWidth="1000px" >
-                    <DialogTitle>
-                        <h2>Return Item</h2>
-                    </DialogTitle>
-                    <DialogContent>
-                        <AddReturnItemForm />
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={handleReturnItemDialogClose} color="primary">Cancel</Button>
-                    </DialogActions>
-                </Dialog>
+        <Modal
+            isOpen={isAddNewItemFormOpen}
+            onRequestClose={handleCloseAddNewItemForm}
+            contentLabel="Add New Item Form Modal"
+          >
+            <AddNewItemForm onClose={handleCloseAddNewItemForm} />
+          </Modal>
       </Main>
     </Box>
   );
