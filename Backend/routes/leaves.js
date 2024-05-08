@@ -3,7 +3,10 @@ const {getLeaves,
     getLeave,
     createLeave,
     deleteLeave,
-    updateLeave
+    updateLeave,
+    rejectLeave,
+    acceptLeave
+    
  }= require('../controllers/leaveController')
 
 
@@ -23,6 +26,13 @@ router.delete('/:id',deleteLeave)
 
 //update a single leave
 router.patch('/:id',updateLeave)
+
+//reject a singe leave
+router.post('/:id/reject', rejectLeave);
+
+// Endpoint to accept a leave request
+router.patch('/:id/accept', acceptLeave);
+
 
 
 module.exports = router

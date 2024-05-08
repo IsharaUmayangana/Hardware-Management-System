@@ -53,7 +53,7 @@ ul {
 }
 .addBtn{
   position:relative;
-  left: 1320px;
+  left: 1300px;
   top: 65px;
  
 }
@@ -64,7 +64,7 @@ ul {
 }
 .empDet{
   position:relative;
-  left:1px;
+  left:620px;
   top:20px;
   font-family:Georgia, 'Times New Roman', Times, serif;
   
@@ -89,7 +89,7 @@ ul {
 }
 .addNew{
   position:relative;
-  left:1370px;
+  left:1350px;
   top: 30px;
 }
 .fullbody{
@@ -98,12 +98,19 @@ ul {
 .genarate{
   position:absolute;
   height: 40px;
-  width: 130px;
-  left: 1000px;
+  width: 150px;
+  left: 1090px;
+  top: 5px;
   bottom: 60px;
   background-color: aqua;
 
 }
+.rpt{
+  position:relative;
+  right:120px;
+
+}
+
 .sear{
 
   position:relative;
@@ -131,6 +138,27 @@ ul {
 	background-position: center;
 
 }
+.UpdateEmpForm{
+
+  position: absolute;
+	top: 20px;
+	left: 790px;
+	padding: 60px 32px;
+	height: 700px;
+  width: 700px;
+	backdrop-filter: blur(60px);
+	border-radius: 20px;
+	box-shadow: -7px 5px 28px 5px rgb(64, 0, 64);
+  color: black;
+
+}
+.UpdateEmpFormbody{
+  background: url('./Hr.jpg');
+	height: 100vh;
+	background-size: cover;
+	background-position: center;
+  
+}
 .adBtn{
   position:relative;
   top: 10px;
@@ -146,7 +174,7 @@ ul {
   position:relative;
   width: 50px;
   height: 40px;
-  left: 1130px;
+  left: 970px;
   top: -60px;
   background-color: aqua;
   color: black;
@@ -208,29 +236,73 @@ ul {
     bottom: 500px;
   }
   .scan{
-    font-size: 100px;
+    font-size: 130px;
     position: relative;
     left: 300px;
+    top: 110px;
+    color:black;
+    font-family: 'Times New Roman', Times, serif;
 
 
   }
   .here{
-    font-size: 100px;
+    font-size: 130px;
     position: relative;
     left: 300px;
+    top: 30px;
+    color:black;
+    font-family: 'Times New Roman', Times, serif;
   }
   .toGet{
     font-size: 60px;
     position: relative;
     left: 300px;
+    top:-10px;
+    color:black;
+    font-family: 'Times New Roman', Times, serif;
   }
   .info{
     font-size: 60px;
     position: relative;
     left: 300px;
+    top:-30px;
+    color:black;
+    font-family: 'Times New Roman', Times, serif;
   }
   .qrCodepic{
     position: relative;
     left: 900px;
-    bottom: 400px;
+    bottom: 460px;
   }
+  .employeeQRCode{
+
+    background: url('./qrBG3.jpg');
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+
+  }
+
+  .emplId{
+    position: relative;
+    right: 20px;
+    
+  }
+  .emplName{
+
+    position: relative;
+    right: 100px;
+  }
+.emplMail{
+  position: relative;
+  right: 180px;
+}
+.emplJob{
+
+  position: relative;
+  right: 210px;
+}
+.emplType{
+  position: relative;
+  right: 270px;
+}

@@ -15,6 +15,8 @@ router.get('/',getDetails)
 //Get a single details
 router.get('/:id',getDetail)
 
+
+
 //create a single details
 router.post('/', createDetails)
 

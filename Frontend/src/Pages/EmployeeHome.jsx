@@ -49,11 +49,11 @@ const EmployeeHome = () => {
     <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
       <List>
         {[
-          { text: 'Employee Details' ,icon: <BadgeIcon /> },
+          { text: 'Employee Details' ,icon: <BadgeIcon />, link: '/#' },
           { text: 'Accepted Leave Requests', icon: <MarkEmailReadIcon /> , link: '/acceptedLeaveRequests' },
           { text: 'Rejected Leave Requests', icon: <UnsubscribeIcon /> },
           { text: 'Employee attendance', icon: <EmojiPeopleIcon /> , link: '/AttHome' },
-          { text: 'Payroll', icon: <SummarizeIcon /> }
+          
         ].map((item, index) => (
           <ListItem key={item.text} disablePadding>
             <ListItemButton  component={Link} to={item.link || '/'}>
@@ -123,6 +123,7 @@ const EmployeeHome = () => {
                     <li className="empList"><strong>Job Post</strong></li>
                     <li className="empList"><strong>Employee type</strong></li>
                     <li className="empList"><strong>QR Code</strong></li> 
+                    <li className="rpt"><strong>Report</strong></li> 
                 </ul>
                 
             </div>

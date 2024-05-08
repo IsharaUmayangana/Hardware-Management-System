@@ -71,7 +71,8 @@ const UpdateEmployeeForm = () => {
     };
 
     return (
-        <div>
+        <div className="UpdateEmpFormbody">
+        <div className="UpdateEmpForm">
             <h2>Update Employee Details</h2>
             {employee && (
                 <form onSubmit={handleSubmit}>
@@ -92,18 +93,19 @@ const UpdateEmployeeForm = () => {
                     <input type="text" value={jobPost} onChange={(e) => setJobPost(e.target.value)} />
 
                     <label>Date of Hire:</label>
-                    <input type="date" value={dateofhire} onChange={(e) => setDateofhire(e.target.value)} />
+                    <input type="date" value={dateofhire} onChange={(e) => setDateofhire(e.target.value)} disabled/>
 
                     <label>Employment Type (permanent/temporary):</label>
                     <input type="text" value={employmenttype} onChange={(e) => setEmploymenttype(e.target.value)} />
 
                     <label>Basic Salary:</label>
-                    <input type="number" value={basicsalary} onChange={(e) => setBasicsalary(e.target.value)} />
+                    <input type="number" value={basicsalary} onChange={(e) => setBasicsalary(e.target.value)} disabled/>
 
                     <button type="submit">Update</button>
                 </form>
             )}
         </div>
+         </div>
     );
 }
 

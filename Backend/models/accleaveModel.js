@@ -2,17 +2,8 @@ const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema
 
-const employeeSchema = new Schema({
+const accleaveSchema = new Schema({
     employeeid: {
-        type: String,
-        required: true,
-        unique:true
-    },
-    fullname: {
-        type: String,
-        required: true
-    },
-    address: { 
         type: String,
         required: true
     },
@@ -20,23 +11,23 @@ const employeeSchema = new Schema({
         type: String,
         required: true
     },
-    jobPost: { 
+    leaveType: {
         type: String,
         required: true
     },
-    dateofhire: { 
+    startDate: { 
         type: Date,
         required: true
     },
-    employmenttype: { 
-        type: String,
+    endDate: { 
+        type: Date,
         required: true
     },
-    basicsalary: { 
-        type: Number,
+    reason: { 
+        type: String,
         required: true
     }
 
 },{ timestamps: true })
 
-module.exports = mongoose.model('Employee', employeeSchema);
+module.exports = mongoose.model('AccLeave', accleaveSchema);

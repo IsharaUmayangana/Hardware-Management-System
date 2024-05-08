@@ -1,65 +1,81 @@
-
 import { useState } from "react";
+import './leave.css';
 
-import './leave.css'
+const LeaveDetails = ({ leave, onDelete }) => {
+  const [error, setError] = useState(null);
 
-const LeaveDetails = ({ leave , onAccept}) => {
+  const handleAcceptAndAccepted = async () => {
+    try {
+      // First, perform the original "accept" operation
+      let response = await fetch(`http://localhost:8000/leaves/${leave._id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ status: 'accepted' }),
+      });
 
+      if (!response.ok) {
+        throw new Error('Failed to update leave status');
+      }
 
-    const [error, setError] = useState(null);
-    
-    const handleAccept = async () => {
-        try {
-            const response = await fetch(`http://localhost:8000/leaves/${leave._id}`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ status: 'accepted' }),
-            });
-            if (!response.ok) {
-                throw new Error('Failed to accept leave');
-            }
-            // Call the onAccept callback to remove the accepted leave from LeaveHome.jsx
-            onAccept(leave._id);
-        } catch (error) {
-            console.error('Error accepting leave:', error);
-            setError('Failed to accept leave');
-        }
-    };
+      // Now, perform the "accepted" operation that involves moving and deleting
+      response = await fetch(`http://localhost:8000/leaves/${leave._id}/accept`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
-    
-    const handleReject = async () => {
-        try {
-            const response = await fetch(`http://localhost:8000/leaves/${leave._id}`, {
-                method: 'DELETE',
-            });
-            if (!response.ok) {
-                throw new Error('Failed to reject leave Requests');
-            }
-            // Call onDelete callback to update employee list
-            onDelete(leave._id);
-            alert('Leave Request Rejected successfully');
-        } catch (error) {
-            console.error('Error Rejectinging leave request:', error);
-            alert('Failed to delete leave Request');
-        }
-    };
-    
-    return(
-        <div className="leaveDetails">
-        <ul>
-        <li>{leave.employeeid}</li>
-        <li>{leave.email}</li>
-        <li>{leave.leaveType}</li>
-        <li>{leave.startDate}</li>
-        <li>{leave.endDate}</li>
-        <li>{leave.reason}</li>
-        <li><button onClick={handleReject} className='levBtn'>Reject</button></li>
-        <li><button onClick={handleAccept} className='levBtn'>Accept</button></li>
-        </ul>
-        </div>
-    )
-}
+      if (!response.ok) {
+        throw new Error('Failed to accept leave request');
+      }
 
-export default LeaveDetails 
+      // Remove from the current list
+      onDelete(leave._id);
+
+      // Trigger success message or notification
+      alert('Leave request accepted successfully');
+    } catch (error) {
+      console.error('Error accepting leave request:', error);
+      alert('Failed to accept leave request');
+    }
+  };
+
+  const handleReject = async () => {
+    try {
+      const response = await fetch(`http://localhost:8000/leaves/${leave._id}/reject`, {
+        method: 'POST',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to reject leave request');
+      }
+
+      alert('Leave request rejected successfully');
+      window.location.reload();
+    } catch (error) {
+      console.error('Error rejecting leave request:', error);
+      alert('Failed to reject leave request');
+    }
+  };
+
+  return (
+    <div className="leaveDetails">
+      <ul>
+        <li className="levempId">{leave.employeeid}</li>
+        <li className="leveemail">{leave.email}</li>
+        <li className="levType">{leave.leaveType}</li>
+        <li className="levSdate">{leave.startDate}</li>
+        <li className="leveDate">{leave.endDate}</li>
+        <li className="levRsn">{leave.reason}</li>
+        <li>
+          <button onClick={handleReject} className='levBtn'>Reject</button>
+          <button onClick={handleAcceptAndAccepted} className='levBtn'>Accept</button>
+        </li>
+      </ul>
+    </div>
+  );
+};
+
+export default LeaveDetails;

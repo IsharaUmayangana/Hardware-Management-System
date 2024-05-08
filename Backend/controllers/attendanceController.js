@@ -11,13 +11,13 @@ const getAttendances = async (req, res) =>{
 //Get a single details
 const getAttendance = async(req, res) => {
     const{ id } = req.params
+    console.log('id: ',id)
+    // if(!mongoose.Types.ObjectId.isValid(id)) {
 
-    if(!mongoose.Types.ObjectId.isValid(id)) {
+    //     return res.status(404).json({error: 'no such attendance'})
+    // }
 
-        return res.status(404).json({error: 'no such attendance'})
-    }
-
-    const attendance = await Attendance.findById(id)
+    const attendance = await Attendance.findOne({employeeid: id})
 
     if(!attendance){
         return res.status(404).json({error: 'no such attendance'})

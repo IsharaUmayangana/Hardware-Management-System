@@ -14,8 +14,8 @@ ul {
   .leaveDetails{
     position: relative;
     background: #fff;
-    border-radius: 4px;
-    margin: 20px auto;
+    border-radius: 10px;
+    margin: 5px auto;
     padding: 5px;
     position: relative;
     box-shadow: 2px 2px 5px rgb(0,0,0,0.05);
@@ -67,14 +67,48 @@ ul {
     color: black;
     position:relative;
     bottom: 57px;
-    left: 1100px;
+    left: 850px;
     height:40px;
     width: 100px;
+    
 
   }
   .LevDet{
     position:relative;
   left:600px;
-  top:20px;
+  top:2px;
   font-family:Georgia, 'Times New Roman', Times, serif;
+  }
+  .levList{
+
+    position: relative;
+   
+    padding: 10px;
+    margin:-20px;
+  }
+  .levempId{
+
+    position: relative;
+    right: 20px;
+  }
+  .leveemail{
+    position: relative;
+    right: 130px;
+  }
+  .levType{
+    position: relative;
+    right: 150px;
+  }
+  .levSdate{
+    position: relative;
+    right: 290px;
+  }
+  .leveDate{
+    position: relative;
+    right: 320px;
+  }
+ .levRsn{
+  position: relative;
+  left: 975px;
+  bottom: 60px;
   }

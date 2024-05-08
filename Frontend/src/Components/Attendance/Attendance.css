@@ -44,3 +44,22 @@
     left: 100px;
 	width: 270px;
 }
+.attList{
+
+	color: black;
+	position: relative;
+	top: 50px;
+	color: black;
+}
+.attendanceDetails{
+	color: black;
+	position: relative;
+	top: 50px;
+}
+.dailAtt{
+	position:relative;
+    left: 600px;
+	top: 30px;
+	font-family: 'Times New Roman', Times, serif;
+	color: black;
+}

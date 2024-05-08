@@ -13,6 +13,20 @@ import CusHome from "./Components/Home/Home-Products";
 import CusSelectedItem from "./Components/Home/Home-SelectedItem";
 import Report1 from "./Components/Inventory/Inventory-report1";
 
+import EmployeeHome from './Pages/EmployeeHome';
+import EmployeeForm from './Components/Employee/EmployeeForm';
+import UpdateEmployeeForm from './Components/Employee/UpdateEmployeeForm';
+import EmployeeQRCode from './Components/Employee/EmployeeQRCode';
+import LeaveHome from './Pages/LeaveHome';
+import AttendanceHome from './Pages/AttendanceHome';
+import EmployeeReq from './Pages/EmployeeReq';
+import AttendanceForm from './Components/Attendance/AttendanceForm';
+import LeaveForm from './Components/Leave/LeaveForm';
+import AcceptedLeaveReq from './Pages/AcceptedLeaveReq';
+import EmpDashboard from './Pages/EmpDashboard';
+import EmployeeReport from './Pages/EmployeeReport';
+// import QRCodeScanner from './Components/Attendance/QRCodeScanner';
+
 import Layout from "./pages/SupplyManager/components/Layout";
 import SupplyManagementHome from "./pages/SupplyManager/home.page"
 import NotificationPage from "./pages/SupplyManager/home.notifications"
@@ -79,37 +93,37 @@ function App() {
 
           <Route
             path="/supply-management/*"
-            element={
-              <Layout>
-                <Routes>
-                  <Route index element={<SupplyManagementHome />} />
+            element={ 
+               <Layout>
+               <Routes>
+                   <Route index element={<SupplyManagementHome />} />
                   <Route path="notifications" element={<NotificationPage />} />
-                  <Route
-                    path="notifications/:id"
-                    element={<NotificationDetails />}
-                  />
-                  <Route
-                    path="supplier-management"
-                    element={<SupplierList />}
-                  />
-                  <Route path="purchase-orders" element={<SupplierList />} />
-                  <Route path="return-management" element={<SupplierList />} />
-                  <Route path="reports" element={<SupplierList />} />
-                </Routes>
-              </Layout>
+                   <Route
+                     path="notifications/:id"
+                     element={<NotificationDetails />}
+                   /> 
+                   <Route
+                     path="supplier-management"
+                     element={<SupplierList />}
+                   />
+                   <Route path="purchase-orders" element={<SupplierList />} />
+                   <Route path="return-management" element={<SupplierList />} />
+                   <Route path="reports" element={<SupplierList />} />
+                 </Routes>
+             </Layout>
             }
-          />
+          /> 
 
           
 
-
+          {/* Duvidu's routes */}
           <Route exact path="/employee" element={<EmployeeHome />} />
           <Route exact path="/addNewEmployee" element={<EmployeeForm />} />
           <Route exact path="/updateEmployee/:id" element={<UpdateEmployeeForm />} />
           <Route exact path="/leaveRequest" element={<LeaveHome />} />
           <Route exact path="/employeereq" element={<EmployeeReq />} />
           <Route exact path="/addNewLeave" element={<LeaveForm />} />
-          <Route exact path="//employee/:id/qr" element={<EmployeeQRCode />} />
+          <Route exact path="//employee/:employeeid/qr" element={<EmployeeQRCode />} />
 
          
           <Route exact path="/EmpDash" element={<EmpDashboard/>} />
@@ -117,7 +131,6 @@ function App() {
           <Route exact path="/addAttendance" element={<AttendanceForm/>} />
           <Route exact path="/acceptedLeaveRequests" element={<AcceptedLeaveReq />} />
           <Route exact path="/employee/:employeeid/report" element={<EmployeeReport />} />
-
           
          
           

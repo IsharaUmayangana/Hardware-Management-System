@@ -11,13 +11,13 @@ const getDetails = async (req, res) =>{
 //Get a single details
 const getDetail = async(req, res) => {
     const{ id } = req.params
+    console.log(id)
+    // if(!mongoose.Types.ObjectId.isValid(id)) {
 
-    if(!mongoose.Types.ObjectId.isValid(id)) {
+    //     return res.status(404).json({error: 'no such details'})
+    // }
 
-        return res.status(404).json({error: 'no such details'})
-    }
-
-    const employee = await Employee.findById(id)
+    const employee = await Employee.findOne({employeeid: id})
 
     if(!employee){
         return res.status(404).json({error: 'no such details'})
@@ -25,6 +25,9 @@ const getDetail = async(req, res) => {
 
     res.status(200).json(employee)
 }
+
+
+
 
 
 //create a single details

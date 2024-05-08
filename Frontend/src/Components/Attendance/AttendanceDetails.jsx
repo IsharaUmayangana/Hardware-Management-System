@@ -5,7 +5,7 @@ const AttendanceDetails = ({ attendance }) => {
     return(
         <div className="attendanceDetails">
         <ul>
-        <li>{attendance.employeeid}</li>
+        <li>{attendance.employeeid }</li>
         <li>{attendance.status}</li>
         <li>{attendance.timeIn}</li>
         <li>{attendance.timeOut}</li>

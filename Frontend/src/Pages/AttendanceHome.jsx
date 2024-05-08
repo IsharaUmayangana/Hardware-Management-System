@@ -22,14 +22,14 @@ const AttendanceHome = () => {
     }, [])
     return (
         <div className="Atthome">
-         
+        <h2 className="dailAtt">Daily Attendance</h2>
            <div className="titles">
                 <ul>
-                    <li><strong>Employee id</strong></li>
-                    <li><strong>Status</strong></li>
-                    <li><strong>Time In</strong></li>
-                    <li><strong>Time Out</strong></li>
-                    <li><strong>Date</strong></li>
+                    <li className="attList"><strong>Employee id</strong></li>
+                    <li className="attList"><strong>Status</strong></li>
+                    <li className="attList"><strong>Time In</strong></li>
+                    <li className="attList"><strong>Time Out</strong></li>
+                    <li className="attList"><strong>Date</strong></li>
                    
                 </ul>
                 

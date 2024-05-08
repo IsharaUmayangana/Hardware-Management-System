@@ -33,6 +33,8 @@ const DeliveryUpdateDeleteRoutes = require('./routes/DeliveryManagementRoutes/De
 const employeeRoutes = require('./routes/employees');
 const leaveRoutes = require('./routes/leaves');
 const attendanceRoutes = require('./routes/attendance');
+const accleaveRoutes = require('./routes/accleaves');
+
 
 
 const app = express()
@@ -159,6 +161,7 @@ app.use('/DeliveryDelete', DeliveryUpdateDeleteRoutes);
 app.use('/employees',employeeRoutes)
 app.use('/leaves',leaveRoutes)
 app.use('/attendance',attendanceRoutes)
+app.use('/accleaves',accleaveRoutes)
 
 app.use((req, res, next)=> {
     console.log(req.path, req.method)
