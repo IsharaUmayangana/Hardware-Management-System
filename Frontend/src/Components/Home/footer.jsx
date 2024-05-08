@@ -7,7 +7,7 @@ import {
   MDBIcon,
 } from "mdb-react-ui-kit";
 
-const Footer = () => {
+const footer = () => {
   return (
     <MDBFooter
       style={{ backgroundColor: "#d6d6d6" }}
@@ -104,4 +104,4 @@ const Footer = () => {
     </MDBFooter>
   );
 };
-export default Footer;
+export default footer;
