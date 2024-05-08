@@ -31,6 +31,8 @@ function Login() {
                         navigate('/employeeProfile');
                     }else if (res.data.role === "supply-manager") {
                         navigate('/supply-management');
+                    } else if(res.data.role === "inventory-manager"){
+                        navigate('/inventory');
                     } else {
                         navigate('/');
                     }
