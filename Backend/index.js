@@ -38,10 +38,6 @@ const GetDeliveryRoutes = require('./routes/DeliveryManagementRoutes/DeliveryRou
 const DeliveryUpdateDeleteRoutes = require('./routes/DeliveryManagementRoutes/DeliveryRoutes/UpdateAndDeleteRoutes');
 
 
-const employeeRoutes = require('./routes/employees');
-const leaveRoutes = require('./routes/leaves');
-const attendanceRoutes = require('./routes/attendance');
-const accleaveRoutes = require('./routes/accleaves');
 
 const employeeRoutes = require('./routes/employees');
 const leaveRoutes = require('./routes/leaves');
