@@ -5,16 +5,19 @@
     min-height: 100vh;
     font-family: 'Arial', sans-serif;
     /* background: url(HomeBackground.jpg) no-repeat; */
-    background-color: aliceblue;
+    /* background-color: aliceblue; */
     background-size: cover;
     /* background-position:center; */
   }
   
   .navbar {
-    background-color: #191970;
+    background-color: #1d1d33d7;
     overflow: hidden;
     padding: 15px;
     text-align: center;
+  }
+  .navbarContent{
+    margin: 0px 50px;
   }
   
   .logo {
@@ -117,12 +120,11 @@
 
 .homeContainer{
   display: flex;
-  max-width: 1000px;
-  margin: auto;
-  border: 1px black solid;
+  margin: 10px 20px;
 }
 .searchBox {
-  width: 500px;
+  width: 600px;
+  margin-left: 220px;
 }
 
 .categoryBox{

@@ -3,7 +3,7 @@ import axios from "axios";
 import SearchBar from "../searchBar/searchBar";
 import UserItemCard from "../UserItemCard/UserItemCard";
 import NavigationBar from "../../Home/Home-Navigation";
-import Footer from "../../Home/Home-Footer";
+import Footer from "../../Home/footer";
 import "./UserItemList.css";
 
 function UserItemList() {
@@ -87,7 +87,7 @@ function UserItemList() {
           <UserItemCard key={item._id} item={item} style={{ margin: "10px" }} />
         ))}
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

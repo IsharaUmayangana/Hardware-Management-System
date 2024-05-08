@@ -38,6 +38,12 @@ const GetDeliveryRoutes = require('./routes/DeliveryManagementRoutes/DeliveryRou
 const DeliveryUpdateDeleteRoutes = require('./routes/DeliveryManagementRoutes/DeliveryRoutes/UpdateAndDeleteRoutes');
 
 
+
+const employeeRoutes = require('./routes/employees');
+const leaveRoutes = require('./routes/leaves');
+const attendanceRoutes = require('./routes/attendance');
+const accleaveRoutes = require('./routes/accleaves');
+
 const driverDispatcherRoutes = require('./routes/DriverDispatcherRoutes/DriverDispatcherRoutes')
 
 const SalesRoutes = require('./routes/SalesRoutes');
@@ -182,6 +188,19 @@ app.use('/DeliveryDelete', DeliveryUpdateDeleteRoutes);
 
 app.use('/driver-dispatcher', driverDispatcherRoutes);
 
+app.use('/driver-dispatcher', driverDispatcherRoutes);
+
+
+//Duvidu's Api
+app.use('/employees',employeeRoutes)
+app.use('/leaves',leaveRoutes)
+app.use('/attendance',attendanceRoutes)
+app.use('/accleaves',accleaveRoutes)
+
+app.use((req, res, next)=> {
+    console.log(req.path, req.method)
+    next()
+})
 
 
 //Database connection
