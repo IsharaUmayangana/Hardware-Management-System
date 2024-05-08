@@ -2,44 +2,44 @@ import React, { useState, useEffect } from 'react';
 import { TextField, Button, Grid, IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-const AddCategoryForm = () => {
-  const [categoryName, setCategoryName] = useState('');
-  const [categories, setCategories] = useState([]); 
+const AddBrandsForm = () => {
+  const [brandName, setBrandName] = useState('');
+  const [brand, setBrands] = useState([]); 
   const [error, setError] = useState('');
 
-  const handleAddCategory = async () => {
+  const handleAddBrands = async () => {
     try {
-      const response = await fetch('http://localhost:8000/categories', {
+      const response = await fetch('http://localhost:8000/brands', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name: categoryName }),
+        body: JSON.stringify({ name: brandName }),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to add category');
+        throw new Error('Failed to add brand');
       }
 
-      setCategoryName('');
+      setBrandName('');
       setError('');
-      alert('Category added successfully');
+      alert('Brand added successfully');
     } catch (error) {
       setError(error.message);
     }
   };
 
-  const handleDeleteCategory = async (categoryId) => {
+  const handleDeleteBrands = async (brandId) => {
     try {
-      const response = await fetch(`http://localhost:8000/categories/${categoryId}`, {
+      const response = await fetch(`http://localhost:8000/brands/${brandId}`, {
         method: 'DELETE',
       });
 
       if (!response.ok) {
-        throw new Error('Failed to delete category');
+        throw new Error('Failed to delete brand');
       }
 
-      setCategories(categories.filter(category => category._id !== categoryId));
+      setBrands(brand.filter(brand => brand._id !== brandId));
       alert('Category deleted successfully');
     } catch (error) {
       setError(error.message);
@@ -49,14 +49,14 @@ const AddCategoryForm = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch('http://localhost:8000/categories');
+        const response = await fetch('http://localhost:8000/brands');
         if (!response.ok) {
-          throw new Error('Failed to fetch categories');
+          throw new Error('Failed to fetch Brands');
         }
         const data = await response.json();
-        setCategories(data);
+        setBrands(data);
       } catch (error) {
-        console.error('Error fetching categories:', error.message);
+        console.error('Error fetching Brands:', error.message);
       }
     };
 
@@ -66,14 +66,14 @@ const AddCategoryForm = () => {
   return (
     <div className='category-page-main'>
       <div className='newCategory-form'>
-        <h2>Add New Category</h2>
-        <form onSubmit={(e) => { e.preventDefault(); handleAddCategory(); }}>
+        <h2>Add New Brand</h2>
+        <form onSubmit={(e) => { e.preventDefault(); handleAddBrands(); }}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                label="Category Name"
-                value={categoryName}
-                onChange={(e) => setCategoryName(e.target.value)}
+                label="Brand Name"
+                value={brandName}
+                onChange={(e) => setBrandName(e.target.value)}
                 fullWidth
                 required
               />
@@ -81,7 +81,7 @@ const AddCategoryForm = () => {
           </Grid>
           <br />
           <Button variant="contained" color="primary" type="submit">
-            Add Category
+            Add Brand
           </Button>
         </form>
         {error && <div style={{ color: 'red' }}>{error}</div>}
@@ -89,16 +89,15 @@ const AddCategoryForm = () => {
 
       <div className='existing-category-list'>
         <br/>
-        <h2>Existing Categories</h2>
-        <h6>If deleting a product category, make sure to change the product <br/>category of related products as well!</h6>
+        <h2>Existing Brands</h2>
         <TableContainer component={Paper}>
           <Table>
             <TableBody>
-              {categories.map(category => (
-                <TableRow key={category._id}>
-                  <TableCell>{category.name}</TableCell>
+              {brand.map(brand => (
+                <TableRow key={brand._id}>
+                  <TableCell>{brand.name}</TableCell>
                   <TableCell>
-                    <IconButton aria-label="delete" onClick={() => handleDeleteCategory(category._id)}>
+                    <IconButton aria-label="delete" onClick={() => handleDeleteBrands(brand._id)}>
                       <DeleteIcon />
                     </IconButton>
                   </TableCell>
@@ -113,4 +112,4 @@ const AddCategoryForm = () => {
   );
 };
 
-export default AddCategoryForm;
+export default AddBrandsForm;
