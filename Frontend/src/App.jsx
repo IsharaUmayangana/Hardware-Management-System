@@ -17,11 +17,26 @@ import ProductCategory from "./Components/Inventory/inventory-AddNewCategory";
 import ScannerBarcode from "./Components/Inventory/scanner";
 import InventoryLayout from "./Components/Inventory/InventoryLayout"
 
-import Layout from "./pages/SupplyManager/components/Layout";
-import SupplyManagementHome from "./pages/SupplyManager/home.page";
-import NotificationPage from "./pages/SupplyManager/components/low-stock-notifications/home.notifications";
-import NotificationDetails from "./pages/SupplyManager/components/NotificationDetails";
-import SupplierList from "./pages/SupplyManager/components/supplier-management/SupplierList";
+import EmployeeHome from './Pages/EmployeeHome';
+import EmployeeForm from './Components/Employee/EmployeeForm';
+import UpdateEmployeeForm from './Components/Employee/UpdateEmployeeForm';
+import EmployeeQRCode from './Components/Employee/EmployeeQRCode';
+import LeaveHome from './Pages/LeaveHome';
+import AttendanceHome from './Pages/AttendanceHome';
+import EmployeeReq from './Pages/EmployeeReq';
+import AttendanceForm from './Components/Attendance/AttendanceForm';
+import LeaveForm from './Components/Leave/LeaveForm';
+import AcceptedLeaveReq from './Pages/AcceptedLeaveReq';
+import EmpDashboard from './Pages/EmpDashboard';
+import EmployeeReport from './Pages/EmployeeReport';
+// import QRCodeScanner from './Components/Attendance/QRCodeScanner';
+
+import Layout from "./Pages/SupplyManager/components/Layout";
+import SupplyManagementHome from "./Pages/SupplyManager/home.page";
+import NotificationPage from "./Pages/SupplyManager/components/low-stock-notifications/home.notifications";
+import NotificationDetails from "./Pages/SupplyManager/components/NotificationDetails";
+import SupplierList from "./Pages/SupplyManager/components/supplier-management/SupplierList";
+import PurchaseOrderList from "./Pages/SupplyManager/components/purchase-order-management/PurchaseOrderList";
 
 import MapView from "./Components/DeliveryManagement/MapView/AlignMap";
 import CreateVehicle from "./Components/DeliveryManagement/VehicleView/CreateVehicle";
@@ -48,7 +63,7 @@ import LendedItemsList from "./Components/RentalManagement/lendedItem/LendedItem
 import UserItemList from "./Components/RentalManagement/UserItemList/UserItemList";
 import ReservedItemsList from "./Components/RentalManagement/ReservedItemsList/ReservedItemsList";
 import RentalReport from "./Components/RentalManagement/RentalReport/RentalReport";
-import PurchaseOrderList from "./pages/SupplyManager/components/purchase-order-management/PurchaseOrderList";
+
 
 
 
@@ -130,10 +145,10 @@ function App() {
 
           <Route
             path="/supply-management/*"
-            element={
-              <Layout>
-                <Routes>
-                  <Route index element={<SupplyManagementHome />} />
+            element={ 
+               <Layout>
+               <Routes>
+                   <Route index element={<SupplyManagementHome />} />
                   <Route path="notifications" element={<NotificationPage />} />
                   <Route
                     path="notifications/:id"
@@ -156,6 +171,23 @@ function App() {
 
           <Route exact path="/salesManagement" element={<SalesManagement />} />
           <Route exact path="/cashierView" element={<CashierHome />} />
+
+          {/* Duvidu's routes */}
+          <Route exact path="/employee" element={<EmployeeHome />} />
+          <Route exact path="/addNewEmployee" element={<EmployeeForm />} />
+          <Route exact path="/updateEmployee/:id" element={<UpdateEmployeeForm />} />
+          <Route exact path="/leaveRequest" element={<LeaveHome />} />
+          <Route exact path="/employeereq" element={<EmployeeReq />} />
+          <Route exact path="/addNewLeave" element={<LeaveForm />} />
+          <Route exact path="//employee/:employeeid/qr" element={<EmployeeQRCode />} />
+
+         
+          <Route exact path="/EmpDash" element={<EmpDashboard/>} />
+          <Route exact path="/AttHome" element={<AttendanceHome />} />
+          <Route exact path="/addAttendance" element={<AttendanceForm/>} />
+          <Route exact path="/acceptedLeaveRequests" element={<AcceptedLeaveReq />} />
+          <Route exact path="/employee/:employeeid/report" element={<EmployeeReport />} />
+          
 
         </Routes>
       </BrowserRouter>
