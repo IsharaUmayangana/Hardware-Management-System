@@ -60,6 +60,7 @@ import UpdateDriverForm from "./Components/DriverDispatcherManagement/UpdateDriv
 //Himash
 import SalesManagement from "./Components/Sales/salesManager/Sales";
 import CashierHome from "./Components/Sales/cashier/CashierHome";
+import ReturnItemsNotifications from "./pages/SupplyManager/components/ReturnItems/returnItemsNotifications";
 
 
 // import SearchBar from "./Components/RentalManagement/searchBar/searchBar";
@@ -135,7 +136,8 @@ function App() {
               <Layout>
                 <Routes>
                   <Route index element={<SupplyManagementHome />} />
-                  <Route path="notifications" element={<NotificationPage />} />
+                  <Route path="low-stock-notifications" element={<NotificationPage />} />
+                  <Route path="return-items-notifications" element={<ReturnItemsNotifications />} />
                   <Route
                     path="notifications/:id"
                     element={<NotificationDetails />}

@@ -6,7 +6,7 @@ import './InventoryStyles.css';
 
 const InventoryHome = () => {
     const [products, setProducts] = useState(null);
-    const [categories, setCategories] = useState([]); 
+    const [categories, setCategories] = useState([]);
     const [refreshPage, setRefreshPage] = useState(false);
 
     const [selectedCategory, setSelectedCategory] = useState('');
@@ -29,9 +29,9 @@ const InventoryHome = () => {
             const response = await fetch('http://localhost:8000/inventory');
             const json = await response.json();
 
-            if(response.ok){
-              setProducts(json);
-            } 
+            if (response.ok) {
+                setProducts(json);
+            }
         };
 
         fetchProducts();
@@ -55,8 +55,8 @@ const InventoryHome = () => {
     }, [refreshPage]);
 
     //function to count product categories
-    const calculateCategories = () =>{
-        let totalCategories = categories.length;  
+    const calculateCategories = () => {
+        let totalCategories = categories.length;
         return totalCategories;
     };
 
@@ -95,7 +95,7 @@ const InventoryHome = () => {
         }
         let outOfStock = 0;
         let lowStockProducts = []; //array to store low stock product data
-    
+
         products.forEach(product => {
             if (!selectedCategory || product.category === selectedCategory) {
                 if (product.quantity === 0) {
@@ -105,23 +105,24 @@ const InventoryHome = () => {
                 }
             }
         });
-    
+
         //send low stock products to the backend
         sendLowStocktoBackend(lowStockProducts);
-    
+
         return outOfStock;
     };
-    
+
     //function to send low stock data to backend
     const sendLowStocktoBackend = async (lowStockProducts) => {
         try {
             if (lowStockProducts.length > 0) {
+                console.log("low stock items", lowStockProducts)
                 const response = await fetch('http://localhost:8000/supply-management/notifications', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify( lowStockProducts ), //pass low stock product data to backend
+                    body: JSON.stringify(lowStockProducts), //pass low stock product data to backend
                 });
                 if (!response.ok) {
                     if (response.status === 400) {
@@ -136,7 +137,7 @@ const InventoryHome = () => {
         } catch (error) {
             console.error('error sending data', error);
         }
-    };    
+    };
 
     //pagination variables
     const lastIndex = curPage * recordsPerPage;
@@ -150,26 +151,26 @@ const InventoryHome = () => {
     const numbers = [...Array(noOfPage + 1).keys()].slice(1);
 
     //pagination functions
-    function previousPage(){
-        if(curPage !== 1) {
+    function previousPage() {
+        if (curPage !== 1) {
             setCurPage(curPage - 1)
         }
-     }
+    }
 
-     function changeCurPage(id){
+    function changeCurPage(id) {
         setCurPage(id)
-     }
+    }
 
-     function nextPage(){
-        if(curPage !== noOfPage) {
+    function nextPage() {
+        if (curPage !== noOfPage) {
             setCurPage(curPage + 1)
         }
-     }
+    }
 
-    return ( 
-        <div className="invhome"> 
+    return (
+        <div className="invhome">
             <div className='invMain'>
-                <Status totalCategories={calculateCategories()} totalvalue={calculateTotalValue()} totalProducts={calculateTotalProducts()} outOfStock={calculateOutOfStock()}/>
+                <Status totalCategories={calculateCategories()} totalvalue={calculateTotalValue()} totalProducts={calculateTotalProducts()} outOfStock={calculateOutOfStock()} />
                 <div className="functionBar">
                     <div className='searchbar'>
                         <TextField label="Search by Name" value={searchQuery} onChange={handleSearch} fullWidth />
@@ -179,13 +180,13 @@ const InventoryHome = () => {
                             <InputLabel id="category-select-label">Select Category</InputLabel>
                             <Select labelId="category-select-label" value={selectedCategory} onChange={handleCategory} fullWidth >
                                 <MenuItem value="">All</MenuItem>
-                                    {categories.map(category => (
-                                        <MenuItem key={category._id} value={category.name}>{category.name}</MenuItem>
-                                    ))}                            
+                                {categories.map(category => (
+                                    <MenuItem key={category._id} value={category.name}>{category.name}</MenuItem>
+                                ))}
                             </Select>
                         </FormControl>
                     </div>
-                    
+
                 </div>
                 <table className="topicline">
                     <tbody>
@@ -199,9 +200,9 @@ const InventoryHome = () => {
                     </tbody>
                 </table>
                 {records.map((Inventory) => (
-                    <ProductDetails key={Inventory._id} Inventory={Inventory}/>
+                    <ProductDetails key={Inventory._id} Inventory={Inventory} />
                 ))}
-                
+
 
                 {/* pagination */}
                 <div className='pagination'>
@@ -210,7 +211,7 @@ const InventoryHome = () => {
                     </li>
                     {
                         numbers.map((n, i) => (
-                            <li className={`page-item ${curPage === n ? 'active': ''}`} key={i}>
+                            <li className={`page-item ${curPage === n ? 'active' : ''}`} key={i}>
                                 <Button className='page-link' onClick={() => changeCurPage(n)}>{n}</Button>
                             </li>
                         ))
@@ -221,7 +222,7 @@ const InventoryHome = () => {
                 </div>
             </div>
         </div>
-     );
+    );
 }
 
 export default InventoryHome;
