@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import Loader from '../Loader/Loader';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import styles from './sales.module.css'; // Import CSS module
 
 export default function Sales() {
     const [sales, setSales] = useState([]);
@@ -126,7 +127,7 @@ export default function Sales() {
             startY: 20,
             theme: 'grid',
         });
-        doc.text('Sales Done', 14, 15);
+        doc.text('Sales Report', 14, 15);
         doc.save('sales.pdf');
     };
 
@@ -135,18 +136,17 @@ export default function Sales() {
 
     return (
         <>
-            <div className="bg-gray-100 py-4">
-                <h2 className="text-2xl text-center my-2" style={{ fontWeight: 'bold', fontSize: '2.25rem' }}>Manage Sales</h2>
-                <div className="flex justify-between items-center px-8">
-                    <div className="flex">
-           
-                        <Button variant="contained" color="secondary" onClick={generatePDF}>Generate PDF</Button>
+            <div className={styles.bgGray100}>
+                <h2 className={styles.text2xlCenter}>Manage Sales</h2>
+                <div className={`${styles.flex} ${styles.justifyBetween} px-8`}>
+                    <div className={styles.flex}>
+                        <Button variant="contained" color="secondary" className={styles.leftAlign} onClick={generatePDF}>Sales Report</Button>
                     </div>
                     <TextField
                         label="Search"
                         variant="outlined"
                         margin="normal"
-                        className="ml-auto"
+                        className={styles.mlAuto}
                         onChange={(e) => {
                             const keyword = e.target.value.toLowerCase();
                             const filteredSales = sales.filter(sale =>
@@ -163,7 +163,7 @@ export default function Sales() {
                     />
                 </div>
                 {!isLoading ? (
-                    <TableContainer component={Paper} className="max-w-screen-xl mx-auto mt-8">
+                    <TableContainer component={Paper} className={styles.maxWScreenXl}>
                         <Table>
                             <TableHead>
                                 <TableRow>
@@ -188,8 +188,8 @@ export default function Sales() {
                                         <TableCell>{sale.quantity}</TableCell>
                                         <TableCell>{parseFloat(sale.totalPrice).toFixed(2)}</TableCell>
                                         <TableCell>
-                                            <div className="flex">
-                                                <Button size='small' variant="outlined" color="primary" className="mr-2" onClick={() => handleUpdateSale(sale)}>Update</Button>
+                                            <div className={styles.flex}>
+                                                <Button size='small' variant="outlined" color="primary" className={styles.mr2} onClick={() => handleUpdateSale(sale)}>Update</Button>
                                                 <Button size='small' variant="outlined" color="error" startIcon={<Delete />} onClick={() => handleDeleteSale(sale._id)}>Delete</Button>
                                             </div>
                                         </TableCell>

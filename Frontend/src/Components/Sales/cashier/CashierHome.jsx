@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import Loader from '../Loader/Loader';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import styles from './cashier.module.css'; // Import CSS module
 
 export default function SalesManagement() {
   const [sales, setSales] = useState([]);
@@ -121,20 +122,22 @@ export default function SalesManagement() {
  
 
   return (<>
-    <div className="bg-gray-100 py-4">
-    <h2 className="text-2xl text-center my-2" style={{fontWeight: 'bold', fontSize: '2.25rem'}}>Current Sales</h2>
+  <div className={styles.body}>
+  <h2 className={styles.text2xlCenter}>Current Sales</h2>
+
+    <div className={styles.bgGray100}>
 
 
-      <div className="flex justify-between items-center px-8">
-        <div className="flex">
-          <Button variant="contained" color="primary" className="mr-4" onClick={handleAddDialogOpen}>Add Sale</Button>
+      <div className={styles.flexJustifyBetweenItemsCenter}>
+        <div className={styles.flex}>
+          <Button variant="contained" color="primary" className={styles.mr4} onClick={handleAddDialogOpen}>Add Sale</Button>
          
         </div>
         <TextField
           label="Search"
           variant="outlined"
           margin="normal"
-          className="ml-auto"
+          className={styles.mlAuto}
           onChange={(e) => {
             const keyword = e.target.value.toLowerCase();
             const filteredSales = sales.filter(sale =>
@@ -151,7 +154,7 @@ export default function SalesManagement() {
         />
       </div>
       {!isLoading ? (
-        <TableContainer component={Paper} className="max-w-screen-xl mx-auto mt-8">
+        <TableContainer component={Paper} className={styles.maxWScreenXl}>
           <Table>
             <TableHead>
               <TableRow>
@@ -176,9 +179,9 @@ export default function SalesManagement() {
                   <TableCell>{sale.quantity}</TableCell>
                   <TableCell>{parseFloat(sale.totalPrice).toFixed(2)}</TableCell>
                   <TableCell>
-                    <div className="flex">
-                      <Button size='small' variant="outlined" color="primary" className="mr-2" onClick={() => handleUpdateSale(sale)}>Update</Button>
-                      <Button size='small' variant="outlined" color="error" startIcon={<Delete />} onClick={() => handleDeleteSale(sale._id)}>Delete</Button>
+                    <div className={styles.flex}>
+                      <Button size='small' variant="outlined" color="primary" className={styles.mr1} onClick={() => handleUpdateSale(sale)}>Update</Button>
+                      <Button size='small' variant="outlined" color="error" className={styles.mr2} startIcon={<Delete />} onClick={() => handleDeleteSale(sale._id)}>Delete</Button>
                     </div>
                   </TableCell>
                 </TableRow>
@@ -274,6 +277,7 @@ export default function SalesManagement() {
           <Button onClick={handleDialogClose} color="secondary">Cancel</Button>
         </DialogActions>
       </Dialog>
+    </div>
     </div>
     </>
   );
