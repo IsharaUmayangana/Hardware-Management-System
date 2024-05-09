@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { Card, CardContent, Typography, Button, Modal } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
+import { Toaster, toast } from "sonner";
 
 const ReservedItemsList = () => {
   document.title = "Reserved Items";
@@ -45,6 +46,7 @@ const ReservedItemsList = () => {
         itemId: selectedItem.itemId,
         itemName: selectedItem.itemName,
         lenderName: selectedItem.buyerName,
+        nicNo: selectedItem.nicNo,
         daysForLend: selectedItem.daysToRent,
         oneDayPrice: selectedItem.oneDayPrice,
         totalPay: selectedItem.totalPay,
@@ -95,6 +97,10 @@ const ReservedItemsList = () => {
     setShowRemoveConfirmationModal(false);
   };
 
+  const notify = () => {
+    toast.success("Item Rented Successfully!");
+  };
+
   return (
     <>
       <h2
@@ -139,10 +145,10 @@ const ReservedItemsList = () => {
                 Days to Rent: {item.daysToRent}
               </Typography>
               <Typography variant="body1">
-                One Day Price: {item.oneDayPrice}
+                One Day Price: Rs. {item.oneDayPrice}.00
               </Typography>
               <Typography variant="body1">
-                Total Price: {item.totalPay}
+                Total Price: Rs. {item.totalPay}.00
               </Typography>
               <div
                 style={{
@@ -212,7 +218,10 @@ const ReservedItemsList = () => {
           <Button
             variant="contained"
             color="primary"
-            onClick={handleConfirmRent}
+            onClick={() => {
+              handleConfirmRent();
+              notify();
+            }}
             style={{
               marginBottom: "5px",
               backgroundColor: "#1a759f",
@@ -306,6 +315,7 @@ const ReservedItemsList = () => {
           Go to Item List
         </Button>
       </Link>
+      <Toaster richColors position="top-right" />
     </>
   );
 };

@@ -18,9 +18,12 @@ import ScannerBarcode from "./Components/Inventory/scanner";
 import InventoryLayout from "./Components/Inventory/InventoryLayout"
 
 
+
+//import EmployeeHome from './pages/EmployeeHome';
+
 import EmployeeHome from './pages/EmployeeHome';
 
-//import EmployeeHome from './Pages/EmployeeHome';
+
 
 
 import EmployeeForm from './Components/Employee/EmployeeForm';
