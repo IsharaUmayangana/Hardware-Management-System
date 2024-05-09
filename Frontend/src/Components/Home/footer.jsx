@@ -10,7 +10,7 @@ import {
 const footer = () => {
   return (
     <MDBFooter
-      style={{ backgroundColor: "#74c0fc" }}
+      style={{ backgroundColor: "#0d1b2a" }}
       className="text-center text-lg-start text-muted"
     >
       <section className="">
@@ -27,7 +27,7 @@ const footer = () => {
 
               <img
                 style={{ marginLeft: "28px" }}
-                src={`http://localhost:8000/logos/laksiri-hardware-logo1.jpg`}
+                src={`./logo_laksiri.png`}
                 alt="Product"
                 width={"150px"}
               />
