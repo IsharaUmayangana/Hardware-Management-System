@@ -99,28 +99,14 @@ header a {
   border-bottom: #333 solid;
 }
 .searchbar{
-  width: 300px;
+  width: 360px;
 }
 .categoryBox{
   width: 250px;
 }
-/* .addButton{
-  display: inline-block;
-  width: 80px;
-  height: 30px;
-  padding: 10px 10px 0px 10px;
-  margin: 10px 10px;
-  text-decoration: none;
-  background-color: #5349b2; 
-  color: #fff; 
-  border-radius: 5px;
-  border: 2px solid #141236; 
+.brandBox{
+  width: 150px;
 }
-
-.addButton:hover {
-  background-color: #3172ae; 
-  color: #fff; 
-} */
 
 /* home page */
 .invhome {

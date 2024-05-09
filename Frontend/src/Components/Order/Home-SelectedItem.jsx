@@ -11,6 +11,7 @@ import Stack from '@mui/material/Stack';
 import NavigationBar from '../Home/Home-Navigation';
 import Footer from '../Home/footer'
 
+import formatNumber from 'format-number';
 
 
 const HomeSelectedItem = ({ addToCart }) => {
@@ -111,10 +112,9 @@ const HomeSelectedItem = ({ addToCart }) => {
 
     return () => clearTimeout(timer);
   }, []);
-  
-  
-  
-  
+
+  // Define options for formatting
+  const options = { round: 2, padRight: 2, padLeft: 0, thousand: ',', decimal: '.' };
 
   return (
   <div>
@@ -137,9 +137,10 @@ const HomeSelectedItem = ({ addToCart }) => {
           </div>
           <div className="productOrderDetails">
             <p className="productName">Product Name : {product.name}</p>
-            <p className="unitPrice">Unit Price : {product.price}</p>
+            <p className="unitPrice">Unit Price : Rs {product.price && formatNumber(options)(parseFloat(product.price))}</p>
             <p className="availableAmount">Available Amount : {product.quantity}</p>
-            <p className="availableAmount">Description: {product.description}</p>
+            <p className="availableAmount">Brand : {product.brand}</p>
+            <p className="availableAmount">Description : {product.description}</p>
             <Stack spacing={2} direction="column">
               {product.quantity > 0 ? (
                 <Button variant="contained" size="medium" style={{ width: '200px' }} onClick={handleAddToCart} startIcon={<AddShoppingCartIcon />}>

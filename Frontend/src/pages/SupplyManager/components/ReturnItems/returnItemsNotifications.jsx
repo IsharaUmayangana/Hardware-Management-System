@@ -1,29 +1,26 @@
 import { useEffect, useState } from "react"
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
-import styles from "./notifications.module.css"
+import styles from "./returnItemsNotifications.module.css"
 import SearchBar from "../searchBar/searchBar"
 import LinearProgress from '@mui/material/LinearProgress';
 
 
 
-
-const NotificationPage = () => {
+const ReturnItemsNotifications = () => {
     const [notifications, setNotifications] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [filteredNotifications, setFilteredNotifications] = useState([]);
     const [loading, setLoading] = useState(true);
 
-
     useEffect(() => {
         const fetchNotifications = async () => {
             try {
-                const response = await fetch('http://localhost:8000/supply-management/notifications');
+                const response = await fetch('http://localhost:8000/returnItem');
 
                 if (response.ok) {
                     const json = await response.json();
                     setNotifications(json);
                     setFilteredNotifications(json);
-                    console.log("notifications ",json)
                 } else {
                     console.error('Failed to fetch data');
                 }
@@ -37,7 +34,6 @@ const NotificationPage = () => {
         fetchNotifications()
     }, [])
 
-    console.log("filtered not ", filteredNotifications)
     const handleSearch = (searchTerm) => {
         setSearchQuery(searchTerm);
     };
@@ -55,7 +51,7 @@ const NotificationPage = () => {
 
     const handleSendingEmail = async () => {
         try {
-            const response = await fetch('http://localhost:8000/supply-management/sendMail/low-stocks', {
+            const response = await fetch('http://localhost:8000/supply-management/sendMail/return-items', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -72,26 +68,25 @@ const NotificationPage = () => {
         }
     };
 
-    if (loading) { return (<LinearProgress />) }
+    if(loading) { return(<LinearProgress/>)}
 
     return (
-
         <div className={styles.lowStockNotificationsContainer}>
-
-            {!loading && <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 10, height: 45 }}>
+             {loading && <LinearProgress />}
+            {!loading && <div style={{ display: "flex", justifyContent:"space-between", marginBottom: 10, height:45 }}>
                 <div className={styles.notificationButtons}>
                     <button onClick={handleSendingEmail}>Send Email</button>
                 </div>
-
-                <SearchBar onSearch={handleSearch} placeholder="Search by supplier name" />
-
+                
+                <SearchBar onSearch={handleSearch}  placeholder="Search by supplier name" />
+                
             </div>}
             {filteredNotifications.map((notification) => (
                 <div key={notification._id} className={styles.notificationItem}>
                     <div className={styles.notificationContent}>
-                        <h4>{notification.name}</h4>
-                        <p><strong>Category:</strong> {notification.category}</p>
-                        <p>{notification.quantity} items remaining</p>
+                        <h4>{notification.name.name}</h4>
+                        <p><strong>Serial Number:</strong> {notification.serialNumber}</p>
+                        <p>Damage: {notification.returnType}</p>
                         <p>{formatDistanceToNow(new Date(notification.createdAt), { addSuffix: true })}</p>
                         <p><strong>Suppliers:</strong> {notification.suppliers?.map(supplier => supplier.name).join(', ')}</p>
                     </div>
@@ -102,4 +97,4 @@ const NotificationPage = () => {
     )
 }
 
-export default NotificationPage
+export default ReturnItemsNotifications

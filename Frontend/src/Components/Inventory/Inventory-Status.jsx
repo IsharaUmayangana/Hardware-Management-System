@@ -28,7 +28,7 @@ const Status = (props) => {
                     <h4>{totalCategories}</h4>
                 </div>
                 <div className="box3" >
-                    <Link to='/supply-management/notifications'>
+                    <Link to='/supply-management/low-stock-notifications'>
                         <ProductionQuantityLimitsIcon /> 
                         <h4>Out of Stock:</h4>
                         <h4>{totalOutOfproducts}</h4> 
