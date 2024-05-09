@@ -39,7 +39,7 @@ function App() {
 
   const handleToggleBoth = () => {
     setOpenHome(!openHome);
-    setOpenSidebar(!openSidebar);
+    //setOpenSidebar(!openSidebar);
     
   };
 

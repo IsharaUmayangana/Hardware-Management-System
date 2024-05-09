@@ -35,6 +35,7 @@ const CreateVehicleRoute = require('./routes/DeliveryManagementRoutes/DeliveryRo
 const GetDeliveryRoutes = require('./routes/DeliveryManagementRoutes/DeliveryRoutes/GetDeliveryRoute');
 const DeliveryUpdateDeleteRoutes = require('./routes/DeliveryManagementRoutes/DeliveryRoutes/UpdateAndDeleteRoutes');
 
+const DeliveryInfoRoutesfromOrders = require('./routes/DeliveryManagementRoutes/DeliveryRoutes/DeliveryInfoRoutesFromOrders');
 
 
 const employeeRoutes = require('./routes/employees');
@@ -168,14 +169,12 @@ app.use('/DeliveryUpdateDelete', DeliveryUpdateDeleteRoutes);
 //Get Delivery ID for Delete
 app.use('/DeliveryDelete', DeliveryUpdateDeleteRoutes);
 
-// app.get('/orders/:email', async (req, res) => {
-//     try {
-//         const appointments = await or.find({});
-//         res.status(200).json({ appointments });
-//     } catch (error) {
-//         res.status(500).json({ error: 'Internal server error' });
-//     }
-// });
+app.use('/Deliveryinfofromorder', DeliveryInfoRoutesfromOrders);
+
+//Delete Deliveryinfofromorder data
+
+app.use('/DeleteDeliveryinfofromorder', DeliveryInfoRoutesfromOrders);
+
 
 
 

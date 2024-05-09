@@ -17,26 +17,26 @@ import ProductCategory from "./Components/Inventory/inventory-AddNewCategory";
 import ScannerBarcode from "./Components/Inventory/scanner";
 import InventoryLayout from "./Components/Inventory/InventoryLayout"
 
-import EmployeeHome from './Pages/EmployeeHome';
+import EmployeeHome from './pages/EmployeeHome';
 import EmployeeForm from './Components/Employee/EmployeeForm';
 import UpdateEmployeeForm from './Components/Employee/UpdateEmployeeForm';
 import EmployeeQRCode from './Components/Employee/EmployeeQRCode';
-import LeaveHome from './Pages/LeaveHome';
-import AttendanceHome from './Pages/AttendanceHome';
-import EmployeeReq from './Pages/EmployeeReq';
+import LeaveHome from './pages/LeaveHome';
+import AttendanceHome from './pages/AttendanceHome';
+import EmployeeReq from './pages/EmployeeReq';
 import AttendanceForm from './Components/Attendance/AttendanceForm';
 import LeaveForm from './Components/Leave/LeaveForm';
-import AcceptedLeaveReq from './Pages/AcceptedLeaveReq';
-import EmpDashboard from './Pages/EmpDashboard';
-import EmployeeReport from './Pages/EmployeeReport';
+import AcceptedLeaveReq from './pages/AcceptedLeaveReq';
+import EmpDashboard from './pages/EmpDashboard';
+import EmployeeReport from './pages/EmployeeReport';
 // import QRCodeScanner from './Components/Attendance/QRCodeScanner';
 
-import Layout from "./Pages/SupplyManager/components/Layout";
-import SupplyManagementHome from "./Pages/SupplyManager/home.page";
-import NotificationPage from "./Pages/SupplyManager/components/low-stock-notifications/home.notifications";
-import NotificationDetails from "./Pages/SupplyManager/components/NotificationDetails";
-import SupplierList from "./Pages/SupplyManager/components/supplier-management/SupplierList";
-import PurchaseOrderList from "./Pages/SupplyManager/components/purchase-order-management/PurchaseOrderList";
+import Layout from "./pages/SupplyManager/components/Layout";
+import SupplyManagementHome from "./pages/SupplyManager/home.page";
+import NotificationPage from "./pages/SupplyManager/components/low-stock-notifications/home.notifications";
+import NotificationDetails from "./pages/SupplyManager/components/NotificationDetails";
+import SupplierList from "./pages/SupplyManager/components/supplier-management/SupplierList";
+import PurchaseOrderList from "./pages/SupplyManager/components/purchase-order-management/PurchaseOrderList";
 
 import MapView from "./Components/DeliveryManagement/MapView/AlignMap";
 import CreateVehicle from "./Components/DeliveryManagement/VehicleView/CreateVehicle";
@@ -46,6 +46,9 @@ import DeliveryView from "./Components/DeliveryManagement/DeliveryView/DeliveryV
 import CreateDelivery from "./Components/DeliveryManagement/MapView/DeliveryForm";
 import DeliveryUpdateDelete from "./Components/DeliveryManagement/DeliveryView/DeliveryUpdateDelete";
 import Orders from "./Components/DeliveryManagement/OrderView/Orders";
+import Orderfetch from "./Components/DeliveryManagement/Retrive/callorderFetch"
+import DeliveryInfo from "./Components/DeliveryManagement/Retrive/DeliveryInfoPage"
+
 
 import SelectedOrderItem from "./Components/Order/Home-SelectedItem";
 import CartPage from "./Components/Order/CartPages";
@@ -141,6 +144,10 @@ function App() {
             element={<DeliveryUpdateDelete />}
           />
           <Route path="/Orders" element={<Orders />} />
+          <Route path="/orderfetchfromorder" element={<Orderfetch />} />
+          {/* orderfetch */}
+          <Route path="/Deliveryinfofromorder" element={<DeliveryInfo />} />
+
 
           <Route path="/driver-dispatcher" element={<DriverDispatcherHome />} />
           <Route path="/driver-dispatcher/AddDriver" element={<AddDriverForm />} />
