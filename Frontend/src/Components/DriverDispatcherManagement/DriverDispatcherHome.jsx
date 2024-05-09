@@ -12,7 +12,7 @@ export default function DriverDispatcherHome() {
 
     // This function will be called when the "Go to Report Page" button is clicked
     const reportHandleClick = () => {
-        navigate('/report'); // Navigate programmatically to the report page
+        navigate('/driver-dispatcher/report'); // Navigate programmatically to the report page
     };
 
     return (

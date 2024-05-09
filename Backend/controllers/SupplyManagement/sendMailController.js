@@ -1,6 +1,7 @@
 const nodemailer = require("nodemailer");
 require('dotenv').config();
 const { orderRequestEmailTemplate } = require('../../emailTemplates/purchaseOrderEmailTemplate')
+const { returnItemsEmailTemplate } = require('../../emailTemplates/returnItemsEmailTemplate')
 
 const sendEmail = async (recipient, subject, html) => {
 
@@ -36,7 +37,7 @@ const sendEmail = async (recipient, subject, html) => {
     }
 };
 
-const sendMail = async (req, res) => {
+const sendLowStocksMail = async (req, res) => {
     try {
         const currentDate = new Date().toLocaleDateString('en-US', { timeZone: 'Asia/Colombo' });
         const { notifications } = req.body;
@@ -89,6 +90,67 @@ const sendMail = async (req, res) => {
     }
 };
 
+const sendReturnItemsMail = async (req, res) => {
+    try {
+        const currentDate = new Date().toLocaleDateString('en-US', { timeZone: 'Asia/Colombo' });
+        const { notifications } = req.body;
+
+        // Group notifications by supplier
+        const ordersBySupplier = {};
+        notifications.forEach(notification => {
+            notification.suppliers.forEach(supplier => {
+                const supplierEmail = supplier.contact.email;
+                const supplierName = supplier.name;
+                if (supplierEmail) {
+                    if (!ordersBySupplier[supplierEmail]) {
+                        ordersBySupplier[supplierEmail] = [];
+                    }
+                    ordersBySupplier[supplierEmail].push(notification);
+                }
+            });
+        });
+
+        // Send email to each supplier with their return items
+        for (const [supplierEmail, notifications] of Object.entries(ordersBySupplier)) {
+            // Create return items details for the email
+            const returnItemsDetailsHTML = notifications.map(notification => {
+                const { name, serialNumber, returnType, description } = notification;
+                const productName = name.name;
+                return `
+                    <tr>
+                        ${notification === notifications[0] ? `<td rowspan="${notifications.length}">${productName}</td>` : ""}
+                        ${notification === notifications[0] ? `<td rowspan="${notifications.length}">${notifications.length}</td>` : ""}
+                        <td>${serialNumber}</td>
+                        <td>${returnType}</td>
+                       
+                    </tr>
+                `;
+            }).join('');
+
+            // Generate HTML content using the return items email template
+            let html = returnItemsEmailTemplate;
+
+            // Replace the supplier name placeholder for each unique supplier
+            html = html.replace("[Supplier Name]", notifications[0].suppliers[0].name);
+
+            // Replace the return items details placeholder
+            html = html.replace("[Return Items Details]", returnItemsDetailsHTML);
+
+            // Send email to supplier
+            await sendEmail(supplierEmail, "Return Items", html);
+        }
+
+        res.sendStatus(200);
+    } catch (error) {
+        console.error("Failed to send emails:", error);
+        res.sendStatus(500); // Send appropriate HTTP status code in case of failure
+    }
+};
 
 
-module.exports = { sendMail };
+
+
+
+
+
+module.exports = { sendLowStocksMail, sendReturnItemsMail };

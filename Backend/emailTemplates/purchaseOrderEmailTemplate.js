@@ -2,7 +2,7 @@ const orderRequestEmailTemplate = `
 <html>
 <head>
     <style>
-        /* Add your CSS styles here */
+       
         body {
             font-family: Arial, sans-serif;
         }
@@ -47,7 +47,7 @@ const orderRequestEmailTemplate = `
         </div>
         <div class="content">
             <p>From: Laksiri Hardware Pvt Ltd</p>
-            <p>Dear [Supplier Name],</p>
+            <p>[Supplier Name],</p>
             <p>We hope this email finds you well. We are reaching out to place an order for some hardware items for our upcoming projects. Kindly find the details of our order below:</p>
             <table>
                 <thead>

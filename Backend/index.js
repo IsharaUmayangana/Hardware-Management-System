@@ -8,8 +8,6 @@ const jwt = require('jsonwebtoken')
 const cookieParser = require('cookie-parser')
 
 
-
-
 const registerRouter = require('./routes/LoginRegisterDashboard/registerRouter');
 const authRoutes = require('./routes/LoginRegisterDashboard/authRoutes');
 const authDashboard = require('./routes/LoginRegisterDashboard/authDashboard');
@@ -21,11 +19,13 @@ const feedbackRoutes = require('./routes/productFeedback');
 const productCategoryRoutes = require('./routes/productCategories');
 const ratingRoutes = require('./routes/ratings')
 const returnItemRouts = require('./routes/returnItem');
+const productBrands = require('./routes/productBrands');
 
 const lowStockNotifications = require('./routes/SupplyManagementRoutes/lowStockRoutes');
 const supplierManagementRoutes = require('./routes/SupplyManagementRoutes/SupplierManagementRoutes');
 const purchaseOrderRoutes = require('./routes/SupplyManagementRoutes/PurchaseOrdersRoutes');
 const sendMailRoutes = require('./routes/SupplyManagementRoutes/sendMailRoutes')
+const returnItemsRoutes = require('./routes/SupplyManagementRoutes/returnItemsRoutes')
 
 const CreatevehicleRoutes = require('./routes/DeliveryManagementRoutes/VehicleRoutes/CreateVehicleRoute');
 const VehicleViewRoutes = require('./routes/DeliveryManagementRoutes/VehicleRoutes/VehicleViewRoute');
@@ -37,6 +37,13 @@ const CreateVehicleRoute = require('./routes/DeliveryManagementRoutes/DeliveryRo
 const GetDeliveryRoutes = require('./routes/DeliveryManagementRoutes/DeliveryRoutes/GetDeliveryRoute');
 const DeliveryUpdateDeleteRoutes = require('./routes/DeliveryManagementRoutes/DeliveryRoutes/UpdateAndDeleteRoutes');
 
+const DeliveryInfoRoutesfromOrders = require('./routes/DeliveryManagementRoutes/DeliveryRoutes/DeliveryInfoRoutesFromOrders');
+
+
+const employeeRoutes = require('./routes/employees');
+const leaveRoutes = require('./routes/leaves');
+const attendanceRoutes = require('./routes/attendance');
+const accleaveRoutes = require('./routes/accleaves');
 
 const driverDispatcherRoutes = require('./routes/DriverDispatcherRoutes/DriverDispatcherRoutes')
 
@@ -68,12 +75,12 @@ app.use('/dashboard', authDashboard);
 
 //Inventory Manager's Api
 app.use('/inventory', inventoryRoutes);
-app.use('/feedback',feedbackRoutes);
+app.use('/brands',productBrands);
 app.use('/returnItem',returnItemRouts);
 app.use('/categories',productCategoryRoutes);
 
 //Navishka's API
-app.use('/order', orderRoutes); // Add order routes
+app.use('/order', orderRoutes); 
 app.use('/cart',cartRoutes)
 app.use('/deliveryinfo', deliveryInfoRoutes);
 app.use('/ratings', ratingRoutes);
@@ -90,8 +97,8 @@ app.get('/logout', (req, res) => {
 app.use('/supply-management/suppliers', supplierManagementRoutes);
 app.use('/supply-management/purchase-orders', purchaseOrderRoutes);
 app.use('/supply-management/sendMail', sendMailRoutes);
+app.use('/supply-management/returnItems', returnItemsRoutes);
 app.use('/supply-management', lowStockNotifications);
-
 
 
 
@@ -164,24 +171,32 @@ app.use('/DeliveryUpdateDelete', DeliveryUpdateDeleteRoutes);
 //Get Delivery ID for Delete
 app.use('/DeliveryDelete', DeliveryUpdateDeleteRoutes);
 
+app.use('/Deliveryinfofromorder', DeliveryInfoRoutesfromOrders);
+
+//Delete Deliveryinfofromorder data
+
+app.use('/DeleteDeliveryinfofromorder', DeliveryInfoRoutesfromOrders);
 
 
-// //Get Delivery ID for Delete
-// app.delete('/DeliveryDelete/:id', (req, res) => {
-//     const id = req.params.id;
-//     DeliveryModel.findByIdAndDelete({_id: id})
-//         .then(deletedDelivery => {
-//             res.json(deletedDelivery); // Send the deleted delivery as JSON response
-//         })
-//         .catch(err => {
-//             res.status(500).json({ error: err.message }); // Send error response if there's an error
-//         });
-// });
+
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------//
 
 app.use('/driver-dispatcher', driverDispatcherRoutes);
 
+app.use('/driver-dispatcher', driverDispatcherRoutes);
+
+
+//Duvidu's Api
+app.use('/employees',employeeRoutes)
+app.use('/leaves',leaveRoutes)
+app.use('/attendance',attendanceRoutes)
+app.use('/accleaves',accleaveRoutes)
+
+app.use((req, res, next)=> {
+    console.log(req.path, req.method)
+    next()
+})
 
 
 //Database connection

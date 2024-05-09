@@ -37,7 +37,7 @@
   }
 
 .notificationButtons {
-    margin-top: 20px;
+    margin-top: 0px;
 }
 
 .notificationButtons button {
@@ -47,6 +47,8 @@
     padding: 10px 20px;
     cursor: pointer;
     margin-right: 10px;
+    height: 45;
+    margin-top: 0;
 }
 
 .notificationButtons button:hover {

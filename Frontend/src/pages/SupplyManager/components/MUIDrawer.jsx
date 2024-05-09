@@ -23,6 +23,9 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import SearchBar from "./searchBar/searchBar";
+import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
+import AssignmentReturnIcon from '@mui/icons-material/AssignmentReturn';
+import { Tooltip } from "@mui/material";
 
 const drawerWidth = 240;
 
@@ -85,15 +88,15 @@ export default function MuiDrawer() {
   };
 
   const components = [
-    {
-      text: "Overview",
-      path: "/supply-management",
-    },
+    // {
+    //   text: "Overview",
+    //   path: "/supply-management",
+    // },
     {
       text: "Purchase Orders",
-      path:'/supply-management/purchase-orders'
-    }, 
-    
+      path: '/supply-management/purchase-orders'
+    },
+
     {
       text: "Supplier Management",
       path: "/supply-management/supplier-management"
@@ -102,14 +105,14 @@ export default function MuiDrawer() {
       text: "Return Management",
       path: "/supply-management/return-management"
     },
-    {
-      text: "Report and Analytics",
-      path: "/supply-management/reports",
-    },
+    // {
+    //   text: "Report and Analytics",
+    //   path: "/supply-management/reports",
+    // },
   ];
 
   const getCurrentRouteText = () => {
-    if (location.pathname === "/supply-management/notifications") {
+    if (location.pathname === "/supply-management/low-stock-notifications") {
       return "Low Stock Items";
     }
     const currentComponent = components.find(
@@ -141,24 +144,45 @@ export default function MuiDrawer() {
             {getCurrentRouteText()}
           </Typography>
 
-          
+
           <Box sx={{ flexGrow: 1 }} />
-          <IconButton
-            component={Link}
-            to="/supply-management/notifications"
-            size="large"
-            aria-label="show new notifications"
-            color="inherit"
-            edge="end"
-            sx={{
-              width: 50,
-              height: 50,
-            }}
-          >
-            <Badge color="error" batchcontent={17}>
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
+          <Tooltip title="Low Stock Items">
+            <IconButton
+              component={Link}
+              to="/supply-management/low-stock-notifications"
+              size="large"
+              aria-label="show new notifications"
+              color="inherit"
+              edge="end"
+              sx={{
+                width: 50,
+                height: 50,
+                marginRight: 1
+              }}
+            >
+              <Badge color="error" batchcontent={17}>
+                <ProductionQuantityLimitsIcon />
+              </Badge>
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Return Items">
+            <IconButton
+              component={Link}
+              to="/supply-management/return-items-notifications"
+              size="large"
+              aria-label="show new notifications"
+              color="inherit"
+              edge="end"
+              sx={{
+                width: 50,
+                height: 50,
+              }}
+            >
+              <Badge color="error" batchcontent={17}>
+                <AssignmentReturnIcon />
+              </Badge>
+            </IconButton>
+          </Tooltip>
           {/* <p>Notifications</p> */}
         </Toolbar>
       </AppBar>

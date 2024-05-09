@@ -56,7 +56,7 @@ function AddOrderForm({ isOpen, onClose, onSubmit }) {
 
     const handleProductChange = (event, value) => {
         setSelectedProduct(value);
-        // Assuming you have unit price information for products
+        
         if (value) {
             setUnitPrice(value.unitPrice);
             setQuantity(1); // Set default quantity to 1
