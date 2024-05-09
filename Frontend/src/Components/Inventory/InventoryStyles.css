@@ -1,4 +1,4 @@
-/* google font */
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
 
 body {
@@ -28,7 +28,7 @@ header a {
   display: flex;
 }
 
-/* ststus boxes */
+
 
 .statusBoxs {
   color: black;
@@ -58,7 +58,7 @@ header a {
 .button-list{
   border: #333 2px solid;
 }
-/* pagination */
+
 
 .pagination {
   display: flex;
@@ -89,7 +89,7 @@ header a {
   border-color: #007bff;
 }
 
-/* searchbar style */
+
 
 .functionBar{
   display: flex;
@@ -108,7 +108,7 @@ header a {
   width: 150px;
 }
 
-/* home page */
+
 .invhome {
     display: flex;
     flex-direction: row;
@@ -198,12 +198,12 @@ header a {
 }
 
 
-/* InventoryForm page */
+
 
 .newItem-form,
 .editItem-form {
   width: 1000px;
-  /* margin: 20px 250px; */
+ 
   padding: 20px;
   border: 1px solid #262bc8;
   border-radius: 8px;
@@ -244,7 +244,7 @@ button:hover {
   width: 200px;
 }
 
-/* productDetails */
+
 
 .productDetails {
   background: #fff;
@@ -254,7 +254,7 @@ button:hover {
 .productDetails li {
   color: #511b5b;
 }
-/*selected product*/
+
 .selectedProduct {
   margin: 0 auto;
   width: fit-content;
@@ -274,7 +274,7 @@ button:hover {
   width: 500px;
   height: 300px;
 }
-/* customized-barcode */
+
 .customized-barcode svg{
   width: 500px; 
   height: auto;
@@ -290,7 +290,7 @@ button:hover {
 .detailsBox{
   color: black;
 }
-/* HomePage */
+
 .homeProductDetails{
   height: 350px;
   width: 200px;
@@ -307,11 +307,11 @@ button:hover {
   margin-bottom: 20px;
 }
 
-/*add category page*/
+
 
 .newCategory-form {
   width: 500px;
-  /* margin: 20px 250px; */
+  
   padding: 20px;
   border: 1px solid #262bc8;
   border-radius: 8px;

@@ -71,7 +71,7 @@ const LeaveDetails = ({ leave, onDelete }) => {
         <li className={leaveCss.levRsn}>{leave.reason}</li>
         <li>
           <button onClick={handleReject} className={leaveCss.levBtn}>Reject</button>
-          <button onClick={handleAcceptAndAccepted} className={leaveCss.levBtnA}>Accept</button>
+          <button onClick={handleAcceptAndAccepted} className={leaveCss.levBtn}>Accept</button>
         </li>
       </ul>
     </div>

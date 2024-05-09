@@ -66,10 +66,10 @@ const LeaveForm = () => {
             <input type="date" onChange={(e) => setStartDate(e.target.value)} value={startDate}/>
 
             <lable>End Date:</lable>
-            <input type="date" onChange={(e) => setEndDate(e.target.value)} value={endDate}/>
+            <input type="date" onChange={(e) => setEndDate(e.target.value)} value={endDate} />
 
             <lable>Reason:</lable>
-            <input type="text" onChange={(e) => setReason(e.target.value)} value={reason}/>
+            <input type="text" onChange={(e) => setReason(e.target.value)} value={reason} />
 
             <button className={leaveCss.sendReq}  onClick={notify}>Send Request</button><ToastContainer />
             {error && <div className={leaveCss.error}>{error}</div>}

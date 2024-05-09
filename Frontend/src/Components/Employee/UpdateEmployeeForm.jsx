@@ -83,10 +83,10 @@ const UpdateEmployeeForm = () => {
                     <input type="text" value={employee.employeeid} disabled />
 
                     <label>Full Name:</label>
-                    <input type="text" value={fullname} onChange={(e) => setFullname(e.target.value)} />
+                    <input type="text" value={fullname} onChange={(e) => setFullname(e.target.value)} disabled/>
 
                     <label>Address:</label>
-                    <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} />
+                    <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} disabled/>
 
                     <label>Email:</label>
                     <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
@@ -101,7 +101,7 @@ const UpdateEmployeeForm = () => {
                     <input type="text" value={employmenttype} onChange={(e) => setEmploymenttype(e.target.value)} />
 
                     <label>Basic Salary:</label>
-                    <input type="number" value={basicsalary} onChange={(e) => setBasicsalary(e.target.value)} disabled/>
+                    <input type="number" value={basicsalary} onChange={(e) => setBasicsalary(e.target.value)} />
 
                     <button type="submit">Update</button>
                 </form>

@@ -78,7 +78,7 @@ li {
   height: 40px;
   width: 100px;
   left: 930px;
-  bottom: 72px;
+  bottom: 60px;
   font-size: 15px;
   background-color: aqua;
 }
@@ -87,10 +87,11 @@ li {
   left:1300px;
   bottom: 133px;
 }
-.search{
+.searches{
   position: relative;
   width: 1200px;
   left: 90px;
+ 
 }
 .addNew{
   position:relative;
@@ -105,7 +106,7 @@ li {
   height: 40px;
   width: 160px;
   left: 1080px;
-  top: -7px;
+  top: 3px;
   bottom: 60px;
   font-size: 12px;  
   background-color: aqua;
@@ -127,7 +128,7 @@ li {
 
   position: absolute;
 	top: 20px;
-	left: 790px;
+	left: 500px;
 	padding: 60px 32px;
 	height: 700px;
   width: 700px;
@@ -181,7 +182,7 @@ li {
   width: 70px;
   height: 40px;
   left: 938px;
-  top: -70px;
+  top: -60px;
   font-size: 15px;
   background-color: aqua;
   color: black;
@@ -312,4 +313,9 @@ li {
 .emplType{
   position: relative;
   right: 270px;
+}
+
+.employid{
+  position: relative;
+  top: 10px;
 }
