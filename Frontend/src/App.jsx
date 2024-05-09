@@ -18,6 +18,7 @@ import ScannerBarcode from "./Components/Inventory/scanner";
 import InventoryLayout from "./Components/Inventory/InventoryLayout"
 
 import EmployeeHome from './pages/EmployeeHome';
+import EmployeeHome from './pages/EmployeeHome';
 import EmployeeForm from './Components/Employee/EmployeeForm';
 import UpdateEmployeeForm from './Components/Employee/UpdateEmployeeForm';
 import EmployeeQRCode from './Components/Employee/EmployeeQRCode';
@@ -37,7 +38,6 @@ import NotificationPage from "./pages/SupplyManager/components/low-stock-notific
 import NotificationDetails from "./pages/SupplyManager/components/NotificationDetails";
 import SupplierList from "./pages/SupplyManager/components/supplier-management/SupplierList";
 import PurchaseOrderList from "./pages/SupplyManager/components/purchase-order-management/PurchaseOrderList";
-
 
 import MapView from "./Components/DeliveryManagement/MapView/AlignMap";
 import CreateVehicle from "./Components/DeliveryManagement/VehicleView/CreateVehicle";

@@ -8,7 +8,7 @@ import NavigationBar from '../Home/Home-Navigation';
 import formatNumber from 'format-number';
 
 import './order.css';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+
 
 
 const CartPage = () => {
@@ -99,34 +99,10 @@ const CartPage = () => {
     };
 
 
-    // const handleProceedToCheckout = () => {
-    //     const totalPrice = calculateTotalPrice();
-        
-        
-    //     fetch('http://localhost:8000/order/create', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify({
-    //             carts,
-    //             totalPrice
-    //         }),
-    //     })
-    //     .then((response) => response.json())
-    //     .then((data) => {
-    //         console.log('Order created successfully:', data);
-    //         navigate('/deliveryinfo',{ state: { totalPrice } });
-    //     })
-    //     .catch((error) => {
-    //         console.error("Error creating order:", error);
-    //         alert('Failed to create order');
-    //     });
-    // };
     const handleProceedToCheckout = () => {
         const totalPrice = calculateTotalPrice();
        
-
+        
         
         // Update inventory quantities
         carts.forEach(cart => {
@@ -145,6 +121,9 @@ const CartPage = () => {
                 .catch(error => console.error('Error updating inventory:', error));
             });
         });
+        fetch('http://localhost:8000/cart/clear', {
+            method: 'DELETE'
+        })
         
         // Proceed to create order
         fetch('http://localhost:8000/order/create', {
@@ -160,6 +139,7 @@ const CartPage = () => {
         .then((response) => response.json())
         .then((data) => {
             console.log('Order created successfully:', data);
+            
             navigate('/deliveryinfo',{ state: { totalPrice } });
         })
         .catch((error) => {

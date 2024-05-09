@@ -1,8 +1,5 @@
 import React from 'react';
 import './order.css';
-import NavigationBar from '../Home/Home-Navigation';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import { makeStyles } from '@mui/styles';
 
 
 
@@ -13,8 +10,10 @@ const FinalPage = () => {
        
     <div className="thank">
         <div ><img className="check"src={`http://localhost:8000/logos/check.png`} alt="Check" /></div>
+        <p className="success">Order Successful</p>
         <p>Thank you</p>
         <p>for your order</p>
+        
     </div>
     </div>
   );

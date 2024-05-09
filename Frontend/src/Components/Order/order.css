@@ -226,6 +226,15 @@ body {
   margin: 0 auto; 
 } */
 
+.Rating{
+  color: black;
+  text-align: center;
+}
+
+.ratingFont{
+  color: #000;
+}
+
 .check{
   width: 100px;
   height: 100px;
@@ -234,8 +243,13 @@ body {
 
 .thank{
   text-align: center;
-  font-size: 35px;
+  font-size: 30px;
   margin-top: 15px;
+  margin-left: 35px;
+}
+
+.success{
+  color: blue;
 }
 
 input[type="text"],
@@ -266,6 +280,11 @@ input[type="number"] {
 
 .OrderH2{
   color: #000;
+}
+
+.totalPrice{
+  font-size: 22px;
+  text-align: center;
 }
 
 .Total{
