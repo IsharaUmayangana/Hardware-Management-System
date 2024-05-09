@@ -1,4 +1,5 @@
 import React from "react";
+import './Dashboard.css'
 import {
     BsFillArchiveFill, BsFillGrid3X2GapFill,
     BsPeopleFill, BsFillGearFill

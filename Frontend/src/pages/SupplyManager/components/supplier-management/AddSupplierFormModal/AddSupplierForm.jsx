@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Box, TextField, Button, Stack, Autocomplete } from '@mui/material';
-//import ProductSelection from '../ProductSelection';
 import Checkbox from '@mui/material/Checkbox';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
-
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 function AddSupplierForm({ isOpen, onClose, onSubmit }) {
-    const [formData, setFormData] = React.useState({
+    const [formData, setFormData] = useState({
         name: '',
         phone: '',
         email: '',
@@ -21,6 +19,7 @@ function AddSupplierForm({ isOpen, onClose, onSubmit }) {
 
     const [products, setProducts] = useState([]);
     const [selectedProducts, setSelectedProducts] = useState([]);
+    const [formErrors, setFormErrors] = useState({});
 
     useEffect(() => {
         // Fetch products from Inventory collection
@@ -41,30 +40,58 @@ function AddSupplierForm({ isOpen, onClose, onSubmit }) {
         fetchProducts();
     }, []);
 
-    
+    const validateForm = () => {
+        const errors = {};
+
+        // Basic validation for required fields
+        if (!formData.name.trim()) {
+            errors.name = 'Name is required';
+        }
+        if (!formData.phone.trim()) {
+            errors.phone = 'Phone is required';
+        } else if (!/^\d{10}$/.test(formData.phone)) {
+            errors.phone = 'Phone number must be 10 digits';
+        }
+        if (!formData.email.trim()) {
+            errors.email = 'Email is required';
+        } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+            errors.email = 'Email is invalid';
+        }
+        if (!formData.address.trim()) {
+            errors.address = 'Address is required';
+        }
+        if (!formData.paymentTerms.trim()) {
+            errors.paymentTerms = 'Payment Terms are required';
+        }
+        if (selectedProducts.length === 0) {
+            errors.selectedProducts = 'Please select at least one product';
+        }
+
+        setFormErrors(errors);
+        return Object.keys(errors).length === 0;
+    };
 
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormData({ ...formData, [name]: value });
     };
 
-    
-
     const handleSubmit = async (event) => {
         event.preventDefault();
-        //console.log('Form submitted:', formData);
-        const formattedData = {
-            name: formData.name,
-            contact: {
-                phone: formData.phone,
-                email: formData.email,
-                address: formData.address,
-            },
-            productsSupplied: selectedProducts,
-            paymentTerms: formData.paymentTerms,
-        };
-        await onSubmit(formattedData);
-        onClose();
+        if (validateForm()) {
+            const formattedData = {
+                name: formData.name,
+                contact: {
+                    phone: formData.phone,
+                    email: formData.email,
+                    address: formData.address,
+                },
+                productsSupplied: selectedProducts,
+                paymentTerms: formData.paymentTerms,
+            };
+            await onSubmit(formattedData);
+            onClose();
+        }
     };
 
     return (
@@ -95,6 +122,8 @@ function AddSupplierForm({ isOpen, onClose, onSubmit }) {
                             onChange={handleChange}
                             fullWidth
                             required
+                            error={!!formErrors.name}
+                            helperText={formErrors.name}
                         />
                         <TextField
                             label="Phone"
@@ -103,6 +132,8 @@ function AddSupplierForm({ isOpen, onClose, onSubmit }) {
                             onChange={handleChange}
                             fullWidth
                             required
+                            error={!!formErrors.phone}
+                            helperText={formErrors.phone}
                         />
                         <TextField
                             label="Email"
@@ -111,6 +142,8 @@ function AddSupplierForm({ isOpen, onClose, onSubmit }) {
                             onChange={handleChange}
                             fullWidth
                             required
+                            error={!!formErrors.email}
+                            helperText={formErrors.email}
                         />
                         <TextField
                             label="Address"
@@ -119,6 +152,8 @@ function AddSupplierForm({ isOpen, onClose, onSubmit }) {
                             onChange={handleChange}
                             fullWidth
                             required
+                            error={!!formErrors.address}
+                            helperText={formErrors.address}
                         />
                         <TextField
                             label="Payment Terms"
@@ -127,9 +162,9 @@ function AddSupplierForm({ isOpen, onClose, onSubmit }) {
                             onChange={handleChange}
                             fullWidth
                             required
+                            error={!!formErrors.paymentTerms}
+                            helperText={formErrors.paymentTerms}
                         />
-                        {/*<ProductSelection onSelect={handleProductSelect} />*/}
-
                         <Autocomplete
                             multiple
                             options={products}
@@ -149,17 +184,21 @@ function AddSupplierForm({ isOpen, onClose, onSubmit }) {
                             value={selectedProducts}
                             onChange={(event, newValue) => setSelectedProducts(newValue)}
                             renderInput={(params) => (
-                                <TextField {...params} label="Select Product" variant="outlined" />
+                                <TextField
+                                    {...params}
+                                    label="Select Product"
+                                    variant="outlined"
+                                    error={!!formErrors.selectedProducts}
+                                    helperText={formErrors.selectedProducts}
+                                />
                             )}
                         />
                         <Button type="submit" variant="contained" color="primary">
                             Add Supplier
                         </Button>
-
                         <Button variant="contained" color="error" onClick={onClose}>
                             Cancel
                         </Button>
-
                     </Stack>
                 </form>
             </Box>

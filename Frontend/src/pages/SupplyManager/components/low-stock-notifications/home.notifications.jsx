@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import styles from "./notifications.module.css"
 import SearchBar from "../searchBar/searchBar"
+import LinearProgress from '@mui/material/LinearProgress';
+
 
 
 
@@ -9,23 +11,33 @@ const NotificationPage = () => {
     const [notifications, setNotifications] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [filteredNotifications, setFilteredNotifications] = useState([]);
+    const [loading, setLoading] = useState(true);
+
 
     useEffect(() => {
         const fetchNotifications = async () => {
-            const response = await fetch('http://localhost:8000/supply-management/notifications');
+            try {
+                const response = await fetch('http://localhost:8000/supply-management/notifications');
 
-            if (response.ok) {
-                const json = await response.json();
-                setNotifications(json);
-                setFilteredNotifications(json);
-            } else {
-                console.error('Failed to fetch data');
+                if (response.ok) {
+                    const json = await response.json();
+                    setNotifications(json);
+                    setFilteredNotifications(json);
+                    console.log("notifications ",json)
+                } else {
+                    console.error('Failed to fetch data');
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            } finally {
+                setLoading(false); // Set loading state to false once data fetching is complete
             }
         };
 
         fetchNotifications()
     }, [])
 
+    console.log("filtered not ", filteredNotifications)
     const handleSearch = (searchTerm) => {
         setSearchQuery(searchTerm);
     };
@@ -43,7 +55,7 @@ const NotificationPage = () => {
 
     const handleSendingEmail = async () => {
         try {
-            const response = await fetch('http://localhost:8000/supply-management/sendMail', {
+            const response = await fetch('http://localhost:8000/supply-management/sendMail/low-stocks', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -52,6 +64,7 @@ const NotificationPage = () => {
             });
             if (response.ok) {
                 console.log('Emails sent successfully');
+                alert('Emails sent successfully')
             } else {
                 console.error('Failed to send emails');
             }
@@ -60,13 +73,20 @@ const NotificationPage = () => {
         }
     };
 
-
+    if (loading) { return (<LinearProgress />) }
 
     return (
+
         <div className={styles.lowStockNotificationsContainer}>
-            <div style={{ display: "flex", justifyContent: "end", marginBottom:10, width:'auto'}}>
+
+            {!loading && <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 10, height: 45 }}>
+                <div className={styles.notificationButtons}>
+                    <button onClick={handleSendingEmail}>Send Email</button>
+                </div>
+
                 <SearchBar onSearch={handleSearch} placeholder="Search by supplier name" />
-            </div>
+
+            </div>}
             {filteredNotifications.map((notification) => (
                 <div key={notification._id} className={styles.notificationItem}>
                     <div className={styles.notificationContent}>
@@ -78,9 +98,7 @@ const NotificationPage = () => {
                     </div>
                 </div>
             ))}
-            <div className={styles.notificationButtons}>
-                <button onClick={handleSendingEmail}>Send Email</button>
-            </div>
+
         </div>
     )
 }

@@ -139,7 +139,7 @@ function RentalManagement() {
               </Button>
             </Link>
 
-            <Link to="/lendedItems" style={{ marginLeft: "0", margin: "10px" }}>
+            <Link to="/rentalservice/lendedItems" style={{ marginLeft: "0", margin: "10px" }}>
               <Button
                 variant="contained"
                 style={{
@@ -154,7 +154,7 @@ function RentalManagement() {
 
             <Link
               style={{ marginLeft: "0", margin: "10px" }}
-              to="/reserved-items"
+              to="/rentalservice/reserved-items"
             >
               <Button
                 variant="contained"
@@ -171,7 +171,7 @@ function RentalManagement() {
 
             <Link
               style={{ marginLeft: "0", margin: "10px" }}
-              to="/rentalReport"
+              to="/rentalservice/rentalReport"
             >
               <Button
                 variant="contained"
