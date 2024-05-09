@@ -4,7 +4,7 @@ import { useEffect , useState} from "react"
 //components 
 import LeaveDetails from "../Components/Leave/LeaveDetails"
 import Navibar from "../Components/Leave/Navibar"
-import '../Components/Leave/leave.css'
+import leaveCss from '../Components/Leave/leave.module.css'
 
 
 
@@ -30,22 +30,22 @@ const LeaveHome = () => {
     
 
     return (
-        <div className="home">
+        <div className={leaveCss.home}>
            <Navibar/>
           
-           <div className="titles">
+           <div className={leaveCss.titles}>
                 <ul>
-                    <li className="levList"><strong>Employee id</strong></li>
-                    <li className="levList"><strong>Email</strong></li>
-                    <li className="levList"><strong>Leave Type</strong></li>
-                    <li className="levList"><strong>Start Date</strong></li>
-                    <li className="levList"><strong>End Date</strong></li>
-                    <li className="levList"><strong>Reason</strong></li>
+                    <li className={leaveCss.levList}><strong>Employee id</strong></li>
+                    <li className={leaveCss.levList}><strong>Email</strong></li>
+                    <li className={leaveCss.levList}><strong>Leave Type</strong></li>
+                    <li className={leaveCss.levList}><strong>Start Date</strong></li>
+                    <li className={leaveCss.levList}><strong>End Date</strong></li>
+                    <li className={leaveCss.levList}><strong>Reason</strong></li>
                    
                 </ul>
                 
             </div>
-           <div className="leaves">
+           <div className={leaveCss.leaves}>
             {leaves && leaves.map((leave) => (
                    
                 <LeaveDetails key={leave._id} leave={leave}  onDelete={handleDelete}/>

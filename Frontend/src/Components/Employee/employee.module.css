@@ -1,10 +1,24 @@
+
+
+.employeeDetails{
+  background: #fff;
+  position: relative;
+  border-radius: 4px;
+  padding: 5px;
+  margin:5px;
+  box-shadow: 2px 2px 5px rgb(0,0,0,0.05);
+  height: 50px;
+  color: black;
+ 
+}
+
 ul {
     list-style-type: none;
     margin: 0px 0px 0px 30px;
     padding: 0;
   }
   
-  li {
+li {
     display: inline-block; 
     width: 500px; 
     margin: 5px 0px 10px 20px; 
@@ -21,17 +35,7 @@ ul {
     margin:-20px;
   }
 
-  .employeeDetails{
-    background: #fff;
-    position: relative;
-    border-radius: 4px;
-    padding: 5px;
-    margin:5px;
-    box-shadow: 2px 2px 5px rgb(0,0,0,0.05);
-    height: 50px;
-    color: black;
-   
-}
+ 
 .fullbody{
   color: black;
   position: relative;
@@ -74,7 +78,8 @@ ul {
   height: 40px;
   width: 100px;
   left: 930px;
-  bottom: 60px;
+  bottom: 72px;
+  font-size: 15px;
   background-color: aqua;
 }
 .dltBtn{
@@ -93,15 +98,16 @@ ul {
   top: 30px;
 }
 .fullbody{
-  background-color: aquamarine;
+  background-color: rgb(123, 179, 238);
 }
 .genarate{
   position:absolute;
   height: 40px;
-  width: 150px;
-  left: 1090px;
-  top: 5px;
+  width: 160px;
+  left: 1080px;
+  top: -7px;
   bottom: 60px;
+  font-size: 12px;  
   background-color: aqua;
 
 }
@@ -132,7 +138,7 @@ ul {
 
 }
 .AddImage{
-  background: url('./Hr.jpg');
+  background: url('./bg97.jpg');
 	height: 100vh;
 	background-size: cover;
 	background-position: center;
@@ -153,7 +159,7 @@ ul {
 
 }
 .UpdateEmpFormbody{
-  background: url('./Hr.jpg');
+  background: url('./bg97.jpg');
 	height: 100vh;
 	background-size: cover;
 	background-position: center;
@@ -170,12 +176,13 @@ ul {
   position:relative;
  right: 730px;
 }
-.qr{
+.qrr{
   position:relative;
-  width: 50px;
+  width: 70px;
   height: 40px;
-  left: 970px;
-  top: -60px;
+  left: 938px;
+  top: -70px;
+  font-size: 15px;
   background-color: aqua;
   color: black;
 
@@ -198,7 +205,7 @@ ul {
 
 .AddNewLeaves,
 .AddNewAttendances {
-  background-color: #4CAF50; /* Green */
+  background-color: #4CAF50;
   border: none;
   color: white;
   width: 600px;
@@ -214,7 +221,7 @@ ul {
 
 .AddNewLeaves:hover,
 .AddNewAttendances:hover {
-  background-color: #45a049; /* Darker Green */
+  background-color: #45a049;
 }
 
 .addReq,

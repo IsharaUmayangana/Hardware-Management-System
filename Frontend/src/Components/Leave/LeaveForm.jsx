@@ -1,4 +1,7 @@
 import  { useState } from "react"
+import leaveCss from './leave.module.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const LeaveForm = () => {
     const [employeeid, setEmployeeid] = useState('')
@@ -9,6 +12,8 @@ const LeaveForm = () => {
     const [reason, setReason] = useState('')
     const [error, setError] = useState(null)
    
+    const notify = () => toast("Submiting a new leave Request!");
+
 
     const handleLeaveForm = async (e) => {
 
@@ -43,8 +48,8 @@ const LeaveForm = () => {
 
 
     return (
-        <div className="leaveImg">
-        <div className="LeaveFrm">
+        <div className={leaveCss.leaveImg}>
+        <div className={leaveCss.LeaveFrm}>
         <form onSubmit={handleLeaveForm}>
             <h3>Add a New Leave Request</h3>
 
@@ -66,8 +71,8 @@ const LeaveForm = () => {
             <lable>Reason:</lable>
             <input type="text" onChange={(e) => setReason(e.target.value)} value={reason}/>
 
-            <button className="sendReq">Send Request</button>
-            {error && <div className="error">{error}</div>}
+            <button className={leaveCss.sendReq}  onClick={notify}>Send Request</button><ToastContainer />
+            {error && <div className={leaveCss.error}>{error}</div>}
         </form>
         </div>
         </div>

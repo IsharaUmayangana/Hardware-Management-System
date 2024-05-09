@@ -2,8 +2,8 @@ import { useEffect , useState} from "react"
 
 //components 
 import AttendanceDetails from "../Components/Attendance/AttendanceDetails"
-// import Navibar from "../Components/Leave/Navibar"
-// import '../Components/Leave/leave.css'
+
+import AttendanceCss from '../Components/Attendance/Attendance.module.css'
 
 
 const AttendanceHome = () => {
@@ -21,20 +21,20 @@ const AttendanceHome = () => {
         fetchAttendances()
     }, [])
     return (
-        <div className="Atthome">
-        <h2 className="dailAtt">Daily Attendance</h2>
-           <div className="titles">
+        <div className={AttendanceCss.Atthome}>
+        <h2 className={AttendanceCss.dailAtt}>Daily Attendance</h2>
+           <div className={AttendanceCss.titles}>
                 <ul>
-                    <li className="attList"><strong>Employee id</strong></li>
-                    <li className="attList"><strong>Status</strong></li>
-                    <li className="attList"><strong>Time In</strong></li>
-                    <li className="attList"><strong>Time Out</strong></li>
-                    <li className="attList"><strong>Date</strong></li>
+                    <li className={AttendanceCss.attList}><strong>Employee id</strong></li>
+                    <li className={AttendanceCss.attList}><strong>Status</strong></li>
+                    <li className={AttendanceCss.attList}><strong>Time In</strong></li>
+                    <li className={AttendanceCss.attList}><strong>Time Out</strong></li>
+                    <li className={AttendanceCss.attList}><strong>Date</strong></li>
                    
                 </ul>
                 
             </div>
-           <div className="attendances">
+           <div className={AttendanceCss.attendances}>
             {attendances && attendances.map((attendance) => (
                    
                 <AttendanceDetails key={attendance._id} attendance={attendance}/>

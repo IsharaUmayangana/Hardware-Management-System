@@ -1,5 +1,5 @@
 import { useState } from "react";
-import './employee.css';
+import employeeCss from './employee.module.css'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -14,7 +14,7 @@ const EmployeeForm = () => {
     const [basicsalary, setBasicsalary] = useState('');
     const [error, setError] = useState(null);
 
-    const notify = () => toast("Wow so easy!");
+    const notify = () => toast("Adding a new employee!");
 
     const handleEmployeeForm = async (e) => {
         e.preventDefault();
@@ -61,8 +61,8 @@ const EmployeeForm = () => {
     }
 
     return (
-        <div className="AddImage">
-            <div className="AddEmpForm">
+        <div className={employeeCss.AddImage}>
+            <div className={employeeCss.AddEmpForm}>
                 <form onSubmit={handleEmployeeForm}>
                     <h3>Add a New Employee</h3> 
 
@@ -90,8 +90,8 @@ const EmployeeForm = () => {
                     <label>Basic Salary:</label>
                     <input type="number" onChange={(e) => setBasicsalary(e.target.value)} value={basicsalary} />
 
-                    <button className="adBtn" onClick={notify}>Add Employee</button><ToastContainer />
-                    {error && <div className="error">{error}</div>}
+                    <button className={employeeCss.adBtn} onClick={notify}>Add Employee</button><ToastContainer />
+                    {error && <div className={employeeCss.error}>{error}</div>}
                 </form>
             </div>
         </div>
