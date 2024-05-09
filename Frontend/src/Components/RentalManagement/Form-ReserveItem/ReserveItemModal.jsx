@@ -149,6 +149,7 @@ const ReserveItemModal = ({ isOpen, onClose, item, onReservationSuccess }) => {
                   label="Contact Number"
                   value={reservationData.contactNo}
                   onChange={handleChange}
+                  inputProps={{ type: "number" }}
                   fullWidth
                   required
                 />
@@ -160,7 +161,6 @@ const ReserveItemModal = ({ isOpen, onClose, item, onReservationSuccess }) => {
                   value={reservationData.nicNo}
                   onChange={handleChange}
                   fullWidth
-                  inputProps={{ type: "number" }}
                   required
                 />
               </Grid>
@@ -168,7 +168,7 @@ const ReserveItemModal = ({ isOpen, onClose, item, onReservationSuccess }) => {
                 <TextField
                   name="oneDayPrice"
                   label="One Day Price"
-                  value={reservationData.oneDayPrice}
+                  value={"Rs. " + reservationData.oneDayPrice}
                   fullWidth
                   disabled
                 />
@@ -188,7 +188,7 @@ const ReserveItemModal = ({ isOpen, onClose, item, onReservationSuccess }) => {
                 <TextField
                   name="totalPay"
                   label="Total Pay"
-                  value={reservationData.totalPay}
+                  value={"Rs. " + reservationData.totalPay}
                   fullWidth
                   disabled
                 />

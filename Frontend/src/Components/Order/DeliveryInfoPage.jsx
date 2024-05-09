@@ -24,7 +24,10 @@ const DeliveryInfoPage = () => {
 
     const [phoneNumberError, setPhoneNumberError] = useState('');
 
-    const totalPrice = location.state.totalPrice || 0 ;
+    //const totalPrice = location.state.totalPrice || 0 ;
+
+    const totalPrice = location.state ? location.state.totalPrice || 0 : 0;
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -188,7 +191,7 @@ const DeliveryInfoPage = () => {
                     ) }}
                 />
                 </Box>
-                <p className="totalPrice">Total Price: {totalPrice}</p>
+                <p className="totalPrice">Total Price: Rs {totalPrice}</p>
                 <Button variant="contained" color="primary" type="submit">
                     Place order
                 </Button>

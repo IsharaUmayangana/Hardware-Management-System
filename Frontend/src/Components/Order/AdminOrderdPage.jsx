@@ -84,13 +84,33 @@ const OrderPage = () => {
         filterOrders();
     }, [startDate, endDate, minPrice, maxPrice,searchTerm]);
 
+    
+
     const getAllOrders = () => {
         setStartDate('');
         setEndDate('');
         setMinPrice('');
         setMaxPrice('');
-        fetchOrders();
+        // Fetch orders from the backend
+        fetch('http://localhost:8000/order')
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Failed to fetch orders');
+                }
+                return response.json();
+            })
+            .then((data) => {
+                if (data && data.orders) {
+                    setOrders(data.orders);
+                }
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error("Error fetching orders:", error);
+                setLoading(false);
+            });
     };
+    
     // const handleViewRatings = async(productId) => {
     //     setSelectedProduct(productId);
         

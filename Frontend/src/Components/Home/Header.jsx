@@ -17,7 +17,10 @@ import {
 } from "@mui/material";
 
 const StyledHeader = styled.header`
-  background-color: #1d1d33d7;
+
+  background-color: #0d1b2a;
+
+
   width: 100%;
   padding: 10px 12px 8px 12px;
   display: flex;
@@ -28,7 +31,7 @@ const StyledHeader = styled.header`
     .nav-logo-link {
       text-decoration: none;
       font-size: 24px;
-      color: #fab005;
+      color: #ce4257;
       font-weight: bold;
     }
   }
@@ -58,7 +61,7 @@ const NavMenu = styled.ul`
   li {
     &:hover {
       cursor: pointer;
-      background: #44a8f4;
+      background: #495057;
       border-radius: 4px;
     }
   }

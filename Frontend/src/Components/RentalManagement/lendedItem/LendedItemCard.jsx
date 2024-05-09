@@ -11,12 +11,17 @@ import {
   DialogActions,
 } from "@mui/material";
 import axios from "axios";
+import { Toaster, toast } from "sonner";
 
 function LendedItemCard({ item, onExtendTime, onItemReceived }) {
   const [openConfirmation, setOpenConfirmation] = useState(false);
 
   const handleItemReceived = () => {
     setOpenConfirmation(true);
+  };
+
+  const notify = () => {
+    toast.success("Item Details addded to the Report Successfully!");
   };
 
   const handleConfirmReceived = async () => {
@@ -71,9 +76,15 @@ function LendedItemCard({ item, onExtendTime, onItemReceived }) {
         <Button variant="outlined" onClick={() => onExtendTime(item)}>
           Extend Time Period
         </Button>
-        <Button variant="outlined" onClick={handleItemReceived}>
+        <Button
+          variant="outlined"
+          onClick={() => {
+            handleItemReceived();
+          }}
+        >
           Item Received
         </Button>
+        <Toaster richColors position="top-right" />
       </CardActions>
 
       <Dialog open={openConfirmation} onClose={handleCloseConfirmation}>
@@ -84,7 +95,12 @@ function LendedItemCard({ item, onExtendTime, onItemReceived }) {
           </Typography>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleConfirmReceived} color="primary">
+          <Button
+            onClick={() => {
+              handleConfirmReceived(), notify();
+            }}
+            color="primary"
+          >
             Yes
           </Button>
           <Button onClick={handleCloseConfirmation} color="secondary">
