@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
+import styled from "@emotion/styled";
+import LogoutIcon from '@mui/icons-material/Logout';
 import { FaBars } from "react-icons/fa";
 import CartCount from "../Order/CartCount";
 import { useDispatch } from "react-redux";
@@ -9,8 +10,6 @@ import { clearUser } from "../ReduxTool/userSlice";
 import axios from "axios";
 import { BsPersonCircle } from "react-icons/bs";
 import {
-  TextField,
-  Button,
   Drawer,
   List,
   ListItem,
@@ -18,7 +17,7 @@ import {
 } from "@mui/material";
 
 const StyledHeader = styled.header`
-  background-color: #74c0fc;
+  background-color: #1d1d33d7;
   width: 100%;
   padding: 10px 12px 8px 12px;
   display: flex;
@@ -51,7 +50,8 @@ const StyledHeader = styled.header`
     }
   }
 `;
-const NavManu = styled.ul`
+
+const NavMenu = styled.ul`
   list-style: none;
   display: flex;
 
@@ -72,7 +72,6 @@ const NavManu = styled.ul`
     text-decoration: none;
     color: white;
     display: block;
-    padding: 10px 10px;
   }
   @media screen and (max-width: 768px) {
     display: ${(props) => (props.isToggleOpen ? "block" : "none")};
@@ -85,12 +84,9 @@ const NavManu = styled.ul`
 
 const Header = () => {
   const [isToggleOpen, setIsToggleOpen] = useState(false);
-
   const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("");
   const [drawerOpen, setDrawerOpen] = useState(false);
   const user = useSelector((state) => state.user.user);
-  console.log(user.name);
   const dispatch = useDispatch();
 
   const handleToggleOpen = () => {
@@ -136,7 +132,6 @@ const Header = () => {
 
   return (
     <>
-      {/* Apply the styled header */}
       <StyledHeader>
         <div className="nav_logo">
           <Link to={"/"} className="nav-logo-link">
@@ -149,17 +144,16 @@ const Header = () => {
           </Link>
         </div>
 
-        {/* Use FaBars icon for toggle */}
         <FaBars className="menuToggleBtn" onClick={handleToggleOpen} />
-        {/* Apply the styled navigation menu */}
-        <NavManu isToggleOpen={isToggleOpen}>
-          <li>
+        
+        <NavMenu isToggleOpen={isToggleOpen} >
+          <li style={{width:"120px"}}>
             <Link to={"/"} className="nav-menu-list">
               Home
             </Link>
           </li>
 
-          <li>
+          <li style={{width:"120px"}}>
             <Link
               to={"/projects"}
               className="nav-menu-list"
@@ -169,48 +163,48 @@ const Header = () => {
             </Link>
           </li>
 
-          <li>
+          <li style={{width:"120px"}}>
             <Link to={"/userItemList"} className="nav-menu-list">
               Rental Items
             </Link>
           </li>
 
-          <li>
+          <li style={{width:"120px"}}>
             <Link to={"/Cart"} className="nav-menu-list">
               <div className="profile-info">
-                <span>Cart</span>
                 <CartCount />
               </div>
             </Link>
           </li>
-
+          
           <li>
+            <Link to={"/"} className="nav-menu-list">
+              <BsPersonCircle className="iconHeader" />
+              Hello {user.name}
+            </Link>
+          </li>
+
+          <li style={{width:"50px"}}>
             <Link
               to={"/login"}
               className="nav-menu-list"
               onClick={handleLogout}
             >
-              Log Out
+              <LogoutIcon/>
             </Link>
           </li>
-          <li>
-            <Link to={"/"} className="nav-menu-list">
-              <BsPersonCircle className="iconHeader" />
-              Hello, {user.name}
-            </Link>
-          </li>
+
           <Drawer
             anchor="left"
             open={drawerOpen}
             onClose={() => setDrawerOpen(false)}
           >
             <List>
-              <ListItem button key="All" onClick={() => handleCategory("")}>
+              <ListItem key="All" onClick={() => handleCategory("")}>
                 <ListItemText primary="All" />
               </ListItem>
               {categories.map((category) => (
                 <ListItem
-                  button
                   key={category._id}
                   onClick={() => handleCategory(category.name)}
                 >
@@ -219,7 +213,7 @@ const Header = () => {
               ))}
             </List>
           </Drawer>
-        </NavManu>
+        </NavMenu>
       </StyledHeader>
     </>
   );
