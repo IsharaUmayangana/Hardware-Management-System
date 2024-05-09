@@ -26,6 +26,7 @@ const lowStockNotifications = require('./routes/SupplyManagementRoutes/lowStockR
 const supplierManagementRoutes = require('./routes/SupplyManagementRoutes/SupplierManagementRoutes');
 const purchaseOrderRoutes = require('./routes/SupplyManagementRoutes/PurchaseOrdersRoutes');
 const sendMailRoutes = require('./routes/SupplyManagementRoutes/sendMailRoutes')
+const returnItemsRoutes = require('./routes/SupplyManagementRoutes/returnItemsRoutes')
 
 const CreatevehicleRoutes = require('./routes/DeliveryManagementRoutes/VehicleRoutes/CreateVehicleRoute');
 const VehicleViewRoutes = require('./routes/DeliveryManagementRoutes/VehicleRoutes/VehicleViewRoute');
@@ -96,8 +97,8 @@ app.get('/logout', (req, res) => {
 app.use('/supply-management/suppliers', supplierManagementRoutes);
 app.use('/supply-management/purchase-orders', purchaseOrderRoutes);
 app.use('/supply-management/sendMail', sendMailRoutes);
+app.use('/supply-management/returnItems', returnItemsRoutes);
 app.use('/supply-management', lowStockNotifications);
-
 
 
 

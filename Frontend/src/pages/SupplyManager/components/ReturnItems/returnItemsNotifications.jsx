@@ -59,7 +59,7 @@ const ReturnItemsNotifications = () => {
                 body: JSON.stringify({ notifications: filteredNotifications })
             });
             if (response.ok) {
-                console.log('Emails sent successfully');
+                alert('Emails sent successfully');
             } else {
                 console.error('Failed to send emails');
             }
