@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './order.css';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 // import RatingPage from './RatingComponent'
 
 const OrderPage = () => {
@@ -11,6 +13,7 @@ const OrderPage = () => {
     const [minPrice, setMinPrice] = useState('');
     const [maxPrice, setMaxPrice] = useState('');
     const [selectedProduct, setSelectedProduct] = useState(null);
+    const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
         fetch('http://localhost:8000/order')
@@ -32,7 +35,19 @@ const OrderPage = () => {
             });
     }, []);
 
+    const handleSearch = () => {
+        const filtered = orders.filter(order => {
+            return order.carts.some(cart => {
+                return cart.cartItems.some(item => {
+                    return item.product.name.toLowerCase().includes(searchTerm.toLowerCase());
+                });
+            });
+        });
+        setFilteredOrders(filtered);
+    };
+
     
+
     const generateReport = () => {
         window.print();
     };
@@ -52,13 +67,22 @@ const OrderPage = () => {
         if (minPrice && maxPrice) {
             filtered = filtered.filter(order => order.totalPrice >= parseFloat(minPrice) && order.totalPrice <= parseFloat(maxPrice));
         }
+        if (searchTerm.trim() !== '') {
+            filtered = filtered.filter(order =>
+                order.carts.some(cart =>
+                    cart.cartItems.some(item =>
+                        item.product.name.toLowerCase().includes(searchTerm.toLowerCase())
+                    )
+                )
+            );
+        }
 
         setFilteredOrders(filtered);
     };
 
     useEffect(() => {
         filterOrders();
-    }, [startDate, endDate, minPrice, maxPrice]);
+    }, [startDate, endDate, minPrice, maxPrice,searchTerm]);
 
     const getAllOrders = () => {
         setStartDate('');
@@ -76,15 +100,25 @@ const OrderPage = () => {
         <div>
             <h2 className="OrderH2"><strong>Order Details</strong></h2>
             <div>
-                <label htmlFor="startDate">Start Date:</label>
+                <input className="ratingFont"
+                    type="text"
+                    placeholder="Search by item name"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
+                
+                
+                <label className="ratingFont" htmlFor="startDate">Start Date:</label>
                 <input type="date" id="startDate" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
-                <label htmlFor="endDate">End Date:</label>
+                <label className="ratingFont" htmlFor="endDate">End Date:</label>
                 <input type="date" id="endDate" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
-                <label htmlFor="minPrice">Min Price:</label>
+                <label className="ratingFont" htmlFor="minPrice">Min Price:</label>
                 <input type="number" id="minPrice" value={minPrice} onChange={(e) => setMinPrice(e.target.value)} />
-                <label htmlFor="maxPrice">Max Price:</label>
+                <label className="ratingFont" htmlFor="maxPrice">Max Price:</label>
                 <input type="number" id="maxPrice" value={maxPrice} onChange={(e) => setMaxPrice(e.target.value)} />
-                <button className="generate-report-btn" onClick={getAllOrders}>Get all orders</button>
+                <Stack spacing={2} direction="row">
+                    <Button variant="contained" onClick={getAllOrders}>Get all orders</Button>
+                </Stack>
             </div>
             {loading ? (
                 <p>Loading...</p>
@@ -94,7 +128,7 @@ const OrderPage = () => {
                 <div className="Order">
                     {filteredOrders.map((order, index) => (
                         <div key={index}>
-                            <h3>Order {index + 1}</h3>
+                            <h3 className="orderHeader">Order {index + 1}</h3>
                             <p className="Total">Total Price: {order.totalPrice}</p>
                             <table className="cart-table-head" >
                                 <thead>
@@ -124,8 +158,7 @@ const OrderPage = () => {
                                 </div>
                             ))}
                             <hr className="bold-hr" />
-                            <button onClick={() => handleViewRatings(order.productId)}>View Ratings</button>
-                            {/* {selectedProduct === order.productId && <RatingPage productId={order.productId} />} */}
+                            
                         </div>
                     ))}
                 </div>

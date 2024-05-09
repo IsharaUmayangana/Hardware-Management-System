@@ -3,6 +3,8 @@ import axios from "axios";
 import SearchBar from "../searchBar/searchBar";
 import UserItemCard from "../UserItemCard/UserItemCard";
 import NavigationBar from "../../Home/Home-Navigation";
+import Footer from "../../Home/footer";
+import Header from "../../Home/Header";
 import "./UserItemList.css";
 
 function UserItemList() {
@@ -33,7 +35,7 @@ function UserItemList() {
 
   return (
     <div className="">
-      <NavigationBar />
+      <Header />
 
       <div
         style={{
@@ -86,6 +88,7 @@ function UserItemList() {
           <UserItemCard key={item._id} item={item} style={{ margin: "10px" }} />
         ))}
       </div>
+      <Footer />
     </div>
   );
 }

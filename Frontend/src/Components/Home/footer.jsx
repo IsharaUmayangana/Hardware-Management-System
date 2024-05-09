@@ -7,14 +7,17 @@ import {
   MDBIcon,
 } from "mdb-react-ui-kit";
 
-const Footer = () => {
+const footer = () => {
   return (
     <MDBFooter
-      style={{ backgroundColor: "#d6d6d6" }}
+      style={{ backgroundColor: "#74c0fc" }}
       className="text-center text-lg-start text-muted"
     >
       <section className="">
-        <MDBContainer className="text-center text-md-start mt-5 p-4">
+        <MDBContainer
+          className="text-center text-md-start mt-5 pt-2"
+          style={{ color: "white" }}
+        >
           <MDBRow className="mt-3">
             <MDBCol md="3" lg="4" xl="3" className="mx-auto mb-4">
               <h6 className="text-uppercase fw-bold mb-4">
@@ -33,25 +36,25 @@ const Footer = () => {
               </p>
             </MDBCol>
 
-            <MDBCol md="2" lg="2" xl="2" className="mx-auto mb-4">
+            <MDBCol md="2" lg="2" xl="2" className="mx-auto mb-4 ">
               <h6 className="text-uppercase fw-bold mb-4">Products</h6>
               <p>
-                <a href="#!" className="text-reset">
+                <a href="#!" className="text-decoration-none text-reset">
                   Home
                 </a>
               </p>
               <p>
-                <a href="#!" className="text-reset">
+                <a href="#!" className="text-decoration-none text-reset">
                   About Us
                 </a>
               </p>
               <p>
-                <a href="#!" className="text-reset">
+                <a href="#!" className="text-decoration-none text-reset">
                   Delivery Information
                 </a>
               </p>
               <p>
-                <a href="#!" className="text-reset">
+                <a href="#!" className="text-decoration-none text-reset">
                   Terms & Conditions
                 </a>
               </p>
@@ -60,22 +63,22 @@ const Footer = () => {
             <MDBCol md="3" lg="2" xl="2" className="mx-auto mb-4">
               <h6 className="text-uppercase fw-bold mb-4">Useful links</h6>
               <p>
-                <a href="#!" className="text-reset">
+                <a href="#!" className="text-decoration-none text-reset">
                   Pricing
                 </a>
               </p>
               <p>
-                <a href="#!" className="text-reset">
+                <a href="#!" className="text-decoration-none text-reset">
                   Settings
                 </a>
               </p>
               <p>
-                <a href="#!" className="text-reset">
+                <a href="#!" className="text-decoration-none text-reset">
                   Orders
                 </a>
               </p>
               <p>
-                <a href="#!" className="text-reset">
+                <a href="#!" className="text-decoration-none text-reset">
                   Help
                 </a>
               </p>
@@ -100,8 +103,21 @@ const Footer = () => {
             </MDBCol>
           </MDBRow>
         </MDBContainer>
+        <MDBRow
+          className="text-center text-md-start "
+          style={{
+            backgroundColor: "#191970",
+            color: "white",
+            maxWidth: "100%",
+            margin: "auto",
+          }}
+        >
+          <h6 style={{ margin: "0 auto", textAlign: "center" }}>
+            © 2024 Laksiri Hardware All rights reserved.
+          </h6>
+        </MDBRow>
       </section>
     </MDBFooter>
   );
 };
-export default Footer;
+export default footer;

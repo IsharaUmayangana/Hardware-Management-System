@@ -18,6 +18,8 @@ const InventoryHome = () => {
     const [image, setImage] = useState(null);
     const [error, setError] = useState(null);
     const [categories, setCategories] = useState([]);
+    const [brand, setBrand] = useState('');
+    const [brands, setBrands] = useState([]);
 
     // Fetch categories from the backend API
     useEffect(() => {
@@ -35,6 +37,23 @@ const InventoryHome = () => {
         };
         fetchCategories();
     }, []); // empty dependency array to run this effect only once
+
+    useEffect(() => {
+        const fetchBrands = async () => {
+            try {
+                const response = await fetch('http://localhost:8000/brands');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch brands');
+                }
+                const data = await response.json();
+                setBrands(data);
+            } catch (error) {
+                console.error('Error fetching brands:', error.message);
+            }
+        };
+
+        fetchBrands();
+    }, []);
 
     // Calculate price after discount 
     useEffect(() => {
@@ -89,6 +108,7 @@ const InventoryHome = () => {
         const formData = new FormData();
         formData.append('name', name);
         formData.append('category', category);
+        formData.append('brand', brand);
         formData.append('price', priceAfterDiscount);
         formData.append('pricebeforeDiscount', pricebeforeDiscount); 
         formData.append('buyingPrice', buyingPrice);
@@ -118,6 +138,7 @@ const InventoryHome = () => {
             // Clear form fields
             setName('');
             setCategory('');
+            setBrand('');
             setBuyingPrice('');
             setpricebeforeDiscount('');
             setQuantity('');
@@ -145,7 +166,7 @@ const InventoryHome = () => {
                         required
                     />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={6}>
                     <TextField
                         select
                         label="Item Category"
@@ -155,6 +176,22 @@ const InventoryHome = () => {
                         required
                     >
                         {categories.map((option) => (
+                            <MenuItem key={option._id} value={option.name}>
+                                {option.name}
+                            </MenuItem>
+                        ))}
+                    </TextField>
+                </Grid>
+                <Grid item xs={6}>
+                    <TextField
+                        select
+                        label="Brand"
+                        value={brand}
+                        onChange={(e) => setBrand(e.target.value)}
+                        fullWidth
+                        required
+                    >
+                        {brands.map((option) => (
                             <MenuItem key={option._id} value={option.name}>
                                 {option.name}
                             </MenuItem>

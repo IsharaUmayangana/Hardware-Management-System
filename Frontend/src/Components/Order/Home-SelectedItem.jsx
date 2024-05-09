@@ -9,7 +9,9 @@ import RatingComponent from './RatingPage';// Import the BasicRating component
 import RatingPage from "./RatingComponent";
 import Stack from '@mui/material/Stack';
 import NavigationBar from '../Home/Home-Navigation';
-import CartCount from './CartCount';
+import Footer from '../Home/footer'
+
+import formatNumber from 'format-number';
 
 
 const HomeSelectedItem = ({ addToCart }) => {
@@ -56,7 +58,7 @@ const HomeSelectedItem = ({ addToCart }) => {
         },
         body: JSON.stringify({
           productId: id,
-          userId: '662639b6d941c0f2cc66be48', // Assuming you have the user's ID in state
+          userId: '662639b6d941c0f2cc66be48', 
           rating: newRating,
         }),
       });
@@ -110,18 +112,15 @@ const HomeSelectedItem = ({ addToCart }) => {
 
     return () => clearTimeout(timer);
   }, []);
-  
-  
-  
-  
+
+  // Define options for formatting
+  const options = { round: 2, padRight: 2, padLeft: 0, thousand: ',', decimal: '.' };
 
   return (
   <div>
-            <NavigationBar/>
-        
+    <NavigationBar/>
+
     <div className="selectedOrderProduct">
-      
-      
       {loading && <p>Loading...</p>}
       {!loading && !product && <p>No product found</p>}
       {!loading && product && (
@@ -138,13 +137,18 @@ const HomeSelectedItem = ({ addToCart }) => {
           </div>
           <div className="productOrderDetails">
             <p className="productName">Product Name : {product.name}</p>
-            <p className="unitPrice">Unit Price : {product.price}</p>
+            <p className="unitPrice">Unit Price : Rs {product.price && formatNumber(options)(parseFloat(product.price))}</p>
             <p className="availableAmount">Available Amount : {product.quantity}</p>
-            <p className="availableAmount">Description: {product.description}</p>
+            <p className="availableAmount">Brand : {product.brand}</p>
+            <p className="availableAmount">Description : {product.description}</p>
             <Stack spacing={2} direction="column">
-              <Button variant="contained" size="medium" style={{ width: '200px' }} onClick={handleAddToCart} startIcon={<AddShoppingCartIcon />}>
-                Add to Cart
-              </Button>
+              {product.quantity > 0 ? (
+                <Button variant="contained" size="medium" style={{ width: '200px' }} onClick={handleAddToCart} startIcon={<AddShoppingCartIcon />}>
+                  Add to Cart
+                </Button>
+              ):(
+                <p className="outOfStockMsg">Out of Stock</p>
+              )}
               <Button variant="contained" size="medium" style={{ width: '200px' }} component={Link} to="/cart" startIcon={<ShoppingCartIcon />}>
                 View Cart
               </Button>
@@ -158,7 +162,7 @@ const HomeSelectedItem = ({ addToCart }) => {
         </div>
       )}
     </div>
-
+      <Footer/>
     </div>
   );
 };

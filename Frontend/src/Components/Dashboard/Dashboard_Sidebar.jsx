@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import './Dashboard.css'
 import {
   BsCart3,
   BsGrid1X2Fill,
@@ -62,7 +62,7 @@ function Sidebar() {
 
         <li className="sidebar-list-item">
           <a href="">
-            <BsMenuButtonWideFill className="icon" /> report management
+            <BsMenuButtonWideFill className="icon" /> Sales Management
           </a>
         </li>
 

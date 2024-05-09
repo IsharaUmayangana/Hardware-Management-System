@@ -1,28 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import ProductDetails from './Inventory-ProductDetails';
 import Status from './Inventory-Status';
-import AddProductForm from './InventoryForm';
-import AddNewCategoryForm from './inventory-AddNewCategory';
-import AddReturnItemForm from './returnItemForm';
-import { TextField, Select, MenuItem, Button, FormControl, InputLabel, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
+import { TextField, Select, MenuItem, Button, FormControl, InputLabel } from '@mui/material';
 import './InventoryStyles.css';
 
 const InventoryHome = () => {
     const [products, setProducts] = useState(null);
-    const [categories, setCategories] = useState([]); 
-    const [addCategoryDialogOpen, setAddCategoryDialogOpen] = useState(false);
-    const [addProductDialogOpen, setAddProductDialogOpen] = useState(false);
-    const [addReturnItemDialogOpen, setAddReturnItemDialogOpen] = useState(false);
+    const [categories, setCategories] = useState([]);
+    const [brands, setBrands] = useState([]);
     const [refreshPage, setRefreshPage] = useState(false);
 
     const [selectedCategory, setSelectedCategory] = useState('');
+    const [selectedBrand, setSelectedBrand] = useState(''); // New state for selected brand
     const [searchQuery, setSearchQuery] = useState('');
     const [curPage, setCurPage] = useState(1);
     const recordsPerPage = 7;
 
+    //title of the document
+    useEffect(() => {
+        document.title = "Inventory";
+    }, []);
+
     const handleCategory = (e) => {
         setSelectedCategory(e.target.value);
         setCurPage(1); //reset page number when category change
+    };
+
+    const handleBrand = (e) => { //function to handle brand selection
+        setSelectedBrand(e.target.value);
+        setCurPage(1); //reset page number when brand change
     };
 
     const handleSearch = (e) => {
@@ -30,42 +36,14 @@ const InventoryHome = () => {
         setCurPage(1); //reset page number when search query change
     };
 
-    //Dialog functions
-    const handleAddCategoryDialogOpen = () => {
-        setAddCategoryDialogOpen(true);
-    };
-
-    const handleAddCategoryDialogClose = () => {
-        setAddCategoryDialogOpen(false);
-        setRefreshPage(true);
-    };
-
-    const handleAddProductDialogOpen = () => {
-        setAddProductDialogOpen(true);
-    };
-
-    const handleAddProductDialogClose = () => {
-        setAddProductDialogOpen(false);
-        setRefreshPage(true);
-    };
-
-    const handleReturnItemDialogOpen = () => {
-        setAddReturnItemDialogOpen(true);
-    };
-
-    const handleReturnItemDialogClose = () => {
-        setAddReturnItemDialogOpen(false);
-        setRefreshPage(true);
-    };
-
     useEffect(() => {
         const fetchProducts = async () => {
             const response = await fetch('http://localhost:8000/inventory');
             const json = await response.json();
 
-            if(response.ok){
-              setProducts(json);
-            } 
+            if (response.ok) {
+                setProducts(json);
+            }
         };
 
         fetchProducts();
@@ -88,50 +66,69 @@ const InventoryHome = () => {
         fetchCategories();
     }, [refreshPage]);
 
-    //function to count product categories
-    const calculateCategories = () =>{
-        let totalCategories = categories.length;  
+    useEffect(() => {
+        const fetchBrands = async () => {
+            try {
+                const response = await fetch('http://localhost:8000/brands');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch brands');
+                }
+                const data = await response.json();
+                setBrands(data);
+            } catch (error) {
+                console.error('Error fetching brands:', error.message);
+            }
+        };
+
+        fetchBrands();
+    }, [refreshPage]);
+
+    // Function to count product categories
+    const calculateCategories = () => {
+        let totalCategories = categories.length;
         return totalCategories;
     };
 
-    //function to calculate total value
+    // Function to calculate total value
     const calculateTotalValue = () => {
         if (!products) {
             return 0;
         }
         let totalValue = 0;
         products.forEach(product => {
-            if (!selectedCategory || product.category === selectedCategory) {
+            if ((!selectedCategory || product.category === selectedCategory) &&
+                (!selectedBrand || product.brand === selectedBrand)) {
                 totalValue += product.price * product.quantity;
             }
         });
         return totalValue;
     };
 
-    //function to calculate total products
+    // Function to calculate total products
     const calculateTotalProducts = () => {
         if (!products) {
             return 0;
         }
         let totalProducts = 0;
         products.forEach(product => {
-            if (!selectedCategory || product.category === selectedCategory) {
+            if ((!selectedCategory || product.category === selectedCategory) &&
+                (!selectedBrand || product.brand === selectedBrand)) {
                 totalProducts += 1;
             }
         });
         return totalProducts;
     };
 
-    //function to check and find out of stock
+    // Function to check and find out of stock
     const calculateOutOfStock = () => {
         if (!products) {
             return 0;
         }
         let outOfStock = 0;
-        let lowStockProducts = []; //array to store low stock product data
-    
+        let lowStockProducts = []; // Array to store low stock product data
+
         products.forEach(product => {
-            if (!selectedCategory || product.category === selectedCategory) {
+            if ((!selectedCategory || product.category === selectedCategory) && (!selectedBrand || product.brand === selectedBrand)) {
                 if (product.quantity === 0) {
                     outOfStock += 1;
                 } else if (product.quantity < product.quantityLimit) {
@@ -139,23 +136,24 @@ const InventoryHome = () => {
                 }
             }
         });
-    
+
         //send low stock products to the backend
         sendLowStocktoBackend(lowStockProducts);
-    
+
         return outOfStock;
     };
-    
+
     //function to send low stock data to backend
     const sendLowStocktoBackend = async (lowStockProducts) => {
         try {
             if (lowStockProducts.length > 0) {
+                console.log("low stock items", lowStockProducts)
                 const response = await fetch('http://localhost:8000/supply-management/notifications', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify( lowStockProducts ), //pass low stock product data to backend
+                    body: JSON.stringify(lowStockProducts), //pass low stock product data to backend
                 });
                 if (!response.ok) {
                     if (response.status === 400) {
@@ -170,13 +168,14 @@ const InventoryHome = () => {
         } catch (error) {
             console.error('error sending data', error);
         }
-    };    
+    };
 
-    //pagination variables
+    // Pagination variables
     const lastIndex = curPage * recordsPerPage;
     const firstIndex = lastIndex - recordsPerPage;
     const filteredProducts = products ? products.filter(product =>
         (!selectedCategory || product.category === selectedCategory) &&
+        (!selectedBrand || product.brand === selectedBrand) &&
         (!searchQuery || product.name.toLowerCase().includes(searchQuery.toLowerCase()))
     ) : [];
     const records = filteredProducts.slice(firstIndex, lastIndex);
@@ -184,27 +183,26 @@ const InventoryHome = () => {
     const numbers = [...Array(noOfPage + 1).keys()].slice(1);
 
     //pagination functions
-    function previousPage(){
-        if(curPage !== 1) {
+    function previousPage() {
+        if (curPage !== 1) {
             setCurPage(curPage - 1)
         }
-     }
+    }
 
-     function changeCurPage(id){
+    function changeCurPage(id) {
         setCurPage(id)
-     }
+    }
 
-     function nextPage(){
-        if(curPage !== noOfPage) {
+    function nextPage() {
+        if (curPage !== noOfPage) {
             setCurPage(curPage + 1)
         }
-     }
+    }
 
-    return ( 
-        <div className="invhome"> 
+    return (
+        <div className="invhome">
             <div className='invMain'>
-                <h2>Inventory</h2>
-                <Status totalCategories={calculateCategories()} totalvalue={calculateTotalValue()} totalProducts={calculateTotalProducts()} outOfStock={calculateOutOfStock()}/>
+                <Status totalCategories={calculateCategories()} totalvalue={calculateTotalValue()} totalProducts={calculateTotalProducts()} outOfStock={calculateOutOfStock()} />
                 <div className="functionBar">
                     <div className='searchbar'>
                         <TextField label="Search by Name" value={searchQuery} onChange={handleSearch} fullWidth />
@@ -212,17 +210,25 @@ const InventoryHome = () => {
                     <div className="categoryBox">
                         <FormControl fullWidth>
                             <InputLabel id="category-select-label">Select Category</InputLabel>
-                            <Select labelId="category-select-label" value={selectedCategory} onChange={handleCategory} fullWidth >
-                                <MenuItem value="">All</MenuItem>
-                                    {categories.map(category => (
-                                        <MenuItem key={category._id} value={category.name}>{category.name}</MenuItem>
-                                    ))}                            
+                            <Select labelId="category-select-label" value={selectedCategory} onChange={handleCategory} fullWidth>
+                                <MenuItem value="">All Categories</MenuItem>
+                                {categories.map(category => (
+                                    <MenuItem key={category._id} value={category.name}>{category.name}</MenuItem>
+                                ))}
                             </Select>
                         </FormControl>
                     </div>
-                    <Button className='add-buttons' onClick={handleAddCategoryDialogOpen} variant="contained" color="primary">Add New Category</Button>
-                    <Button className='add-buttons' onClick={handleAddProductDialogOpen} variant="contained" color="primary">Add New Product</Button>
-                    <Button className='add-buttons' onClick={handleReturnItemDialogOpen} variant="contained" color="primary">Return Item</Button>
+                    <div className="brandBox">
+                        <FormControl fullWidth>
+                            <InputLabel id="brand-select-label">Select Brand</InputLabel>
+                            <Select labelId="brand-select-label" value={selectedBrand} onChange={handleBrand} fullWidth>
+                                <MenuItem value="">All Brands</MenuItem>
+                                {brands.map(brand => (
+                                    <MenuItem key={brand._id} value={brand.name}>{brand.name}</MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+                    </div>
                 </div>
                 <table className="topicline">
                     <tbody>
@@ -236,23 +242,17 @@ const InventoryHome = () => {
                     </tbody>
                 </table>
                 {records.map((Inventory) => (
-                    <ProductDetails key={Inventory._id} Inventory={Inventory}/>
+                    <ProductDetails key={Inventory._id} Inventory={Inventory} />
                 ))}
-                
-                {/* button to navigate to report1 */}
-                <div>
-                    <Button href="/report1" variant="contained" color="primary">Inventory List Report</Button>
-                </div>
-                <br></br>
 
-                {/* pagination */}
+                {/* Pagination */}
                 <div className='pagination'>
                     <li className='page-item'>
                         <Button className='page-link' onClick={previousPage}>Prev</Button>
                     </li>
                     {
                         numbers.map((n, i) => (
-                            <li className={`page-item ${curPage === n ? 'active': ''}`} key={i}>
+                            <li className={`page-item ${curPage === n ? 'active' : ''}`} key={i}>
                                 <Button className='page-link' onClick={() => changeCurPage(n)}>{n}</Button>
                             </li>
                         ))
@@ -261,45 +261,9 @@ const InventoryHome = () => {
                         <Button className='page-link' onClick={nextPage}>Next</Button>
                     </li>
                 </div>
-
-                {/* Add New Category Dialog */}
-                <Dialog open={addCategoryDialogOpen} onClose={handleAddCategoryDialogClose} maxWidth="100px">
-                    <DialogContent>
-                        <AddNewCategoryForm />
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={handleAddCategoryDialogClose} color="primary">Cancel</Button>
-                    </DialogActions>
-                </Dialog>
-
-                {/* Add New Product Dialog */}
-                <Dialog open={addProductDialogOpen} onClose={handleAddProductDialogClose} maxWidth="1000px" >
-                    <DialogTitle>
-                        <h2>Add New Product</h2>
-                    </DialogTitle>
-                    <DialogContent>
-                        <AddProductForm />
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={handleAddProductDialogClose} color="primary">Cancel</Button>
-                    </DialogActions>
-                </Dialog>
-
-                {/* Return Item Dialog */}
-                <Dialog open={addReturnItemDialogOpen} onClose={handleReturnItemDialogClose} maxWidth="1000px" >
-                    <DialogTitle>
-                        <h2>Return Item</h2>
-                    </DialogTitle>
-                    <DialogContent>
-                        <AddReturnItemForm />
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={handleReturnItemDialogClose} color="primary">Cancel</Button>
-                    </DialogActions>
-                </Dialog>
             </div>
         </div>
-     );
+    );
 }
 
 export default InventoryHome;

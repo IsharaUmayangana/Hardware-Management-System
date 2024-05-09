@@ -1,9 +1,16 @@
 import React, { useState } from "react";
 import { TextField, Button, Box } from "@mui/material";
+import { useNavigate,useLocation } from 'react-router-dom'
+import Typography from '@mui/material/Typography';
 import PaymentIcon from '@mui/icons-material/Payment';
+import SimpleDialog from './FinalPage';
 import './order.css';
+import NavigationBar from '../Home/Home-Navigation';
 
-const PaymentPage = ({ totalPrice }) => {
+const PaymentPage = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const [openDialog, setOpenDialog] = useState(false);
     const [cvv, setCvv] = useState('');
     const [cvvError, setCvvError] = useState('');
     //Expiry date validation
@@ -11,7 +18,10 @@ const PaymentPage = ({ totalPrice }) => {
     const [expiryError, setExpiryError] = useState('');
     const [cardNumber, setCardNumber] = useState('');
     const [cardNumberError, setCardNumberError] = useState('');
+    const [paymentSubmitted, setPaymentSubmitted] = useState(false);
 
+    
+    const totalPrice = location.state.totalPrice || 0 ;
 
     const handleCvvChange = (e) => {
         const { value } = e.target;
@@ -68,38 +78,61 @@ const handleCardNumberChange = (e) => {
       setCardNumberError('');
   }
 };
-  // return (
-  //   <div className="Payment">
-  //     <h2>Payment Details</h2>
-  //     <form style={{ display: 'flex', flexDirection: 'column' }}>
-  //       <label htmlFor="cardName">Name on Card:</label>
-  //       <input type="text" id="cardName" name="cardName" required />
-  //       <label htmlFor="cardNumber">Card Number:</label>
-  //       <input type="text" id="cardNumber" name="cardNumber" value={cardNumber} onChange={handleCardNumberChange} maxLength="19" required />
-  //       {cardNumberError && <p style={{ color: 'red' }}>{cardNumberError}</p>}
-  //       <label htmlFor="cvv">CVV:</label>
-  //       <input type="text" id="cvv" name="cvv" value={cvv}onChange={handleCvvChange} maxLength="3" required />
-  //       {cvvError && <p style={{ color: 'red' }}>{cvvError}</p>}
-  //       <label htmlFor="expiry">Expiry MM/YY:</label>
-  //       <input type="text" id="expiry" name="expiry" value={expiry} onChange={handleExpiryChange} maxLength="5" required />
-  //       {expiryError && <p style={{ color: 'red' }}>{expiryError}</p>}
-  //       <p>Total Price: {totalPrice}</p>
-  //       <button type="submit">Pay Now</button>
-  //     </form>
-  //   </div>
-  // );
+
+const handleSubmit = (e) => {
+    e.preventDefault(); // Prevent default form submission
+    setOpenDialog(true);
+    // Prepare payment data
+    const paymentData = {
+        cvv,
+        expiry,
+        cardNumber,
+        totalPrice
+    };
+
+    // Send POST request
+    fetch('your-api-endpoint', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(paymentData)
+    })
+    .then(response => {
+        if (response.ok) {
+            // Handle successful response
+            console.log('Payment successful');
+            setOpenDialog(true);
+            setPaymentSubmitted(true);
+        } else {
+            // Handle error response
+            console.error('Payment failed');
+        }
+    })
+    .catch(error => {
+        // Handle network error
+        console.error('Error:', error);
+    });
+};
+
+  
   return (
+  <div>
+    <NavigationBar/>
     <div className="Payment" style={{ display: 'flex', justifyContent: 'center' }}>
+        
         <div>
         <h2>Payment Details</h2>
         
-        <form style={{ display: 'flex', flexDirection: 'column',width:'400px'}}>
+        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column',width:'400px'}}>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}> {/* Added Box component with gap */}
             <TextField
+                
                 label="Name on Card"
                 id="cardName"
                 name="cardName"
                 required
+                InputProps={{ inputProps: { pattern: '[A-Za-z ]+', title: 'Name cannot contain numbers' } }}
             />
             <TextField
                 label="Card Number"
@@ -107,6 +140,7 @@ const handleCardNumberChange = (e) => {
                 name="cardNumber"
                 value={cardNumber}
                 onChange={handleCardNumberChange}
+                
                 required
                 error={cardNumberError ? true : false}
                 helperText={cardNumberError}
@@ -114,6 +148,7 @@ const handleCardNumberChange = (e) => {
                 
             />
             <TextField
+                type="number"
                 label="CVV"
                 id="cvv"
                 name="cvv"
@@ -123,8 +158,10 @@ const handleCardNumberChange = (e) => {
                 required
                 error={cvvError ? true : false}
                 helperText={cvvError}
+                InputProps={{ inputProps: { pattern: '[0-9]{0,3}', title: 'CVV must be 3 digits' } }}
             />
             <TextField
+                
                 label="Expiry MM/YY"
                 id="expiry"
                 name="expiry"
@@ -134,14 +171,17 @@ const handleCardNumberChange = (e) => {
                 required
                 error={expiryError ? true : false}
                 helperText={expiryError}
+                InputProps={{ inputProps: { pattern: '[0-9/]{0,5}', title: 'Invalid expiry date' } }}
             /></Box>
-            <p>Total Price: {totalPrice}</p>
+            <p className="totalPrice">Total Price: {totalPrice}</p>
             <Button variant="contained" color="primary" type="submit" startIcon={<PaymentIcon />}>
                 Pay Now
             </Button>
         </form>
         
         </div>
+        {openDialog && <SimpleDialog onClose={() => setOpenDialog(false)} />}
+    </div>
     </div>
 );
 };

@@ -101,7 +101,7 @@ const AllItemsRatingPage = () => {
           
             <div style={{ width: '80%' }}>
                 <div>
-                  <h1>Rating Details</h1>
+                  <h1 className="Rating">Rating Details</h1>
                 </div>
                 {loading ? (
                     <p>Loading...</p>

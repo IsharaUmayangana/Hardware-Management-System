@@ -29,6 +29,7 @@ const SearchBar = ({ onSearch , placeholder}) => {
         style={{
           border: "0.1px solid #ccc",
           borderRadius: "5px",
+          height:45
         }}
       >
         <div className="search-container" >

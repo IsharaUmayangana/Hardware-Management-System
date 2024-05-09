@@ -8,8 +8,6 @@ const jwt = require('jsonwebtoken')
 const cookieParser = require('cookie-parser')
 
 
-
-
 const registerRouter = require('./routes/LoginRegisterDashboard/registerRouter');
 const authRoutes = require('./routes/LoginRegisterDashboard/authRoutes');
 const authDashboard = require('./routes/LoginRegisterDashboard/authDashboard');
@@ -21,6 +19,7 @@ const feedbackRoutes = require('./routes/productFeedback');
 const productCategoryRoutes = require('./routes/productCategories');
 const ratingRoutes = require('./routes/ratings')
 const returnItemRouts = require('./routes/returnItem');
+const productBrands = require('./routes/productBrands');
 
 const lowStockNotifications = require('./routes/SupplyManagementRoutes/lowStockRoutes');
 const supplierManagementRoutes = require('./routes/SupplyManagementRoutes/SupplierManagementRoutes');
@@ -37,7 +36,17 @@ const CreateVehicleRoute = require('./routes/DeliveryManagementRoutes/DeliveryRo
 const GetDeliveryRoutes = require('./routes/DeliveryManagementRoutes/DeliveryRoutes/GetDeliveryRoute');
 const DeliveryUpdateDeleteRoutes = require('./routes/DeliveryManagementRoutes/DeliveryRoutes/UpdateAndDeleteRoutes');
 
+
+
+const employeeRoutes = require('./routes/employees');
+const leaveRoutes = require('./routes/leaves');
+const attendanceRoutes = require('./routes/attendance');
+const accleaveRoutes = require('./routes/accleaves');
+
+const driverDispatcherRoutes = require('./routes/DriverDispatcherRoutes/DriverDispatcherRoutes')
+
 const SalesRoutes = require('./routes/SalesRoutes');
+
 
 
 
@@ -64,7 +73,7 @@ app.use('/dashboard', authDashboard);
 
 //Inventory Manager's Api
 app.use('/inventory', inventoryRoutes);
-app.use('/feedback',feedbackRoutes);
+app.use('/brands',productBrands);
 app.use('/returnItem',returnItemRouts);
 app.use('/categories',productCategoryRoutes);
 
@@ -160,22 +169,34 @@ app.use('/DeliveryUpdateDelete', DeliveryUpdateDeleteRoutes);
 //Get Delivery ID for Delete
 app.use('/DeliveryDelete', DeliveryUpdateDeleteRoutes);
 
-
-
-// //Get Delivery ID for Delete
-// app.delete('/DeliveryDelete/:id', (req, res) => {
-//     const id = req.params.id;
-//     DeliveryModel.findByIdAndDelete({_id: id})
-//         .then(deletedDelivery => {
-//             res.json(deletedDelivery); // Send the deleted delivery as JSON response
-//         })
-//         .catch(err => {
-//             res.status(500).json({ error: err.message }); // Send error response if there's an error
-//         });
+// app.get('/orders/:email', async (req, res) => {
+//     try {
+//         const appointments = await or.find({});
+//         res.status(200).json({ appointments });
+//     } catch (error) {
+//         res.status(500).json({ error: 'Internal server error' });
+//     }
 // });
+
+
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------//
 
+app.use('/driver-dispatcher', driverDispatcherRoutes);
+
+app.use('/driver-dispatcher', driverDispatcherRoutes);
+
+
+//Duvidu's Api
+app.use('/employees',employeeRoutes)
+app.use('/leaves',leaveRoutes)
+app.use('/attendance',attendanceRoutes)
+app.use('/accleaves',accleaveRoutes)
+
+app.use((req, res, next)=> {
+    console.log(req.path, req.method)
+    next()
+})
 
 
 //Database connection

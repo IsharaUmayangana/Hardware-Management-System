@@ -100,11 +100,10 @@ const SelectedItem = () => {
         {!loading && product && (
           <div className="detailsBox" >
             <h2>{product.name}</h2>
-            <span><a href='http://localhost:5173/inventory' className="back-button">Back</a></span>
             <div className="sp-container1">
               <div className="sp-subContainer1"> 
                 <img className="sp-imageView" src={`http://localhost:8000/images/`+ product.img_URL} alt="Product" />
-                <p className="sp-description"><strong>Description :</strong> <br></br>{product.description}</p>
+                <p className="sp-description"><strong>Brand :</strong>{product.brand}<br/><br/><strong>Description :</strong> <br></br>{product.description}</p>
                 <div className="sp-button">
                   <Button onClick={handleEditDialogOpen} variant="contained" color="primary">Edit</Button>
                   <Button onClick={handleDelete} variant="contained" color="error">Delete</Button>
@@ -123,7 +122,7 @@ const SelectedItem = () => {
                     </tr>
                     <tr>
                       <th>Price Before Discount:</th>
-                      <td>{product.pricebeforeDiscount && formatNumber(options)(parseFloat(product.pricebeforeDiscount))}</td>
+                      <td>Rs.{product.pricebeforeDiscount && formatNumber(options)(parseFloat(product.pricebeforeDiscount))}</td>
                     </tr>
                     <tr>
                       <th>Discount :</th>
@@ -131,15 +130,15 @@ const SelectedItem = () => {
                     </tr>
                     <tr>
                       <th>Price After Discount:</th>
-                      <td>{product.price && formatNumber(options)(parseFloat(product.price))}</td>
+                      <td>Rs.{product.price && formatNumber(options)(parseFloat(product.price))}</td>
                     </tr>
                     <tr>
                       <th>Unit Buying Price:</th>
-                      <td>{product.buyingPrice && formatNumber(options)(parseFloat(product.buyingPrice))}</td>
+                      <td>Rs.{product.buyingPrice && formatNumber(options)(parseFloat(product.buyingPrice))}</td>
                     </tr>
                     <tr>
                       <th>Profit:</th>
-                      <td>{product.price && product.buyingPrice && formatNumber(options)(parseFloat(product.price) - parseFloat(product.buyingPrice))}</td>
+                      <td>Rs.{product.price && product.buyingPrice && formatNumber(options)(parseFloat(product.price) - parseFloat(product.buyingPrice))}</td>
                     </tr>
                     <tr>
                       <th>Available Amount:</th>
@@ -151,7 +150,7 @@ const SelectedItem = () => {
                     </tr>
                     <tr>
                       <th>Total Value of Available Quantity:</th>
-                      <td>{product.price && product.quantity && formatNumber(options)(parseFloat(product.price) * parseFloat(product.quantity))}</td>
+                      <td>Rs.{product.price && product.quantity && formatNumber(options)(parseFloat(product.price) * parseFloat(product.quantity))}</td>
                     </tr>
                     <tr>
                       <th>Display on home page:</th>
