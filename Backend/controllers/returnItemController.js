@@ -1,14 +1,39 @@
 const returnItem = require('../models/returnItemModel');
 const Inventory = require('../models/inventoryModel');
 const mongoose = require('mongoose');
+const Supplier = require('../models/SupplyManagementModels/supplierModel')
 
 // get all return item data
 const getAllReturnProducts = async (req, res) => {
     try {
-        const allRetrunData = await returnItem.find({}).sort({ createdAt: -1 });
-        res.status(200).json(allRetrunData);
+       
+        const returnItems = await returnItem.find({}).populate('name');
+
+        
+        const updatedreturnItems = [];
+
+       
+        for (const returnItem of returnItems) {
+           
+            const productId = returnItem.name;
+
+           
+            const suppliers = await Supplier.find({ productsSupplied: productId });
+
+            
+            const updatedreturnItem = {
+                ...returnItem.toObject(), 
+                suppliers: suppliers
+            };
+
+            
+            updatedreturnItems.push(updatedreturnItem);
+        }
+
+        res.status(200).json(updatedreturnItems);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        console.error('Error fetching return items:', error);
+        res.status(500).json({ error: 'Internal server error' });
     }
 };
 

@@ -19,6 +19,7 @@ const feedbackRoutes = require('./routes/productFeedback');
 const productCategoryRoutes = require('./routes/productCategories');
 const ratingRoutes = require('./routes/ratings')
 const returnItemRouts = require('./routes/returnItem');
+const productBrands = require('./routes/productBrands');
 
 const lowStockNotifications = require('./routes/SupplyManagementRoutes/lowStockRoutes');
 const supplierManagementRoutes = require('./routes/SupplyManagementRoutes/SupplierManagementRoutes');
@@ -73,7 +74,7 @@ app.use('/dashboard', authDashboard);
 
 //Inventory Manager's Api
 app.use('/inventory', inventoryRoutes);
-app.use('/feedback',feedbackRoutes);
+app.use('/brands',productBrands);
 app.use('/returnItem',returnItemRouts);
 app.use('/categories',productCategoryRoutes);
 

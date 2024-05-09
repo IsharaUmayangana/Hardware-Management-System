@@ -1,4 +1,4 @@
-import './employee.css'
+import employeeCss from './employee.module.css'
 import { Link } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { IconButton } from "@mui/material";
@@ -30,20 +30,20 @@ const EmployeeDetails = ({ employee, onDelete  }) => {
 
     return(
        
-        <div className="employeeDetails">
+        <div className={employeeCss.employeeDetails}>
             <ul>
-            <li><div className='emplId'>{employee.employeeid}</div></li>
-            <li><div className='emplName'>{employee.fullname}</div></li>
-            <li><div className='emplMail'>{employee.email}</div></li>
-            <li><div className='emplJob'>{employee.jobPost}</div></li>
-            <li><div className='emplType'>{employee.employmenttype}</div></li>
-            <li><button className="qr"><Link to={`/employee/${employee.employeeid}/qr`}>QR</Link></button></li>
-            <li><button className='editBtn'><Link to={`/updateEmployee/${employee._id}`}>Update</Link></button></li>
-            <li><button className='genarate'>
+            <li><div className={employeeCss.emplId}>{employee.employeeid}</div></li>
+            <li><div className={employeeCss.emplName}>{employee.fullname}</div></li>
+            <li><div className={employeeCss.emplMail}>{employee.email}</div></li>
+            <li><div className={employeeCss.emplJob}>{employee.jobPost}</div></li>
+            <li><div className={employeeCss.emplType}>{employee.employmenttype}</div></li>
+            <li><button className={employeeCss.qrr}><Link to={`/employee/${employee.employeeid}/qr`}>QR</Link></button></li>
+            <li><button className={employeeCss.editBtn}><Link to={`/updateEmployee/${employee._id}`}>Update</Link></button></li>
+            <li><button className={employeeCss.genarate}>
                 <Link to={`/employee/${employee.employeeid}/report`}>Generate Report</Link>
             </button></li>
 
-        <div className='dltBtn'> <li>
+        <div className={employeeCss.dltBtn}> <li>
         <IconButton size="large"  color="inherit" onClick={handleDelete}>
           <Badge  color="error">
             <DeleteIcon/>

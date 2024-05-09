@@ -1,5 +1,5 @@
 import { useState } from "react";
-import './leave.css';
+import leaveCss from './leave.module.css';
 
 const LeaveDetails = ({ leave, onDelete }) => {
   const [error, setError] = useState(null);
@@ -61,17 +61,17 @@ const LeaveDetails = ({ leave, onDelete }) => {
   };
 
   return (
-    <div className="leaveDetails">
+    <div className={leaveCss.leaveDetails}>
       <ul>
-        <li className="levempId">{leave.employeeid}</li>
-        <li className="leveemail">{leave.email}</li>
-        <li className="levType">{leave.leaveType}</li>
-        <li className="levSdate">{leave.startDate}</li>
-        <li className="leveDate">{leave.endDate}</li>
-        <li className="levRsn">{leave.reason}</li>
+        <li className={leaveCss.evempId}>{leave.employeeid}</li>
+        <li className={leaveCss.leveemail}>{leave.email}</li>
+        <li className={leaveCss.levType}>{leave.leaveType}</li>
+        <li className={leaveCss.levSdate}>{leave.startDate}</li>
+        <li className={leaveCss.leveDate}>{leave.endDate}</li>
+        <li className={leaveCss.levRsn}>{leave.reason}</li>
         <li>
-          <button onClick={handleReject} className='levBtn'>Reject</button>
-          <button onClick={handleAcceptAndAccepted} className='levBtn'>Accept</button>
+          <button onClick={handleReject} className={leaveCss.levBtn}>Reject</button>
+          <button onClick={handleAcceptAndAccepted} className={leaveCss.levBtnA}>Accept</button>
         </li>
       </ul>
     </div>

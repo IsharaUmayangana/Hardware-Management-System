@@ -120,7 +120,7 @@ const OrderPage = () => {
         <div>
             <h2 className="OrderH2"><strong>Order Details</strong></h2>
             <div>
-                <input
+                <input className="ratingFont"
                     type="text"
                     placeholder="Search by item name"
                     value={searchTerm}
@@ -128,13 +128,13 @@ const OrderPage = () => {
                 />
                 
                 
-                <label htmlFor="startDate">Start Date:</label>
+                <label className="ratingFont" htmlFor="startDate">Start Date:</label>
                 <input type="date" id="startDate" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
-                <label htmlFor="endDate">End Date:</label>
+                <label className="ratingFont" htmlFor="endDate">End Date:</label>
                 <input type="date" id="endDate" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
-                <label htmlFor="minPrice">Min Price:</label>
+                <label className="ratingFont" htmlFor="minPrice">Min Price:</label>
                 <input type="number" id="minPrice" value={minPrice} onChange={(e) => setMinPrice(e.target.value)} />
-                <label htmlFor="maxPrice">Max Price:</label>
+                <label className="ratingFont" htmlFor="maxPrice">Max Price:</label>
                 <input type="number" id="maxPrice" value={maxPrice} onChange={(e) => setMaxPrice(e.target.value)} />
                 <Stack spacing={2} direction="row">
                     <Button variant="contained" onClick={getAllOrders}>Get all orders</Button>
