@@ -2,6 +2,7 @@ import { useEffect , useState} from "react"
 import React from 'react';
 import { createTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
+import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -13,9 +14,10 @@ import MarkEmailReadIcon from '@mui/icons-material/MarkEmailRead';
 import UnsubscribeIcon from '@mui/icons-material/Unsubscribe';
 import EmojiPeopleIcon from '@mui/icons-material/EmojiPeople';
 import SummarizeIcon from '@mui/icons-material/Summarize';
+import MenuIcon from '@mui/icons-material/Menu';
 import QRCode from 'qrcode.react';
 import { Link } from 'react-router-dom';
-import MenuIcon from '@mui/icons-material/Menu';
+
 
 
 import employeeCss from '../Components/Employee/employee.module.css'
@@ -28,8 +30,14 @@ import SearchIcon from '@mui/icons-material/Search';
 import { IconButton } from "@mui/material";
 import Badge from "@mui/material/Badge";
 
+
+
+
+
+
 const EmployeeHome = () => {
-    const [employees, setEmployees] = useState(null);
+
+    const [employees, setEmployees] = useState(null)
     const [searchQuery, setSearchQuery] = useState('');
     const [open, setOpen] = React.useState(false);
 
@@ -63,20 +71,24 @@ const EmployeeHome = () => {
 
     useEffect(() =>  {
         const fetchEmployees = async () => {
-            const response = await fetch('http://localhost:8000/employees');
-            const json = await response.json();
-            if (response.ok){
-                setEmployees(json);
-            }
-        };
-        fetchEmployees();
-    }, []);
+        const response = await fetch('http://localhost:8000/employees')
+        const json = await response.json()
+      
 
-    // Function to handle search query changes
-    const handleSearchInputChange = (e) => {
-        setSearchQuery(e.target.value);
-    };
+        if (response.ok){
+            setEmployees(json)
+        }
+    }
 
+    fetchEmployees()
+}, []);
+
+
+        // Function to handle search query changes
+        const handleSearchInputChange = (e) => {
+            setSearchQuery(e.target.value);
+          };
+          
     return (
         <div className={employeeCss.fullbody}>
           <Button  className={employeeCss.menuIC} onClick={toggleDrawer(true)}><MenuIcon/></Button>
@@ -133,8 +145,10 @@ const EmployeeHome = () => {
               
             </div>
             </div>
-        </div>
+            </div>
     )
+   
 }
 
-export default EmployeeHome;
+
+export default EmployeeHome

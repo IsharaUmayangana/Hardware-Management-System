@@ -78,7 +78,7 @@ app.use('/returnItem',returnItemRouts);
 app.use('/categories',productCategoryRoutes);
 
 //Navishka's API
-app.use('/order', orderRoutes); // Add order routes
+app.use('/order', orderRoutes); 
 app.use('/cart',cartRoutes)
 app.use('/deliveryinfo', deliveryInfoRoutes);
 app.use('/ratings', ratingRoutes);
