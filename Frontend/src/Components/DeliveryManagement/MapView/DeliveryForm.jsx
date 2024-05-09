@@ -138,6 +138,8 @@ const FormSide = ({ ShippingAddressCopy, handleFetchData, sampleData, deliveryCo
     setOpenDialog(false);
   };
 
+  
+
   return (
     <Grid item xs={12} md={6}>
       <Paper elevation={3} style={PaperStyle} sx={{ padding: 1, backgroundColor: "", borderRadius: 2, width: "80%", marginTop: "7px" }}>
@@ -182,9 +184,11 @@ const FormSide = ({ ShippingAddressCopy, handleFetchData, sampleData, deliveryCo
             required />
           {/* //FFA500 */}
 
+          
+
           <Button type="submit" variant="contained" sx={{ width: '100%', height: '35px', bgcolor: '#F8CD4E', fontWeight: "bold", marginTop: 3, borderRadius: 1 }}>Submit</Button>
           <container >
-            <Button onClick={showOrderData} variant="outlined" sx={{ width: '45%', height: '35px', bgcolor: '', marginTop: 2, borderRadius: 1 }}>Order Data</Button>
+            <Button component={Link} to='/Deliveryinfofromorder' variant="outlined" sx={{ width: '45%', height: '35px', bgcolor: '', marginTop: 2, borderRadius: 1 }}>Order Data</Button>
             <Button onClick={handleFetchData} variant="outlined" sx={{ width: '45%', height: '35px', bgcolor: '', marginTop: 2, marginLeft: 4, borderRadius: 1 }}>Vehicle Data</Button>
           </container>
 

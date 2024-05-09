@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import QRCode from 'qrcode.react';
+import employeeCss from './employee.module.css'
+
 
 const EmployeeQRCode = () => {
   const { employeeid } = useParams();
@@ -25,15 +27,15 @@ const EmployeeQRCode = () => {
   }, [employeeid]);
 
   return (
-    <div className="employeeQRCode">
-      <p className='scan'>SCAN</p>
-      <p className='here'>HERE</p>
-      <p className='toGet'>TO GET MORE</p>
-      <p className='info'>INFORMATION</p>
+    <div className={employeeCss.employeeQRCode}>
+      <p className={employeeCss.scan}>SCAN</p>
+      <p className={employeeCss.here}>HERE</p>
+      <p className={employeeCss.toGet}>TO GET MORE</p>
+      <p className={employeeCss.info}>INFORMATION</p>
       
       {employee ? (
         <QRCode
-          className='qrCodepic'
+          className={employeeCss.qrCodepic}
           value={JSON.stringify({
             employeeid: employee.employeeid,
             fullname: employee.fullname,

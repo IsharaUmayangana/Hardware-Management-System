@@ -46,7 +46,7 @@ ul {
 
   }
   .leaveImg{
-    background: url('./Hr3.jpg');
+    background: url('./bg97.jpg');
     height: 100vh;
     background-size: cover;
     background-position: center;
@@ -59,19 +59,31 @@ ul {
   color: black;
   }
   .home{
-    background-color:aquamarine;
+    background-color:rgb(123, 179, 238);
     color: black;
   }
   .levBtn{
     background-color: aqua;
     color: black;
     position:relative;
-    bottom: 57px;
+    bottom: 69px;
+    font-size: 15px;
     left: 850px;
     height:40px;
     width: 100px;
     
 
+  }
+  .levBtnA{
+
+    background-color: aqua;
+    color: black;
+    position:relative;
+    bottom: 69px;
+    font-size: 15px;
+    left: 870px;
+    height:40px;
+    width: 100px;
   }
   .LevDet{
     position:relative;
@@ -110,5 +122,57 @@ ul {
  .levRsn{
   position: relative;
   left: 975px;
-  bottom: 60px;
+  bottom: 75px;
   }
+
+
+  .homee {
+    padding: 20px;
+    background-color:rgb(123, 179, 238);
+    font-family: Arial, sans-serif;
+   
+  }
+  
+  .titleAcc {
+     position:relative;
+  left:600px;
+  top:2px;
+  font-family:Georgia, 'Times New Roman', Times, serif;
+  color: black;
+  }
+  
+  .acceptedLeaveRequests {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Spacing between leave requests */
+  }
+  
+  .leaveCard {
+    background-color: #fff;
+    border: 1px solid black; /* Border around the box */
+    padding: 15px; /* Padding inside the box */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  }
+  
+  .leaveCard strong {
+    color: #555; /* Change color for the labels */
+  }
+  
+  /* Additional styling for responsiveness */
+  @media (max-width: 768px) {
+    .acceptedLeaveRequests {
+      flex-direction: column;
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+  

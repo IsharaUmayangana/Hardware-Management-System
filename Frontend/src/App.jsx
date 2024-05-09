@@ -17,7 +17,12 @@ import ProductCategory from "./Components/Inventory/inventory-AddNewCategory";
 import ScannerBarcode from "./Components/Inventory/scanner";
 import InventoryLayout from "./Components/Inventory/InventoryLayout"
 
+
 import EmployeeHome from './pages/EmployeeHome';
+
+//import EmployeeHome from './Pages/EmployeeHome';
+
+
 import EmployeeForm from './Components/Employee/EmployeeForm';
 import UpdateEmployeeForm from './Components/Employee/UpdateEmployeeForm';
 import EmployeeQRCode from './Components/Employee/EmployeeQRCode';
@@ -38,7 +43,6 @@ import NotificationDetails from "./pages/SupplyManager/components/NotificationDe
 import SupplierList from "./pages/SupplyManager/components/supplier-management/SupplierList";
 import PurchaseOrderList from "./pages/SupplyManager/components/purchase-order-management/PurchaseOrderList";
 
-
 import MapView from "./Components/DeliveryManagement/MapView/AlignMap";
 import CreateVehicle from "./Components/DeliveryManagement/VehicleView/CreateVehicle";
 import VehicleView from "./Components/DeliveryManagement/VehicleView/VehicleView";
@@ -47,13 +51,17 @@ import DeliveryView from "./Components/DeliveryManagement/DeliveryView/DeliveryV
 import CreateDelivery from "./Components/DeliveryManagement/MapView/DeliveryForm";
 import DeliveryUpdateDelete from "./Components/DeliveryManagement/DeliveryView/DeliveryUpdateDelete";
 import Orders from "./Components/DeliveryManagement/OrderView/Orders";
+import Orderfetch from "./Components/DeliveryManagement/Retrive/callorderFetch"
+import DeliveryInfo from "./Components/DeliveryManagement/Retrive/DeliveryInfoPage"
+
 
 import SelectedOrderItem from "./Components/Order/Home-SelectedItem";
 import CartPage from "./Components/Order/CartPages";
 import DeliveryInfoPage from "./Components/Order/DeliveryInfoPage";
 import PaymentPage from "./Components/Order/PaymentPage";
 import AdminOrdersPage from "./Components/Order/AdminOrderdPage";
-import AdminRatingPage from './Components/Order/AdminRatingPage'
+import AdminRatingPage from './Components/Order/AdminRatingPage';
+import FinalPage from './Components/Order/FinalPage';
 
 import { Provider } from "react-redux";
 import store from "../src/Components/ReduxTool/Store";
@@ -117,6 +125,8 @@ function App() {
           <Route exact path='/deliveryinfo' element={<DeliveryInfoPage />} />
           <Route exact path='/payment' element={<PaymentPage />} />
           <Route exact path='/order' element={<AdminOrdersPage />} />
+          <Route exact path="/rating" element={<AdminRatingPage />} />
+          <Route exact path="/final" element={<FinalPage />} />
           {<Route exact path="/cusHome" element={<CusHome addToCart={addToCart} />} />}
           <Route exact path="/cusSelectedItem/:id" element={<CusSelectedItem />} />
 
@@ -153,10 +163,16 @@ function App() {
             element={<DeliveryUpdateDelete />}
           />
           <Route path="/Orders" element={<Orders />} />
+          <Route path="/orderfetchfromorder" element={<Orderfetch />} />
+          {/* orderfetch */}
+          <Route path="/Deliveryinfofromorder" element={<DeliveryInfo />} />
+
 
           <Route path="/driver-dispatcher" element={<DriverDispatcherHome />} />
           <Route path="/driver-dispatcher/AddDriver" element={<AddDriverForm />} />
           <Route path="/driver-dispatcher/:driverId" element={<UpdateDriverForm />} />
+          <Route path="/driver-dispatcher/report" element={<Report/>} />
+
 
           <Route
             path="/supply-management/*"

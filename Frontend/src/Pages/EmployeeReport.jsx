@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
-import "../Components/Employee/employee.css";
+import employeeCss from '../Components/Employee/employee.module.css'
 import { useReactToPrint } from "react-to-print";
 import {
   Grid,
@@ -87,38 +87,68 @@ const EmployeeReport = () => {
   }
 
   return (
-    <div style={{ textAlign: 'center', margin: '20px 60px' }}>
-      <div ref={componentPDF} style={{ width: '60%', padding: '10px', alignSelf: 'center' }}>
-        <Typography variant="h4">Employee Report</Typography>
-        <Table>
-          <TableBody>
-            <TableRow>
-              <TableCell>Employee ID</TableCell>
-              <TableCell>{employeeData.employeeid}</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>Attendance Count</TableCell>
-              <TableCell>{employeeData.attendanceCount}</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>No-Pay Leave Count</TableCell>
-              <TableCell>{employeeData.accleaveCount}</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>Basic Salary (LKR)</TableCell>
-              <TableCell>{employeeData.basicSalary}</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>Monthly Salary (LKR)</TableCell>
-              <TableCell>{employeeData.monthlySalary}</TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </div>
-      <Button variant="contained" onClick={generateReport}>
-        Download
-      </Button>
+    
+    <div style={{ textAlign: 'center', padding: '20px 60px', backgroundColor: '#f5f5f5' }}>
+    <div
+      ref={componentPDF}
+      style={{
+        width: '60%',
+        padding: '20px',
+        margin: '0 auto', // Centering the content
+        backgroundColor: '#ffffff', // White background
+        borderRadius: '8px', // Rounded corners
+        boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.1)', // Soft shadow for depth
+      }}
+    >
+      <Typography
+        variant="h4"
+        style={{
+          marginBottom: '20px',
+          color: '#333', // Dark text color for contrast
+        }}
+      >
+        Employee Report
+      </Typography>
+      <Table>
+        <TableBody>
+          <TableRow>
+            <TableCell style={{ fontWeight: 'bold', color: '#555' }}>Employee ID</TableCell>
+            <TableCell>{employeeData.employeeid}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell style={{ fontWeight: 'bold', color: '#555' }}>Attendance Count</TableCell>
+            <TableCell>{employeeData.attendanceCount}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell style={{ fontWeight: 'bold', color: '#555' }}>No-Pay Leave Count</TableCell>
+            <TableCell>{employeeData.accleaveCount}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell style={{ fontWeight: 'bold', color: '#555' }}>Basic Salary (LKR)</TableCell>
+            <TableCell>{employeeData.basicSalary}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell style={{ fontWeight: 'bold', color: '#555' }}>Monthly Salary (LKR)</TableCell>
+            <TableCell>{employeeData.monthlySalary}</TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
     </div>
+    <Button
+      variant="contained"
+      onClick={generateReport}
+      style={{
+        marginTop: '20px',
+        backgroundColor: '#1976d2', // Blue color for the button
+        color: '#ffffff', // White text on the button
+        padding: '10px 20px', // Spacing around the text
+        borderRadius: '4px', // Rounded corners for the button
+      }}
+    >
+      Download
+    </Button>
+  </div>
+  
   );
 };
 
