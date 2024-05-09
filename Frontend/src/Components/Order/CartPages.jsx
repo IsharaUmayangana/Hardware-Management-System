@@ -5,10 +5,10 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import DeleteIcon from '@mui/icons-material/Delete';
 import NavigationBar from '../Home/Home-Navigation';
-import formatNumber from 'format-number';
+
 
 import './order.css';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+
 
 
 const CartPage = () => {
@@ -71,7 +71,7 @@ const CartPage = () => {
                 totalPrice += item.price;
             });
         });
-        return totalPrice && formatNumber(options)(parseFloat(totalPrice));
+        return totalPrice ;
     };
 
     
@@ -99,34 +99,10 @@ const CartPage = () => {
     };
 
 
-    // const handleProceedToCheckout = () => {
-    //     const totalPrice = calculateTotalPrice();
-        
-        
-    //     fetch('http://localhost:8000/order/create', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify({
-    //             carts,
-    //             totalPrice
-    //         }),
-    //     })
-    //     .then((response) => response.json())
-    //     .then((data) => {
-    //         console.log('Order created successfully:', data);
-    //         navigate('/deliveryinfo',{ state: { totalPrice } });
-    //     })
-    //     .catch((error) => {
-    //         console.error("Error creating order:", error);
-    //         alert('Failed to create order');
-    //     });
-    // };
     const handleProceedToCheckout = () => {
         const totalPrice = calculateTotalPrice();
        
-
+        
         
         // Update inventory quantities
         carts.forEach(cart => {
@@ -145,6 +121,9 @@ const CartPage = () => {
                 .catch(error => console.error('Error updating inventory:', error));
             });
         });
+        // fetch('http://localhost:8000/cart/clear', {
+        //     method: 'DELETE'
+        // })
         
         // Proceed to create order
         fetch('http://localhost:8000/order/create', {
@@ -160,6 +139,7 @@ const CartPage = () => {
         .then((response) => response.json())
         .then((data) => {
             console.log('Order created successfully:', data);
+            
             navigate('/deliveryinfo',{ state: { totalPrice } });
         })
         .catch((error) => {
@@ -168,8 +148,7 @@ const CartPage = () => {
         });
     };
 
-    // Define options for formatting
-    const options = { round: 2, padRight: 2, padLeft: 0, thousand: ',', decimal: '.' };
+    
     
  return (
     <div >
@@ -203,7 +182,7 @@ const CartPage = () => {
                                         <tr key={itemIndex}>
                                             <td><img src={`http://localhost:8000/images/${item.product.img_URL}`} alt={item.product.name} /></td>
                                             <td>{item.product ? item.product.name : 'Product Name Not Available'}</td>
-                                            <td style={{textAlign:"right"}}>Rs {item.price && formatNumber(options)(parseFloat(item.price))}</td>
+                                            <td >Rs {item.price}</td>
                                             <td>
                                                 <input
                                                     type="number"

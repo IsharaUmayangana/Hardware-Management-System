@@ -17,7 +17,12 @@ import ProductCategory from "./Components/Inventory/inventory-AddNewCategory";
 import ScannerBarcode from "./Components/Inventory/scanner";
 import InventoryLayout from "./Components/Inventory/InventoryLayout"
 
-import EmployeeHome from './Pages/EmployeeHome';
+
+import EmployeeHome from './pages/EmployeeHome';
+
+//import EmployeeHome from './Pages/EmployeeHome';
+
+
 import EmployeeForm from './Components/Employee/EmployeeForm';
 import UpdateEmployeeForm from './Components/Employee/UpdateEmployeeForm';
 import EmployeeQRCode from './Components/Employee/EmployeeQRCode';
@@ -48,6 +53,9 @@ import DeliveryView from "./Components/DeliveryManagement/DeliveryView/DeliveryV
 import CreateDelivery from "./Components/DeliveryManagement/MapView/DeliveryForm";
 import DeliveryUpdateDelete from "./Components/DeliveryManagement/DeliveryView/DeliveryUpdateDelete";
 import Orders from "./Components/DeliveryManagement/OrderView/Orders";
+import Orderfetch from "./Components/DeliveryManagement/Retrive/callorderFetch"
+import DeliveryInfo from "./Components/DeliveryManagement/Retrive/DeliveryInfoPage"
+
 
 import SelectedOrderItem from "./Components/Order/Home-SelectedItem";
 import CartPage from "./Components/Order/CartPages";
@@ -156,10 +164,16 @@ function App() {
             element={<DeliveryUpdateDelete />}
           />
           <Route path="/Orders" element={<Orders />} />
+          <Route path="/orderfetchfromorder" element={<Orderfetch />} />
+          {/* orderfetch */}
+          <Route path="/Deliveryinfofromorder" element={<DeliveryInfo />} />
+
 
           <Route path="/driver-dispatcher" element={<DriverDispatcherHome />} />
           <Route path="/driver-dispatcher/AddDriver" element={<AddDriverForm />} />
           <Route path="/driver-dispatcher/:driverId" element={<UpdateDriverForm />} />
+          <Route path="/driver-dispatcher/report" element={<Report/>} />
+
 
           <Route
             path="/supply-management/*"
@@ -181,7 +195,7 @@ function App() {
                     path="purchase-orders"
                     element={<PurchaseOrderList />}
                   />
-                  <Route path="return-management" element={<SupplierList />} />
+                  <Route path="return-management" element={<ReturnItemsList />} />
                   <Route path="reports" element={<SupplierList />} />
                 </Routes>
               </Layout>

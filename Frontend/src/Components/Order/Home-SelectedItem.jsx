@@ -5,11 +5,12 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Button from '@mui/material/Button';
 import { useSelector } from "react-redux";
-import RatingComponent from './RatingPage';// Import the BasicRating component
+import RatingComponent from './RatingPage';
 import RatingPage from "./RatingComponent";
 import Stack from '@mui/material/Stack';
 import NavigationBar from '../Home/Home-Navigation';
-import CartCount from './CartCount';
+import Footer from '../Home/footer'
+
 import formatNumber from 'format-number';
 
 
@@ -24,7 +25,7 @@ const HomeSelectedItem = ({ addToCart }) => {
   const [rating, setRating] = useState(0);
   const [averageRating, setAverageRating] = useState(null);
   const [numberOfRatings, setNumberOfRatings] = useState(0);
-  // const [refreshPage,setRefreshPage] = useState(false);
+  
 
 
   
@@ -65,14 +66,13 @@ const HomeSelectedItem = ({ addToCart }) => {
         throw new Error('Failed to add rating');
       }
       console.log('Rating added successfully');
-      setRating(newRating); // Update the local state after successful rating submission
+      setRating(newRating); 
 
 
-      //fetchRatings()
-      // updateRatings(newRating)
+      
     } catch (error) {
       console.error('Error adding rating:', error);
-      // Handle error, show message to the user, etc.
+      
     }
   };
   
@@ -96,7 +96,7 @@ const HomeSelectedItem = ({ addToCart }) => {
       if (!response.ok) {
         throw new Error('Failed to add item to cart');
       }
-      //alert('Product added to cart successfully');
+      
 
     } catch (error) {
       console.error('Error adding item to cart:', error);
@@ -161,7 +161,7 @@ const HomeSelectedItem = ({ addToCart }) => {
         </div>
       )}
     </div>
-
+      <Footer/>
     </div>
   );
 };

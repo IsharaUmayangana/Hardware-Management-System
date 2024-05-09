@@ -191,8 +191,8 @@ const MapView = ( ) => {
             </Card>
           </div>
 
-          <div style={{ marginBottom: "20px"  , paddingLeft: "27px"}}>
-            <input type="text" value={destination} onChange={handleChangeDestination} placeholder="Enter Destination" style={{ padding: "10px", borderRadius: "8px", border: "1px solid #ccc", width: "640px" }} />
+          <div style={{ marginBottom: "20px"  , paddingLeft: "2px"}}>
+            <input type="text" value={destination} onChange={handleChangeDestination} placeholder="Enter Destination" style={{ padding: "10px", borderRadius: "8px", border: "1px solid #ccc", width: "625px" }} />
             <Button variant='outlined'  onClick={handleSearchDestination} style={{ width: "80px" , marginLeft: "10px", borderRadius: "5px" , padding: "8px"}}>Search</Button>
           </div>
 

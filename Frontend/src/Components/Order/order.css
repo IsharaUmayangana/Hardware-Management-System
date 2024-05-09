@@ -213,11 +213,22 @@ body {
   text-align: center; 
 }
 
+
 .cart-table-body td {
   padding: 8px;
   text-align: center; 
   border: none;
   
+}
+
+
+.Rating{
+  color: black;
+  text-align: center;
+}
+
+.ratingFont{
+  color: #000;
 }
 
 .check{
@@ -228,8 +239,13 @@ body {
 
 .thank{
   text-align: center;
-  font-size: 35px;
+  font-size: 30px;
   margin-top: 15px;
+  margin-left: 35px;
+}
+
+.success{
+  color: blue;
 }
 
 input[type="text"],
@@ -260,6 +276,11 @@ input[type="number"] {
 
 .OrderH2{
   color: #000;
+}
+
+.totalPrice{
+  font-size: 22px;
+  text-align: center;
 }
 
 .Total{
