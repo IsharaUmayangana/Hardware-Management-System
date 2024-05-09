@@ -88,10 +88,10 @@ export default function MuiDrawer() {
   };
 
   const components = [
-    {
-      text: "Overview",
-      path: "/supply-management",
-    },
+    // {
+    //   text: "Overview",
+    //   path: "/supply-management",
+    // },
     {
       text: "Purchase Orders",
       path: '/supply-management/purchase-orders'
@@ -105,10 +105,10 @@ export default function MuiDrawer() {
       text: "Return Management",
       path: "/supply-management/return-management"
     },
-    {
-      text: "Report and Analytics",
-      path: "/supply-management/reports",
-    },
+    // {
+    //   text: "Report and Analytics",
+    //   path: "/supply-management/reports",
+    // },
   ];
 
   const getCurrentRouteText = () => {

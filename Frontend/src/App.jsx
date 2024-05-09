@@ -84,8 +84,9 @@ import UpdateDriverForm from "./Components/DriverDispatcherManagement/UpdateDriv
 //Himash
 import SalesManagement from "./Components/Sales/salesManager/Sales";
 import CashierHome from "./Components/Sales/cashier/CashierHome";
-import ReturnItemsNotifications from "./Pages/SupplyManager/components/ReturnItems/returnItemsNotifications";
-import Report from "./Components/DriverDispatcherManagement/report";
+import ReturnItemsNotifications from "./pages/SupplyManager/components/ReturnItems/returnItemsNotifications";
+import ReturnItemsList from "./pages/SupplyManager/components/ReturnItems/ReturnItemsList";
+
 
 // import SearchBar from "./Components/RentalManagement/searchBar/searchBar";
 
@@ -193,7 +194,7 @@ function App() {
                     path="purchase-orders"
                     element={<PurchaseOrderList />}
                   />
-                  <Route path="return-management" element={<SupplierList />} />
+                  <Route path="return-management" element={<ReturnItemsList />} />
                   <Route path="reports" element={<SupplierList />} />
                 </Routes>
               </Layout>
