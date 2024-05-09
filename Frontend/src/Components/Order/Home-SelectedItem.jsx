@@ -9,7 +9,8 @@ import RatingComponent from './RatingPage';// Import the BasicRating component
 import RatingPage from "./RatingComponent";
 import Stack from '@mui/material/Stack';
 import NavigationBar from '../Home/Home-Navigation';
-import CartCount from './CartCount';
+import Footer from '../Home/footer'
+
 
 
 const HomeSelectedItem = ({ addToCart }) => {
@@ -160,7 +161,7 @@ const HomeSelectedItem = ({ addToCart }) => {
         </div>
       )}
     </div>
-
+      <Footer/>
     </div>
   );
 };

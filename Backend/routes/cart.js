@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { addToCart,getCartById,getAllCarts,updateCart,deleteCartItem   } = require('../controllers/cartController');
+const { addToCart,getCartById,getAllCarts,updateCart,deleteCartItem, clearCart   } = require('../controllers/cartController');
 // const { model } = require('mongoose');
 const router = express.Router();
 //const { extractUserId  } = require('../middleware/authMiddleware');
@@ -16,6 +16,6 @@ router.patch('/update', updateCart);
 
 router.delete('/:cartId/remove/:productId', deleteCartItem);
 
-
+router.delete('/clear', clearCart);
 
 module.exports = router;

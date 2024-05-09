@@ -114,7 +114,19 @@ exports.deleteCartItem = async (req, res) => {
     }
 };
 
+exports.clearCart = async (req, res) => {
+    try {
+        const userId = '662639b6d941c0f2cc66be48'; // Assuming userId is obtained from authentication middleware
+        
+        // Find and delete the user's cart
+        await Cart.findOneAndDelete({ user: userId });
 
+        res.status(200).json({ message: 'Cart cleared successfully' });
+    } catch (error) {
+        console.error('Error clearing cart:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
 
 
 
