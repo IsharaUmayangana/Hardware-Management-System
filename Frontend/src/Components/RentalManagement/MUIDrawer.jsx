@@ -19,16 +19,13 @@ import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import Badge from "@mui/material/Badge";
+import Modal from "react-modal";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import AddProductForm from './InventoryForm';
-import AddNewCategoryForm from './inventory-AddNewCategory';
-import AddNewBrandForm from './inventory-AddNewBrand';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material'
 import { useState } from "react";
-import AddReturnItemForm from './returnItemForm';
-
+import AddNewItemForm from "./Form-addItem/AddNewItemForm";
 
 const drawerWidth = 240;
 
@@ -82,9 +79,9 @@ export default function MuiDrawer() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [addCategoryDialogOpen, setAddCategoryDialogOpen] = useState(false);
-  const [addBrandDialogOpen, setAddBrandDialogOpen] = useState(false);
   const [addProductDialogOpen, setAddProductDialogOpen] = useState(false);
   const [addReturnItemDialogOpen, setAddReturnItemDialogOpen] = useState(false);
+  const [isAddNewItemFormOpen, setAddNewItemFormOpen] = useState(false);
 
 
   const handleDrawerOpen = () => {
@@ -95,38 +92,15 @@ export default function MuiDrawer() {
     setOpen(false);
   };
 
-  const handleAddCategoryDialogOpen = () => {
-    setAddCategoryDialogOpen(true);
+  const handleAddItemClick = () => {
+    setAddNewItemFormOpen(true);
   };
 
-  const handleAddCategoryDialogClose = () => {
-    setAddCategoryDialogOpen(false);
+  const handleCloseAddNewItemForm = () => {
+    setAddNewItemFormOpen(false);
   };
 
-  const handleAddBrandDialogOpen = () => {
-    setAddBrandDialogOpen(true);
-  };
 
-  const handleAddBrandDialogClose = () => {
-    setAddBrandDialogOpen(false);
-  };
-
-  const handleAddProductDialogOpen = () => {
-    setAddProductDialogOpen(true);
-  };
-
-  const handleAddProductDialogClose = () => {
-    setAddProductDialogOpen(false);
-  };
-
-  const handleReturnItemDialogOpen = () => {
-    setAddReturnItemDialogOpen(true);
-  };
-
-  const handleReturnItemDialogClose = () => {
-    setAddReturnItemDialogOpen(false);
-    setRefreshPage(true);
-  };
 
   const getCurrentRouteText = () => {
     if (location.pathname === "inventory/report1") {
@@ -158,7 +132,7 @@ export default function MuiDrawer() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            <h4>Inventory</h4>
+            <h4>Rental Service</h4>
           </Typography>
 
 
@@ -209,84 +183,34 @@ export default function MuiDrawer() {
         </DrawerHeader>
         <Divider />
         <List>
-          <Link to={`http://localhost:5173/inventory`} style={{textDecoration:"none",color:"black"}}>
-          <ListItemButton>
+          <ListItemButton href="/rentalservice">
             <ListItemText primary="Home" />
           </ListItemButton>
-          </Link>
-          <ListItemButton onClick={handleAddCategoryDialogOpen}>
-            <ListItemText primary="Add New Category" />
+          <ListItemButton onClick={handleAddItemClick}>
+            <ListItemText primary="Add New Item" />
           </ListItemButton>
-          <ListItemButton onClick={handleAddBrandDialogOpen}>
-            <ListItemText primary="Add New Brand" />
+          <ListItemButton href="/rentalservice/lendedItems">
+            <ListItemText primary="View Rented Items" />
           </ListItemButton>
-          <ListItemButton onClick={handleAddProductDialogOpen}>
-            <ListItemText primary="Add New Products" />
+          <ListItemButton href="/rentalservice/reserved-items">
+            <ListItemText primary="View Reserved Items" />
           </ListItemButton>
-          <ListItemButton onClick={handleReturnItemDialogOpen}>
-            <ListItemText primary="Return Item" />
+          <ListItemButton href="/rentalservice/rentalReport">
+            <ListItemText primary="Invoice" />
           </ListItemButton>
-          <Link to={`http://localhost:5173/inventory/report1`} style={{textDecoration:"none",color:"black"}}>
-          <ListItemButton >
-            <ListItemText primary="Inventory Report" />
-          </ListItemButton>
-          </Link>
-          <Link to={`http://localhost:5173/`} style={{textDecoration:"none",color:"red"}}>
-          <ListItemButton >
-            <ListItemText primary="Customer Side Home" />
-          </ListItemButton>
-          </Link>
         </List>
         <Divider />
         <List></List>
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
-        {/* Add New Category Dialog */}
-        <Dialog open={addCategoryDialogOpen} onClose={handleAddCategoryDialogClose} maxWidth="100px">
-          <DialogContent>
-            <AddNewCategoryForm />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleAddCategoryDialogClose} color="primary">Cancel</Button>
-          </DialogActions>
-        </Dialog>
-
-        {/* Add New Brand Dialog */}
-        <Dialog open={addBrandDialogOpen} onClose={handleAddBrandDialogClose} maxWidth="100px">
-          <DialogContent>
-            <AddNewBrandForm />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleAddBrandDialogClose} color="primary">Cancel</Button>
-          </DialogActions>
-        </Dialog>
-
-        {/* Add New Product Dialog */}
-        <Dialog open={addProductDialogOpen} onClose={handleAddProductDialogClose} maxWidth="1000px" >
-          <DialogTitle>
-            <h2>Add New Product</h2>
-          </DialogTitle>
-          <DialogContent>
-            <AddProductForm />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleAddProductDialogClose} color="primary">Cancel</Button>
-          </DialogActions>
-        </Dialog>
-
-        {/* Return Item Dialog */}
-        <Dialog open={addReturnItemDialogOpen} onClose={handleReturnItemDialogClose} maxWidth="1000px" >
-          <DialogTitle>
-            <h2>Return Item</h2>
-          </DialogTitle>
-          <DialogContent>
-            <AddReturnItemForm />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleReturnItemDialogClose} color="primary">Cancel</Button>
-          </DialogActions>
-        </Dialog>
+        <Modal
+            isOpen={isAddNewItemFormOpen}
+            onRequestClose={handleCloseAddNewItemForm}
+            contentLabel="Add New Item Form Modal"
+          >
+            <AddNewItemForm onClose={handleCloseAddNewItemForm} />
+          </Modal>
       </Main>
     </Box>
   );

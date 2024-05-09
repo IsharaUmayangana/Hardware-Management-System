@@ -1,8 +1,7 @@
-const orderRequestEmailTemplate = `
+const returnItemsEmailTemplate = `
 <html>
 <head>
     <style>
-       
         body {
             font-family: Arial, sans-serif;
         }
@@ -43,40 +42,26 @@ const orderRequestEmailTemplate = `
 <body>
     <div class="container">
         <div class="header">
-            <h2>Order Request</h2>
+            <h2>Return Items</h2>
         </div>
         <div class="content">
-            <p>From: Laksiri Hardware Pvt Ltd</p>
-            <p>[Supplier Name],</p>
-            <p>We hope this email finds you well. We are reaching out to place an order for some hardware items for our upcoming projects. Kindly find the details of our order below:</p>
+            <p>Dear [Supplier Name],</p>
+            <p>We regret to inform you that we need to return the following items:</p>
             <table>
                 <thead>
                     <tr>
-                        <th>Item</th>
+                        <th>Product</th>
                         <th>Quantity</th>
-                        
+                        <th>Serial Number</th>
+                        <th>Reason for Return</th>
                     </tr>
                 </thead>
                 <tbody>
-                    [Order Details]
+                    [Return Items Details]
                 </tbody>
             </table>
-            <br>
-            <p><strong>Delivery Information:</strong></p>
-            <ul>
-                <li>Delivery Address: No 17, Laksiri Hardware Pvt Ltd, Malabe</li>
-                <li>Preferred Delivery Date: Within a week</li>
-            </ul>
-            <br>
-            <p><strong>Billing Information:</strong></p>
-            <ul>
-                <li>Billing Address: No 17, Laksiri Hardware Pvt Ltd, Malabe</li>
-                <li>Payment Method: COD</li>
-            </ul>
-            <br>
-            <p>Please provide us with a quotation for the total cost of the order, including any applicable taxes and shipping charges. Additionally, let us know if there are any discounts or promotions available for bulk orders.</p>
-            <p>We would appreciate it if you could confirm receipt of this email and provide an estimated delivery timeline.</p>
-            <p>Thank you for your prompt attention to this matter. We look forward to doing business with you.</p>
+            <p>We kindly request your assistance in processing the return. Please provide us with instructions on how to proceed with the return process.</p>
+            <p>Thank you for your cooperation in this matter.</p>
             <br>
             <p>Best regards,</p>
             <p>Supply Manager</p>
@@ -89,6 +74,7 @@ const orderRequestEmailTemplate = `
     </div>
 </body>
 </html>
+
 `;
 
-module.exports = { orderRequestEmailTemplate };
+module.exports = { returnItemsEmailTemplate };

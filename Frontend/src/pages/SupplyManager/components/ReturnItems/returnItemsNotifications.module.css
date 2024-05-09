@@ -38,6 +38,7 @@
 
 .notificationButtons {
     margin-top: 0px;
+    justify-content: start;
 }
 
 .notificationButtons button {

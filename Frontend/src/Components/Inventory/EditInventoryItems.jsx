@@ -21,6 +21,8 @@ const EditInventoryItems = ({ product }) => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [brand, setBrand] = useState(product.brand);
+  const [brands, setBrands] = useState([]);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -35,6 +37,23 @@ const EditInventoryItems = ({ product }) => {
 
     fetchCategories();
   }, []);
+
+  useEffect(() => {
+    const fetchBrands = async () => {
+        try {
+            const response = await fetch('http://localhost:8000/brands');
+            if (!response.ok) {
+                throw new Error('Failed to fetch brands');
+            }
+            const data = await response.json();
+            setBrands(data);
+        } catch (error) {
+            console.error('Error fetching brands:', error.message);
+        }
+    };
+
+    fetchBrands();
+}, []);
 
   // form validation function
   const validateForm = () => {
@@ -76,6 +95,14 @@ const EditInventoryItems = ({ product }) => {
     }
   }, [pricebeforeDiscount, discount]);
 
+  //recalculate priceAfterDiscount when pricebeforeDiscount change
+  useEffect(() => {
+    if (pricebeforeDiscount && discount) {
+      const discountedPrice = parseFloat(pricebeforeDiscount) - (parseFloat(pricebeforeDiscount) * parseFloat(discount) / 100);
+      setPriceAfterDiscount(discountedPrice.toFixed(2));
+    }
+  }, [pricebeforeDiscount]);
+
   const handleInventoryEdit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -86,6 +113,7 @@ const EditInventoryItems = ({ product }) => {
     const formData = new FormData();
     formData.append('name', name);
     formData.append('category', category);
+    formData.append('brand', brand);
     formData.append('price', priceAfterDiscount);
     formData.append('pricebeforeDiscount', pricebeforeDiscount); 
     formData.append('quantity', quantity);
@@ -133,7 +161,7 @@ const EditInventoryItems = ({ product }) => {
               required
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={6}>
             <TextField
               select
               label="Item Category"
@@ -143,6 +171,22 @@ const EditInventoryItems = ({ product }) => {
               required
             >
               {categories.map((option) => (
+                <MenuItem key={option._id} value={option.name}>
+                  {option.name}
+                </MenuItem>
+              ))}
+            </TextField>
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              select
+              label="Brand"
+              value={brand}
+              onChange={(e) => setBrand(e.target.value)}
+              fullWidth
+              required
+             >
+              {brands.map((option) => (
                 <MenuItem key={option._id} value={option.name}>
                   {option.name}
                 </MenuItem>

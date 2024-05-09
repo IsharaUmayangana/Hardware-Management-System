@@ -17,26 +17,27 @@ import ProductCategory from "./Components/Inventory/inventory-AddNewCategory";
 import ScannerBarcode from "./Components/Inventory/scanner";
 import InventoryLayout from "./Components/Inventory/InventoryLayout"
 
-import EmployeeHome from './Pages/EmployeeHome';
+import EmployeeHome from './pages/EmployeeHome';
 import EmployeeForm from './Components/Employee/EmployeeForm';
 import UpdateEmployeeForm from './Components/Employee/UpdateEmployeeForm';
 import EmployeeQRCode from './Components/Employee/EmployeeQRCode';
-import LeaveHome from './Pages/LeaveHome';
-import AttendanceHome from './Pages/AttendanceHome';
-import EmployeeReq from './Pages/EmployeeReq';
+import LeaveHome from './pages/LeaveHome';
+import AttendanceHome from './pages/AttendanceHome';
+import EmployeeReq from './pages/EmployeeReq';
 import AttendanceForm from './Components/Attendance/AttendanceForm';
 import LeaveForm from './Components/Leave/LeaveForm';
-import AcceptedLeaveReq from './Pages/AcceptedLeaveReq';
-import EmpDashboard from './Pages/EmpDashboard';
-import EmployeeReport from './Pages/EmployeeReport';
+import AcceptedLeaveReq from './pages/AcceptedLeaveReq';
+import EmpDashboard from './pages/EmpDashboard';
+import EmployeeReport from './pages/EmployeeReport';
 // import QRCodeScanner from './Components/Attendance/QRCodeScanner';
 
-import Layout from "./Pages/SupplyManager/components/Layout";
-import SupplyManagementHome from "./Pages/SupplyManager/home.page";
-import NotificationPage from "./Pages/SupplyManager/components/low-stock-notifications/home.notifications";
-import NotificationDetails from "./Pages/SupplyManager/components/NotificationDetails";
-import SupplierList from "./Pages/SupplyManager/components/supplier-management/SupplierList";
-import PurchaseOrderList from "./Pages/SupplyManager/components/purchase-order-management/PurchaseOrderList";
+import Layout from "./pages/SupplyManager/components/Layout";
+import SupplyManagementHome from "./pages/SupplyManager/home.page";
+import NotificationPage from "./pages/SupplyManager/components/low-stock-notifications/home.notifications";
+import NotificationDetails from "./pages/SupplyManager/components/NotificationDetails";
+import SupplierList from "./pages/SupplyManager/components/supplier-management/SupplierList";
+import PurchaseOrderList from "./pages/SupplyManager/components/purchase-order-management/PurchaseOrderList";
+
 
 import MapView from "./Components/DeliveryManagement/MapView/AlignMap";
 import CreateVehicle from "./Components/DeliveryManagement/VehicleView/CreateVehicle";
@@ -52,7 +53,8 @@ import CartPage from "./Components/Order/CartPages";
 import DeliveryInfoPage from "./Components/Order/DeliveryInfoPage";
 import PaymentPage from "./Components/Order/PaymentPage";
 import AdminOrdersPage from "./Components/Order/AdminOrderdPage";
-import AdminRatingPage from './Components/Order/AdminRatingPage'
+import AdminRatingPage from './Components/Order/AdminRatingPage';
+import FinalPage from './Components/Order/FinalPage';
 
 import { Provider } from "react-redux";
 import store from "../src/Components/ReduxTool/Store";
@@ -63,6 +65,7 @@ import LendedItemsList from "./Components/RentalManagement/lendedItem/LendedItem
 import UserItemList from "./Components/RentalManagement/UserItemList/UserItemList";
 import ReservedItemsList from "./Components/RentalManagement/ReservedItemsList/ReservedItemsList";
 import RentalReport from "./Components/RentalManagement/RentalReport/RentalReport";
+import RentalLayout from "./Components/RentalManagement/Layout";
 
 
 
@@ -74,6 +77,7 @@ import UpdateDriverForm from "./Components/DriverDispatcherManagement/UpdateDriv
 //Himash
 import SalesManagement from "./Components/Sales/salesManager/Sales";
 import CashierHome from "./Components/Sales/cashier/CashierHome";
+import ReturnItemsNotifications from "./pages/SupplyManager/components/ReturnItems/returnItemsNotifications";
 
 
 // import SearchBar from "./Components/RentalManagement/searchBar/searchBar";
@@ -113,15 +117,28 @@ function App() {
           <Route exact path='/deliveryinfo' element={<DeliveryInfoPage />} />
           <Route exact path='/payment' element={<PaymentPage />} />
           <Route exact path='/order' element={<AdminOrdersPage />} />
+          <Route exact path="/rating" element={<AdminRatingPage />} />
+          <Route exact path="/final" element={<FinalPage />} />
           {<Route exact path="/cusHome" element={<CusHome addToCart={addToCart} />} />}
           <Route exact path="/cusSelectedItem/:id" element={<CusSelectedItem />} />
 
           {/* sanjuka - routes */}
-          <Route path="/rentalService" element={<RentalManagement />} />
-          <Route path="/lendedItems" element={<LendedItemsList />} />
+
+          <Route
+            path="/rentalservice/*"
+            element={
+              <RentalLayout>
+                <Routes>
+                  <Route exact path="/" element={<RentalManagement />} />
+                  <Route path="/lendedItems" element={<LendedItemsList />} />
+                  <Route path="/reserved-items" element={<ReservedItemsList />} />
+                  <Route path="/rentalReport" element={<RentalReport />} />
+                </Routes>
+              </RentalLayout>
+            }
+          />
           <Route path="/userItemList" element={<UserItemList />} />
-          <Route path="/reserved-items" element={<ReservedItemsList />} />
-          <Route path="/rentalReport" element={<RentalReport />} />
+
 
           {/* Prabashwara's routes */}
           <Route path="/MapView" element={<MapView />} />
@@ -141,15 +158,16 @@ function App() {
 
           <Route path="/driver-dispatcher" element={<DriverDispatcherHome />} />
           <Route path="/driver-dispatcher/AddDriver" element={<AddDriverForm />} />
-          <Route path="/driver-dispatcher/:driverId" element={<UpdateDriverForm/>} />
+          <Route path="/driver-dispatcher/:driverId" element={<UpdateDriverForm />} />
 
           <Route
             path="/supply-management/*"
-            element={ 
-               <Layout>
-               <Routes>
-                   <Route index element={<SupplyManagementHome />} />
-                  <Route path="notifications" element={<NotificationPage />} />
+            element={
+              <Layout>
+                <Routes>
+                  <Route index element={<SupplyManagementHome />} />
+                  <Route path="low-stock-notifications" element={<NotificationPage />} />
+                  <Route path="return-items-notifications" element={<ReturnItemsNotifications />} />
                   <Route
                     path="notifications/:id"
                     element={<NotificationDetails />}
@@ -181,13 +199,13 @@ function App() {
           <Route exact path="/addNewLeave" element={<LeaveForm />} />
           <Route exact path="//employee/:employeeid/qr" element={<EmployeeQRCode />} />
 
-         
-          <Route exact path="/EmpDash" element={<EmpDashboard/>} />
+
+          <Route exact path="/EmpDash" element={<EmpDashboard />} />
           <Route exact path="/AttHome" element={<AttendanceHome />} />
-          <Route exact path="/addAttendance" element={<AttendanceForm/>} />
+          <Route exact path="/addAttendance" element={<AttendanceForm />} />
           <Route exact path="/acceptedLeaveRequests" element={<AcceptedLeaveReq />} />
           <Route exact path="/employee/:employeeid/report" element={<EmployeeReport />} />
-          
+
 
         </Routes>
       </BrowserRouter>

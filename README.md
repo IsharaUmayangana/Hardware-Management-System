@@ -62,7 +62,7 @@ cd frontend
 ```
 Install dependencies:
 ```bash
-npm install
+npm install --force
 
 ```
 Start the frontend development server:
