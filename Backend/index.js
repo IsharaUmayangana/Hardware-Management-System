@@ -25,6 +25,7 @@ const lowStockNotifications = require('./routes/SupplyManagementRoutes/lowStockR
 const supplierManagementRoutes = require('./routes/SupplyManagementRoutes/SupplierManagementRoutes');
 const purchaseOrderRoutes = require('./routes/SupplyManagementRoutes/PurchaseOrdersRoutes');
 const sendMailRoutes = require('./routes/SupplyManagementRoutes/sendMailRoutes')
+const returnItemsRoutes = require('./routes/SupplyManagementRoutes/returnItemsRoutes')
 
 const CreatevehicleRoutes = require('./routes/DeliveryManagementRoutes/VehicleRoutes/CreateVehicleRoute');
 const VehicleViewRoutes = require('./routes/DeliveryManagementRoutes/VehicleRoutes/VehicleViewRoute');
@@ -36,6 +37,7 @@ const CreateVehicleRoute = require('./routes/DeliveryManagementRoutes/DeliveryRo
 const GetDeliveryRoutes = require('./routes/DeliveryManagementRoutes/DeliveryRoutes/GetDeliveryRoute');
 const DeliveryUpdateDeleteRoutes = require('./routes/DeliveryManagementRoutes/DeliveryRoutes/UpdateAndDeleteRoutes');
 
+const DeliveryInfoRoutesfromOrders = require('./routes/DeliveryManagementRoutes/DeliveryRoutes/DeliveryInfoRoutesFromOrders');
 
 
 const employeeRoutes = require('./routes/employees');
@@ -95,8 +97,8 @@ app.get('/logout', (req, res) => {
 app.use('/supply-management/suppliers', supplierManagementRoutes);
 app.use('/supply-management/purchase-orders', purchaseOrderRoutes);
 app.use('/supply-management/sendMail', sendMailRoutes);
+app.use('/supply-management/returnItems', returnItemsRoutes);
 app.use('/supply-management', lowStockNotifications);
-
 
 
 
@@ -169,14 +171,12 @@ app.use('/DeliveryUpdateDelete', DeliveryUpdateDeleteRoutes);
 //Get Delivery ID for Delete
 app.use('/DeliveryDelete', DeliveryUpdateDeleteRoutes);
 
-// app.get('/orders/:email', async (req, res) => {
-//     try {
-//         const appointments = await or.find({});
-//         res.status(200).json({ appointments });
-//     } catch (error) {
-//         res.status(500).json({ error: 'Internal server error' });
-//     }
-// });
+app.use('/Deliveryinfofromorder', DeliveryInfoRoutesfromOrders);
+
+//Delete Deliveryinfofromorder data
+
+app.use('/DeleteDeliveryinfofromorder', DeliveryInfoRoutesfromOrders);
+
 
 
 

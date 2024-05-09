@@ -24,7 +24,10 @@ const DeliveryInfoPage = () => {
 
     const [phoneNumberError, setPhoneNumberError] = useState('');
 
-    const totalPrice = location.state.totalPrice || 0 ;
+    //const totalPrice = location.state.totalPrice || 0 ;
+
+    const totalPrice = location.state ? location.state.totalPrice || 0 : 0;
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
