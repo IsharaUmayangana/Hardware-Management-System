@@ -1,4 +1,4 @@
-
+/* 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
 
 
@@ -204,7 +204,7 @@ body {
 .Price-h {
   width: 200px; 
 }
-/**/
+
 .cart-table-body td {
   padding: 8px;
   text-align: center; 
@@ -251,4 +251,4 @@ body {
 
 .productImage:hover {
   transform: scale(1.7);
-}
+} */
