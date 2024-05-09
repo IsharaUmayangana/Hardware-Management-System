@@ -82,7 +82,7 @@ const handleCardNumberChange = (e) => {
 const handleSubmit = (e) => {
     e.preventDefault(); // Prevent default form submission
     setOpenDialog(true);
-    // Prepare payment data
+    
     const paymentData = {
         cvv,
         expiry,
@@ -110,7 +110,7 @@ const handleSubmit = (e) => {
         }
     })
     .catch(error => {
-        // Handle network error
+        
         console.error('Error:', error);
     });
 };
@@ -125,7 +125,7 @@ const handleSubmit = (e) => {
         <h2>Payment Details</h2>
         
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column',width:'400px'}}>
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}> {/* Added Box component with gap */}
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}> 
             <TextField
                 
                 label="Name on Card"
@@ -173,7 +173,7 @@ const handleSubmit = (e) => {
                 helperText={expiryError}
                 InputProps={{ inputProps: { pattern: '[0-9/]{0,5}', title: 'Invalid expiry date' } }}
             /></Box>
-            <p className="totalPrice">Total Price: {totalPrice}</p>
+            <p className="totalPrice">Total Price: Rs {totalPrice}</p>
             <Button variant="contained" color="primary" type="submit" startIcon={<PaymentIcon />}>
                 Pay Now
             </Button>
