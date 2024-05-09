@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Joi from 'joi'
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function AddDriverForm() {
   const navigate = useNavigate();
@@ -18,8 +20,29 @@ export default function AddDriverForm() {
     setFormData({ ...formData, [name]: value });
   };
 
+  const schema = Joi.object({
+    fullName: Joi.string().pattern(new RegExp('^[A-Za-z]+$')).required(),
+    phoneNumber: Joi.string().length(10).required(),
+    licenseNumber: Joi.string().length(12).required(),
+    vehicleType: Joi.string().required(),
+    availabilityStatus: Joi.string().required(),
+    rating: Joi.number().integer().min(0).max(5).required(),
+  });
+
   const handleSubmit = async (e) => {
+
     e.preventDefault();
+    
+    const validationResult = schema.validate(formData, { abortEarly: false });
+  if (validationResult.error) {
+    // Handle validation errors, maybe display them to the user
+    validationResult.error.details.map(error => {
+      toast.error(error.message)
+
+    })
+    return;
+  }
+
     try {
       const response = await axios.post('http://localhost:8000/driver-dispatcher', formData);
       console.log(response.data);
@@ -39,6 +62,7 @@ export default function AddDriverForm() {
 
   return (
     <div className="container">
+      <ToastContainer/>
       <form onSubmit={handleSubmit}>
         {/* Full Name Input */}
         <div className="mb-3">
@@ -158,4 +182,3 @@ export default function AddDriverForm() {
     </div>
   );
 }
-
