@@ -2,7 +2,7 @@
 Hardware Management web app built using MERN stack.
 
 
-<img src="" width=600px />
+<img src="https://github.com/IsharaUmayangana/Hardware-Management-System/blob/main/Frontend/public/screenshots/rental.png" width=600px />
 
 
 ## Technology Stack
@@ -74,16 +74,16 @@ npm run dev
 ## ScreenShots
 <div>
   <p align="center" width="100%">
-    <img width="300px" src="" >
-    <img width="300px" src="" >
+    <img width="300px" src="https://github.com/IsharaUmayangana/Hardware-Management-System/blob/main/Frontend/public/screenshots/rental.png" >
     
   </p>
 <p align="center" width="100%">
-  <img width="300px" src="" >
-  <img src="" width=300px />
+  <img width="300px" src="https://github.com/IsharaUmayangana/Hardware-Management-System/blob/main/Frontend/public/screenshots/reserve.png" >
+  <img src="https://github.com/IsharaUmayangana/Hardware-Management-System/blob/main/Frontend/public/screenshots/supplier.png" width=300px />
 </p>
   <p align="center" width="100%">
-    <img src="" width=300px />
+    <img src="https://github.com/IsharaUmayangana/Hardware-Management-System/blob/main/Frontend/public/screenshots/toast.png" width=300px />
+    <img width="300px" src="https://github.com/IsharaUmayangana/Hardware-Management-System/blob/main/Frontend/public/screenshots/delivery.png" >
   </p>
 </div>
 
