@@ -15,6 +15,8 @@ import EmojiPeopleIcon from '@mui/icons-material/EmojiPeople';
 import SummarizeIcon from '@mui/icons-material/Summarize';
 import QRCode from 'qrcode.react';
 import { Link } from 'react-router-dom';
+import MenuIcon from '@mui/icons-material/Menu';
+
 
 import employeeCss from '../Components/Employee/employee.module.css'
 
