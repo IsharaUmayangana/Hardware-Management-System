@@ -247,9 +247,15 @@ body {
   color: blue;
 }
 
-input[type="text"],
+/* input[type="text"],
 input[type="date"],
 input[type="number"] {
+  width: 200px;
+  margin-left: 30px;
+  margin-right: 10px;
+} */
+
+.input-field{
   width: 200px;
   margin-left: 30px;
   margin-right: 10px;
