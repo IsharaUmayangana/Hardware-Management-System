@@ -78,8 +78,6 @@ function AddSupplierForm({ isOpen, onClose, onSubmit }) {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
-        
         if (validateForm()) {
             const formattedData = {
                 name: formData.name,

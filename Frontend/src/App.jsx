@@ -45,7 +45,6 @@ import NotificationPage from "./pages/SupplyManager/components/low-stock-notific
 import NotificationDetails from "./pages/SupplyManager/components/NotificationDetails";
 import SupplierList from "./pages/SupplyManager/components/supplier-management/SupplierList";
 import PurchaseOrderList from "./pages/SupplyManager/components/purchase-order-management/PurchaseOrderList";
-import ReturnItemsList from "./pages/SupplyManager/components/ReturnItems/ReturnItemsList";
 
 import MapView from "./Components/DeliveryManagement/MapView/AlignMap";
 import CreateVehicle from "./Components/DeliveryManagement/VehicleView/CreateVehicle";
@@ -89,6 +88,7 @@ import UpdateDriverForm from "./Components/DriverDispatcherManagement/UpdateDriv
 import SalesManagement from "./Components/Sales/salesManager/Sales";
 import CashierHome from "./Components/Sales/cashier/CashierHome";
 import ReturnItemsNotifications from "./pages/SupplyManager/components/ReturnItems/returnItemsNotifications";
+import ReturnItemsList from "./pages/SupplyManager/components/ReturnItems/ReturnItemsList";
 
 
 // import SearchBar from "./Components/RentalManagement/searchBar/searchBar";
@@ -174,7 +174,7 @@ function App() {
           <Route path="/driver-dispatcher" element={<DriverDispatcherHome />} />
           <Route path="/driver-dispatcher/AddDriver" element={<AddDriverForm />} />
           <Route path="/driver-dispatcher/:driverId" element={<UpdateDriverForm />} />
-          {/* <Route path="/driver-dispatcher/report" element={<Report/>} /> */}
+          <Route path="/driver-dispatcher/report" element={<Report/>} />
 
 
           <Route

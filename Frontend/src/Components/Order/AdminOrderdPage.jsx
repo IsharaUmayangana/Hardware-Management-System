@@ -119,9 +119,8 @@ const OrderPage = () => {
     return (
         <div>
             <h2 className="OrderH2"><strong>Order Details</strong></h2>
-            <div  >
-                <input className="ratingFont input-field"
-                
+            <div>
+                <input className="ratingFont"
                     type="text"
                     placeholder="Search by item name"
                     value={searchTerm}
@@ -130,13 +129,13 @@ const OrderPage = () => {
                 
                 
                 <label className="ratingFont" htmlFor="startDate">Start Date:</label>
-                <input className="input-field" type="date" id="startDate" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+                <input type="date" id="startDate" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
                 <label className="ratingFont" htmlFor="endDate">End Date:</label>
-                <input className="input-field" type="date" id="endDate" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+                <input type="date" id="endDate" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
                 <label className="ratingFont" htmlFor="minPrice">Min Price:</label>
-                <input className="input-field" type="number" id="minPrice" value={minPrice} onChange={(e) => setMinPrice(e.target.value)} />
+                <input type="number" id="minPrice" value={minPrice} onChange={(e) => setMinPrice(e.target.value)} />
                 <label className="ratingFont" htmlFor="maxPrice">Max Price:</label>
-                <input className="input-field" type="number" id="maxPrice" value={maxPrice} onChange={(e) => setMaxPrice(e.target.value)} />
+                <input type="number" id="maxPrice" value={maxPrice} onChange={(e) => setMaxPrice(e.target.value)} />
                 <Stack spacing={2} direction="row">
                     <Button variant="contained" onClick={getAllOrders}>Get all orders</Button>
                 </Stack>
