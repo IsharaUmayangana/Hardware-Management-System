@@ -29,16 +29,21 @@ export default function Sales() {
         quantity: '',
     });
 
-    const handleUpdateSale = (sale) => {
-        setOpenUpdateDialog(true);
-        setUpdateFormData({
-            _id: sale._id,
-            date: sale.date,
-            time: sale.time,
-            item: sale.item,
-            unitPrice: sale.unitPrice,
-            quantity: sale.quantity,
-        });
+    const [deliveryCount, setDeliveryCount] = useState(0);
+    const [showDetails, setShowDetails] = useState(false);
+    const [deliveryInfo, setDeliveryInfo] = useState([]);
+
+    useEffect(() => {
+        axios.get("http://localhost:8000/DeliveryView/DeliveryView")
+            .then(res => {
+                setDeliveryInfo(res.data);
+                setDeliveryCount(res.data.length);
+            })
+            .catch(err => console.log(err));
+    }, []);
+
+    const handleCountClick = () => {
+        setShowDetails(!showDetails);
     };
 
     const handleAddDialogOpen = () => {
@@ -139,8 +144,8 @@ export default function Sales() {
                 <h2 className="text-2xl text-center my-2" style={{ fontWeight: 'bold', fontSize: '2.25rem' }}>Manage Sales</h2>
                 <div className="flex justify-between items-center px-8">
                     <div className="flex">
-           
                         <Button variant="contained" color="secondary" onClick={generatePDF}>Generate PDF</Button>
+                        <Button variant="outlined" color="primary" onClick={handleCountClick}>Delivery Info Count: {deliveryCount}</Button>
                     </div>
                     <TextField
                         label="Search"
@@ -206,13 +211,29 @@ export default function Sales() {
                 ) : (
                     <Loader />
                 )}
-                
+
+                <Dialog open={showDetails} onClose={handleCountClick}>
+                    <DialogTitle>Delivery Info Details</DialogTitle>
+                    <DialogContent>
+                        {deliveryInfo.map((delivery, index) => (
+                            <div key={delivery._id} style={{ borderBottom: index !== deliveryInfo.length - 1 ? '1px solid #ccc' : 'none' }}>
+                                <p style={{ color: '#333', fontSize: '16px', marginBottom: '5px' }}>Delivery-ID: {delivery._id}</p>
+                                <p style={{ color: '#333', fontSize: '16px', marginBottom: '5px' }}>shippingAddress: {delivery.shippingAddress} </p>
+                                <p style={{ color: '#333', fontSize: '16px', marginBottom: '5px' }}>Address: {delivery.selectedVehicle}</p>
+                                <p style={{ color: '#333', fontSize: '16px', marginBottom: '5px' }}>deliveryCost: Rs-{delivery.deliveryCost} </p>
+                                <p style={{ color: '#333', fontSize: '16px', marginBottom: '5px' }}>estimateTime: {delivery.estimateTime}H-M</p>
+                            </div>
+                        ))}
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleCountClick} color="primary">Close</Button>
+                    </DialogActions>
+                </Dialog>
+
                 <Dialog open={openUpdateDialog} onClose={handleDialogClose}>
                     <DialogTitle>Update Sale</DialogTitle>
                     <DialogContent>
                         <form>
-                            {/* <TextField required label="Date" type="date" margin="normal" name="date" value={updateFormData.date} onChange={(e) => setUpdateFormData({ ...updateFormData, date: e.target.value })} fullWidth />
-                            <TextField required label="Time" type="time" margin="normal" name="time" value={updateFormData.time} onChange={(e) => setUpdateFormData({ ...updateFormData, time: e.target.value })} fullWidth /> */}
                             <TextField required label="Item" margin="normal" name="item" value={updateFormData.item} onChange={(e) => setUpdateFormData({ ...updateFormData, item: e.target.value })} fullWidth />
                             <TextField required label="Unit Price" type="number" margin="normal" name="unitPrice" value={updateFormData.unitPrice} onChange={(e) => setUpdateFormData({ ...updateFormData, unitPrice: e.target.value })} fullWidth />
                             <TextField required label="Quantity" type="number" margin="normal" name="quantity" value={updateFormData.quantity} onChange={(e) => setUpdateFormData({ ...updateFormData, quantity: e.target.value })} fullWidth />
