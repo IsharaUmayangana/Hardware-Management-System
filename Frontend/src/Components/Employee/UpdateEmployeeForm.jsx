@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import employeeCss from './employee.module.css'
+
+
 
 
 
 
 const UpdateEmployeeForm = () => {
-    const { id } = useParams(); // Get employee ID from URL params
+    const { id } = useParams(); 
     const [employee, setEmployee] = useState(null);
    
 
@@ -14,11 +17,12 @@ const UpdateEmployeeForm = () => {
             const response = await fetch(`http://localhost:8000/employees/${id}`);
             const data = await response.json();
             setEmployee(data);
+            
         };
         fetchEmployee();
     }, [id]);
 
-    // Define state variables for input fields and initialize them with the employee's data
+    
     const [fullname, setFullname] = useState('');
     const [address, setAddress] = useState('');
     const [email, setEmail] = useState('');
@@ -27,7 +31,6 @@ const UpdateEmployeeForm = () => {
     const [employmenttype, setEmploymenttype] = useState('');
     const [basicsalary, setBasicsalary] = useState('');
 
-    // Update state variables with employee data when it is available
     useEffect(() => {
         if (employee) {
             setFullname(employee.fullname);
@@ -71,12 +74,11 @@ const UpdateEmployeeForm = () => {
     };
 
     return (
-        <div className="UpdateEmpFormbody">
-        <div className="UpdateEmpForm">
+        <div className={employeeCss.UpdateEmpFormbody}>
+        <div className={employeeCss.UpdateEmpForm}>
             <h2>Update Employee Details</h2>
             {employee && (
                 <form onSubmit={handleSubmit}>
-                    {/* Input fields pre-filled with current employee details */}
                     <label>Employee ID:(EmXXX)</label>
                     <input type="text" value={employee.employeeid} disabled />
 

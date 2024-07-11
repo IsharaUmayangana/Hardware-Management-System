@@ -90,7 +90,7 @@ const AddCategoryForm = () => {
       <div className='existing-category-list'>
         <br/>
         <h2>Existing Categories</h2>
-        <h7>If deleting a product category, make sure to change the product <br/>category of related products as well!</h7>
+        <h6>If deleting a product category, make sure to change the product <br/>category of related products as well!</h6>
         <TableContainer component={Paper}>
           <Table>
             <TableBody>

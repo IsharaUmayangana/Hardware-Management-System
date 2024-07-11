@@ -20,7 +20,7 @@ import { Link } from 'react-router-dom';
 
 
 
-import '../Components/Employee/employee.css'
+import employeeCss from '../Components/Employee/employee.module.css'
 
 
 import Navibar from "../Components/Employee/Navibar"
@@ -49,9 +49,8 @@ const EmployeeHome = () => {
     <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
       <List>
         {[
-          { text: 'Employee Details' ,icon: <BadgeIcon />, link: '/#' },
+          { text: 'Employee Details' ,icon: <BadgeIcon />, link: '/employee' },
           { text: 'Accepted Leave Requests', icon: <MarkEmailReadIcon /> , link: '/acceptedLeaveRequests' },
-          { text: 'Rejected Leave Requests', icon: <UnsubscribeIcon /> },
           { text: 'Employee attendance', icon: <EmojiPeopleIcon /> , link: '/AttHome' },
           
         ].map((item, index) => (
@@ -91,23 +90,23 @@ const EmployeeHome = () => {
           };
           
     return (
-        <div className="fullbody">
-          <Button  className="menuIC" onClick={toggleDrawer(true)}><MenuIcon/></Button>
+        <div className={employeeCss.fullbody}>
+          <Button  className={employeeCss.menuIC} onClick={toggleDrawer(true)}><MenuIcon/></Button>
       <Drawer open={open} onClose={toggleDrawer(false)}>
         {DrawerList}
       </Drawer>
             <Navibar/>
             <div>
             <div >
-                <div className="belowNav">
-                <div className="sear"><SearchIcon/></div>
-        <IconButton size="large"  color="inherit" href="/addNewEmployee" className='addBtn'>
+                <div className={employeeCss.belowNav}>
+                <div className={employeeCss.sear}><SearchIcon/></div>
+        <IconButton size="large"  color="inherit" href="/addNewEmployee" className={employeeCss.addBtn}>
           <Badge  color="error">
           <AddBoxIcon/>
           </Badge>
         </IconButton></div>
-            <div className="addNew">Add New Employee</div>
-            <div className="search">
+            <div className={employeeCss.addNew}>Add New Employee</div>
+            <div className={employeeCss.search}>
             <input
                     type="text"
                     placeholder="Search by Employee ID"
@@ -115,15 +114,15 @@ const EmployeeHome = () => {
                     onChange={handleSearchInputChange}
                 />
             </div>
-            <div className="titles">
+            <div className={employeeCss.titles}>
                 <ul>
-                    <li className="empList"><strong>Employee id</strong></li>
-                    <li className="empList"><strong>Full Name</strong></li>
-                    <li className="empList"><strong>Email</strong></li>
-                    <li className="empList"><strong>Job Post</strong></li>
-                    <li className="empList"><strong>Employee type</strong></li>
-                    <li className="empList"><strong>QR Code</strong></li> 
-                    <li className="rpt"><strong>Report</strong></li> 
+                    <li className={employeeCss.empList}><strong>Employee id</strong></li>
+                    <li className={employeeCss.empList}><strong>Full Name</strong></li>
+                    <li className={employeeCss.empList}><strong>Email</strong></li>
+                    <li className={employeeCss.empList}><strong>Job Post</strong></li>
+                    <li className={employeeCss.empList}><strong>Employee type</strong></li>
+                    <li className={employeeCss.empList}><strong>QR Code</strong></li> 
+                    <li className={employeeCss.rpt}><strong>Report</strong></li> 
                 </ul>
                 
             </div>
@@ -131,7 +130,7 @@ const EmployeeHome = () => {
 
             
             </div>
-            <div className="details">
+            <div className={employeeCss.details}>
         
             {employees &&
           employees

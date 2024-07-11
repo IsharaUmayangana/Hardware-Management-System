@@ -5,11 +5,13 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Button from '@mui/material/Button';
 import { useSelector } from "react-redux";
-import RatingComponent from './RatingPage';// Import the BasicRating component
+import RatingComponent from './RatingPage';
 import RatingPage from "./RatingComponent";
 import Stack from '@mui/material/Stack';
 import NavigationBar from '../Home/Home-Navigation';
-import CartCount from './CartCount';
+import Footer from '../Home/footer'
+
+import formatNumber from 'format-number';
 
 
 const HomeSelectedItem = ({ addToCart }) => {
@@ -23,7 +25,7 @@ const HomeSelectedItem = ({ addToCart }) => {
   const [rating, setRating] = useState(0);
   const [averageRating, setAverageRating] = useState(null);
   const [numberOfRatings, setNumberOfRatings] = useState(0);
-  // const [refreshPage,setRefreshPage] = useState(false);
+  
 
 
   
@@ -64,14 +66,13 @@ const HomeSelectedItem = ({ addToCart }) => {
         throw new Error('Failed to add rating');
       }
       console.log('Rating added successfully');
-      setRating(newRating); // Update the local state after successful rating submission
+      setRating(newRating); 
 
 
-      //fetchRatings()
-      // updateRatings(newRating)
+      
     } catch (error) {
       console.error('Error adding rating:', error);
-      // Handle error, show message to the user, etc.
+      
     }
   };
   
@@ -95,7 +96,7 @@ const HomeSelectedItem = ({ addToCart }) => {
       if (!response.ok) {
         throw new Error('Failed to add item to cart');
       }
-      //alert('Product added to cart successfully');
+      
 
     } catch (error) {
       console.error('Error adding item to cart:', error);
@@ -110,10 +111,9 @@ const HomeSelectedItem = ({ addToCart }) => {
 
     return () => clearTimeout(timer);
   }, []);
-  
-  
-  
-  
+
+  // Define options for formatting
+  const options = { round: 2, padRight: 2, padLeft: 0, thousand: ',', decimal: '.' };
 
   return (
   <div>
@@ -136,9 +136,10 @@ const HomeSelectedItem = ({ addToCart }) => {
           </div>
           <div className="productOrderDetails">
             <p className="productName">Product Name : {product.name}</p>
-            <p className="unitPrice">Unit Price : {product.price}</p>
+            <p className="unitPrice">Unit Price : Rs {product.price && formatNumber(options)(parseFloat(product.price))}</p>
             <p className="availableAmount">Available Amount : {product.quantity}</p>
-            <p className="availableAmount">Description: {product.description}</p>
+            <p className="availableAmount">Brand : {product.brand}</p>
+            <p className="availableAmount">Description : {product.description}</p>
             <Stack spacing={2} direction="column">
               {product.quantity > 0 ? (
                 <Button variant="contained" size="medium" style={{ width: '200px' }} onClick={handleAddToCart} startIcon={<AddShoppingCartIcon />}>
@@ -160,7 +161,7 @@ const HomeSelectedItem = ({ addToCart }) => {
         </div>
       )}
     </div>
-
+      <Footer/>
     </div>
   );
 };

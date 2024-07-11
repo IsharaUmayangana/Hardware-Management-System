@@ -8,16 +8,25 @@ const CustomerSideHome = () => {
     const userId = useSelector(state => state.user.userId);
     const [products, setProducts] = useState(null);
     const [categories, setCategories] = useState([]);
+    const [brands, setBrands] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('');
+    const [selectedBrand, setSelectedBrand] = useState('');
     const [searchQuery, setSearchQuery] = useState('');
     const [curPage, setCurPage] = useState(1);
     const recordsPerPage = 10;
-    const [drawerOpen, setDrawerOpen] = useState(false); // State for drawer open/close
+    const [categoryDrawerOpen, setCategoryDrawerOpen] = useState(false); // State for category drawer open/close
+    const [brandDrawerOpen, setBrandDrawerOpen] = useState(false); // State for brand drawer open/close
 
     const handleCategory = (category) => {
         setSelectedCategory(category);
         setCurPage(1); // Reset page number when category changes
-        setDrawerOpen(false); // Close drawer when category is selected
+        setCategoryDrawerOpen(false); // Close category drawer when category is selected
+    };
+
+    const handleBrand = (brand) => {
+        setSelectedBrand(brand);
+        setCurPage(1); // Reset page number when brand changes
+        setBrandDrawerOpen(false); // Close brand drawer when brand is selected
     };
 
     const handleSearch = (e) => {
@@ -55,10 +64,28 @@ const CustomerSideHome = () => {
         fetchCategories();
     }, []);
 
+    useEffect(() => {
+        const fetchBrands = async () => {
+            try {
+                const response = await fetch('http://localhost:8000/brands');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch brands');
+                }
+                const data = await response.json();
+                setBrands(data);
+            } catch (error) {
+                console.error('Error fetching brands:', error.message);
+            }
+        };
+
+        fetchBrands();
+    }, []);
+
     const lastIndex = curPage * recordsPerPage;
     const firstIndex = lastIndex - recordsPerPage;
     const filteredProducts = products ? products.filter(product =>
         (!selectedCategory || product.category === selectedCategory) &&
+        (!selectedBrand || product.brand === selectedBrand) &&
         (product.displayItem === true) &&
         (!searchQuery || product.name.toLowerCase().includes(searchQuery.toLowerCase()))
     ) : [];
@@ -87,8 +114,8 @@ const CustomerSideHome = () => {
         <div className={homeCss.cusHomeView}>
             <div className={homeCss.homeContainer}>
                 <div className={homeCss.categoryBox}>
-                    <Button onClick={() => setDrawerOpen(true)}>BROWSE CATEGORIES</Button>
-                    <Drawer anchor="left" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
+                    <Button onClick={() => setCategoryDrawerOpen(true)}>BROWSE CATEGORIES</Button>
+                    <Drawer anchor="left" open={categoryDrawerOpen} onClose={() => setCategoryDrawerOpen(false)}>
                         <List>
                             <ListItem button key="All" onClick={() => handleCategory('')}>
                                 <ListItemText primary="All" />
@@ -96,6 +123,21 @@ const CustomerSideHome = () => {
                             {categories.map(category => (
                                 <ListItem button key={category._id} onClick={() => handleCategory(category.name)}>
                                     <ListItemText primary={category.name} />
+                                </ListItem>
+                            ))}
+                        </List>
+                    </Drawer>
+                </div>
+                <div className={homeCss.categoryBox}>
+                    <Button onClick={() => setBrandDrawerOpen(true)}>BROWSE BRAND</Button>
+                    <Drawer anchor="left" open={brandDrawerOpen} onClose={() => setBrandDrawerOpen(false)}>
+                        <List>
+                            <ListItem button key="All" onClick={() => handleBrand('')}>
+                                <ListItemText primary="All" />
+                            </ListItem>
+                            {brands.map(brand => (
+                                <ListItem button key={brand._id} onClick={() => handleBrand(brand.name)}>
+                                    <ListItemText primary={brand.name} />
                                 </ListItem>
                             ))}
                         </List>

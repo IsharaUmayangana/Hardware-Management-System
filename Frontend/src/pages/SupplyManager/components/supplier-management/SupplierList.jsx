@@ -18,7 +18,7 @@ import UpdateSupplierForm from "./UpdateSupplierFormModal/UpdateSupplierForm";
 
 const initialRows = [];
 
-function EditToolbar(props) {
+function EditToolbar(props, rows) {
   const { setRows, setRowModesModel } = props;
   const [isFormOpen, setIsFormOpen] = React.useState(false);
 
@@ -28,7 +28,16 @@ function EditToolbar(props) {
 
   const handleFormSubmit = async (formData) => {
     //console.log("New supplier formData: ",formData)
+    // const supplier = rows.find((row) => row.name === formData.name);
+    // if(supplier){
+    //   alert("Supplier creation failed, the Supplier name is already taken!")
+
+    //   return
+    // }
+
+    
     try {
+      
       const response = await fetch(
         "http://localhost:8000/supply-management/suppliers",
         {
@@ -65,6 +74,9 @@ function EditToolbar(props) {
       }
     } catch (error) {
       console.error("Error adding supplier:", error);
+      if(error.message=="Supplier already exists"){
+        alert(error.message)
+      }
     }
   };
   const handleAddSupplierClick = () => {
@@ -91,6 +103,7 @@ function EditToolbar(props) {
         isOpen={isFormOpen}
         onClose={handleFormClose}
         onSubmit={handleFormSubmit}
+        rows={rows}
       />
     </React.Fragment>
   );
@@ -249,20 +262,7 @@ export default function SupplierList() {
         ];
       },
     },
-    {
-      field: "navigate",
-      headerName: "",
-      width: 150,
-      type: "actions",
-      renderCell: (params) => (
-        <Button
-          endIcon={<ChevronRightIcon />}
-          onClick={() => handleNavigate(params.row.id)}
-        >
-          View more
-        </Button>
-      ),
-    },
+
   ];
 
   const handleNavigate = (id) => {
@@ -281,8 +281,8 @@ export default function SupplierList() {
           const transformedData = data.map(supplier => ({
             id: supplier._id,
             name: supplier.name,
-            phone: supplier.contact ? supplier.contact.phone : '', 
-            email: supplier.contact ? supplier.contact.email : '', 
+            phone: supplier.contact ? supplier.contact.phone : '',
+            email: supplier.contact ? supplier.contact.email : '',
             address: supplier.contact ? supplier.contact.address : '',
             productsSupplied: supplier.productsSupplied?.map(product => ({
               name: product.name,
@@ -302,6 +302,7 @@ export default function SupplierList() {
     fetchData();
   }, []);
 
+  //console.log("rows: ", rows)
   return (
     <Box
       sx={{
@@ -325,7 +326,7 @@ export default function SupplierList() {
           toolbar: EditToolbar,
         }}
         slotProps={{
-          toolbar: { setRows, setRowModesModel },
+          toolbar: { setRows, setRowModesModel, rows },
         }}
       />
 

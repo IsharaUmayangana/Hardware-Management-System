@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { TextField, Button, Box } from "@mui/material";
+import { useNavigate,useLocation } from 'react-router-dom'
 import Typography from '@mui/material/Typography';
 import PaymentIcon from '@mui/icons-material/Payment';
 import SimpleDialog from './FinalPage';
 import './order.css';
+import NavigationBar from '../Home/Home-Navigation';
 
-const PaymentPage = ({ totalPrice }) => {
+const PaymentPage = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
     const [openDialog, setOpenDialog] = useState(false);
     const [cvv, setCvv] = useState('');
     const [cvvError, setCvvError] = useState('');
@@ -17,7 +21,7 @@ const PaymentPage = ({ totalPrice }) => {
     const [paymentSubmitted, setPaymentSubmitted] = useState(false);
 
     
-
+    const totalPrice = location.state.totalPrice || 0 ;
 
     const handleCvvChange = (e) => {
         const { value } = e.target;
@@ -78,7 +82,7 @@ const handleCardNumberChange = (e) => {
 const handleSubmit = (e) => {
     e.preventDefault(); // Prevent default form submission
     setOpenDialog(true);
-    // Prepare payment data
+    
     const paymentData = {
         cvv,
         expiry,
@@ -106,24 +110,29 @@ const handleSubmit = (e) => {
         }
     })
     .catch(error => {
-        // Handle network error
+        
         console.error('Error:', error);
     });
 };
 
   
   return (
+  <div>
+    <NavigationBar/>
     <div className="Payment" style={{ display: 'flex', justifyContent: 'center' }}>
+        
         <div>
         <h2>Payment Details</h2>
         
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column',width:'400px'}}>
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}> {/* Added Box component with gap */}
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}> 
             <TextField
+                
                 label="Name on Card"
                 id="cardName"
                 name="cardName"
                 required
+                InputProps={{ inputProps: { pattern: '[A-Za-z ]+', title: 'Name cannot contain numbers' } }}
             />
             <TextField
                 label="Card Number"
@@ -139,6 +148,7 @@ const handleSubmit = (e) => {
                 
             />
             <TextField
+                type="number"
                 label="CVV"
                 id="cvv"
                 name="cvv"
@@ -148,8 +158,10 @@ const handleSubmit = (e) => {
                 required
                 error={cvvError ? true : false}
                 helperText={cvvError}
+                InputProps={{ inputProps: { pattern: '[0-9]{0,3}', title: 'CVV must be 3 digits' } }}
             />
             <TextField
+                
                 label="Expiry MM/YY"
                 id="expiry"
                 name="expiry"
@@ -159,8 +171,9 @@ const handleSubmit = (e) => {
                 required
                 error={expiryError ? true : false}
                 helperText={expiryError}
+                InputProps={{ inputProps: { pattern: '[0-9/]{0,5}', title: 'Invalid expiry date' } }}
             /></Box>
-            <p>Total Price: {totalPrice}</p>
+            <p className="totalPrice">Total Price: Rs {totalPrice}</p>
             <Button variant="contained" color="primary" type="submit" startIcon={<PaymentIcon />}>
                 Pay Now
             </Button>
@@ -168,6 +181,7 @@ const handleSubmit = (e) => {
         
         </div>
         {openDialog && <SimpleDialog onClose={() => setOpenDialog(false)} />}
+    </div>
     </div>
 );
 };

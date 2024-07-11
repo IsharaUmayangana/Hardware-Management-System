@@ -1,9 +1,12 @@
+import AttendanceCss from './Attendance.module.css'
+
+
 const AttendanceDetails = ({ attendance }) => {
 
    
     
     return(
-        <div className="attendanceDetails">
+        <div className={AttendanceCss.attendanceDetails}>
         <ul>
         <li>{attendance.employeeid }</li>
         <li>{attendance.status}</li>

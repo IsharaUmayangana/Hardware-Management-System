@@ -6,9 +6,9 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { clearUser } from "../ReduxTool/userSlice";
 
-import NavigationBar from "./Home-Navigation";
 import HomeComponent from "./Home-Products";
 import Footer from "./footer";
+import Header from "./Header";
 
 import { BsPersonCircle } from "react-icons/bs";
 
@@ -18,7 +18,6 @@ function NavHome() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [cartItemCount, setCartItemCount] = useState(0);
-
 
   //logout with route
   //clear cookie data and locatstorage data
@@ -33,29 +32,40 @@ function NavHome() {
     navigate("/login"); // Redirect to the login page after logout
   };
 
-  // Navigate to user item list
-  const handleCheckRentalItems = () => {
-    navigate("/userItemList");
-  };
-
- 
-
   return (
     <div className={homeCss.body}>
-      <NavigationBar />
+      <Header />
 
-      <div style={{ display: "flex" }}>
-        <div className={homeCss.navIcons}>
-          <BsPersonCircle className="iconHeader" />
-          <span className={homeCss.span}>Welcome {user.name}</span>
-
-          <span className={homeCss.span}>
-            <button onClick={handleLogout} className="btn btn-primary">
-              Logout
-            </button>
-          </span>
-        </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginTop: "10px",
+          color: "#fca311",
+          fontFamily: "unset",
+          fontWeight: "600",
+          fontSize: "30px",
+          letterSpacing: "5px",
+        }}
+      >
+        Discover Top Brands at Laksiri Hardware!
       </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginTop: "1px",
+          marginBottom: "20px",
+          color: "#415a77",
+          fontFamily: "unset",
+          fontWeight: "600",
+          fontSize: "20px",
+          letterSpacing: "4px",
+        }}
+      >
+        Your Source for Quality Tools and Supplies
+      </div>
+
       <div>
         <HomeComponent />
       </div>

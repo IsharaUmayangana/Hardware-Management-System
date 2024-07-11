@@ -117,14 +117,12 @@
   margin-bottom: 30px;
   padding: auto;
 }
-
 .homeContainer{
   display: flex;
-  margin: 10px 20px;
 }
 .searchBox {
   width: 600px;
-  margin-left: 220px;
+  margin-left: 60px;
 }
 
 .categoryBox{

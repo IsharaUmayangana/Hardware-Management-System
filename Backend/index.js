@@ -19,11 +19,13 @@ const feedbackRoutes = require('./routes/productFeedback');
 const productCategoryRoutes = require('./routes/productCategories');
 const ratingRoutes = require('./routes/ratings')
 const returnItemRouts = require('./routes/returnItem');
+const productBrands = require('./routes/productBrands');
 
 const lowStockNotifications = require('./routes/SupplyManagementRoutes/lowStockRoutes');
 const supplierManagementRoutes = require('./routes/SupplyManagementRoutes/SupplierManagementRoutes');
 const purchaseOrderRoutes = require('./routes/SupplyManagementRoutes/PurchaseOrdersRoutes');
 const sendMailRoutes = require('./routes/SupplyManagementRoutes/sendMailRoutes')
+const returnItemsRoutes = require('./routes/SupplyManagementRoutes/returnItemsRoutes')
 
 const CreatevehicleRoutes = require('./routes/DeliveryManagementRoutes/VehicleRoutes/CreateVehicleRoute');
 const VehicleViewRoutes = require('./routes/DeliveryManagementRoutes/VehicleRoutes/VehicleViewRoute');
@@ -73,12 +75,12 @@ app.use('/dashboard', authDashboard);
 
 //Inventory Manager's Api
 app.use('/inventory', inventoryRoutes);
-app.use('/feedback',feedbackRoutes);
+app.use('/brands',productBrands);
 app.use('/returnItem',returnItemRouts);
 app.use('/categories',productCategoryRoutes);
 
 //Navishka's API
-app.use('/order', orderRoutes); // Add order routes
+app.use('/order', orderRoutes); 
 app.use('/cart',cartRoutes)
 app.use('/deliveryinfo', deliveryInfoRoutes);
 app.use('/ratings', ratingRoutes);
@@ -95,8 +97,8 @@ app.get('/logout', (req, res) => {
 app.use('/supply-management/suppliers', supplierManagementRoutes);
 app.use('/supply-management/purchase-orders', purchaseOrderRoutes);
 app.use('/supply-management/sendMail', sendMailRoutes);
+app.use('/supply-management/returnItems', returnItemsRoutes);
 app.use('/supply-management', lowStockNotifications);
-
 
 
 

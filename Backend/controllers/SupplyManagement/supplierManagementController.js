@@ -1,3 +1,4 @@
+const { error } = require('console');
 const Supplier = require('../../models/SupplyManagementModels/supplierModel');
 const mongoose = require('mongoose')
 
@@ -41,6 +42,12 @@ const getOneSupplier = async (req, res) => {
 const createSupplier = async (req, res) => {
     const { name, contact, productsSupplied, paymentTerms } = req.body;
     //console.log(req.body)
+
+    const existingSupplier = Supplier.find({name: req.body.name})
+
+    if(existingSupplier){
+        res.status(400).json({error: "Supplier already exists"})
+    }
 
     try {
 

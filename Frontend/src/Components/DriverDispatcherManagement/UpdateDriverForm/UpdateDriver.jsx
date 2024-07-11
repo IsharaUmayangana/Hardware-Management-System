@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
+import Joi from 'joi'
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function UpdateDriverForm() {
   const { driverId } = useParams();
@@ -40,9 +42,19 @@ export default function UpdateDriverForm() {
   const handleClick = () => {
     navigate('/driver-dispatcher'); // Navigate programmatically to '/drivers' route
   };
+
+  const schema = Joi.object({
+    fullName: Joi.string().pattern(new RegExp('^[A-Za-z]+$')).required(),
+    phoneNumber: Joi.string().length(10).required(),
+    licenseNumber: Joi.string().length(12).required(),
+    vehicleType: Joi.string().required(),
+    availabilityStatus: Joi.string().required(),
+    rating: Joi.number().integer().min(0).max(5).required(),
+  });
   
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       const response = await axios.patch(`http://localhost:8000/driver-dispatcher/${driverId}`, formData);
       console.log(response.data);

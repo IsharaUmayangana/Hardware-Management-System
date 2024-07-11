@@ -1,6 +1,8 @@
 
-import './Attendance.css'
+import AttendanceCss from './Attendance.module.css'
 import React, { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -11,6 +13,9 @@ const AttendanceForm = () => {
     const [timeIn, setTimeIn] = useState('');
     const [timeOut, setTimeOut] = useState('');
     const [error, setError] = useState(null)
+
+    const notify = () => toast("Submitting attendance!");
+
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -41,10 +46,10 @@ const AttendanceForm = () => {
 
 
     return (
-    <div className='AttImg'><div className='AddAttForm'>
+    <div className={AttendanceCss.AttImg}><div className={AttendanceCss.AddAttForm}>
         <form onSubmit={handleSubmit}>
-        <h3 className='adddaily'>Add Daily Attendance</h3>
-            <input type="text" className="empId" placeholder="Employee ID" value={employeeid} onChange={(e) => setEmployeeid(e.target.value)} />
+        <h3 className={AttendanceCss.adddaily}>Add Daily Attendance</h3>
+            <input type="text" className={AttendanceCss.empId} placeholder="Employee ID" value={employeeid} onChange={(e) => setEmployeeid(e.target.value)} />
             <select value={status} onChange={(e) => setStatus(e.target.value)}>
                 <option value="">Select Status</option>
                 <option value="present">Present</option>
@@ -58,7 +63,7 @@ const AttendanceForm = () => {
         <div className="timeout">Time Out:</div>
         <input className="timeout" type="datetime-local" value={timeOut} onChange={(e) => setTimeOut(e.target.value)} />
       </label>
-            <button className="atBtn"  type="submit">Submit</button>
+            <button className={AttendanceCss.atBtn}  type="submit" onClick={notify}>Submit</button><ToastContainer />
         </form>
         </div>
         </div>

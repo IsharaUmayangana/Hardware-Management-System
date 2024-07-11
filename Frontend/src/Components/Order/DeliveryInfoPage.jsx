@@ -191,7 +191,7 @@ const DeliveryInfoPage = () => {
                     ) }}
                 />
                 </Box>
-                <p>Total Price: {totalPrice}</p>
+                <p className="totalPrice">Total Price: Rs {totalPrice}</p>
                 <Button variant="contained" color="primary" type="submit">
                     Place order
                 </Button>
