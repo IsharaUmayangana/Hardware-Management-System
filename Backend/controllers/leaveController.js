@@ -32,16 +32,25 @@ const getLeave = async(req, res) => {
 
 //create a single details
 const createLeave = async(req , res) => {
-    const {employeeid,email, leaveType,startDate,endDate,reason} =req.body
+    const { employeeid, email, leaveType, startDate, endDate, reason } = req.body;
 
-    try{
-        const leave = await Leave.create({employeeid,email, leaveType,startDate,endDate,reason})
-        res.status(200).json(leave)
-    }catch(error){
-        res.status(400).json({error: error.message})
+    try {
+        // Check if there is any existing leave request for the same employee and date
+        const existingLeave = await Leave.findOne({
+            employeeid: employeeid,
+            startDate: startDate,
+        });
+
+        if (existingLeave) {
+            return res.status(400).json({ error: "Leave request already exists for the same employee and date" });
+        }
+
+        const leave = await Leave.create({ employeeid, email, leaveType, startDate, endDate, reason });
+        res.status(200).json(leave);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
     }
 }
-
 
 //delete a single details
 

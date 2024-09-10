@@ -149,7 +149,7 @@ const CartPage = () => {
     };
 
     // Define options for formatting
-    const options = { round: 2, padRight: 2, padLeft: 0, thousand: ',', decimal: '.' };
+    //const options = { round: 2, padRight: 2, padLeft: 0, thousand: ',', decimal: '.' };
     
  return (
     <div >
